@@ -4,8 +4,74 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="Frameworks/Bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+
 </head>
-<body>
+<body class="bg-dark">
+<nav class="navbar bg-dark nav-logo-color">
+    <div class="container-fluid">
+        <a class="navbar-brand nav-logo-color" href="#">
+            <img src="/P1/Images/restaurant-logo.png" alt="" height="30"
+                 class="d-inline-block align-text-top">
+            Restify
+        </a>
+<!--        <form class="d-flex">-->
+<!--            <input class="form-control me-2" type="text" placeholder="Username" aria-label="username">-->
+<!--            <input class="form-control me-2" type="password" placeholder="Password" aria-label="password">-->
+<!--            <button class="btn btn-outline-success" type="submit">Login</button>-->
+<!--        </form>-->
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row ">
+
+
+        <div class="col-sm container rounding bg-white right container-shadows">
+            <h3>Login</h3>
+            <form>
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text left-rounded-pill" style="background-color: #0096C7; color: white;" >@</span>
+                    <input type="text" class="form-control right-rounded-pill" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control rounded-pill" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                </div>
+
+                <button type="button" class="form-control btn btn-outline-primary rounded-pill" style="margin-bottom: 10px;">Log In</button>
+
+            </form>
+            
+        </div>
+
+
+
+
+
+        <div class="col-sm container rounding bg-white right container-shadows" >
+            <h3>Sign Up</h3>
+            <form>
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text left-rounded-pill" style="background-color: #0096C7; color: white;" id="basic-addon1">@</span>
+                    <input type="text" class="form-control right-rounded-pill" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control rounded-pill" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control rounded-pill" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control rounded-pill" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1">
+                </div>
+
+                <button type="button" class="form-control btn btn-outline-primary rounded-pill" style="margin-bottom: 10px">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

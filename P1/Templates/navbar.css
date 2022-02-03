@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,700&display=swap');
+@import url('/P1/Templates/global-styling.css');  /* TODO WHEN YOU COPY THIS REMEMBER TO CHANGE DIRECTORY */
 
 /*html, body{*/
 /*    background-color: lightgrey;*/
 /*}*/
 
 .background {
-    background-color: #434750;
+    background-color: var(--background-grey);
 }
 
 .nav-logo-color {
@@ -14,40 +15,44 @@
     font-style: italic;
     font-family: 'Nunito', sans-serif;
 }
+
 .nav-logo-color:hover{
    color: white;
 }
 
 .lol {
     background-color: #434750;
-    border-color: #0096C7;
+    /*border-color: #0096C7;*/
     color: #0096C7;
 }
 
 .lol:hover {
-    background-color: #0096C7;
-    color:#434750;
+    /*background-color: #0096C7;*/
+    color:white;
 }
 .lol:active{
-    color: #434750;
+    color: #FF5400;
 }
 
 .lol:focus {
-    background-color:#0096C7;
+    box-shadow: none;
+    /*background-color: unset;*/
+    /*color: #0096C7;*/
 }
 
 .dropdown-menu {
-    min-width: 5em;
-}
-
-.lol {
+    /*min-width: 5em;*/
 
 }
+
+/*.lol {*/
+/*    border-color: yellow;*/
+/*}*/
 
 .dropdown-menu {
     background-color: #0096C7;
 }
 
-.lollol:active {
-    background-color: #ffca2c;
+.lollol:hover {
+    background-color: #434750;
 }

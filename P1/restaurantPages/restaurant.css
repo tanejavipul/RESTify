@@ -1,0 +1,91 @@
+
+.cover {
+    background-image: url('../images/pizzapizza.jpeg');
+    background-size: cover;
+    height: 300px;
+}
+
+.black-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    height: inherit;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.edit-button {
+    position: absolute;
+    left: 10px;
+    bottom: 40px;
+    z-index: 1; /* prevents button from dissapearing on hover*/            
+}
+
+.nav-item {
+    position:relative;
+}
+
+/* https://bootsnipp.com/snippets/exE6D */
+nav>.nav.nav-tabs {
+    border: none;
+    color: #fff;
+    background: #272e38;
+    border-radius: 4px;
+    border-bottom: 5px solid #e74c3c;
+    position:relative;
+    bottom: 20px;
+}
+
+nav>div a.nav-item.nav-link {
+    border: none;
+    padding: 18px 25px;
+    border-radius: 0;
+    color:white;
+}
+
+nav>div a.nav-item.nav-link.active {
+    border: none;
+    padding: 18px 25px;
+    color: #fff;
+    background: #e74c3c;
+    border-radius: 0;
+}
+
+/* nav>div a.nav-item.nav-link.active:after {
+    content: "";
+    position: relative;
+    bottom: -60px;
+    left: -10%;
+    border: 15px solid transparent;
+    border-top-color: #e74c3c;
+} */
+
+.tab-content {
+    background: #fdfdfd;
+    line-height: 25px;
+    border: 1px solid #ddd;
+    /* border-top: 5px solid #e74c3c; */
+    /* border-bottom: 5px solid #e74c3c; */
+    padding: 30px 25px;
+}
+
+
+
+/* nav>div a.nav-item.nav-link:hover,
+nav>div a.nav-item.nav-link:focus {
+    border: none;
+    background: #e74c3c;
+    color: #fff;
+    border-radius: 0;
+    transition: background 0.20s linear;
+} */
+
+nav>div a.nav-item.nav-link:hover {
+    background: #e74c3c;
+    transition: background 0.20s linear;
+}
+
+
+
+/*============*/
+

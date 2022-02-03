@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,700&display=swap');
+@import url('/P1/global-styling.css');  /* TODO WHEN YOU COPY THIS REMEMBER TO CHANGE DIRECTORY */
+
+/*html, body{*/
+/*    background-color: lightgrey;*/
+/*}*/
+
+.background {
+    background-color: var(--background-grey);
+}
+
+.nav-logo-color {
+    color: var(--blue-2);
+    font-weight: bold;
+    font-style: italic;
+    font-family: 'Nunito', sans-serif;
+}
+
+.nav-logo-color:hover{
+   color: white;
+}
+
+.nav-logo-color:active {
+    color: var(--orange-1);
+}
+
+.navbar-button-styling {
+    background-color: var(--background-grey);
+    /*border-color: #0096C7;*/
+    color: var(--blue-2);
+}
+
+.navbar-button-styling:hover {
+    /*background-color: #0096C7;*/
+    color:white;
+}
+.navbar-button-styling:active{
+    color: var(--orange-1);
+}
+
+.navbar-button-styling:focus {
+    box-shadow: none; /* gets rid of the box outline when you click on button */
+}
+
+

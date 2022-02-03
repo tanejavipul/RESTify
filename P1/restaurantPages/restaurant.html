@@ -25,6 +25,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    
+
     <style>
         .my-card {
             width: min-content;
@@ -34,22 +36,19 @@
             height: 100%;
         }
 
-        .carousel-inner{
-            width:100%;
+        .carousel-inner {
+            width: 100%;
             height: 700px !important;
         }
 
         .carousel-item {
             object-fit: cover;
         }
-
-  
     </style>
 
 </head>
 
 <body>
-
 
     <div class="cover text-center text-white">
         <div class="black-overlay">
@@ -82,23 +81,29 @@
 
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <div class="nav-item">
-                            <button type="button" class="btn btn-primary edit-button fa fa-pencil"></button>
-                            <a class="nav-item nav-link active" id="nav-home-tab" href="#" role="tab" aria-controls="nav-home"
-                                aria-selected="true">Info</a>
+                            <!-- <button type="button" class="btn btn-primary edit-button fa fa-pencil"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Some tooltip text!"></button> -->
+
+                                <button type="button" class="btn btn-primary edit-button fa fa-pencil">
+                                    <div class="hover-info top">Click to edit</div>
+                                </button>
+                            
+                            <a class="nav-item nav-link active" id="nav-home-tab" href="#" role="tab"
+                                aria-controls="nav-home" aria-selected="true">Info</a>
                         </div>
                         <div class="nav-item">
                             <a class="nav-item nav-link" id="nav-profile-tab" href="menu.html" role="tab"
-                            aria-controls="nav-profile" aria-selected="false">Menu</a>
+                                aria-controls="nav-profile" aria-selected="false">Menu</a>
                         </div>
                         <div class="nav-item">
                             <a class="nav-item nav-link" id="nav-contact-tab" href="#nav-contact" role="tab"
-                            aria-controls="nav-contact" aria-selected="false">Blogs</a>
+                                aria-controls="nav-contact" aria-selected="false">Blogs</a>
                         </div>
                         <div class="nav-item">
                             <a class="nav-item nav-link" id="nav-about-tab" href="#nav-about" role="tab"
-                            aria-controls="nav-about" aria-selected="false">Comments</a>
+                                aria-controls="nav-about" aria-selected="false">Comments</a>
                         </div>
-                        
+
                     </div>
                 </nav>
 
@@ -107,7 +112,30 @@
                         <!-- <script>
                             $( "#nav-home" ).load( "searchResults.html" );
                         </script> -->
-
+                        <div class="row justify-content-center mb-4 ">
+                            <div class="col-md-8">
+                                <div class="card border-primary mx-sm-1 p-3">
+                                    <div class="row">
+                                        <div class="card border-primary shadow text-primary p-2 my-card col-md-2"><span
+                                                class="fa fa-map" aria-hidden="true"></span></div>
+                                        <div class="text-primary col-md-10 d-flex align-items-center">
+                                            <h6 class="m-0">1234 New York Drive, Vasilievsky Island ON</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card border-primary mx-sm-1 p-3">
+                                    <div class="row">
+                                        <div class="card border-primary shadow text-primary p-2 my-card col-md-2"><span
+                                                class="fa fa-phone" aria-hidden="true"></span></div>
+                                        <div class="text-primary col-md-10 d-flex align-items-center">
+                                            <h6 class="m-0">888-888-8888</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- https://bootsnipp.com/snippets/aMVZE -->
                         <div class="jumbotron border-0">
@@ -168,23 +196,33 @@
                             <div class="col-md-8 ">
                                 <div class="bg-primary p-4 rounded">
                                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    nostrud
                                     exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                                    nulla
+                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                    officia
                                     deserunt mollit anim id est laborum. "Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                    aliqua.
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                    aliquip
+                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                    velit
+                                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                                    non
                                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.""
                                 </div>
                             </div>
                             <div class="col-md ">
-                                <div class="bg-primary p-4 rounded">"Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                <div class="bg-primary p-4 rounded">"Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing
+                                    elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                    ad
                                     minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                                    esse
                                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
 
@@ -206,8 +244,7 @@
                                     <img src="../images/bbb-splash.png" class="d-block w-100" alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="../images/design.png" class="d-block w-100"
-                                        alt="...">
+                                    <img src="../images/design.png" class="d-block w-100" alt="...">
                                 </div>
                                 <div class="carousel-item">
                                     <img src="../images/food.png" class="d-block w-100" alt="...">

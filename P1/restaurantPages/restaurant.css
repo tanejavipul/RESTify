@@ -25,6 +25,47 @@
     position:relative;
 }
 
+
+.hover-info{
+    /*https://stackoverflow.com/questions/3331353/transitions-on-the-css-display-property for info on delaying display */
+    display:block;
+    z-index: 100;
+    position: absolute;
+    
+    background: rgb(17, 17, 17);
+    color: #ced1e9;
+    /* transition: color 1s;; */
+    font-size: 16px;
+    font-weight: 600;
+    padding: 1px 4px 1px 4px;
+    border-radius: 4px;
+    user-select: none;
+    width: 200px;
+    left:140%;
+    
+}
+
+.hover-info.top{
+    display:none;
+    bottom: 60%
+}
+.edit-button:hover .hover-info.top {
+    display: block;
+}
+
+.hover-info::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 13px;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-right: 10px solid rgb(17, 17, 17);
+    border-bottom: 4px solid transparent;
+    transition: border .25s;
+}
+
 /* https://bootsnipp.com/snippets/exE6D */
 nav>.nav.nav-tabs {
     border: none;

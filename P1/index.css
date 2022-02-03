@@ -3,6 +3,82 @@
 /*html, body{*/
 /*    background-color: lightgrey;*/
 /*}*/
+
+.background {
+    background-color: #434750;
+}
+
+.blue {
+    /*background-color: lightskyblue;*/
+    background-color: rgba(135,206,250,8%);
+}
+
+.green {
+    background-color: white;
+}
+
+
+.rounding-right {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.rounding-left {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .nav-logo-color {
     color: #0096C7;
     font-weight: bold;
@@ -41,19 +117,10 @@ h1{
 
 }
 
-.rounding {
-    border-radius: 10px;
+.form-control::placeholder{
+    color: #0096C7;
+
 }
-
-.logo {
-    height: 10em;
-}
-
-
-/*.form-control::placeholder{*/
-/*    color: #0a53be;*/
-
-/*}*/
 
 
 .form-control {
@@ -73,13 +140,9 @@ h1{
 }
 
 .container-shadows {
-    margin-top: 2em;
-    margin-left: 2em;
-    margin-right: 2em;
+    /*margin-top: 2em;*/
+    /*margin-left: 2em;*/
+    /*margin-right: 2em;*/
 
     box-shadow: 5px 5px 8px #0096C7;
-}
-
-.right{
-
 }

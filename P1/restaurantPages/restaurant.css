@@ -66,6 +66,14 @@
     transition: border .25s;
 }
 
+.logo {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+
+
 /* https://bootsnipp.com/snippets/exE6D */
 nav>.nav.nav-tabs {
     border: none;

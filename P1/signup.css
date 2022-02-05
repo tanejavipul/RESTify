@@ -1,27 +1,6 @@
-@import "global-styling.css";
+@import url('login.css');
 
-html, body {
-    height: 100%;
-
-}
-
-
-/*.background-img {*/
-/*    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),*/
-/*    url('Images/La-Societe-Patio-Pic.jpeg');*/
-/*    background-size: cover;*/
-/*    background-position: center center;*/
-/*    height: 100%;*/
-/*    !*filter: blur(10%);*!*/
-/*    !*filter:  grayscale(.5);*!*/
-/*    background-repeat: no-repeat;*/
-/*}*/
-
-
-.tone-down-bg {
-    background-color: rgba(0, 0, 0, 0.78);
-}
-
+/*OVERRIDE LOGIN CSS*/
 #intro {
     background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
     url('Images/La-Societe-Patio-Pic.jpeg');
@@ -31,121 +10,9 @@ html, body {
 }
 
 
-.change-vertical {
-    margin-top: 20%;
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
-    /*position: absolute;*/
-    /*top: 40%;*/
-    /*left: 40%;*/
-    /*width: 40%;*/
-}
-
-
-/*COPIED*/
-
-.nav-logo-color {
-    color: var(--blue-main);
-    font-weight: bold;
-    font-style: italic;
-    font-family: 'Nunito', sans-serif;
-}
-
-.nav-logo-color:hover {
-    color: white;
-}
-
-
-.left-rounded-pill {
-    border-top-left-radius: 50em;
-    border-bottom-left-radius: 50em;
-
-}
-
-.right-rounded-pill {
-    border-top-right-radius: 50em;
-    border-bottom-right-radius: 50em;
-
-}
-
-
-.login-signup-icons {
-    background-color: var(--blue-main);
-    color: white;
-}
-
-
-.btn-outline-primary:hover {
-    background-color: var(--blue-main);
-    border-color: var(--blue-main);
-
-}
-
-.btn-outline-primary {
-    border-color: var(--blue-main);
-}
-
 .align-b {
-    margin-bottom: 3em;
+    margin-bottom: 4em;
 }
-
-h1 {
-    /*display: inline-block;*/
-    /*font-size: 100px;*/
-    font-size: 6em;
-    font-weight: bold;
-    font-style: italic;
-    font-family: 'Nunito', sans-serif;
-}
-
-.form-control::placeholder {
-    color: var(--blue-main);
-
-}
-
-
-.form-control {
-    color: var(--blue-main);
-}
-
-.button-style {
-    border-color: var(--blue-main);
-}
-
-.form-control:active {
-    color: var(--blue-main);
-}
-
-h3, h5 {
-    color: var(--blue-main);
-    font-weight: bold;
-    font-style: italic;
-    font-family: 'Nunito', sans-serif;
-    margin-top: 1rem;
-}
-
-.shadow {
-    color: white;
-}
-
-.login-container {
-    padding-top: 1em;
-    padding-bottom: 2em;
-
-    /*width: 25rem;*/
-    background-color: white;
-    padding-left: 4em;
-    padding-right: 4em;
-    border-radius: 40px;
-    box-shadow: 5px 5px 10px var(--blue-main);
-}
-
-a {
-    text-decoration: none;
-    display: block;
-    text-align: center;
-}
-
 
 
 .rounding {

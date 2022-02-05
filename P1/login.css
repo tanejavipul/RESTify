@@ -21,6 +21,7 @@ html, body {
 .tone-down-bg {
     background-color: rgba(0, 0, 0, 0.78);
 }
+
 #intro {
     background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
     url('Images/Background.jpeg');
@@ -30,11 +31,10 @@ html, body {
 }
 
 
-
 .change-vertical {
     margin-top: 20%;
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
     /*position: absolute;*/
     /*top: 40%;*/
     /*left: 40%;*/
@@ -42,17 +42,16 @@ html, body {
 }
 
 
-
-
 /*COPIED*/
 
 .nav-logo-color {
-    color: #0096C7;
+    color: var(--blue-main);
     font-weight: bold;
     font-style: italic;
     font-family: 'Nunito', sans-serif;
 }
-.nav-logo-color:hover{
+
+.nav-logo-color:hover {
     color: white;
 }
 
@@ -71,19 +70,19 @@ html, body {
 
 
 .login-signup-icons {
-    background-color: #0096C7;
+    background-color: var(--blue-main);
     color: white;
 }
 
 
-
 .btn-outline-primary:hover {
-    background-color: #0096C7;
-    border-color: #0096C7;
+    background-color: var(--blue-main);
+    border-color: var(--blue-main);
 
 }
+
 .btn-outline-primary {
-    border-color: #0096C7;
+    border-color: var(--blue-main);
 }
 
 .align-b {
@@ -91,39 +90,35 @@ html, body {
     padding-top: 2em;
 }
 
-h1{
+h1 {
     /*display: inline-block;*/
     /*font-size: 100px;*/
     font-size: 6em;
-    color: #0096C7;
     font-weight: bold;
     font-style: italic;
     font-family: 'Nunito', sans-serif;
-
-
 }
 
-.form-control::placeholder{
-    color: #0096C7;
+.form-control::placeholder {
+    color: var(--blue-main);
 
 }
 
 
 .form-control {
-    color: #0096C7;
+    color: var(--blue-main);
 }
 
-.button-style{
-    border-color: #0096C7;
+.button-style {
+    border-color: var(--blue-main);
 }
 
 .form-control:active {
-    color: #0096C7;
+    color: var(--blue-main);
 }
 
-
 h3, h5 {
-    color: #0096C7;
+    color: var(--blue-main);
     font-weight: bold;
     font-style: italic;
     font-family: 'Nunito', sans-serif;
@@ -133,6 +128,7 @@ h3, h5 {
 .shadow {
     color: white;
 }
+
 .login-container {
     padding-top: 1em;
     padding-bottom: 2em;
@@ -142,7 +138,7 @@ h3, h5 {
     padding-left: 4em;
     padding-right: 4em;
     border-radius: 40px;
-    box-shadow: 5px 5px 10px #0096C7;
+    box-shadow: 5px 5px 10px var(--blue-main);
 }
 
 a {

@@ -2,129 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RESTify</title>
-    <link rel="stylesheet" href="/P1/Frameworks/Bootstrap/bootstrap.min.css">
+    <title>Restify</title>
+    <link rel="stylesheet" href="Frameworks/Bootstrap/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="signup.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
 
 </head>
-<body class="background">
 
+<body>
 
+<!-- Gradient Image Backround https://webdevetc.com/blog/how-to-add-a-gradient-overlay-to-a-background-image-using-just-css-and-html/-->
+<!-- Also used https://bootsnipp.com/snippets/eNxGv-->
+<!-- this helped the most https://mdbootstrap.com/docs/standard/content-styles/background-image/-->
+<div id="intro" class="bg-image shadow-2-strong">
+    <div class="mask d-flex align-items-center h-100 tone-down-bg">
+        <div class="container">
+            <div class="row">
 
-<div class="container  rounding-right rounding-left">
-    <div class="row rounding">
-        <div class="align-b" style="margin-bottom: 1em">
+                <div class="col-7" style="">
+                    <div class="align-b">
 
-            <!--                TODO fix logo-->
+                        <!--                TODO fix logo-->
 
-            <img src="/P1/Images/restaurant-logo.png" alt="" height="80"
-                 class="float-left" style="margin: 0">
-            <h1 class="nav-logo-color d-inline align-bottom" style="font-size: 4em">Restify</h1>
-        </div>
-
-        <div class="col-sm-7 blue rounding-left">
-
-
-            <!--            TODO fix sample images and crop them so if other picture with longer width does make the col box change-->
-            <!--            TODO fix carousel class-->
-            <!--            TODO add margin bottom and top for pictures-->
-
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="Images/oliver-bonacini-hospitality-lena-restaurant-event-space-semi-private-dining-bar-overview-1024x682.jpeg" class="d-block w-100 opacity-25" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Images/ithaa-1.jpeg" class="d-block w-100 opacity-25" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Images/Subsix.jpeg" class="d-block w-100 opacity-25" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
+                        <img src="/P1/Images/restaurant-logo.png" alt="" height="110px" class="float-left">
+                        <h1 class="nav-logo-color d-inline align-bottom">
+                            RESTify
+                        </h1>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
+
+                <div class="col-7">
+
+                    <div id="carouselExampleCaptions" class="carousel slide rounding" data-bs-ride="carousel" style="background-color: grey;">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner rounding">
+                            <div class="carousel-item active rounding">
+                                <img src="Images/oliver-bonacini-hospitality-lena-restaurant-event-space-semi-private-dining-bar-overview-1024x682.jpeg" class="d-block w-100 opacity-25 rounding" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>First slide label</h5>
+                                    <p>Some representative placeholder content for the first slide.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item rounding">
+                                <img src="Images/ithaa-1.jpeg" class="d-block w-100 opacity-25 rounding " alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Second slide label</h5>
+                                    <p>Some representative placeholder content for the second slide.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item rounding">
+                                <img src="Images/Subsix.jpeg" class="d-block w-100 opacity-25 rounding" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Third slide label</h5>
+                                    <p>Some representative placeholder content for the third slide.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
 
 
 
 
 
-        <!-- TODO Sign Up -->
-
-        <div class="col-sm green rounding-right container-shadows ">
+                </div>
 
 
-            <h3>Sign Up</h3>
-            <form>
-                <div class="input-group mb-3 ">
+
+
+                <div class="col-4  login-container">
+                    <h3>Sign Up</h3>
+                    <div class="input-group mb-3 ">
                                 <span class="input-group-text left-rounded-pill login-signup-icons">
                                     <img src="Images/Icons/alternate_email_white.svg" alt="AT">
                                 </span>
-                    <input type="text" class="form-control right-rounded-pill" placeholder="Username"
-                           aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group mb-3">
+                        <input type="text" class="form-control right-rounded-pill" placeholder="Username"
+                               aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
                                 <span class="input-group-text left-rounded-pill login-signup-icons">
                                     <img src="Images/Icons/mail_outline_white.svg" alt="mail">
                                 </span>
-                    <input type="email" class="form-control right-rounded-pill" placeholder="Email" aria-label="Email"
-                           aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group mb-3">
+                        <input type="email" class="form-control right-rounded-pill" placeholder="Email" aria-label="Email"
+                               aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                                <span class="input-group-text left-rounded-pill login-signup-icons">
+                                    <img src="Images/Icons/smartphone.svg" alt="mail">
+                                </span>
+                        <input type="tel" class="form-control right-rounded-pill" placeholder="123 345 7891"
+                               aria-label="Password" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
                                 <span class="input-group-text left-rounded-pill login-signup-icons">
                                     <img src="Images/Icons/lock_white.svg" alt="mail">
                                 </span>
-                    <input type="password" class="form-control right-rounded-pill" placeholder="Password"
-                           aria-label="Password" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group mb-3">
+                        <input type="password" class="form-control right-rounded-pill" placeholder="Password"
+                               aria-label="Password" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
                                 <span class="input-group-text left-rounded-pill login-signup-icons">
                                     <img src="Images/Icons/enhanced_lock_white.svg" alt="mail">
                                 </span>
-                    <input type="password" class="form-control right-rounded-pill" placeholder="Confirm Password"
-                           aria-label="Confirm Password" aria-describedby="basic-addon1">
-                </div>
+                        <input type="password" class="form-control right-rounded-pill" placeholder="Confirm Password"
+                               aria-label="Confirm Password" aria-describedby="basic-addon1">
+                    </div>
+                    <button type="button" class="form-control btn btn-outline-primary  shadow-none rounded-pill">
+                        Log In
+                    </button>
+                    <hr>
+<!--                    <h5 class="text-center">New Here?</h5>-->
+                    <button type="button" class="form-control btn btn-outline-primary  shadow-none rounded-pill">
+                        ALREADY HAVE AN ACCOUNT?
+                    </button>
 
-                <button type="button" class="form-control btn btn-outline-primary rounded-pill"
-                        style="margin-bottom: 10px">Sign Up
-                </button>
-            </form>
+                </div>
+            </div>
+
+
 
         </div>
-
     </div>
 </div>
-
-
-
-
-
-
 
 </body>
 </html>

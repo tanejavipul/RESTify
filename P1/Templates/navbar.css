@@ -1,31 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,700&display=swap');
-@import url('/P1/global-styling.css');  /* TODO WHEN YOU COPY THIS REMEMBER TO CHANGE DIRECTORY */
+@import url('/P1/global-styling.css');
 
-/*html, body{*/
-/*    background-color: lightgrey;*/
-/*}*/
 
-.background {
-    background-color: var(--background-grey);
+/* TODO COPY THIS TO ADD NAVBAR STYLING IN YOUR HTML
+@import url('global-styling.css');
+@import url('navbar.css');
+*/
+
+
+
+
+
+
+.navbar-background {
+    /* TODO CHANGE THIS IF YOU DONT WANT IT TRANSPARENT*/
+    background-color: rgba(0,0,0,0.78);
 }
 
-.nav-logo-color {
+.navbar-logo-color {
     color: var(--blue-2);
     font-weight: bold;
     font-style: italic;
     font-family: 'Nunito', sans-serif;
 }
 
-.nav-logo-color:hover{
+.navbar-logo-color:hover{
    color: white;
 }
 
-.nav-logo-color:active {
+.navbar-logo-color:active {
     color: var(--orange-1);
 }
 
 .navbar-button-styling {
-    background-color: var(--background-grey);
+    /* TODO CHANGE THIS IF YOU DONT WANT IT TRANSPARENT AND SAME COLOR AS ABOVE*/
+    /*background-color: var(--background-grey);*/
     /*border-color: #0096C7;*/
     color: var(--blue-2);
 }

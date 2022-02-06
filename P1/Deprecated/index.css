@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,700&display=swap');
+
+/*html, body{*/
+/*    background-color: lightgrey;*/
+/*}*/
+
+.background {
+    background-color: #434750;
+}
+
+.blue {
+    /*background-color: lightskyblue;*/
+    background-color: rgba(135,206,250,8%);
+}
+
+.green {
+    background-color: white;
+}
+
+
+.rounding-right {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.rounding-left {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+
+}
+
+.login-signup-icons {
+    background-color: #0096C7;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.nav-logo-color {
+    color: #0096C7;
+    font-weight: bold;
+    font-style: italic;
+    font-family: 'Nunito', sans-serif;
+}
+.nav-logo-color:hover{
+   color: white;
+}
+
+.container {
+    margin-top: 7rem;
+    width: 75%;
+
+}
+
+.btn-outline-primary:hover {
+    background-color: #0096C7;
+    border-color: #0096C7;
+
+}
+.btn-outline-primary {
+    border-color: #0096C7;
+}
+
+
+h1{
+    /*display: inline-block;*/
+    /*font-size: 100px;*/
+
+    color: #0096C7;
+    font-weight: bold;
+    font-style: italic;
+    font-family: 'Nunito', sans-serif;
+
+
+}
+
+.form-control::placeholder{
+    color: #0096C7;
+
+}
+
+
+.form-control {
+    color: #0096C7;
+}
+
+.left-rounded-pill {
+    border-top-left-radius: 50em;
+    border-bottom-left-radius: 50em;
+
+}
+
+.right-rounded-pill {
+    border-top-right-radius: 50em;
+    border-bottom-right-radius: 50em;
+
+}
+
+.container-shadows {
+    /*margin-top: 2em;*/
+    /*margin-left: 2em;*/
+    /*margin-right: 2em;*/
+
+    box-shadow: 5px 5px 8px #0096C7;
+}

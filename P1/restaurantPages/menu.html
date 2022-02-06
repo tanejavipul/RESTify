@@ -25,6 +25,22 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style>
+        /* centering images */
+        div {
+            position: relative;
+        }
+
+        img {
+            position: absolute;
+            width: 80%;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -50,47 +66,231 @@
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <div class="nav-item">
-                            <a class="nav-item nav-link" id="nav-home-tab" href="restaurant.html" role="tab" aria-controls="nav-home"
-                                aria-selected="true">Info</a>
+                            <a class="nav-item nav-link" id="nav-home-tab" href="restaurant.html" role="tab"
+                                aria-controls="nav-home" aria-selected="true">Info</a>
                         </div>
                         <div class="nav-item">
                             <button type="button" class="btn btn-primary edit-button fa fa-pencil">
                                 <div class="hover-info top">Click to edit</div>
                             </button>
                             <a class="nav-item nav-link active" id="nav-profile-tab" href="#" role="tab"
-                            aria-controls="nav-profile" aria-selected="false">Menu</a>
+                                aria-controls="nav-profile" aria-selected="false">Menu</a>
                         </div>
                         <div class="nav-item">
                             <a class="nav-item nav-link" id="nav-contact-tab" href="#nav-contact" role="tab"
-                            aria-controls="nav-contact" aria-selected="false">Blogs</a>
+                                aria-controls="nav-contact" aria-selected="false">Blogs</a>
                         </div>
                         <div class="nav-item">
                             <a class="nav-item nav-link" id="nav-about-tab" href="#nav-about" role="tab"
-                            aria-controls="nav-about" aria-selected="false">Comments</a>
+                                aria-controls="nav-about" aria-selected="false">Comments</a>
                         </div>
-                        
+
                     </div>
                 </nav>
-                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-content py-3 px-3 px-sm-0 border-0" id="nav-tabContent">
+                    <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <!-- <script>
                             $( "#nav-home" ).load( "searchResults.html" );
                         </script> -->
-                        General Info content
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        2
-                    </div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                        3
-                    </div>
-                    <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                        4
+
+                    <!-- menu content -->
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
+                        aria-labelledby="nav-profile-tab">
+                        <h4> Main </h4>
+                        <!-- row-cols-#: modifies # of columns shown on smaller display, 2nd row-cols-md is for normal display, g is gutter (spacing) -->
+                        <div class="row row-cols-2 row-cols-md-2 g-2 mb-4">
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="../images/pizzaslice.jpg" class="img-fluid rounded-start"
+                                                alt="...">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Pepperoni Slice</h5>
+                                                    <p class="card-text"><small class="">A delicious pepperoni pizza
+                                                            slice with gooey cheese.</small></p>
+                                                    <p class="card-text float-end"><small class="text-muted">3.99
+                                                            CAD</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="../images/pizzaslice.jpg" class="img-fluid rounded-start"
+                                                alt="...">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Pepperoni Slice</h5>
+                                                    <p class="card-text"><small class="">A delicious pepperoni pizza
+                                                            slice
+                                                            with gooey cheese.</small></p>
+                                                    <p class="card-text float-end"><small class="text-muted">3.99
+                                                            CAD</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="row g-0 ">
+                                        <div class="col-md-3 ">
+                                            <img src="../images/pizzaslice.jpg" class="img-fluid rounded-start"
+                                                alt="...">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Pepperoni Slice</h5>
+                                                    <p class="card-text"><small class="">A delicious pepperoni pizza
+                                                            slice
+                                                            with gooey cheese.</small></p>
+                                                    <p class="card-text float-end"><small class="text-muted">3.99
+                                                            CAD</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col ">
+                                <div class="card h-100 ">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="" class="img-fluid rounded-start" alt="No Image Avaialble"
+                                                onerror="this.src='../images/logo.png'">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Cheese Slice</h5>
+                                                    <p class="card-text"><small class="">A delicious cheese pizza
+                                                            slice
+                                                            with gooey cheese.</small></p>
+                                                    <p class="card-text float-end"><small class="text-muted">3.99
+                                                            CAD</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
+                <h4> Sides </h4>
+                        <!-- row-cols-#: modifies # of columns shown on smaller display, 2nd row-cols-md is for normal display, g is gutter (spacing) -->
+                        <div class="row row-cols-2 row-cols-md-2 g-2 mb-4">
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="../images/pizzaslice.jpg" class="img-fluid rounded-start"
+                                                alt="...">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Pepperoni Slice</h5>
+                                                    <p class="card-text"><small class="">A delicious pepperoni pizza
+                                                            slice with gooey cheese.</small></p>
+                                                    <p class="card-text float-end"><small class="text-muted">3.99
+                                                            CAD</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="../images/pizzaslice.jpg" class="img-fluid rounded-start"
+                                                alt="...">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Pepperoni Slice</h5>
+                                                    <p class="card-text"><small class="">A delicious pepperoni pizza
+                                                            slice
+                                                            with gooey cheese.</small></p>
+                                                    <p class="card-text float-end"><small class="text-muted">3.99
+                                                            CAD</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <h4> Desserts </h4>
+                        <!-- row-cols-#: modifies # of columns shown on smaller display, 2nd row-cols-md is for normal display, g is gutter (spacing) -->
+                        <div class="row row-cols-2 row-cols-md-2 g-2 mb-4">
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="../images/pizzaslice.jpg" class="img-fluid rounded-start"
+                                                alt="...">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Pepperoni Slice</h5>
+                                                    <p class="card-text"><small class="">A delicious pepperoni pizza
+                                                            slice with gooey cheese.</small></p>
+                                                    <p class="card-text float-end"><small class="text-muted">3.99
+                                                            CAD</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="../images/pizzaslice.jpg" class="img-fluid rounded-start"
+                                                alt="...">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Pepperoni Slice</h5>
+                                                    <p class="card-text"><small class="">A delicious pepperoni pizza
+                                                            slice
+                                                            with gooey cheese.</small></p>
+                                                    <p class="card-text float-end"><small class="text-muted">3.99
+                                                            CAD</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    3
+                </div>
+                <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                    4
+                </div>
             </div>
+
         </div>
+    </div>
     </div>
 </body>
 

@@ -6,7 +6,7 @@
 }
 
 .black-overlay {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.70);
     height: inherit;
     width: 100%;
     position: absolute;

@@ -6,16 +6,16 @@ html, body {
 }
 
 
-.background-img {
-    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
-    url('Images/Background.jpeg');
-    background-size: cover;
-    background-position: center center;
-    height: 100%;
-    /*filter: blur(10%);*/
-    /*filter:  grayscale(.5);*/
-    background-repeat: no-repeat;
-}
+/*.background-img {*/
+/*    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),*/
+/*    url('Images/Background.jpeg');*/
+/*    background-size: cover;*/
+/*    background-position: center center;*/
+/*    height: 100%;*/
+/*    !*filter: blur(10%);*!*/
+/*    !*filter:  grayscale(.5);*!*/
+/*    background-repeat: no-repeat;*/
+/*}*/
 
 
 .tone-down-bg {
@@ -30,19 +30,6 @@ html, body {
     height: 100vh;
 }
 
-
-.change-vertical {
-    margin-top: 20%;
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
-    /*position: absolute;*/
-    /*top: 40%;*/
-    /*left: 40%;*/
-    /*width: 40%;*/
-}
-
-
-/*COPIED*/
 
 .nav-logo-color {
     color: var(--blue-main);
@@ -109,9 +96,9 @@ h1 {
     color: var(--blue-main);
 }
 
-.button-style {
-    border-color: var(--blue-main);
-}
+/*.button-style {*/
+/*    border-color: var(--blue-main);*/
+/*}*/
 
 .form-control:active {
     color: var(--blue-main);
@@ -125,10 +112,6 @@ h3, h5 {
     margin-top: 1rem;
 }
 
-.shadow {
-    color: white;
-}
-
 .login-container {
     padding-top: 1em;
     padding-bottom: 2em;
@@ -139,10 +122,4 @@ h3, h5 {
     padding-right: 4em;
     border-radius: 40px;
     box-shadow: 5px 5px 10px var(--blue-main);
-}
-
-a {
-    text-decoration: none;
-    display: block;
-    text-align: center;
 }

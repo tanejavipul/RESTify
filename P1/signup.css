@@ -1,0 +1,28 @@
+@import url('login.css');
+
+/*OVERRIDE LOGIN CSS*/
+#intro {
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
+    url('Images/La-Societe-Patio-Pic.jpeg');
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
+
+
+.align-b {
+    margin-bottom: 4em;
+}
+
+
+.rounding {
+    border-radius: 40px;
+}
+
+.carousel-inner {
+    max-height: 380px;
+}
+
+img {
+    max-height: 380px;
+}

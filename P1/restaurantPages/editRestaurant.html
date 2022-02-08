@@ -10,6 +10,10 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../Frameworks/Bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../Templates/navbar.css">
+    <link rel="stylesheet" href="../search.css">
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -21,236 +25,251 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style type="text/css">
-        .jumbotron {
-            padding: 4rem 2rem;
-            margin-bottom: 2rem;
-            background-color: var(--bs-light);
-            border-radius: .3rem;
-        }
-    </style>
+
 </head>
 
 <body>
-    <div class="jumbotron text-center bg-dark text-white">
-        <h1>Edit my Restaurant</h1>
-    </div>
+    <div id="intro">
+        <nav class="navbar  navbar-background fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand navbar-logo-color" href="#">
 
-    <!-- specifying its name, address, logo, address, postal code, and phone number. -->
-
-    <div class="container">
-        <form class="row g-3">
-            <div class="col-12">
-                <label for="inputRestaurantName" class="form-label">Restaurant Name</label>
-                <input type="text" class="form-control" id="inputRestaurantName" required>
-            </div>
-            <div class="col-12">
-                <label for="inputRestaurantNumber" class="form-label">Restaurant Number</label>
-                <input type="tel" class="form-control" id="inputRestaurantNumber" name="telphone"
-                    placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12"
-                    title="Ten digits code" required />
-            </div>
-            <div class="col-12">
-                <label for="inputAddress" class="form-label">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
-            </div>
-            <div class="col-12">
-                <label for="inputAddress2" class="form-label">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"
-                    required>
-            </div>
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity" required>
-            </div>
-            <div class="col-md-4">
-                <label for="inputState" class="form-label">State</label>
-                <select id="inputState" class="form-select" required>
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label for="inputZip" class="form-label">Zip/Postal</label>
-                <input type="text" class="form-control" id="inputZip" required>
-            </div>
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Logo</label>
-                <input class="form-control" type="file" id="formFile">
-            </div>
-
-            <!-- edit page inputs -->
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">General Information</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                <div id="passwordHelpBlock" class="form-text">
-                    Any information about your restaurant
+                    <img src="../Images/restaurant-logo.png" alt="" height="28" class="d-inline-block align-text-top">
+                    Restify
+                </a>
+                <div class="ms-auto">
+                    <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/search.svg"
+                            alt="search" />Search</button>
+                    <button class="btn  navbar-button-styling" type="submit"><img
+                            src="../Images/Icons/circle_notifications.svg" alt="notifications">Notification</button>
+                    <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/profile.svg"
+                            alt="profile" />Profile</button>
+                    <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/logout.svg"
+                            alt="logout" />Logout</button>
                 </div>
             </div>
+        </nav>
 
-            <div class="mb-3">
-                <label for="formCarouselPicture1" class="form-label">Carousel Pictures (max 3)</label>
-                <input class="form-control mb-2" type="file" id="formCarouselPicture1">
-                <input class="form-control mb-2" type="file" id="formCarouselPicture2">
-                <input class="form-control" type="file" id="formCarouselPicture3">
-                <div id="carouselHelpBlock" class="form-text">
-                    These pictures will be shown exclusively in carousel component of your restaurant page
+        <div class="jumbotron text-center">
+            <h1>Edit my Restaurant</h1>
+        </div>
+
+        <!-- specifying its name, address, logo, address, postal code, and phone number. -->
+
+        <div class="container text-light">
+            <form class="row g-3">
+                <div class="col-12">
+                    <label for="inputRestaurantName" class="form-label">Restaurant Name</label>
+                    <input type="text" class="form-control" id="inputRestaurantName" required>
                 </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="formPicture1" class="form-label">Additional Pictures (max 4)</label>
-                <input class="form-control mb-2" type="file" id="formPicture1">
-                <input class="form-control mb-2" type="file" id="formPicture2">
-                <input class="form-control mb-2" type="file" id="formPicture3">
-                <input class="form-control" type="file" id="formPicture4">
-
-                <div id="pictureHelpBlock" class="form-text">
-                    These pictures will be shown separately after the carousel component of your restaurant page
+                <div class="col-12">
+                    <label for="inputRestaurantNumber" class="form-label">Restaurant Number</label>
+                    <input type="tel" class="form-control" id="inputRestaurantNumber" name="telphone"
+                        placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12"
+                        title="Ten digits code" required />
                 </div>
-            </div>
-
-            <!-- hours of operation: TODO: if we keep this, fix the duplicate id values for wednesday - sunday -->
-            <div class="mb-3">
-                <div>Hours of Operation</div>
-                <div id="operationHelpBox" class="form-text mb-2">
-                    Please specify your restaurant opening times for each day or select closed otherwise
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
                 </div>
-
-                <label for="time1">Monday</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
-                    </div>
+                <div class="col-12">
+                    <label for="inputAddress2" class="form-label">Address 2</label>
+                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"
+                        required>
                 </div>
-                <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                    <label class="form-check-label" for="flexCheckDefault1">
-                        CLOSED
-                    </label>
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">City</label>
+                    <input type="text" class="form-control" id="inputCity" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label">State</label>
+                    <select id="inputState" class="form-select" required>
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="inputZip" class="form-label">Zip/Postal</label>
+                    <input type="text" class="form-control" id="inputZip" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Logo</label>
+                    <input class="form-control" type="file" id="formFile">
                 </div>
 
-                <label for="time1">Tuesday</label> 
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="tuesdaytime1" class="col-form-label-sm">Opening Time</label>
-                        <input class="form-control mb-2" type="time" id="tuesdaytime1" name="tuesdaytime1">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="tuesdaytime2" class="col-form-label-sm">Closing Time</label>
-                        <input class="form-control mb-2" type="time" id="tuesdaytime2" name="tuesdaytime2">
+                <!-- edit page inputs -->
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">General Information</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div id="passwordHelpBlock" class="form-text">
+                        Any information about your restaurant
                     </div>
                 </div>
-                <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                    <label class="form-check-label" for="flexCheckDefault2">
-                        CLOSED
-                    </label>
+
+                <div class="mb-3">
+                    <label for="formCarouselPicture1" class="form-label">Carousel Pictures (max 3)</label>
+                    <input class="form-control mb-2" type="file" id="formCarouselPicture1">
+                    <input class="form-control mb-2" type="file" id="formCarouselPicture2">
+                    <input class="form-control" type="file" id="formCarouselPicture3">
+                    <div id="carouselHelpBlock" class="form-text">
+                        These pictures will be shown exclusively in carousel component of your restaurant page
+                    </div>
                 </div>
 
-                <label for="time1">Wednesday</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
+                <div class="mb-3">
+                    <label for="formPicture1" class="form-label">Additional Pictures (max 4)</label>
+                    <input class="form-control mb-2" type="file" id="formPicture1">
+                    <input class="form-control mb-2" type="file" id="formPicture2">
+                    <input class="form-control mb-2" type="file" id="formPicture3">
+                    <input class="form-control" type="file" id="formPicture4">
+
+                    <div id="pictureHelpBlock" class="form-text">
+                        These pictures will be shown separately after the carousel component of your restaurant page
                     </div>
-                    <div class="col-md-6">
-                        <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
-                    </div>
-                </div>
-                <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                    <label class="form-check-label" for="flexCheckDefault3">
-                        CLOSED
-                    </label>
                 </div>
 
-                <label for="time1">Thursday</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
+                <!-- hours of operation: TODO: if we keep this, fix the duplicate id values for wednesday - sunday -->
+                <div class="mb-3">
+                    <div>Hours of Operation</div>
+                    <div id="operationHelpBox" class="form-text mb-2">
+                        Please specify your restaurant opening times for each day or select closed otherwise
                     </div>
-                    <div class="col-md-6">
-                        <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
+
+                    <label for="time1">Monday</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
+                        </div>
                     </div>
-                </div>
-                <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-                    <label class="form-check-label" for="flexCheckDefault4">
-                        CLOSED
-                    </label>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                        <label class="form-check-label" for="flexCheckDefault1">
+                            CLOSED
+                        </label>
+                    </div>
+
+                    <label for="time1">Tuesday</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="tuesdaytime1" class="col-form-label-sm">Opening Time</label>
+                            <input class="form-control mb-2" type="time" id="tuesdaytime1" name="tuesdaytime1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tuesdaytime2" class="col-form-label-sm">Closing Time</label>
+                            <input class="form-control mb-2" type="time" id="tuesdaytime2" name="tuesdaytime2">
+                        </div>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+                        <label class="form-check-label" for="flexCheckDefault2">
+                            CLOSED
+                        </label>
+                    </div>
+
+                    <label for="time1">Wednesday</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
+                        </div>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
+                        <label class="form-check-label" for="flexCheckDefault3">
+                            CLOSED
+                        </label>
+                    </div>
+
+                    <label for="time1">Thursday</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
+                        </div>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                        <label class="form-check-label" for="flexCheckDefault4">
+                            CLOSED
+                        </label>
+                    </div>
+
+                    <label for="time1">Friday</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
+                        </div>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
+                        <label class="form-check-label" for="flexCheckDefault5">
+                            CLOSED
+                        </label>
+                    </div>
+
+                    <label for="time1">Saturday</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
+                        </div>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6">
+                        <label class="form-check-label" for="flexCheckDefault6">
+                            CLOSED
+                        </label>
+                    </div>
+
+                    <label for="time1">Sunday</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
+                            <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault7">
+                        <label class="form-check-label" for="flexCheckDefault7">
+                            CLOSED
+                        </label>
+                    </div>
+
                 </div>
 
-                <label for="time1">Friday</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
-                    </div>
-                </div>
-                <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
-                    <label class="form-check-label" for="flexCheckDefault5">
-                        CLOSED
-                    </label>
-                </div>
-
-                <label for="time1">Saturday</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
-                    </div>
-                </div>
-                <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6">
-                    <label class="form-check-label" for="flexCheckDefault6">
-                        CLOSED
-                    </label>
-                </div>
-
-                <label for="time1">Sunday</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="mondaytime1" class="col-form-label-sm">Opening Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime1" name="mondaytime1">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="mondaytime2" class="col-form-label-sm">Closing Time</label>
-                        <input class="form-control mb-2" type="time" id="mondaytime2" name="mondaytime2">
-                    </div>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault7">
-                    <label class="form-check-label" for="flexCheckDefault7">
-                        CLOSED
-                    </label>
-                </div>
-
-            </div>
 
 
-
-            <div class="col-12 mb-4">
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </form>
+                <div class="col-12 mb-4">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 

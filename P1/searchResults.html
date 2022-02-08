@@ -29,110 +29,112 @@
 </head>
 
 <body>
-    <!--COPY FROM HERE  -->
-    <nav class="navbar  navbar-background fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand navbar-logo-color" href="#">
+    <div id="intro">
+        <!--COPY FROM HERE  -->
+        <nav class="navbar  navbar-background fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand navbar-logo-color" href="#">
 
-                <img src="./Images/restaurant-logo.png" alt="" height="28" class="d-inline-block align-text-top">
-                Restify
-            </a>
-            <div class="ms-auto">
-                <button class="btn  navbar-button-styling" type="submit"><img src="./Images/Icons/search.svg"
-                        alt="search" />Search</button>
-                <button class="btn  navbar-button-styling" type="submit"><img
-                        src="./Images/Icons/circle_notifications.svg" alt="notifications">Notification</button>
-                <button class="btn  navbar-button-styling" type="submit"><img src="./Images/Icons/profile.svg"
-                        alt="profile" />Profile</button>
-                <button class="btn  navbar-button-styling" type="submit"><img src="./Images/Icons/logout.svg"
-                        alt="logout" />Logout</button>
+                    <img src="./Images/restaurant-logo.png" alt="" height="28" class="d-inline-block align-text-top">
+                    Restify
+                </a>
+                <div class="ms-auto">
+                    <button class="btn  navbar-button-styling" type="submit"><img src="./Images/Icons/search.svg"
+                            alt="search" />Search</button>
+                    <button class="btn  navbar-button-styling" type="submit"><img
+                            src="./Images/Icons/circle_notifications.svg" alt="notifications">Notification</button>
+                    <button class="btn  navbar-button-styling" type="submit"><img src="./Images/Icons/profile.svg"
+                            alt="profile" />Profile</button>
+                    <button class="btn  navbar-button-styling" type="submit"><img src="./Images/Icons/logout.svg"
+                            alt="logout" />Logout</button>
+                </div>
             </div>
+        </nav>
+        <!--COPY FROM HERE-->
+
+        <div class="jumbotron text-center">
+            <h1 class="mb-4">Look for Restaurants</h1>
+            <form target="_blank">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" />
+                            <button type="submit" class="btn btn-primary"
+                                style="border-top-left-radius: 0%; border-bottom-left-radius: 0%;"
+                                onclick="window.location.href='searchResults.html';">search</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
         </div>
-    </nav>
-    <!--COPY FROM HERE-->
-
-    <div class="jumbotron text-center">
-        <h1 class="mb-4">Look for Restaurants</h1>
-        <form target="_blank">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <input type="search" class="form-control" placeholder="Search" aria-label="Search"
-                            aria-describedby="search-addon" />
-                        <button type="submit" class="btn btn-primary"
-                            style="border-top-left-radius: 0%; border-bottom-left-radius: 0%;"
-                            onclick="window.location.href='searchResults.html';">search</button>
-                    </div>
-                </div>
-            </div>
-
-        </form>
-    </div>
 
 
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card border-0 text-white bg-dark">
-                    <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/chania.jpg"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Pizza Pizza</h5>
-                        <p class="card-text text-truncate">This is the best pizza restaurant on the block
-                        </p>
-                        <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card border-0 text-white bg-dark">
+                        <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/chania.jpg"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Pizza Pizza</h5>
+                            <p class="card-text text-truncate">This is the best pizza restaurant on the block
+                            </p>
+                            <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 text-white bg-dark">
-                    <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/lights.jpg"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text text-truncate">Some quick example text to build on the card
-                            title and make up the bulk of the card's content.</p>
-                        <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                <div class="col">
+                    <div class="card border-0 text-white bg-dark">
+                        <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/lights.jpg"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text text-truncate">Some quick example text to build on the card
+                                title and make up the bulk of the card's content.</p>
+                            <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 text-white bg-dark">
-                    <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/nature.jpg"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text text-truncate">Some quick example text to build on the card
-                            title and mak.</p>
-                        <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                <div class="col">
+                    <div class="card border-0 text-white bg-dark">
+                        <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/nature.jpg"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text text-truncate">Some quick example text to build on the card
+                                title and mak.</p>
+                            <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 text-white bg-dark">
-                    <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/chania.jpg"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Pizza Pizza</h5>
-                        <p class="card-text text-truncate">This is the best pizza restaurant on the block
-                        </p>
-                        <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                <div class="col">
+                    <div class="card border-0 text-white bg-dark">
+                        <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/chania.jpg"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Pizza Pizza</h5>
+                            <p class="card-text text-truncate">This is the best pizza restaurant on the block
+                            </p>
+                            <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 text-white bg-dark">
-                    <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/lights.jpg"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text text-truncate">Some quick example text to build on the card
-                            title and make up the bulk of the card's content.</p>
-                        <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                <div class="col">
+                    <div class="card border-0 text-white bg-dark">
+                        <img class="card-img-top" style="object-fit: cover; height: 12vw;" src="Images/lights.jpg"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text text-truncate">Some quick example text to build on the card
+                                title and make up the bulk of the card's content.</p>
+                            <a href="restaurantPages/restaurant.html" class="btn btn-primary">Visit Restaurant</a>
+                        </div>
                     </div>
                 </div>
+
             </div>
-    
         </div>
     </div>
 </body>

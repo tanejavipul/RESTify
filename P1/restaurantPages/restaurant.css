@@ -1,5 +1,6 @@
 
 @import "../global-styling.css";
+@import url('../Templates/navbar.css');
 
 html, body {
     background-color: var(--background-grey);
@@ -28,8 +29,8 @@ html, body {
 
 .edit-button {
     position: absolute;
-    left: 10px;
-    bottom: 40px;
+    left:0;
+    bottom: 110%;
     z-index: 1; /* prevents button from dissapearing on hover*/            
 }
 
@@ -38,15 +39,13 @@ html, body {
 }
 
 
-.hover-info{
-    /*https://stackoverflow.com/questions/3331353/transitions-on-the-css-display-property for info on delaying display */
+/* .hover-info{
     display:block;
     z-index: 100;
     position: absolute;
     
     background: var(--blue-1);
     color: white;
-    /* transition: color 1s;; */
     font-size: 16px;
     font-weight: 600;
     padding: 1px 4px 1px 4px;
@@ -63,7 +62,7 @@ html, body {
 }
 .edit-button:hover .hover-info.top {
     display: block;
-}
+} */
 
 
 .logo {
@@ -135,7 +134,7 @@ nav>div a.nav-item.nav-link:hover {
 }
 
 .tone-down-bg {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 

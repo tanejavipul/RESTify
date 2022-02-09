@@ -87,42 +87,64 @@
                     </label>
                 </div>
 
+                <form action="" class="row" id="profile-form">
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <label class="col-4 profile-label">FIRST NAME:</label>
+                        <input type="text" class="form-control col-8 input-text-styling shadow-none" placeholder="First Name"
+                               name="firstname" required>
+                    </div>
+                </div>
+                <div class="col-6 ">
+                    <div class="input-group mb-3">
+                        <label class="col-4 profile-label">LAST NAME:</label>
+                        <input type="text" class="form-control col-8 input-text-styling shadow-none" placeholder="Last Name"
+                               name="lastname" required>
+                    </div>
+                </div>
 
                 <div class="col-6">
                     <div class="input-group mb-3">
-                        <label class="col-3 profile-label">FIRST NAME:</label>
-                        <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="First Name"
-                               aria-label="Username" aria-describedby="basic-addon1">
+                        <label class="col-4 profile-label">EMAIL:</label>
+                        <input type="email" class="form-control col-8 input-text-styling shadow-none" placeholder="First Name"
+                               name="email" required>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="input-group mb-3">
-                        <label class="col-3 profile-label">LAST NAME:</label>
-                        <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="Last Name"
-                               aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="input-group mb-3">
-                        <label class="col-3 profile-label">EMAIL:</label>
-                        <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="First Name"
-                               aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group mb-3">
-                        <label class="col-3 profile-label">PHONE:</label>
-                        <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="Phone"
-                               aria-label="Username" aria-describedby="basic-addon1">
+                        <label class="col-4 profile-label">PHONE:</label>
+                        <input type="text" class="form-control col-8 input-text-styling shadow-none" placeholder="Phone"
+                               name="phone" required>
                     </div>
                 </div>
 
 
                 <div class="col-9"></div>
                 <div class="align-items-end col-3">
-                    <button class="save-btn btn shadow-none save-btn">SAVE CHANGES</button>
+                    <input value="SAVE CHANGES" type="submit" class="save-btn btn shadow-none save-btn">
                 </div>
+                </form>
+
+
+
+
+                <h4>Change Password </h4>
+                <form action="" class="row" style="margin: 0; padding: 0">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control col-3 input-text-styling shadow-none" placeholder="Old Password"
+                                   name="old-pass" required>
+                            <input type="text" class="form-control col-3 input-text-styling shadow-none" placeholder="New Password"
+                                   name="new-pass" required>
+                            <input type="text" class="form-control col-3 input-text-styling shadow-none" placeholder="Confirm New Password"
+                                   name="confirm-new-pass" required>
+                        </div>
+
+                    <div class="col-9"></div>
+                    <div class="align-items-end col-3">
+                        <input value="SAVE PASSWORD" type="submit" class="save-btn btn shadow-none save-btn">
+                    </div>
+                </form>
+
 
             </div>
         </div>

@@ -25,12 +25,16 @@ html, body {
 }
 
 
-h2 {
+h2, h4 {
     color: var(--blue-main);
     font-weight: bold;
     font-style: italic;
     font-family: 'Nunito', sans-serif;
     margin-bottom: 1.5em;
+}
+
+h4 {
+    padding-top: 1em;
 }
 
 .row {
@@ -110,7 +114,7 @@ label {
 .input-text-styling {
     border-radius: 0;
     border-bottom: 2px solid var(--blue-main);
-    margin-right: 5em;
+    margin-right: 3em;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -130,4 +134,9 @@ label {
 
 .save-btn:active {
     color: white;
+}
+
+#profile-form {
+    padding: 0;
+    margin: 0;
 }

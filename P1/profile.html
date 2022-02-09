@@ -19,11 +19,48 @@
             Restify
         </a>
         <div class="ms-auto">
+            <button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/search.svg" alt="search"/>Search</button>
 
-            <a href="search.html"><button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/search.svg" alt="search"/>Search</button></a>
-            <a href="notifications.html"><button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/circle_notifications.svg" alt="notifications">Notification</button></a>
-            <a href="profile.html"><button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/profile.svg" alt="profile"/>Profile</button></a>
-            <a href="login.html"><button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/logout.svg" alt="logout"/>Logout</button></a>
+
+            <div class="dropdown navbar-dropdown w-100" >
+                <button class="btn  navbar-button-styling dropdown-toggle" type="button" id="dropdownNotificationsButton"
+                        data-bs-toggle="dropdown" aria-expanded="false"><img src="Images/Icons/circle_notifications.svg" alt="notifications">Notification</button>
+
+                <ul class="dropdown-menu dropdown-menu-noti " style="background-color: white; " aria-labelledby="dropdownNotificationsButton">
+                    <div class="alert alert-primary" style="background-color: var(--blue-main); color: white" role="alert">
+                        PIZZIfy just updated their menu
+                    </div>
+                    <div class="alert alert-primary" style="background-color: var(--blue-main); color: white" role="alert">
+                        Sara has just followed your restaurant
+                    </div>
+                    <div class="" style="text-align: end;background-color: white;">
+                        <a href="#" class="">SEE MORE</a>
+                    </div>
+
+                </ul>
+            </div>
+
+
+
+
+            <!--            PROFILE DROPDOWN-->
+            <div class="dropdown navbar-dropdown" >
+                <button class="btn  navbar-button-styling dropdown-toggle" type="button" id="dropdownProfileutton"
+                        data-bs-toggle="dropdown" aria-expanded="false"><img src="Images/Icons/profile.svg"
+                                                                             alt="profile"/>Profile
+                </button>
+                <ul class="dropdown-menu navbar-background" aria-labelledby="dropdownProfileutton">
+                    <li><a class="dropdown-item nav-dropdown-item"><img src="Images/avatar.png"
+                                                                        class="profile-avatar" alt="...">FULL NAME</a>
+                    </li>
+                    <li><a class="dropdown-item nav-dropdown-item" href="#">EDIT PROFILE</a></li>
+                </ul>
+            </div>
+
+
+
+            <button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/logout.svg" alt="logout"/>Logout</button>
+
         </div>
     </div>
 </nav>

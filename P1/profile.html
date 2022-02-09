@@ -15,18 +15,62 @@
     <div class="container-fluid">
         <a class="navbar-brand navbar-logo-color" href="#">
 
-            <img src="Images/restaurant-logo.png" alt="" height="28" class="d-inline-block align-text-top">
+            <img src="/P1/Images/restaurant-logo.png" alt="" height="28" class="d-inline-block align-text-top">
             Restify
         </a>
         <div class="ms-auto">
+            <a href="#"><button class="btn  navbar-button-styling" type="button"><img src="/P1/Images/Icons/search.svg" alt="search"/>Search</button></a>
 
-            <a href="search.html"><button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/search.svg" alt="search"/>Search</button></a>
-            <a href="notifications.html"><button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/circle_notifications.svg" alt="notifications">Notification</button></a>
-            <a href="profile.html"><button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/profile.svg" alt="profile"/>Profile</button></a>
-            <a href="login.html"><button class="btn  navbar-button-styling" type="button"><img src="Images/Icons/logout.svg" alt="logout"/>Logout</button></a>
+
+            <div class="dropdown navbar-dropdown w-100" >
+                <button class="btn  navbar-button-styling dropdown-toggle" type="button" id="dropdownNotificationsButton"
+                        data-bs-toggle="dropdown" aria-expanded="false"><img src="/P1/Images/Icons/circle_notifications.svg" alt="notifications">Notification</button>
+                <ul class="dropdown-menu dropdown-menu-width dropdown-padding navbar-background" aria-labelledby="dropdownNotificationsButton">
+
+                    <div class="alert alert-secondary alert-dismissible fade show" style="color: #0096C7"  role="alert">
+                        <button class="list-group-item list-group-item-action notification-individual-button">
+                            <span class="notification-time">Jan 20, 2021, 1:15PM</span>
+                            <div class="notification-message"><strong>PIZZIfy</strong> just updated their menu!</div></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close Notification"></button>
+                    </div>
+
+                    <div class="alert alert-secondary alert-dismissible fade show" style="color: #0096C7"  role="alert">
+                        <button class="list-group-item list-group-item-action notification-individual-button">
+                            <span class="notification-time">Jan 20, 2021, 1:15PM</span>
+                            <div class="notification-message"><strong>Sara</strong> has just followed your restaurant!</div></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close Notification"></button>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="noti-load btn btn-primary shadow-none" style="background-color: #0096C7;border: none; border-radius: 0"type="button">LOAD MORE</button>
+                    </div>
+                </ul>
+            </div>
+
+
+
+
+            <!--            PROFILE DROPDOWN-->
+            <div class="dropdown navbar-dropdown" >
+                <button class="btn  navbar-button-styling dropdown-toggle " type="button" id="dropdownprofilebutton"
+                        data-bs-toggle="dropdown" aria-expanded="false"><img src="/P1/Images/Icons/profile.svg"
+                                                                             alt="profile"/>Profile
+                </button>
+                <ul class="dropdown-menu navbar-background dropdown-padding" aria-labelledby="dropdownprofilebutton">
+                    <li><a href="profile.html" class="dropdown-item nav-dropdown-item"><img src="/P1/Images/avatar.png"
+                                                                                            class="profile-avatar" alt="...">FULL NAME</a>
+                    </li>
+                    <li><a href="profile.html" class="dropdown-item nav-dropdown-item text-center" href="#">EDIT PROFILE</a></li>
+                </ul>
+            </div>
+
+
+            <a href="login.html"><button class="btn  navbar-button-styling" type="button"><img src="/P1/Images/Icons/logout.svg" alt="logout"/>Logout</button> </a>
+
         </div>
     </div>
 </nav>
+
 
 <div id="intro">
     <div class="mask d-flex align-items-center h-100 tone-down-bg">
@@ -43,42 +87,64 @@
                     </label>
                 </div>
 
+                <form action="" class="row" id="profile-form">
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <label class="col-4 profile-label">FIRST NAME:</label>
+                        <input type="text" class="form-control col-8 input-text-styling shadow-none" placeholder="First Name"
+                               name="firstname" required>
+                    </div>
+                </div>
+                <div class="col-6 ">
+                    <div class="input-group mb-3">
+                        <label class="col-4 profile-label">LAST NAME:</label>
+                        <input type="text" class="form-control col-8 input-text-styling shadow-none" placeholder="Last Name"
+                               name="lastname" required>
+                    </div>
+                </div>
 
                 <div class="col-6">
                     <div class="input-group mb-3">
-                        <label class="col-3 profile-label">FIRST NAME:</label>
-                        <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="First Name"
-                               aria-label="Username" aria-describedby="basic-addon1">
+                        <label class="col-4 profile-label">EMAIL:</label>
+                        <input type="email" class="form-control col-8 input-text-styling shadow-none" placeholder="First Name"
+                               name="email" required>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="input-group mb-3">
-                        <label class="col-3 profile-label">LAST NAME:</label>
-                        <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="Last Name"
-                               aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="input-group mb-3">
-                        <label class="col-3 profile-label">EMAIL:</label>
-                        <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="First Name"
-                               aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group mb-3">
-                        <label class="col-3 profile-label">PHONE:</label>
-                        <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="Phone"
-                               aria-label="Username" aria-describedby="basic-addon1">
+                        <label class="col-4 profile-label">PHONE:</label>
+                        <input type="text" class="form-control col-8 input-text-styling shadow-none" placeholder="Phone"
+                               name="phone" required>
                     </div>
                 </div>
 
 
                 <div class="col-9"></div>
                 <div class="align-items-end col-3">
-                    <button class="save-btn btn shadow-none save-btn">SAVE CHANGES</button>
+                    <input value="SAVE CHANGES" type="submit" class="save-btn btn shadow-none save-btn">
                 </div>
+                </form>
+
+
+
+
+                <h4>Change Password </h4>
+                <form action="" class="row" style="margin: 0; padding: 0">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control col-3 input-text-styling shadow-none" placeholder="Old Password"
+                                   name="old-pass" required>
+                            <input type="text" class="form-control col-3 input-text-styling shadow-none" placeholder="New Password"
+                                   name="new-pass" required>
+                            <input type="text" class="form-control col-3 input-text-styling shadow-none" placeholder="Confirm New Password"
+                                   name="confirm-new-pass" required>
+                        </div>
+
+                    <div class="col-9"></div>
+                    <div class="align-items-end col-3">
+                        <input value="SAVE PASSWORD" type="submit" class="save-btn btn shadow-none save-btn">
+                    </div>
+                </form>
+
 
             </div>
         </div>

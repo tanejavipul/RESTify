@@ -27,7 +27,7 @@
 
                         <!--                TODO fix logo-->
 
-                        <img src="/P1/Images/restaurant-logo.png" alt="" height="110px" class="float-left">
+                        <img src="/P1/Images/restaurant-logo.png" height="110px" class="float-left">
                         <h1 class="nav-logo-color d-inline align-bottom">
                             RESTify
                         </h1>
@@ -39,28 +39,28 @@
 
                 <div class="col-4  login-container">
                     <h3>Login</h3>
+                    <form>
                     <div class="input-group mb-3">
                                 <span class="input-group-text left-rounded-pill login-signup-icons">
-                                    <img src="Images/Icons/alternate_email_white.svg" alt="AT">
+                                    <img src="Images/Icons/alternate_email_white.svg">
                                 </span>
                         <input type="text" class="form-control right-rounded-pill" placeholder="Username"
-                               aria-label="Username" aria-describedby="basic-addon1">
+                               name="username" required>
                     </div>
                     <div class="input-group mb-3">
                                 <span class="input-group-text left-rounded-pill login-signup-icons">
-                                    <img src="Images/Icons/lock_white.svg" alt="mail">
+                                    <img src="Images/Icons/lock_white.svg">
                                 </span>
                         <input type="password" class="form-control right-rounded-pill" placeholder="Password"
-                               aria-label="Password" aria-describedby="basic-addon1">
+                               name="password" required>
                     </div>
-                    <button type="button" class="form-control btn btn-outline-primary  shadow-none rounded-pill">
-                        Log In
-                    </button>
+                    <input type="submit" value="Log In" class="form-control btn btn-outline-primary  shadow-none rounded-pill">
                     <hr>
                     <h5 class="text-center">New Here?</h5>
                     <a href="signup.html"><button type="button" class="form-control btn btn-outline-primary  shadow-none rounded-pill">
                         CREATE AN ACCOUNT
                     </button></a>
+                    </form>
 
                 </div>
             </div>

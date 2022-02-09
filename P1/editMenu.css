@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');@import url('global-styling.css');
+@import url('navbar.css');
+
+
+
+html, body {
+    height: 100%;
+    background-color: var(--background-grey);
+}
+
+.navbar-background {
+    background-color: rgba(0,0,0,.4);
+}
+.tone-down-bg {
+    background-color: rgba(0, 0, 0, 0.78);
+}
+
+#intro {
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
+    url('Images/MqALXo.jpeg');
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
+
+
+h2 {
+    color: var(--blue-main);
+    font-weight: bold;
+    font-style: italic;
+    font-family: 'Nunito', sans-serif;
+    margin-bottom: 1.5em;
+}
+
+.row {
+    padding: 2.5em 6em 2.5em 6em;
+}
+
+.img-thumbnail {
+    object-fit: cover;
+    border-radius: 50%;
+    border: none;
+    object-position: center;
+}
+
+.menu-img {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.add-img {
+    width: fit-content;
+    margin-bottom: 1em;
+}
+
+.add-img:hover{
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+    transform: scale(1.05);
+}
+
+.menu-btn {
+    color: var(--blue-main);
+}
+
+.menu-btn:hover{
+    font-size: 15px;
+    color: var(--blue-main);
+}
+
+.menu-btn:active{
+    color: white;
+}
+
+.menu-item {
+
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.label-file {
+    color: var(--blue-main);
+    border: none;
+    display: inline-block;
+    padding-left: 1em;
+    cursor: pointer;
+}
+
+.label-file:active{
+    color: white;
+}
+
+/*To make label in the middle of the text box*/
+label {
+    padding-top: .5em;
+    padding-right: 1em;
+}
+
+.menu-label {
+    color: var(--blue-main);
+    font-style: italic;
+    font-weight: 400;
+    font-family: 'Nunito', sans-serif;
+}
+.input-text-styling {
+    border-radius: 0;
+    border-bottom: 2px solid var(--blue-main);
+    margin-right: 5em;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.save-btn {
+    color: var(--blue-main);
+    margin-top: 1em;
+    font-weight: bold;
+    font-size: 2em;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 20px;
+    background-color: var(--bs-body-bg);
+    padding: 0.5em;
+}
+
+.save-btn:hover {
+    transition: all .1s ease-in-out;
+    transform: scale(1.05);
+}
+
+.save-btn:active {
+    color: white;
+}
+
+.add-row {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.add-row:hover {
+    transition: all .1s ease-in-out;
+    transform: scale(1.05);
+}
+
+.add-row-btn {
+    border-radius: 0;
+    border: none;
+    background: none;
+}
+
+.add-row-label {
+    cursor:pointer;
+}
+
+.line-break {
+    margin-top: 2em;
+    border: none;
+    border-top: 3px double var(--blue-main);
+    color: var(--blue-main);
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+
+hr:after {
+    background: #fff;
+    content: '§';
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
+}
+
+.fa-plus-circle, .fa-minus-circle {
+    color: var(--blue-main);
+}

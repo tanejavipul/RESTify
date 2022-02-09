@@ -79,7 +79,7 @@ nav>.nav.nav-tabs {
     color: #fff;
     background: black;
     border-radius: 4px;
-    border-bottom: 5px solid var(--blue-1);
+    border-bottom: 5px solid var(--blue-2);
     position:relative;
     bottom: 20px;
 }
@@ -89,47 +89,28 @@ nav>div a.nav-item.nav-link {
     padding: 18px 25px;
     border-radius: 0;
     color:white;
+    font-weight: 800;
 }
 
 nav>div a.nav-item.nav-link.active {
     border: none;
     padding: 18px 25px;
     color: #fff;
-    background: var(--blue-1);
+    background: var(--blue-2);
     border-radius: 0;
 }
 
-/* nav>div a.nav-item.nav-link.active:after {
-    content: "";
-    position: relative;
-    bottom: -60px;
-    left: -10%;
-    border: 15px solid transparent;
-    border-top-color: #e74c3c;
-} */
 
 .tab-content {
     background: #fdfdfd;
     line-height: 25px;
     border: 1px solid #ddd;
-    /* border-top: 5px solid #e74c3c; */
-    /* border-bottom: 5px solid #e74c3c; */
     padding: 30px 25px;
 }
 
 
-
-/* nav>div a.nav-item.nav-link:hover,
-nav>div a.nav-item.nav-link:focus {
-    border: none;
-    background: #e74c3c;
-    color: #fff;
-    border-radius: 0;
-    transition: background 0.20s linear;
-} */
-
 nav>div a.nav-item.nav-link:hover {
-    background: var(--blue-1);
+    background: var(--blue-2);
     transition: background 0.20s linear;
 }
 
@@ -138,5 +119,5 @@ nav>div a.nav-item.nav-link:hover {
 }
 
 
-/*============*/
+
 

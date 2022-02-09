@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Add Restaurant</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../Frameworks/Bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../profile.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  </style>
+</head>
+
+<body>
+  <nav class="navbar  navbar-background fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand navbar-logo-color" href="#">
+
+        <img src="../Images/restaurant-logo.png" alt="" height="28" class="d-inline-block align-text-top">
+        Restify
+      </a>
+      <div class="ms-auto">
+        <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/search.svg"
+            alt="search" />Search</button>
+        <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/circle_notifications.svg"
+            alt="notifications">Notification</button>
+        <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/profile.svg"
+            alt="profile" />Profile</button>
+        <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/logout.svg"
+            alt="logout" />Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="intro">
+    <div class="mask d-flex align-items-center h-100 tone-down-bg">
+      <div class="container">
+        <form class="row" style="background-color: white;">
+          <h2>Add a Restaurant</h2>
+          <!-- <div class="col-12">
+            <label for="avatar-input" class="avatar-img mb-3">
+              <img src="../Images/avatar.png" class="img-thumbnail" alt="...">
+            </label>
+            <label for="avatar-input" class="label-file">
+              CHANGE PHOTO
+              <input id="avatar-input" type="file" class="btn shadow-none avatar-btn">
+            </label>
+          </div> -->
+
+
+          <div class="col-6">
+            <div class="input-group mb-4">
+              <label for="inputRestaurantName" class="col-3 profile-label">RESTAURANT NAME:</label>
+              <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="Restaurant Name"
+                aria-label="Username" aria-describedby="basic-addon1" id="inputRestaurantName">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-4">
+              <label for="inputRestaurantNumber" class="col-3 profile-label">RESTAURANT NUMBER:</label>
+              <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
+              <input type="tel" class="form-control col-9 input-text-styling shadow-none" id="inputRestaurantNumber"
+                name="telphone" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12"
+                title="Ten digits code" required />
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="input-group mb-4">
+              <label for="inputRestaurantAddress" class=" col-3 profile-label">ADDRESS:</label>
+              <input type="text" class="form-control col-11 input-text-styling shadow-none" id="inputRestaurantAddress" placeholder="1234 Main St"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-4">
+              <label for="inputRestaurantPostal" class="col-3 profile-label">ZIP/POSTAL:</label>
+              <input type="text" class="form-control col-9 input-text-styling shadow-none" id="inputRestaurantPostal" placeholder="Zip/Postal"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-4">
+              <label for="inputRestaurantCity" class="col-3 profile-label">CITY:</label>
+              <input type="text" class="form-control col-9 input-text-styling shadow-none" id="inputRestaurantCity" placeholder="City"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-4">
+              <label for="inputRestaurantState" class="col-3 profile-label">STATE:</label>
+              <!-- <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="State"
+                aria-label="Username" aria-describedby="basic-addon1"> -->
+              <select class="form-select col-9 input-text-styling shadow-none" id="inputRestaurantState" required>
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-9"></div>
+          <div class="align-items-end col-3">
+            <button class="save-btn btn shadow-none">CREATE</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

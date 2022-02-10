@@ -86,7 +86,8 @@ input[type="file"] {
 }
 
 .label-file:hover{
-    font-size: 15px;
+    transition: all .1s ease-in-out;
+    transform: scale(1.2);
 }
 
 .label-file:active{
@@ -125,5 +126,30 @@ label {
     transition: all .1s ease-in-out;
     transform: scale(1.4);
 }
+
+/* from editMenu.css */
+.img-thumbnail {
+    object-fit: cover;
+    border-radius: 50%;
+    border: none;
+    object-position: center;
+}
+
+.menu-img {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.add-img {
+    width: fit-content;
+    margin-bottom: 1em;
+}
+
+/* .add-img:hover{
+    
+    transition: all .1s ease-in-out;
+    transform: scale(1.05);
+} */
 
 

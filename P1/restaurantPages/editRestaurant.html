@@ -42,6 +42,7 @@
         </div>
     </nav>
 
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
     <div id="intro">
         <div class="mask d-flex align-items-center h-100 tone-down-bg">
             <div class="container">
@@ -56,6 +57,17 @@
                   <input id="avatar-input" type="file" class="btn shadow-none avatar-btn">
                 </label>
               </div> -->
+                    <div class="col-12">
+                        <div class="add-img">
+                            <label for="item-img-1" class="menu-img">
+                                <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+                            </label>
+                            <label for="item-img-1" class="label-file mb-3">
+                                UPDATE YOUR LOGO
+                            </label>
+                            <input id="item-img-1" type="file" class="btn shadow-none">
+                        </div>
+                    </div>
 
 
                     <div class="col-6">
@@ -69,7 +81,7 @@
                     <div class="col-6">
                         <div class="input-group mb-4">
                             <label for="inputRestaurantNumber" class="col-3 profile-label">RESTAURANT NUMBER:</label>
-                            <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
+
                             <input type="tel" class="form-control col-9 input-text-styling shadow-none"
                                 id="inputRestaurantNumber" name="telphone" placeholder="967 11 11"
                                 pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12" title="Ten digits code" required />
@@ -114,8 +126,6 @@
                     <div class="col-11 mt-4 mb-4">
                         <div class="input-group mb-4">
                             <label for="inputRestaurantState" class="profile-label">GENERAL INFO:</label>
-                            <!-- <input type="text" class="form-control col-9 input-text-styling shadow-none" placeholder="State"
-                                aria-label="Username" aria-describedby="basic-addon1"> -->
                             <textarea class="form-control w-50" id="inputRestaurantInfo" rows="3"
                                 placeholder="General restaurant information that will be displayed on your restaurant page"></textarea>
                         </div>
@@ -123,18 +133,41 @@
 
                     <div class="mb-4">
                         <div class="profile-label">CAROUSEL</div>
-                        <div id="pictureHelpBlock" class="form-text">
+                        <div id="pictureHelpBlock" class="form-text mb-2">
                             These pictures will be shown separately after the carousel component of your restaurant page
                             (max 3)
                         </div>
-                        <div class="col-6">
-                            <div class="input-group mb-4">
-                                <label for="inputRestaurantState" class="col-3 profile-label">Picture 1:</label>
-                                <select class="form-select col-9 input-text-styling shadow-none"
-                                    id="inputRestaurantState" required>
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
+                        <div class="col-12">
+                            <div>
+                                <label for="item-img-1" class="menu-img">
+                                    <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+                                </label>
+                                <label for="item-img-1" class="label-file mb-3">
+                                    PICTURE 1
+                                </label>
+                                <input id="item-img-1" type="file" class="btn shadow-none">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <label for="item-img-1" class="menu-img">
+                                    <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+                                </label>
+                                <label for="item-img-1" class="label-file mb-3">
+                                    PICTURE 2
+                                </label>
+                                <input id="item-img-1" type="file" class="btn shadow-none">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <label for="item-img-1" class="menu-img">
+                                    <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+                                </label>
+                                <label for="item-img-1" class="label-file mb-3">
+                                    PICTURE 3
+                                </label>
+                                <input id="item-img-1" type="file" class="btn shadow-none">
                             </div>
                         </div>
                     </div>
@@ -295,11 +328,56 @@
 
                     <div class="mt-4">
                         <div class="profile-label">ADDITIONAL PICTURES</div>
-                        <div id="pictureHelpBlock" class="form-text">
+                        <div id="pictureHelpBlock" class="form-text mb-2">
                             These pictures will be shown separately after the carousel component of your restaurant page
                             (max 4)
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div>
+                            <label for="additional-img-1" class="menu-img">
+                                <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+                            </label>
+                            <label for="additional-img-1" class="label-file mb-3">
+                                PICTURE 1
+                            </label>
+                            <input id="additional-img-1" type="file" class="btn shadow-none">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            <label for="additional-img-2" class="menu-img">
+                                <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+                            </label>
+                            <label for="additional-img-2" class="label-file mb-3">
+                                PICTURE 2
+                            </label>
+                            <input id="additional-img-2" type="file" class="btn shadow-none">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            <label for="additional-img-3" class="menu-img">
+                                <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+                            </label>
+                            <label for="additional-img-3" class="label-file mb-3">
+                                PICTURE 3
+                            </label>
+                            <input id="additional-img-3" type="file" class="btn shadow-none">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            <label for="additional-img-4" class="menu-img">
+                                <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+                            </label>
+                            <label for="additional-img-4" class="label-file mb-3">
+                                PICTURE 4
+                            </label>
+                            <input id="additional-img-4" type="file" class="btn shadow-none">
+                        </div>
+                    </div>
+
 
 
                     <div class="col-10"></div>
@@ -311,7 +389,7 @@
             </div>
         </div>
     </div>
- 
+
 </body>
 
 </html>

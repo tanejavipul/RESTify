@@ -6,16 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  
+
   <title>Add Restaurant</title>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="../Frameworks/Bootstrap/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../profile.css">
+  <link rel="stylesheet" type="text/css" href="../editMenu.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <script src="js/bootstrap.min.js"></script>
 
+  <style>
+    .logo-img {
+      object-fit: cover;
+      border-radius: 50%;
+      border: none;
+      object-position: center;
+    }
   </style>
+
 </head>
 
 <body>
@@ -44,15 +54,18 @@
       <div class="container">
         <form class="row" style="background-color: white;">
           <h2>Add a Restaurant</h2>
-          <!-- <div class="col-12">
-            <label for="avatar-input" class="avatar-img mb-3">
-              <img src="../Images/avatar.png" class="img-thumbnail" alt="...">
-            </label>
-            <label for="avatar-input" class="label-file">
-              CHANGE PHOTO
-              <input id="avatar-input" type="file" class="btn shadow-none avatar-btn">
-            </label>
-          </div> -->
+
+          <div class="col-12">
+            <div class="add-img">
+              <label for="item-img-1" class="menu-img">
+                <i class="fa fa-picture-o fa-3x logo-img" aria-hidden="true"></i>
+              </label>
+              <label for="item-img-1" class="label-file mb-3">
+                UPLOAD YOUR LOGO (OPTIONAL)
+              </label>
+              <input id="item-img-1" type="file" class="btn shadow-none">
+            </div>
+          </div>
 
 
           <div class="col-6">
@@ -75,22 +88,22 @@
           <div class="col-6">
             <div class="input-group mb-4">
               <label for="inputRestaurantAddress" class=" col-3 profile-label">ADDRESS:</label>
-              <input type="text" class="form-control col-11 input-text-styling shadow-none" id="inputRestaurantAddress" placeholder="1234 Main St"
-                aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control col-11 input-text-styling shadow-none" id="inputRestaurantAddress"
+                placeholder="1234 Main St" aria-label="Username" aria-describedby="basic-addon1">
             </div>
           </div>
           <div class="col-6">
             <div class="input-group mb-4">
               <label for="inputRestaurantPostal" class="col-3 profile-label">ZIP/POSTAL:</label>
-              <input type="text" class="form-control col-9 input-text-styling shadow-none" id="inputRestaurantPostal" placeholder="Zip/Postal"
-                aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control col-9 input-text-styling shadow-none" id="inputRestaurantPostal"
+                placeholder="Zip/Postal" aria-label="Username" aria-describedby="basic-addon1">
             </div>
           </div>
           <div class="col-6">
             <div class="input-group mb-4">
               <label for="inputRestaurantCity" class="col-3 profile-label">CITY:</label>
-              <input type="text" class="form-control col-9 input-text-styling shadow-none" id="inputRestaurantCity" placeholder="City"
-                aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control col-9 input-text-styling shadow-none" id="inputRestaurantCity"
+                placeholder="City" aria-label="Username" aria-describedby="basic-addon1">
             </div>
           </div>
           <div class="col-6">

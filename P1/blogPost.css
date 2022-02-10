@@ -557,7 +557,7 @@ Timeline
   margin-left: 350px;
   background: #fff;
   border: 1px solid #e6e6e6;
-  padding: 35px 20px;
+  padding: 20px 20px;
   border-radius: 3px;
   text-align: left;
   
@@ -632,4 +632,10 @@ h3 {
 }
 .mb20 {
   margin-bottom: 20px !important;
+}
+
+.restaurant-icon:hover {
+  cursor: pointer;
+  transition: all .1s ease-in-out;
+  transform: scale(1.05);
 }

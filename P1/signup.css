@@ -26,3 +26,15 @@
 img {
     max-height: 380px;
 }
+
+.login-container {
+    margin-left: 6em;
+}
+
+.carousel {
+    background-color: #231F20;
+}
+
+h5 {
+    color: white;
+}

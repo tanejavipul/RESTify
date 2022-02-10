@@ -37,7 +37,8 @@ h4 {
     padding-top: 1em;
 }
 
-.row {
+.row-content-adjust {
+    background-color: white;
     padding: 2.5em 6em 2.5em 6em;
 }
 
@@ -51,7 +52,8 @@ h4 {
 }
 .img-thumbnail:hover{
     transition: all .1s ease-in-out;
-    transform: scale(1.3);
+    transform: scale(1.1);
+    border: #0096C7 1px solid;
 }
 
 
@@ -136,7 +138,19 @@ label {
     color: white;
 }
 
-#profile-form {
-    padding: 0;
-    margin: 0;
+.form-control::placeholder, input, .form-control:focus {
+    font-style: italic;
+    font-family: 'Nunito', sans-serif;
 }
+
+.form-control:focus {
+    color: #0096C7;
+}
+
+.px-075em {
+    padding-left: 0.75em;
+}
+
+
+
+

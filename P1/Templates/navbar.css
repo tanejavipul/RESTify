@@ -120,3 +120,18 @@
     color: var(--blue-1);
 }
 
+.scrollable {
+    height: auto;
+    max-height: 210px;
+    overflow-x: hidden;"
+}
+
+.notification-button {
+    background-color: #0096C7;
+    border: none;
+    border-radius: 0;
+}
+
+.notification-button:hover {
+    background-color: #0096C7;
+}

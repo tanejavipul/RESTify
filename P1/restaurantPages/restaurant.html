@@ -14,15 +14,7 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- <script src="js/bootstrap.min.js"></script> -->
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <style>
         .my-card {
@@ -42,25 +34,76 @@
 </head>
 
 <body>
+    <!--COPY FROM HERE  -->
     <nav class="navbar  navbar-background fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand navbar-logo-color" href="#">
 
-                <img src="../Images/restaurant-logo.png" alt="" height="28" class="d-inline-block align-text-top">
+                <img src="../Images/" height="28" class="d-inline-block align-text-top" alt="">
                 Restify
             </a>
             <div class="ms-auto">
-                <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/search.svg"
-                        alt="search" />Search</button>
-                <button class="btn  navbar-button-styling" type="submit"><img
-                        src="../Images/Icons/circle_notifications.svg" alt="notifications">Notification</button>
-                <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/profile.svg"
-                        alt="profile" />Profile</button>
-                <button class="btn  navbar-button-styling" type="submit"><img src="../Images/Icons/logout.svg"
-                        alt="logout" />Logout</button>
+                <a href="../search.html"><button class="btn  navbar-button-styling" type="button"><img
+                            src="../Images/Icons/search.svg" alt="" />Search</button></a>
+
+                <a href="restaurant.html"><button class="btn  navbar-button-styling" type="button"><img
+                            src="../Images/Icons/restaurant.svg" alt="" />Restaurant</button></a>
+
+                <div class="dropdown navbar-dropdown w-100 f">
+                    <button class="btn  navbar-button-styling dropdown-toggle" type="button"
+                        id="dropdownNotificationsButton" data-bs-toggle="dropdown" aria-expanded="false"><img
+                            src="../Images/Icons/circle_notifications.svg" alt="">Notification</button>
+                    <div class="dropdown-menu dropdown-menu-width scrollable dropdown-padding scrollable navbar-background"
+                        aria-labelledby="dropdownNotificationsButton">
+
+                        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                            <button class="list-group-item list-group-item-action notification-individual-button">
+                                <span class="notification-time">Jan 20, 2021, 1:15PM<br></span>
+                                <span class="notification-message"><strong>PIZZIfy</strong> just updated their
+                                    menu!</span></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close Notification"></button>
+                        </div>
+
+                        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                            <button class="list-group-item list-group-item-action notification-individual-button">
+                                <span class="notification-time">Jan 20, 2021, 1:15PM<br></span>
+                                <span class="notification-message"><strong>Sara</strong> has just followed your
+                                    restaurant!</span></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close Notification"></button>
+                        </div>
+
+                        <span class="d-grid gap-2">
+                            <button class="noti-load btn btn-primary shadow-none notification-button" type="button">LOAD
+                                MORE</button>
+                        </span>
+                    </div>
+                </div>
+                <!--            PROFILE DROPDOWN-->
+                <div class="dropdown navbar-dropdown">
+                    <button class="btn  navbar-button-styling dropdown-toggle " type="button" id="dropdownprofilebutton"
+                        data-bs-toggle="dropdown" aria-expanded="false"><img src="../Images/Icons/profile.svg"
+                            alt="" />Profile
+                    </button>
+                    <ul class="dropdown-menu navbar-background dropdown-padding"
+                        aria-labelledby="dropdownprofilebutton">
+                        <li><a href="../profile.html" class="dropdown-item nav-dropdown-item"><img src="../Images/avatar.png"
+                                    class="profile-avatar" alt="">FULL NAME</a>
+                        </li>
+                        <li><a href="../profile.html" class="dropdown-item nav-dropdown-item text-center">EDIT PROFILE</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <a href="../login.html"><button class="btn  navbar-button-styling" type="button"><img
+                            src="../Images/Icons/logout.svg" alt="" />Logout</button> </a>
+
             </div>
         </div>
     </nav>
+    <!--COPY FROM HERE-->
 
 
     <div class="cover">
@@ -95,11 +138,12 @@
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <div class="nav-item">
-                                
-                                <a class="btn btn-primary btn-lg edit-button fa fa-pencil" href="editRestaurant.html" role="button">
+
+                                <a class="btn btn-primary btn-lg edit-button fa fa-pencil" href="editRestaurant.html"
+                                    role="button">
                                     Edit
                                 </a>
-                                    
+
                                 <a class="nav-item nav-link active" id="nav-home-tab" href="#" role="tab"
                                     aria-controls="nav-home" aria-selected="true">Info</a>
                             </div>
@@ -130,7 +174,8 @@
                                     <div class="card border-primary mx-sm-1 p-3">
                                         <div class="row">
                                             <div class="card border-primary shadow text-primary p-2 my-card col-md-2">
-                                                <span class="fa fa-map" aria-hidden="true"></span></div>
+                                                <span class="fa fa-map" aria-hidden="true"></span>
+                                            </div>
                                             <div class="text-primary col-md-10 d-flex align-items-center">
                                                 <h6 class="m-0">1234 New York Drive, Vasilievsky Island ON</h6>
                                             </div>
@@ -141,7 +186,8 @@
                                     <div class="card border-primary mx-sm-1 p-3">
                                         <div class="row">
                                             <div class="card border-primary shadow text-primary p-2 my-card col-md-2">
-                                                <span class="fa fa-phone" aria-hidden="true"></span></div>
+                                                <span class="fa fa-phone" aria-hidden="true"></span>
+                                            </div>
                                             <div class="text-primary col-md-10 d-flex align-items-center">
                                                 <h6 class="m-0">888-888-8888</h6>
                                             </div>
@@ -293,22 +339,26 @@
                                 </button>
                             </div>
                             <!-- Images -->
-                            <div class="row mt-4 d-flex h-100">
+                            <div class="row mt-4 d-flex h-100 mb-4">
                                 <div class="col-md-3 ">
-                                    <img src="../Images/chania.jpg" alt="..." class="img-thumbnail w-100" style="height: 30vh" >
+                                    <img src="../Images/chania.jpg" alt="..." class="img-thumbnail w-100"
+                                        style="height: 250px">
                                 </div>
                                 <div class="col-md-3">
-                                    <img src="../Images/nature.jpg" alt="..." class="img-thumbnail w-100" style="height: 30vh">
+                                    <img src="../Images/nature.jpg" alt="..." class="img-thumbnail w-100"
+                                        style="height: 250px">
                                 </div>
                                 <div class="col-md-3">
-                                    <img src="../Images/lights.jpg" alt="..." class="img-thumbnail w-100" style="height: 30vh">
+                                    <img src="../Images/lights.jpg" alt="..." class="img-thumbnail w-100"
+                                        style="height: 250px">
                                 </div>
                                 <div class="col-md-3">
-                                    <img src="../Images/fjords.jpg" alt="..." class="img-thumbnail w-100" style="height: 30vh">
+                                    <img src="../Images/fjords.jpg" alt="..." class="img-thumbnail w-100"
+                                        style="height: 250px">
                                 </div>
                             </div>
 
-                            
+
 
 
 

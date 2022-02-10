@@ -10,6 +10,13 @@ html, body {
     url('Images/MqALXo.jpeg');
     background-size: cover;
     background-position: center center;
+    
+
+    /* fixes zoomout background issue */
+    margin: 0;
+    min-height: 100vh;
+    background-size: 100% 100%;
+
 }
 
 .cover {
@@ -116,6 +123,11 @@ nav>div a.nav-item.nav-link:hover {
 
 .tone-down-bg {
     background-color: rgba(0, 0, 0, 0.5);
+
+    /* fixes zoomout background issue */
+    margin: 0;
+    min-height: 100vh;
+    background-size: 100% 100%;
 }
 
 

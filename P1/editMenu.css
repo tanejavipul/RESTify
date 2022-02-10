@@ -20,7 +20,6 @@ html, body {
     url('Images/MqALXo.jpeg');
     background-size: cover;
     background-position: center center;
-    height: 100vh;
 }
 
 
@@ -34,6 +33,8 @@ h2 {
 
 .row {
     padding: 2.5em 6em 2.5em 6em;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 
 .img-thumbnail {

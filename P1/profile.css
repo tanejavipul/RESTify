@@ -134,10 +134,6 @@ label {
     transform: scale(1.05);
 }
 
-.save-btn:active {
-    color: white;
-}
-
 .form-control::placeholder, input, .form-control:focus {
     font-style: italic;
     font-family: 'Nunito', sans-serif;

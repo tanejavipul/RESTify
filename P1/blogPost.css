@@ -223,7 +223,7 @@ body{
 .article .article-title h2 {
   color: var(--orange-1);
   font-weight: 1000;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
 }
 .article .article-title .media {
   padding-top: 15px;

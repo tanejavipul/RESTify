@@ -34,6 +34,20 @@ html, body {
     z-index: 1; /* prevents button from dissapearing on hover*/            
 }
 
+.blog-edit-button {
+    z-index: 1; /* prevents button from dissapearing on hover*/
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+
+.blog-delete-button {
+    z-index: 1; /* prevents button from dissapearing on hover*/
+    position: absolute;
+    left: 0;
+    top: 45px;
+}
+
 .nav-item {
     position:relative;
 }

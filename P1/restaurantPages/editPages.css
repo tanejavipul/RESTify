@@ -109,22 +109,15 @@ label {
 
 .save-btn {
     color: var(--blue-main);
+    border: none;
     margin-top: 1em;
-    font-weight: bold;
-    font-size: 2em;
-    font-family: 'Nunito', sans-serif;
-    border-radius: 20px;
-    background-color: var(--bs-body-bg);
-    padding: 0.5em;
+    font-style: italic;
 }
 
 .save-btn:hover {
+    color: var(--blue-main);
     transition: all .1s ease-in-out;
     transform: scale(1.05);
-}
-
-.save-btn:active {
-    color: white;
 }
 
 .add-row {
@@ -171,4 +164,5 @@ hr:after {
 
 .example-blog {
     width: 30%;
+    height: fit-content;
 }

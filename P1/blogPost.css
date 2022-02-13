@@ -1,7 +1,11 @@
 @import url('global-styling.css');
 
-body{
-  background-color: var(--blue-4);
+html, body {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.78);
+  
+  background-size: cover;
+  background-position: center center; 
 }
 
 .blog-listing {
@@ -12,9 +16,6 @@ body{
 #intro {
   background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
   url('Images/MqALXo.jpeg');
-  /* background-size: cover; */
-  /* background-position: center center; */
-  /* background-attachment: fixed;   */
   margin: 0;
   min-height: 100vh;
   background-size: 100% 100%;
@@ -174,6 +175,10 @@ body{
   text-transform: uppercase;
   display: inline-block;
   margin-right: 10px;
+}
+
+.blog-post {
+  margin-top: 2rem;
 }
 
 .blog-title {
@@ -632,6 +637,10 @@ h3 {
 }
 .mb20 {
   margin-bottom: 20px !important;
+}
+
+.ml-2 {
+  margin-left: 0.5em;
 }
 
 .restaurant-icon:hover {

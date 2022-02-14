@@ -516,10 +516,11 @@ h6 {
   color: var(--blue-main);
 }
 
-
-
-
-/* NEWWWWWW */
+.h7 {
+  font-size: 18px;
+  color: var(--blue-2);
+  font-weight: 600;
+}
 
 /*
 Timeline

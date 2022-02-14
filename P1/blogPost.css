@@ -661,3 +661,16 @@ h3 {
   transition: all .1s ease-in-out;
   transform: scale(1.05);
 }
+
+.title-style {
+  color: white;
+  font-style: italic;
+  font-weight: 400;
+  font-family: 'Nunito', sans-serif;
+}
+
+.jumbotron {
+  padding: 3rem;
+  margin-bottom: 2rem;
+  color: white;
+}

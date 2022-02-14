@@ -127,6 +127,7 @@ label {
     color: var(--blue-main);
     border: none;
     margin-top: 1em;
+    font-style: italic;
 }
 
 .save-btn:hover {

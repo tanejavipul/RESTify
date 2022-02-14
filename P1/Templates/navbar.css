@@ -9,7 +9,7 @@
 
 .navbar-background {
     /* FIXME CHANGE THIS IF YOU DONT WANT IT TRANSPARENT*/
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.8);
 }
 
 .navbar-logo-color {
@@ -123,7 +123,7 @@
 .scrollable {
     height: auto;
     max-height: 210px;
-    overflow-x: hidden;"
+    overflow-x: hidden;
 }
 
 .notification-button {

@@ -2,3 +2,5 @@
 /.idea/modules.xml
 /.idea/group_0012.iml
 /.idea/.gitignore
+/P2/db.sqlite3
+/P2/venv

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from accounts.views import SignUpView, ProfileView
+from accounts.views import SignUpView, ProfileView, ProfileEditView
 
 app_name = 'accounts'
 
@@ -26,5 +26,7 @@ urlpatterns = [
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('logout/', logout_view, name='logout'),
     path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/edit/', ProfileEditView.as_view(), name='profileEdit'),
+
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair')
 ]

@@ -51,24 +51,6 @@ class ProfileSerializer(ModelSerializer):
     # owner = serializers.CharField(source='owner.get_full_name', read_only=True)
     # id = serializers.ReadOnlyField()
 
-    password = serializers.CharField(write_only=True, required=False)
-    password2 = serializers.CharField(write_only=True, required=False)
-
-    class Meta:
-        model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'password', 'password2']
-
-    def validate(self, attrs):
-        if 'password' in attrs:
-            if attrs['password'] != attrs['password2']:
-                raise serializers.ValidationError({"password": "Password fields didn't match."})
-        return attrs
-
-
-class ProfileEditSerializer(ModelSerializer):
-    # owner = serializers.CharField(source='owner.get_full_name', read_only=True)
-    # id = serializers.ReadOnlyField()
-    # https://www.django-rest-framework.org/api-guide/fields/
     username = serializers.CharField(read_only=True, required=False)  # username will only be printed out
     old_password = serializers.CharField(write_only=True, required=False)
     new_password = serializers.CharField(write_only=True, required=False)
@@ -83,23 +65,24 @@ class ProfileEditSerializer(ModelSerializer):
             try:
                 validate_email(attrs['email'])
             except:
-                raise serializers.ValidationError({"email": "Enter Valid Email"})
+                raise serializers.ValidationError({"Email Error": "Enter Valid Email"})
 
         if 'old_password' in attrs and 'new_password' not in attrs:
-            raise serializers.ValidationError({"password": "new_password not provided"})
+            raise serializers.ValidationError({"Password Error": "New Password Not Provided"})
 
         if 'new_password' in attrs:
             if not self.instance.check_password(attrs['old_password']):
-                raise serializers.ValidationError({"password": "Old password incorrect."})
+                raise serializers.ValidationError({"Password Error": "Old Password Incorrect."})
             if len(attrs['new_password']) < 8:
-                raise serializers.ValidationError({"password": "Password to short."})
-            if attrs['new_password'] != attrs['new_password2']:
-                raise serializers.ValidationError({"password": "Password fields didn't match."})
+                raise serializers.ValidationError({"Password Error": "Password To Short."})
+            if 'new_password2' not in attrs or attrs['new_password'] != attrs['new_password2']:
+                raise serializers.ValidationError({"Password Error": "New Password Field's Did Not Match."})
         return attrs
 
     def update(self, instance, validated_data):
         if 'old_password' in validated_data and 'new_password' in validated_data:
             instance.set_password(validated_data['new_password'])
+
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.email = validated_data.get('email', instance.email)

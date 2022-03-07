@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from accounts.models import User
-from accounts.serializer import SignUpSerializer, ProfileSerializer, ProfileEditSerializer
+from accounts.serializer import SignUpSerializer, ProfileSerializer
 
 
 class SignUpView(CreateAPIView):
@@ -19,7 +19,7 @@ class SignUpView(CreateAPIView):
     #     return self.request.user
     #
 
-class ProfileView(RetrieveAPIView):
+class ProfileView(RetrieveAPIView, UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated]
@@ -30,13 +30,13 @@ class ProfileView(RetrieveAPIView):
 
 
 
-class ProfileEditView(UpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = ProfileEditSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_object(self):
-        return self.request.user
+# class ProfileEditView(UpdateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = ProfileEditSerializer
+#     permission_classes = [IsAuthenticated]
+#
+#     def get_object(self):
+#         return self.request.user
 
     # def update(self, request, *args, **kwargs):
     #     print("jeffff")

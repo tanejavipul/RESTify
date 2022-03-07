@@ -17,14 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from accounts.views import SignUpView, ProfileView
+
 app_name = 'accounts'
 
 urlpatterns = [
-    # path('signup/', signup_view, name='signup'),
+    path('signup/', SignUpView.as_view(), name='signup'),
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-
     # path('logout/', logout_view, name='logout'),
-    # path('profile/', profile_edit, name='profile'),
+    path('profile/', ProfileView.as_view(), name='profile'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair')
 ]

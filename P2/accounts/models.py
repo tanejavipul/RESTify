@@ -12,7 +12,7 @@ from restaurants.models import Restaurant
 
 class User(AbstractUser):
     avatar = models.ImageField(upload_to='Avatars/', default='Avatars/avatar.png', blank=False)  # TODO change NULL to default Profile Pic
-    # phone = PhoneNumberField()
+    phone = PhoneNumberField(null=True, blank=True)
 
 
 class Following(models.Model):

@@ -1,11 +1,12 @@
 # from django.contrib.auth.models import User
-from accounts.models import User
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import SET_NULL, IntegerField, DateTimeField, CASCADE
+from django.conf import settings
 
 
 class Restaurant(models.Model):
-    owner = models.OneToOneField(to=User, on_delete=CASCADE, null=True, related_name='restaurants')
+    owner = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True, related_name='restaurants')
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     postal = models.CharField(max_length=10)
@@ -35,21 +36,21 @@ class MenuItem(models.Model):
     price = models.FloatField()
     type = models.CharField(max_length=20)
 
-class Notifications(models.Model):
+class Notification(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='notifications')
     title = models.CharField(max_length=200)
     time = models.TimeField(auto_now=True)
 
-class Comments(models.Model):
-    user = models.ForeignKey(to=User, on_delete=SET_NULL, null=True, related_name='comments')
+class Comment(models.Model):
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='comments')
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='comments')
     comment = models.CharField(max_length=200)
     datetime = DateTimeField(auto_now=True)
-    # def __str__(self):
-    #     return str(self.user) + " commented " + str(self.restaurant)
+    def __str__(self):
+        return "User:" + str(self.user) + " commented on Restaurant:" + str(self.restaurant) + " page"
 
-class RestaurantLikes(models.Model):
-    user = models.ForeignKey(to=User, on_delete=SET_NULL, null=True, related_name='likes')
+class RestaurantLike(models.Model):
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='likes')
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='likes')
-    # def __str__(self):
-    #     return str(self.user) + " liked " + str(self.restaurant)
+    def __str__(self):
+        return "User:" + str(self.user) + " liked Restaurant:" + str(self.restaurant) + " page"

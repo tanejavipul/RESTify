@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # 'rest_framework.authtoken',
     'accounts',
     'restaurants',
+    'blogs',
     # 'rest_framework_simplejwt.token_blacklist',
 
 ]

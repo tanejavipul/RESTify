@@ -1,15 +1,11 @@
 # from django.contrib.auth.models import User
-from ctypes import addressof
-from os import POSIX_FADV_SEQUENTIAL
-from unicodedata import name
 from accounts.models import User
 from django.db import models
-from django.db.models import SET_NULL
-
+from django.db.models import SET_NULL, IntegerField, DateTimeField, CASCADE
 
 
 class Restaurant(models.Model):
-    owner = models.OneToOneField(to=User, on_delete=SET_NULL, null=True, related_name='restaurant')
+    owner = models.OneToOneField(to=User, on_delete=SET_NULL, null=True, related_name='restaurants')
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     postal = models.CharField(max_length=10)
@@ -41,11 +37,19 @@ class MenuItem(models.Model):
 
 class Notifications(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=SET_NULL, null=True, related_name='notifications')
-    title = models.CharField()
+    title = models.CharField(max_length=200)
     time = models.TimeField(auto_now=True)
 
 class Comments(models.Model):
-    pass
+    user = models.ForeignKey(to=User, on_delete=SET_NULL, null=True, related_name='comments')
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=SET_NULL, null=True, related_name='comments')
+    comment = models.CharField(max_length=200)
+    datetime = DateTimeField(auto_now=True)
+    # def __str__(self):
+    #     return str(self.user) + " commented " + str(self.restaurant)
 
 class RestaurantLikes(models.Model):
-    pass
+    user = models.ForeignKey(to=User, on_delete=SET_NULL, null=True, related_name='likes')
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=SET_NULL, null=True, related_name='likes')
+    # def __str__(self):
+    #     return str(self.user) + " liked " + str(self.restaurant)

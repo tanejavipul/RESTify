@@ -21,6 +21,12 @@ class SignUpSerializer(ModelSerializer):
         fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'password', 'password2']
 
     def validate(self, attrs):
+        if 'email' in attrs:
+            try:
+                validate_email(attrs['email'])
+            except:
+                raise serializers.ValidationError({"Email Error": "Enter Valid Email"})
+
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({"password": "Password fields didn't match."})
         return attrs
@@ -58,7 +64,7 @@ class ProfileSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'old_password', 'new_password', 'new_password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'phone', 'avatar', 'old_password', 'new_password', 'new_password2']
 
     def validate(self, attrs):
         if 'email' in attrs:

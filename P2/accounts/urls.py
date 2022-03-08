@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from accounts.views import SignUpView, ProfileView
+from accounts.views import SignUpView, ProfileView, LogOutView
 
 app_name = 'accounts'
 
@@ -30,6 +30,7 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/edit/', ProfileView.as_view(), name='profileEdit'),
 
-    # path('logout/', , name='logout'),
+    # TODO DELETE TOKEN
+    # path('logout/', LogOutView.as_view(), name='logout'),
 
 ]

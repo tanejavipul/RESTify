@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phonenumber_field',
     'rest_framework',
+    # 'rest_framework.authtoken',
     'accounts',
-    'restaurants'
+    'restaurants',
+    # 'rest_framework_simplejwt.token_blacklist',
 
 ]
 

@@ -12,7 +12,7 @@ class Restaurant(models.Model):
     owner = models.OneToOneField(to=User, on_delete=SET_NULL, null=True, related_name='restaurant')
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
-    #postal
+    address = models.CharField(max_length=100)
     #phone
     #logo
 
@@ -28,12 +28,15 @@ class Restaurant(models.Model):
     # image_3
     # image_4
     
-    # name = models.CharField(max_length=200, error_messages={'required': "First name is required."})
-    # swift_code = models.CharField(max_length=200)
-    # inst_num = models.CharField(max_length=200)
-    # description = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
 
+class Notifications(models.Model):
+    pass
 
+class Comments(models.Model):
+    pass
+
+class RestaurantLikes(models.Model):
+    pass

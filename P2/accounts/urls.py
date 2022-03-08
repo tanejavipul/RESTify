@@ -17,14 +17,20 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from accounts.views import SignUpView, ProfileView
+from accounts.views import SignUpView, ProfileView, LogOutView
 
 app_name = 'accounts'
 
 urlpatterns = [
     path('signup/', SignUpView.as_view(), name='signup'),
+
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('logout/', logout_view, name='logout'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+
     path('profile/', ProfileView.as_view(), name='profile'),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair')
+    path('profile/edit/', ProfileView.as_view(), name='profileEdit'),
+
+    # TODO DELETE TOKEN
+    # path('logout/', LogOutView.as_view(), name='logout'),
+
 ]

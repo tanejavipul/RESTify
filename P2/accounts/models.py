@@ -4,9 +4,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 #https://stackoverflow.com/questions/19130942/whats-the-best-way-to-store-phone-number-in-django-models
 
 # Create your models here.
-from django.db.models import SET_NULL
+from django.db.models import CASCADE
 
 # from restaurants.models import Restaurant
+from restaurants.models import Restaurant
 
 
 class User(AbstractUser):
@@ -14,7 +15,6 @@ class User(AbstractUser):
     # phone = PhoneNumberField()
 
 
-#TODO ADDED THIS WHEN RESTAURANT MODEL IS CREATED
-# class Following(models.Model):
-#     user = models.ForeignKey(to=User, on_delete=SET_NULL, null=True, related_name='user')
-#     restuarant = models.ForeignKey(to=Restaurant)
+class Following(models.Model):
+    user = models.ForeignKey(to=User, on_delete=CASCADE, null=True, related_name='following')
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='followers')

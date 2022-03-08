@@ -12,9 +12,9 @@ class Restaurant(models.Model):
     owner = models.OneToOneField(to=User, on_delete=SET_NULL, null=True, related_name='restaurant')
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
+    postal = models.CharField(max_length=10)
     #phone
-    #logo
+    logo = models.ImageField(upload_to='Restaurant/Logo/', default='Restaurant/Logo/logo.png', blank=False)  # TODO change NULL to default Profile Pic
 
     #extra fields on restaurant page
     # description
@@ -32,8 +32,17 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
+class MenuItem(models.Model):
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=SET_NULL, null=True, related_name='items')
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=100)
+    price = models.FloatField()
+    type = models.CharField(max_length=20)
+
 class Notifications(models.Model):
-    pass
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=SET_NULL, null=True, related_name='notifications')
+    title = models.CharField()
+    time = models.TimeField(auto_now=True)
 
 class Comments(models.Model):
     pass

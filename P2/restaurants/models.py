@@ -36,8 +36,14 @@ class MenuItem(models.Model):
     price = models.FloatField()
     type = models.CharField(max_length=20)
 
-class Notification(models.Model):
-    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='notifications')
+class RestaurantUpdate(models.Model):
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='restaurantUpdate')
+    title = models.CharField(max_length=200)
+    time = models.TimeField(auto_now=True)
+
+class OwnerNotification(models.Model):
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='ownerNotification')
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='ownerNotification')
     title = models.CharField(max_length=200)
     time = models.TimeField(auto_now=True)
 

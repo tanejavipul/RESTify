@@ -8,7 +8,6 @@ from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, Bl
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from accounts.models import User, Following
-from accounts.serializer import SignUpSerializer, ProfileSerializer
 from restaurants.models import Restaurant
 
 

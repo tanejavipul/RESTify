@@ -32,7 +32,6 @@ urlpatterns = [
 
     path('follow/<int:rest_id>/', FollowUnfollowView.as_view(), name='followRest'),
     # path('unfollow/<int:rest_id>/', FollowUnfollowView.as_view(), name='unfollowRest'),
-    path('follow/<int:rest_id>/', FollowUnfollowView.as_view(), name='followed'),
 
     # TODO DELETE TOKEN
     # path('logout/', LogOutView.as_view(), name='logout'),

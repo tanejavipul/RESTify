@@ -18,7 +18,7 @@ class SignUpSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'password', 'password2']
+        fields = ['username', 'first_name', 'phone', 'last_name', 'email', 'avatar', 'password', 'password2']
 
     def validate(self, attrs):
         if 'email' in attrs:
@@ -35,19 +35,20 @@ class SignUpSerializer(ModelSerializer):
         email = validated_data.get('email', '')
         first_name = validated_data.get('first_name', '')
         last_name = validated_data.get('last_name', '')
+        phone = validated_data.get('phone', '')
+
 
         user = User.objects.create(
             username=validated_data['username'],
             email=email,
             first_name=first_name,
             last_name=last_name,
+            phone=phone,
         )
 
         user.set_password(validated_data['password'])
         user.save()
 
-        output = {'username': validated_data['username'], 'email': email, 'first_name': first_name,
-                  'last_name': last_name}
 
         print(user)
         return user
@@ -93,6 +94,7 @@ class ProfileSerializer(ModelSerializer):
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.email = validated_data.get('email', instance.email)
         instance.avatar = validated_data.get('avatar', instance.avatar)
+        instance.phone = validated_data.get('phone', instance.phone)
         instance.save()
 
         return instance

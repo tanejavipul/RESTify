@@ -17,10 +17,25 @@ from django.contrib import admin
 from django.urls import path, include
 
 from restaurants.views.FollowView import FollowUnfollowView
+from restaurants.views.RestaurantUpdate import RestaurantUpdateBlogMenuView, RestaurantUpdateView
 
 app_name = 'restaurants'
 
 urlpatterns = [
+
+    # Follow
     path('follow/<int:rest_id>/', FollowUnfollowView.as_view(), name='followRest'),
+
+    # Restaurant Update
+    path('update/<int:rest_id>/', RestaurantUpdateView.as_view(), name='update'),
+    path('update/blog/<int:rest_id>/', RestaurantUpdateBlogMenuView.as_view(), {'blogOrMenu': 'blog'}, name='updateBlog'),
+    path('update/menu/<int:rest_id>/', RestaurantUpdateBlogMenuView.as_view(), {'blogOrMenu': 'menu'}, name='updateMenu'),
+
+    # Owner Update
+    # path('owner/update/follows/', FollowUnfollowView.as_view(), name='followRest'),
+    # path('owner/update/likes/rest/', FollowUnfollowView.as_view(), name='followRest'),
+    # path('owner/update/likes/blog/', FollowUnfollowView.as_view(), name='followRest'),
+    # path('owner/update/comments/', FollowUnfollowView.as_view(), name='followRest'),
+
     # path('unfollow/<int:rest_id>/', FollowUnfollowView.as_view(), name='unfollowRest'),
 ]

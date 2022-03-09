@@ -27,7 +27,7 @@ class FollowUnfollowView(APIView):
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             if Following.objects.filter(user=self.request.user, restaurant=self.kwargs['rest_id']).exists():
-                return Response({'Success': "User already follows restaurant."}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'Success': "User already follows restaurant."}, status=status.HTTP_200_OK)
             if not Restaurant.objects.filter(id=self.kwargs['rest_id']).exists():
                 return Response({'Error': "Restaurant not Found"}, status=status.HTTP_404_NOT_FOUND)
             try:

@@ -39,13 +39,13 @@ class MenuItem(models.Model):
 class RestaurantUpdate(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='restaurantUpdate')
     title = models.CharField(max_length=200)
-    time = models.TimeField(auto_now=True)
+    last_modified = DateTimeField(auto_now=True,editable=True)
 
 class OwnerNotification(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='ownerNotification')
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='ownerNotification')
     title = models.CharField(max_length=200)
-    time = models.TimeField(auto_now=True)
+    time = models.DateTimeField(auto_now=True)
 
 class Comment(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='comments')

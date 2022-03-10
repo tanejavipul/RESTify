@@ -1,17 +1,18 @@
-from rest_framework import status
+from rest_framework import status, pagination
 from rest_framework.authtoken.models import Token
-from rest_framework.generics import RetrieveAPIView, UpdateAPIView, CreateAPIView
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.generics import ListAPIView, ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
-from rest_framework_simplejwt.tokens import RefreshToken
+
 
 from accounts.models import User, Following
 from restaurants.models import Restaurant, RestaurantUpdate
 
 
 # Create your views here.
+from restaurants.serializer.RestaurantUpdateSerializer import RestaurantUpdateSerializer
+
+
 class RestaurantUpdateBlogMenuView(APIView):
     def get_update_message(self, message):
         if message == "blog":
@@ -47,6 +48,41 @@ class RestaurantUpdateBlogMenuView(APIView):
 
 
 
-class RestaurantUpdateView(APIView):
-    def get(self, request):
-        pass
+class CustomPagination(pagination.PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+    page_query_param = 'p'
+
+    def get_paginated_response(self, data):
+        response = Response(data)
+        response['count'] = self.page.paginator.count
+        response['next'] = self.get_next_link()
+        response['previous'] = self.get_previous_link()
+        return response
+
+
+
+class RestaurantUpdateView(ListAPIView):
+    # queryset = RestaurantUpdate.objects.all()
+    serializer_class = RestaurantUpdateSerializer
+    # print(queryset)
+    pagination_class = CustomPagination
+    queryset = RestaurantUpdate.objects.all()
+    # paginate_by = 2
+    def get_queryset(self):
+
+        hee = self.kwargs['rest_id']
+        print(hee)
+
+        restaurant = Restaurant.objects.get(id=hee)
+        print(restaurant)
+        x = RestaurantUpdate.objects.filter(restaurant=restaurant)[0]
+        print("DATEEEE")
+        print(x.last_modified)
+        return RestaurantUpdate.objects.filter(restaurant=restaurant)#.order_by('-datetime')
+
+    def get(self, request, *args, **kwargs):
+        serializer = RestaurantUpdateSerializer(self.get_queryset(), many=True)
+        page = self.paginate_queryset(serializer.data)
+        return self.get_paginated_response(page)

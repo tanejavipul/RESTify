@@ -32,6 +32,7 @@ urlpatterns = [
     path('update/menu/<int:rest_id>/', RestaurantUpdateBlogMenuView.as_view(), {'blogOrMenu': 'menu'}, name='updateMenu'),
 
     # Owner Update
+    # path('owner/update/', FollowUnfollowView.as_view(), name='followRest'),
     # path('owner/update/follows/', FollowUnfollowView.as_view(), name='followRest'),
     # path('owner/update/likes/rest/', FollowUnfollowView.as_view(), name='followRest'),
     # path('owner/update/likes/blog/', FollowUnfollowView.as_view(), name='followRest'),

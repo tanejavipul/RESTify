@@ -67,22 +67,17 @@ class RestaurantUpdateView(ListAPIView):
     # queryset = RestaurantUpdate.objects.all()
     serializer_class = RestaurantUpdateSerializer
     # print(queryset)
-    pagination_class = CustomPagination
+    # pagination_class = CustomPagination
     queryset = RestaurantUpdate.objects.all()
-    # paginate_by = 2
+    # paginate_by = 3
+
     def get_queryset(self):
+        restaurant = Restaurant.objects.get(id=self.kwargs['rest_id'])
+        return RestaurantUpdate.objects.filter(restaurant=restaurant).order_by('-last_modified')
 
-        hee = self.kwargs['rest_id']
-        print(hee)
-
-        restaurant = Restaurant.objects.get(id=hee)
-        print(restaurant)
-        x = RestaurantUpdate.objects.filter(restaurant=restaurant)[0]
-        print("DATEEEE")
-        print(x.last_modified)
-        return RestaurantUpdate.objects.filter(restaurant=restaurant)#.order_by('-datetime')
-
-    def get(self, request, *args, **kwargs):
-        serializer = RestaurantUpdateSerializer(self.get_queryset(), many=True)
-        page = self.paginate_queryset(serializer.data)
-        return self.get_paginated_response(page)
+    # def get(self, request, *args, **kwargs):
+    #     print('dhhdhd')
+    #     serializer = RestaurantUpdateSerializer(self.get_queryset(), many=True)
+    #     page = self.paginate_queryset(serializer.data)
+    #     print(self.get_paginated_response(page))
+    #     return self.get_paginated_response(page)

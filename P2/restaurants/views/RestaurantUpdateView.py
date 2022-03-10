@@ -48,36 +48,22 @@ class RestaurantUpdateBlogMenuView(APIView):
 
 
 
-class CustomPagination(pagination.PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'
-    max_page_size = 50
-    page_query_param = 'p'
-
-    def get_paginated_response(self, data):
-        response = Response(data)
-        response['count'] = self.page.paginator.count
-        response['next'] = self.get_next_link()
-        response['previous'] = self.get_previous_link()
-        return response
-
-
 
 class RestaurantUpdateView(ListAPIView):
-    # queryset = RestaurantUpdate.objects.all()
     serializer_class = RestaurantUpdateSerializer
-    # print(queryset)
-    # pagination_class = CustomPagination
     queryset = RestaurantUpdate.objects.all()
-    # paginate_by = 3
 
     def get_queryset(self):
         restaurant = Restaurant.objects.get(id=self.kwargs['rest_id'])
         return RestaurantUpdate.objects.filter(restaurant=restaurant).order_by('-last_modified')
 
-    # def get(self, request, *args, **kwargs):
-    #     print('dhhdhd')
-    #     serializer = RestaurantUpdateSerializer(self.get_queryset(), many=True)
-    #     page = self.paginate_queryset(serializer.data)
-    #     print(self.get_paginated_response(page))
-    #     return self.get_paginated_response(page)
+class RestaurantUpdateAllView(ListAPIView):
+    serializer_class = RestaurantUpdateSerializer
+    queryset = RestaurantUpdate.objects.all()
+
+    def get_queryset(self):
+        x = RestaurantUpdate.objects.all().prefetch_related('restaurant__owner', 'restaurant__followers').filter(restaurant__followers__user=self.request.user).order_by('-last_modified')
+        print(x)
+        print(len(x))
+        return x
+

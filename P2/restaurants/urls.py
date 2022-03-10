@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 from restaurants.views.FollowView import FollowUnfollowView
-from restaurants.views.RestaurantUpdateView import RestaurantUpdateBlogMenuView, RestaurantUpdateView
+from restaurants.views.RestaurantUpdateView import RestaurantUpdateBlogMenuView, RestaurantUpdateView, \
+    RestaurantUpdateAllView
 
 app_name = 'restaurants'
 
@@ -27,6 +28,7 @@ urlpatterns = [
     path('follow/<int:rest_id>/', FollowUnfollowView.as_view(), name='followRest'),
 
     # Restaurant Update
+    path('update/all/', RestaurantUpdateAllView.as_view(), name='updateAll'),
     path('update/<int:rest_id>/', RestaurantUpdateView.as_view(), name='update'),
     path('update/blog/<int:rest_id>/', RestaurantUpdateBlogMenuView.as_view(), {'blogOrMenu': 'blog'}, name='updateBlog'),
     path('update/menu/<int:rest_id>/', RestaurantUpdateBlogMenuView.as_view(), {'blogOrMenu': 'menu'}, name='updateMenu'),

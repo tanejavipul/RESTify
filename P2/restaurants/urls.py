@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from restaurants.views.FollowView import FollowUnfollowView
-from restaurants.views.RestaurantUpdate import RestaurantUpdateBlogMenuView, RestaurantUpdateView
+from restaurants.views.RestaurantUpdateView import RestaurantUpdateBlogMenuView, RestaurantUpdateView
 
 app_name = 'restaurants'
 

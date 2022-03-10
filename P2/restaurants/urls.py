@@ -19,6 +19,10 @@ from django.urls import path, include
 from restaurants.views.FollowView import FollowUnfollowView
 from restaurants.views.RestaurantUpdateView import RestaurantUpdateBlogMenuView, RestaurantUpdateView, \
     RestaurantUpdateAllView
+from restaurants.views import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantsView
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+
 
 app_name = 'restaurants'
 
@@ -41,4 +45,11 @@ urlpatterns = [
     # path('owner/update/comments/', FollowUnfollowView.as_view(), name='followRest'),
 
     # path('unfollow/<int:rest_id>/', FollowUnfollowView.as_view(), name='unfollowRest'),
+
+    
+    path('add/', AddRestaurantView.as_view(), name='addRestaurant'),
+    path('<restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
+    path('<restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
+    path('<restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'),
+    path('search/', GetRestaurantsView.as_view(), name='getRestaurants')
 ]

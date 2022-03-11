@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 from restaurants.views.FollowView import FollowUnfollowView
-from restaurants.views.RestaurantUpdateView import RestaurantUpdateBlogMenuView, RestaurantUpdateView, \
-    RestaurantUpdateAllView
+from restaurants.views.OwnerNotificationView import OwnerNotificationAddView, OwnerAllNotificationView
+from restaurants.views.RestaurantNotificationView import RestaurantAddNotificationView, RestaurantNotificationView, \
+    RestaurantAllNotificationView
 
 app_name = 'restaurants'
 
@@ -28,17 +29,15 @@ urlpatterns = [
     path('follow/<int:rest_id>/', FollowUnfollowView.as_view(), name='followRest'),
 
     # Restaurant Update
-    path('update/all/', RestaurantUpdateAllView.as_view(), name='updateAll'),
-    path('update/<int:rest_id>/', RestaurantUpdateView.as_view(), name='update'),
-    path('update/blog/<int:rest_id>/', RestaurantUpdateBlogMenuView.as_view(), {'blogOrMenu': 'blog'}, name='updateBlog'),
-    path('update/menu/<int:rest_id>/', RestaurantUpdateBlogMenuView.as_view(), {'blogOrMenu': 'menu'}, name='updateMenu'),
+    path('notification/all/', RestaurantAllNotificationView.as_view(), name='notificationAll'),
+    path('notification/<int:rest_id>/', RestaurantNotificationView.as_view(), name='notificationRestaurant'),
+    path('notification/blog/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {'blogOrMenu': 'blog'}, name='notificationBlog'),
+    path('notification/menu/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {'blogOrMenu': 'menu'}, name='notificationMenu'),
 
     # Owner Update
-    # path('owner/update/', FollowUnfollowView.as_view(), name='followRest'),
-    # path('owner/update/follows/', FollowUnfollowView.as_view(), name='followRest'),
-    # path('owner/update/likes/rest/', FollowUnfollowView.as_view(), name='followRest'),
-    # path('owner/update/likes/blog/', FollowUnfollowView.as_view(), name='followRest'),
-    # path('owner/update/comments/', FollowUnfollowView.as_view(), name='followRest'),
-
-    # path('unfollow/<int:rest_id>/', FollowUnfollowView.as_view(), name='unfollowRest'),
+    path('owner/update/', OwnerAllNotificationView.as_view(), {'Owner': 'blog'}, name='followRest'),
+    path('owner/update/follow/', OwnerNotificationAddView.as_view(), name='followRest'),
+    path('owner/update/like/rest/', OwnerNotificationAddView.as_view(), name='followRest'),
+    path('owner/update/like/blog/', OwnerNotificationAddView.as_view(), name='followRest'),
+    path('owner/update/comment/', OwnerNotificationAddView.as_view(), name='followRest'),
 ]

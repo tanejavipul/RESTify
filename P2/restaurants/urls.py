@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from restaurants.views.MenuView import MenuView, EditMenuView, AddMenuView
 from restaurants.views.FollowView import FollowUnfollowView
 from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantsView
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -50,5 +51,10 @@ urlpatterns = [
     path('<restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
     path('<restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'),
     path('search/', GetRestaurantsView.as_view(), name='getRestaurants'),
+
+    # Menu
+    path('<restaurant_id>/menu/', MenuView.as_view(), name='viewMenu'),
+    path('<restaurant_id>/<menu_item_id>/editMenu/', EditMenuView.as_view(), name='editMenuItem'),
+    path('<restaurant_id>/addMenuItem/', AddMenuView.as_view(), name='addMenuItem'),
 
 ]

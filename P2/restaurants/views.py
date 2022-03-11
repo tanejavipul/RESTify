@@ -2,15 +2,16 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from rest_framework.generics import RetrieveAPIView, UpdateAPIView, CreateAPIView, ListAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView
+from rest_framework.generics import RetrieveAPIView, UpdateAPIView, CreateAPIView, ListAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from rest_framework import filters
 
-from restaurants.serializer import RestaurantSerializer, EditRestaurantSerializer, RestaurantLikeSerializer
+from restaurants.serializer import RestaurantSerializer, EditRestaurantSerializer, RestaurantLikeSerializer, SearchSerializer
 from restaurants.models import Restaurant
 
 
@@ -57,6 +58,11 @@ class RestaurantLikeView(RetrieveDestroyAPIView):
         return restaurant_like
 
 #name, foods, addresses
-# class GetRestaurantsView(ListAPIView):
-#     queryset = 
+class GetRestaurantsView(ListAPIView):
+    permission_classes =  [AllowAny]
+    serializer_class = RestaurantSerializer
+    queryset = Restaurant.objects.all()
+    search_fields = ['name', 'address', 'MenuItem__name'] #need to test menu item, it might be menuitem__name
+    filter_backends = (filters.SearchFilter,)
 
+    # def get_query_set

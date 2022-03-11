@@ -1,3 +1,4 @@
+
 from django.core.validators import validate_email
 from django.shortcuts import redirect, get_object_or_404
 from restaurants.models import RestaurantLike
@@ -10,6 +11,7 @@ from rest_framework.fields import CurrentUserDefault
 
 from restaurants.models import Restaurant
 
+import re
 
 class RestaurantSerializer(ModelSerializer):
     # owner = serializers.CharField(read_only=True, required=True)
@@ -18,9 +20,13 @@ class RestaurantSerializer(ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ['owner', 'name', 'address', 'postal'] #need owner, need to prepopulate it somehow
+        fields = ['owner', 'name', 'address', 'postal']
 
     def validate(self, attrs):
+        _user = self.context['request'].user
+        restaurant = Restaurant.objects.filter(owner=_user)
+        if restaurant.exists():
+            raise serializers.ValidationError({"Error": "User already owns a restaurant"})
         return attrs
 
     def create(self, validated_data):
@@ -47,6 +53,13 @@ class EditRestaurantSerializer(ModelSerializer):
         restaurant = get_object_or_404(Restaurant, id=r_id)
         if restaurant.owner != _user:
             raise serializers.ValidationError({"Error": "Restaurant does not belong to user"})
+
+        if 'postal' in attrs:
+            try:
+                validate_postal(attrs['postal'])
+            except:
+                raise serializers.ValidationError({"Value Error": "Invalid Postal Code"})
+                
         return attrs
 
     def update(self, instance, validated_data):
@@ -61,9 +74,6 @@ class EditRestaurantSerializer(ModelSerializer):
 
 
 class RestaurantLikeSerializer(ModelSerializer):
-    # owner = serializers.CharField(source='owner.get_full_name', read_only=True)
-    # id = serializers.ReadOnlyField()
-
     class Meta:
         model = RestaurantLike
         fields = ['user', 'restaurant'] #will NOT be provided in POST body
@@ -104,6 +114,14 @@ class RestaurantLikeSerializer(ModelSerializer):
     #     self.perform_destroy(instance)
     #     return Response(status=status.HTTP_204_NO_CONTENT)
 
-# class SearchSerializer(Serializer):
-#     filter_data = serializers.CharField(max_length=200)  
+class SearchSerializer(Serializer):
+    search = serializers.CharField(max_length=200)  
 
+
+
+#source https://stackoverflow.com/questions/29859743/python-canadian-address-regex-validation   
+def validate_postal(postal_code):
+    if re.search("[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]", postal_code , re.IGNORECASE | re.DOTALL):
+        return True
+    else:
+        raise ValueError

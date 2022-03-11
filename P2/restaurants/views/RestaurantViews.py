@@ -11,7 +11,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from rest_framework import filters
 
-from restaurants.serializer import RestaurantSerializer, EditRestaurantSerializer, RestaurantLikeSerializer, SearchSerializer
+from restaurants.serializer.RestaurantSerializer import RestaurantSerializer, EditRestaurantSerializer, RestaurantLikeSerializer, SearchSerializer
 from restaurants.models import Restaurant
 
 

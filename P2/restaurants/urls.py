@@ -19,7 +19,7 @@ from django.urls import path, include
 from restaurants.views.FollowView import FollowUnfollowView
 from restaurants.views.RestaurantUpdateView import RestaurantUpdateBlogMenuView, RestaurantUpdateView, \
     RestaurantUpdateAllView
-from restaurants.views import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantsView
+from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantsView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 

@@ -29,33 +29,26 @@ app_name = 'restaurants'
 
 urlpatterns = [
 
-    # Follow
+    # Follow (User Follows a Restaurant)
     path('follow/<int:rest_id>/', FollowUnfollowView.as_view(), name='followRest'),
 
-    # Restaurant Update
+    # Restaurant Notification (Notification the User get if they follow)
     path('notification/all/', RestaurantAllNotificationView.as_view(), name='notificationAll'),
     path('notification/<int:rest_id>/', RestaurantNotificationView.as_view(), name='notificationRestaurant'),
     path('notification/blog/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {'blogOrMenu': 'blog'}, name='notificationBlog'),
     path('notification/menu/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {'blogOrMenu': 'menu'}, name='notificationMenu'),
 
-    # Owner Update
-    # path('owner/update/', FollowUnfollowView.as_view(), name='followRest'),
-    # path('owner/update/follows/', FollowUnfollowView.as_view(), name='followRest'),
-    # path('owner/update/likes/rest/', FollowUnfollowView.as_view(), name='followRest'),
-    # path('owner/update/likes/blog/', FollowUnfollowView.as_view(), name='followRest'),
-    # path('owner/update/comments/', FollowUnfollowView.as_view(), name='followRest'),
-
-    # path('unfollow/<int:rest_id>/', FollowUnfollowView.as_view(), name='unfollowRest'),
-
+    # Owner Notification (Notification the Restaurant Owner gets)
+    path('owner/update/', OwnerAllNotificationView.as_view(), {'Owner': 'blog'}, name='followRest'),
+    path('owner/update/follow/', OwnerNotificationAddView.as_view(), name='followRest'),
+    path('owner/update/like/rest/', OwnerNotificationAddView.as_view(), name='followRest'),
+    path('owner/update/like/blog/', OwnerNotificationAddView.as_view(), name='followRest'),
+    path('owner/update/comment/', OwnerNotificationAddView.as_view(), name='followRest'),
     
     path('add/', AddRestaurantView.as_view(), name='addRestaurant'),
     path('<restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
     path('<restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
     path('<restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'),
     path('search/', GetRestaurantsView.as_view(), name='getRestaurants'),
-    path('owner/update/', OwnerAllNotificationView.as_view(), {'Owner': 'blog'}, name='followRest'),
-    path('owner/update/follow/', OwnerNotificationAddView.as_view(), name='followRest'),
-    path('owner/update/like/rest/', OwnerNotificationAddView.as_view(), name='followRest'),
-    path('owner/update/like/blog/', OwnerNotificationAddView.as_view(), name='followRest'),
-    path('owner/update/comment/', OwnerNotificationAddView.as_view(), name='followRest'),
+
 ]

@@ -6,7 +6,7 @@ from django.conf import settings
 
 
 class Restaurant(models.Model):
-    owner = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True, related_name='restaurants')
+    owner = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True, related_name='restaurant')
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     postal = models.CharField(max_length=10)
@@ -14,7 +14,7 @@ class Restaurant(models.Model):
     logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurant/Logo/logo.png', blank=False)  # TODO change NULL to default Profile Pic
 
     #extra fields on restaurant page
-    # description
+    description = models.TextField(max_length=2000, blank=True)
     # num_likes
     # num_followers
     # num_blog_posts
@@ -36,7 +36,7 @@ class MenuItem(models.Model):
     price = models.FloatField()
     type = models.CharField(max_length=20)
 
-class RestaurantUpdate(models.Model):
+class RestaurantNotification(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='restaurantUpdate')
     title = models.CharField(max_length=200)
     last_modified = DateTimeField(auto_now=True,editable=True)

@@ -1,16 +1,17 @@
-from rest_framework.generics import RetrieveAPIView, get_object_or_404, UpdateAPIView, RetrieveUpdateAPIView, \
-    CreateAPIView
+from rest_framework.generics import get_object_or_404, UpdateAPIView, ListAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from restaurants.models import MenuItem, Restaurant
 from restaurants.serializer.MenuSerializer import MenuSerializer, EditMenuSerializer, AddMenuSerializer
 
 
-class MenuView(RetrieveAPIView):
+class MenuView(ListAPIView):
     serializer_class = MenuSerializer
+    queryset = MenuItem.objects.all()
 
-    def get_object(self):
-        return get_object_or_404(MenuItem, id=self.kwargs['restaurant_id'])
+    def get_queryset(self):
+        restaurant = get_object_or_404(Restaurant, id=self.kwargs['restaurant_id'])
+        return MenuItem.objects.filter(restaurant=restaurant)
 
 
 # Not working yet

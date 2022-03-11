@@ -6,14 +6,14 @@ from rest_framework.views import APIView
 
 
 from accounts.models import User, Following
-from restaurants.models import Restaurant, RestaurantUpdate
+from restaurants.models import Restaurant, RestaurantNotification
 
 
 # Create your views here.
-from restaurants.serializer.RestaurantUpdateSerializer import RestaurantUpdateSerializer
+from restaurants.serializer.RestaurantNotificationSerializer import RestaurantNotificationSerializer
 
 
-class RestaurantUpdateBlogMenuView(APIView):
+class RestaurantAddNotificationView(APIView):
     def get_update_message(self, message):
         if message == "blog":
             return " added a new blog."
@@ -33,10 +33,10 @@ class RestaurantUpdateBlogMenuView(APIView):
 
             restaurant = Restaurant.objects.get(id=self.kwargs['rest_id'])
             message = restaurant.name + message
-            print(message)
+            # print(message)
 
             try:
-                new_update = RestaurantUpdate.objects.create(
+                new_update = RestaurantNotification.objects.create(
                     restaurant=Restaurant.objects.get(id=self.kwargs['rest_id']), title=message)
                 return Response(
                     {'id': new_update.id, 'title': new_update.title, 'restaurant': new_update.restaurant.name},
@@ -49,21 +49,21 @@ class RestaurantUpdateBlogMenuView(APIView):
 
 
 
-class RestaurantUpdateView(ListAPIView):
-    serializer_class = RestaurantUpdateSerializer
-    queryset = RestaurantUpdate.objects.all()
+class RestaurantNotificationView(ListAPIView):
+    serializer_class = RestaurantNotificationSerializer
+    queryset = RestaurantNotification.objects.all()
 
     def get_queryset(self):
         restaurant = Restaurant.objects.get(id=self.kwargs['rest_id'])
-        return RestaurantUpdate.objects.filter(restaurant=restaurant).order_by('-last_modified')
+        return RestaurantNotification.objects.filter(restaurant=restaurant).order_by('-last_modified')
 
-class RestaurantUpdateAllView(ListAPIView):
-    serializer_class = RestaurantUpdateSerializer
-    queryset = RestaurantUpdate.objects.all()
+class RestaurantAllNotificationView(ListAPIView):
+    serializer_class = RestaurantNotificationSerializer
+    queryset = RestaurantNotification.objects.all()
 
     def get_queryset(self):
-        x = RestaurantUpdate.objects.all().prefetch_related('restaurant__owner', 'restaurant__followers').filter(restaurant__followers__user=self.request.user).order_by('-last_modified')
-        print(x)
-        print(len(x))
+        x = RestaurantNotification.objects.all().prefetch_related('restaurant__owner', 'restaurant__followers').filter(restaurant__followers__user=self.request.user).order_by('-last_modified')
+        # print(x)
+        # print(len(x))
         return x
 

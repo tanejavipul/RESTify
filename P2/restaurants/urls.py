@@ -54,14 +54,16 @@ urlpatterns = [
     path('owner/update/comment/<int:rest_id>/', OwnerNotificationAddView.as_view(), {NS.OWNER_NOTI: NS.COMMENT},
          name='ownerNotifyComment'),
 
+    #Restaurant
     path('add/', AddRestaurantView.as_view(), name='addRestaurant'),
-    path('<restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
-    path('<restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
-    path('<restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'),
-    path('<restaurant_id>/view/', GetRestaurantView.as_view(), name='viewRestaurant'),
+    path('<int:restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
     path('search/', GetRestaurantListView.as_view(), name='getRestaurants'),
-    
+    path('<int:restaurant_id>/view/', GetRestaurantView.as_view(), name='viewRestaurant'),
 
+    #Restaurant Likes
+    path('<int:restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
+    path('<int:restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'), #is both GET and DELETE
+    
     # Menu
     path('<int:restaurant_id>/menu/', MenuView.as_view(), name='viewMenu'),
     path('<int:restaurant_id>/<int:menu_id>/editMenuItem/', EditMenuView.as_view(), name='editMenuItem'),

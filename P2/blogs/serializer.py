@@ -2,8 +2,10 @@ from rest_framework import status, serializers
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
-from blogs.models import BlogPost
-from restaurants.models import Restaurant
+from blogs.models import BlogPost, BlogLike
+from restaurants.models import Restaurant, OwnerNotification
+
+from restaurants.views import NotificationSelector as NS
 
 
 class BlogPostSerializer(ModelSerializer):
@@ -25,3 +27,56 @@ class BlogPostSerializer(ModelSerializer):
         )
 
         return new_post
+
+class BlogPostLikeSerializer(ModelSerializer):
+    notification = ''
+    notificationAdded = serializers.SerializerMethodField('notification_added')
+    class Meta:
+        model = BlogLike
+        fields = ['user', 'blog_post', 'notificationAdded'] #will NOT be provided in POST body
+    
+    def notification_added(self, obj):
+        if self.notification == '':
+            return False
+        return {'message': self.notification.title}
+
+    def validate(self, attrs):
+        _user = self.context['request'].user
+        b_id = self.context['blogpost_id']
+        #check if blogpost with provided id exists
+        try:
+            blogPost = BlogPost.objects.get(pk=b_id)
+        except:
+            raise serializers.ValidationError({"Object Error": "No blog post exists with given ID"})
+        
+        if blogPost.user == _user:
+            raise serializers.ValidationError({"Error": "User cannot like their own blog post"})
+        return attrs
+    
+    def create(self, validated_data):
+        _user = self.context['request'].user
+        blogpost_id = self.context["blogpost_id"]
+        _blogpost = BlogPost.objects.get(pk=blogpost_id)
+  
+        try:
+            blogpostLike = _user.blogLikes.get(blog_post = _blogpost)
+        except:
+            # otherwise create new object
+            blogpostLike = BlogLike.objects.create(
+                user=_user, blog_post=_blogpost
+            )
+            blogpostLike.save()
+
+            #create new notification for liking the blog post
+            message = NS.getOwnerNotificationTitle(NS.LIKE_BLOG, _user, _blogpost.restaurant)
+            self.notification = OwnerNotification.objects.create(restaurant=_blogpost.restaurant, user=_user, title=message)
+            self.notification.save()
+            
+        #TODO: remove later
+        if self.notification:
+            print('notification was created')
+        else:
+            print('like already exists, returning value')
+
+        return blogpostLike
+

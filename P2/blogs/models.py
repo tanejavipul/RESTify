@@ -19,6 +19,8 @@ class BlogPost(models.Model):
     last_modified = DateTimeField(auto_now=True, editable=True)
 
 
-class BlogLikes(models.Model):
-    user = models.ForeignKey(to=User, on_delete=CASCADE, null=True, related_name='user')
-    blog_post = models.ForeignKey(to=BlogPost, on_delete=CASCADE, null=True, related_name='blogpost')
+class BlogLike(models.Model):
+    user = models.ForeignKey(to=User, on_delete=CASCADE, null=True, related_name='blogLikes')
+    blog_post = models.ForeignKey(to=BlogPost, on_delete=CASCADE, null=True, related_name='bloglikes')
+    def __str__(self):
+        return "User:" + str(self.user) + " liked BlogPost:" + str(self.blog_post)

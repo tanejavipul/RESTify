@@ -159,18 +159,13 @@ class RestaurantLikeSerializer(ModelSerializer):
             self.notification = OwnerNotification.objects.create(restaurant=_restaurant, user=_user, title=message)
             self.notification.save()
             
-        #return Response(restaurantLike, notification)
+        #TODO: remove later
         if self.notification:
             print('notification was created')
-            self.notificationAdded = True
-            return restaurantLike
-        print('like already exists, returning value')
+        else:
+            print('like already exists, returning value')
         return restaurantLike
-    #default implementation of delete, override if needed
-    # def destroy(self, request, *args, **kwargs):
-    #     instance = self.get_object()
-    #     self.perform_destroy(instance)
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class SearchSerializer(Serializer):
     search = serializers.CharField(max_length=200)  

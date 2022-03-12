@@ -1,17 +1,18 @@
 
 from django.core.validators import validate_email
 from django.shortcuts import redirect, get_object_or_404
-from restaurants.models import RestaurantLike
-from rest_framework import serializers, request
+from rest_framework import serializers, request, status
 from rest_framework.reverse import reverse
 from rest_framework.serializers import ModelSerializer, Serializer
 from rest_framework.validators import UniqueValidator
 
 from rest_framework.fields import CurrentUserDefault
 
-from restaurants.models import Restaurant
-
+from restaurants.models import Restaurant, RestaurantLike, OwnerNotification
+from restaurants.views import NotificationSelector as NS
 import re
+from rest_framework.response import Response
+from django.http import JsonResponse
 
 class RestaurantSerializer(ModelSerializer):
     num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
@@ -79,9 +80,16 @@ class EditRestaurantSerializer(ModelSerializer):
 
 
 class RestaurantLikeSerializer(ModelSerializer):
+    notification = ''
+    notificationAdded = serializers.SerializerMethodField('notification_added')
     class Meta:
         model = RestaurantLike
-        fields = ['user', 'restaurant'] #will NOT be provided in POST body
+        fields = ['user', 'restaurant', 'notificationAdded'] #will NOT be provided in POST body
+    
+    def notification_added(self, obj):
+        if self.notification == '':
+            return False
+        return {'message': self.notification.title}
 
     def validate(self, attrs):
         _user = self.context['request'].user
@@ -91,6 +99,9 @@ class RestaurantLikeSerializer(ModelSerializer):
             restaurant = Restaurant.objects.get(pk=r_id)
         except:
             raise serializers.ValidationError({"Object Error": "No restaurant exists with given ID"})
+        
+        if restaurant.owner == _user:
+            raise serializers.ValidationError({"Error": "User cannot like their own restaurant"})
         return attrs
     
     def create(self, validated_data):
@@ -99,20 +110,34 @@ class RestaurantLikeSerializer(ModelSerializer):
         _restaurant = Restaurant.objects.get(pk=restaurant_id)
 
         #do not create new RestaurantLike object if it already exists
-        user_likes = _user.likes.all()
-        if user_likes.exists():
-            restaurant_like = get_object_or_404(user_likes, restaurant=_restaurant) #user_likes.get(restaurant = _restaurant) 
-            if restaurant_like:
-                print("like already exists")
-                return restaurant_like
-
+        # user_likes = _user.likes.all()
+        # if user_likes.exists():
+        #     restaurant_like = user_likes.filter(restaurant=_restaurant) 
+        #     if restaurant_like.exists():
+        #         print("like already exists")
+        #         return restaurant_like[0] #return first entry in filter, 
+        
+        try:
+            restaurantLike = _user.likes.get(restaurant = _restaurant)
+        except:
         # otherwise create new object
-        restaurantLike = RestaurantLike.objects.create(
-            user=_user, restaurant=_restaurant
-        )
-        restaurantLike.save()
-        return restaurantLike
+            restaurantLike = RestaurantLike.objects.create(
+                user=_user, restaurant=_restaurant
+            )
+            restaurantLike.save()
 
+            #create new notification for liking the restaurant
+            message = NS.getOwnerNotificationTitle(NS.LIKE_REST, _user, _restaurant)
+            self.notification = OwnerNotification.objects.create(restaurant=_restaurant, user=_user, title=message)
+            self.notification.save()
+            
+        #return Response(restaurantLike, notification)
+        if self.notification:
+            print('notification was created')
+            self.notificationAdded = True
+            return restaurantLike
+        print('like already exists, returning value')
+        return restaurantLike
     #default implementation of delete, override if needed
     # def destroy(self, request, *args, **kwargs):
     #     instance = self.get_object()

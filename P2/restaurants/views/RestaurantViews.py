@@ -47,7 +47,7 @@ class GetRestaurantView(RetrieveAPIView):
     def get_object(self):
         return get_object_or_404(self.queryset, id=self.kwargs['restaurant_id'])
 
-class AddRestaurantLikeView(CreateAPIView): #GET, POST, DELETE
+class AddRestaurantLikeView(CreateAPIView): #POST
     queryset = Restaurant.objects.all()
     permission_classes =  [IsAuthenticated]
     serializer_class = RestaurantLikeSerializer
@@ -58,7 +58,7 @@ class AddRestaurantLikeView(CreateAPIView): #GET, POST, DELETE
         # context["query_params"] = self.request.query_params
         return context
     
-class RestaurantLikeView(RetrieveDestroyAPIView):
+class RestaurantLikeView(RetrieveDestroyAPIView): #GET, DELETE
     queryset = Restaurant.objects.all()
     permission_classes =  [IsAuthenticated]
     serializer_class = RestaurantLikeSerializer

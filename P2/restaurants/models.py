@@ -34,7 +34,7 @@ class MenuItem(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
     price = models.FloatField()
-    type = models.CharField(max_length=20)
+    type = models.CharField(max_length=50)
 
 class RestaurantNotification(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='restaurantUpdate')

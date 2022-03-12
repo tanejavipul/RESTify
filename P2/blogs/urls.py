@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.static import static
-from django.conf import settings
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from blogs.views.BlogPostCreateView import BlogPostCreateView
+from blogs.views.BlogPostView import BlogPostView
+
+app_name = 'blogs'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls', namespace='accounts')),
-    path('restaurants/', include('restaurants.urls', namespace='restaurants')),
-    path('blogs/', include('blogs.urls', namespace='blogs')),
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('blogpost/<int:blogpost_id>/', BlogPostView.as_view(), name='view-blog'),
+    path('blogpost/create/', BlogPostCreateView.as_view(), name='create-blog'),
+]

@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from django.db.models import CASCADE
+from django.db.models import CASCADE, DateTimeField
 
 from accounts.models import User
 from restaurants.models import Restaurant
@@ -16,6 +16,7 @@ class BlogPost(models.Model):
     photo_1 = models.ImageField(upload_to='Blogs/Post/', blank=True)
     photo_2 = models.ImageField(upload_to='Blogs/Post/', blank=True)
     photo_3 = models.ImageField(upload_to='Blogs/Post/', blank=True)
+    last_modified = DateTimeField(auto_now=True, editable=True)
 
 
 class BlogLikes(models.Model):

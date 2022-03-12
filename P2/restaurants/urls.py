@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from restaurants.views.CommentView import AddCommentView, CommentView
 from restaurants.views import NotificationSelector as NS
+from restaurants.views.MenuView import MenuView, EditMenuView, AddMenuView
 from restaurants.views.FollowView import FollowUnfollowView
 from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, \
     RestaurantLikeView, GetRestaurantsView
@@ -58,5 +60,14 @@ urlpatterns = [
     path('<restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
     path('<restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'),
     path('search/', GetRestaurantsView.as_view(), name='getRestaurants'),
+
+    # Menu
+    path('<int:restaurant_id>/menu/', MenuView.as_view(), name='viewMenu'),
+    path('<int:restaurant_id>/<int:menu_id>/editMenuItem/', EditMenuView.as_view(), name='editMenuItem'),
+    path('<int:restaurant_id>/addMenuItem/', AddMenuView.as_view(), name='addMenuItem'),
+
+    # Comment
+    path('<int:restaurant_id>/viewComments/', CommentView.as_view(), name='viewComment'),
+    path('<int:restaurant_id>/addComment/', AddCommentView.as_view(), name='addComment'),
 
 ]

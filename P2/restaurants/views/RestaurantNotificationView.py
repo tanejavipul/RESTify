@@ -17,9 +17,6 @@ from restaurants.views import NotificationSelector as NS
 class RestaurantAddNotificationView(APIView):
     # BAD REQUEST
     def post(self, request, *args, **kwargs):
-        message = NS.getRestaurantNotificationTitle(kwargs.get(NS.REST_NOTI))
-        if message == "":
-            return Response({'Error': "Could not update as failed to get title."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         if request.user.is_authenticated:
             if not Restaurant.objects.filter(id=self.kwargs['rest_id']).exists():
@@ -31,9 +28,9 @@ class RestaurantAddNotificationView(APIView):
                 return Response({'Error': output}, status=status.HTTP_403_FORBIDDEN)
 
             restaurant = Restaurant.objects.get(id=self.kwargs['rest_id'])
-            message = restaurant.name + message
-            # print(message)
-
+            message = NS.getRestaurantNotificationTitle(kwargs.get(NS.REST_NOTI), restaurant)
+            if message == "":
+                return Response({'Error': "Could not update"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             try:
                 new_update = RestaurantNotification.objects.create(
                     restaurant=Restaurant.objects.get(id=self.kwargs['rest_id']), title=message)

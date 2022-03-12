@@ -17,20 +17,26 @@ LIKE_BLOG = 'LIKE_BLOG'
 COMMENT = 'COMMENT'
 
 
-def getRestaurantNotificationTitle(message):
+def getRestaurantNotificationTitle(message, rest):
+    rest_name = rest.name
     if message == BLOG:
-        return " added a new blog."
+        return rest_name + " added a new blog."
     if message == MENU:
-        return " made some updates to their menu."
+        return rest_name + " made an update to the menu."
+    return ""
 
 
 
-def getOwnerNotificationTitle(message):
+def getOwnerNotificationTitle(message, user, rest):
+    # for now restaurant name not in use
+    user_name = user.name
+    rest_name = rest.name
     if message == FOLLOW:
-        return " is now following your restaurant."
+        return user_name + " is now following your restaurant."
     if message == LIKE_REST:
-        return " just liked your restaurant."
+        return user_name + " just liked your restaurant."
     if message == LIKE_BLOG:
-        return " just liked your restaurants blog."
+        return user_name + " just liked your restaurants blog."
     if message == COMMENT:
-        return " just commented on your restaurant."
+        return user_name +" just commented on your restaurant."
+    return ""

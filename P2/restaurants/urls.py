@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from restaurants.views.FollowView import FollowUnfollowView
-from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantsView
+from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantListView, GetRestaurantView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
@@ -49,6 +49,8 @@ urlpatterns = [
     path('<restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
     path('<restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
     path('<restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'),
-    path('search/', GetRestaurantsView.as_view(), name='getRestaurants'),
+    path('<restaurant_id>/view/', GetRestaurantView.as_view(), name='viewRestaurant'),
+    path('search/', GetRestaurantListView.as_view(), name='getRestaurants'),
+    
 
 ]

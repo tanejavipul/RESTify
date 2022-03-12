@@ -14,24 +14,31 @@ from restaurants.models import Restaurant
 import re
 
 class RestaurantSerializer(ModelSerializer):
-    # owner = serializers.CharField(read_only=True, required=True)
-    # password2 = serializers.CharField(write_only=True, required=True)
-    # user = serializers.ReadOnlyField(source = 'user.username')
+    num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
+    num_follows = serializers.IntegerField(read_only=True, required=False, default=0)
+    num_comments = serializers.IntegerField(read_only=True, required=False, default=0)
+    num_blogs = serializers.IntegerField(read_only=True, required=False, default=0)
 
     class Meta:
         model = Restaurant
-        fields = ['owner', 'name', 'address', 'postal']
+        fields = ['owner', 'name', 'address', 'postal', 'phone', 'logo', 'num_likes', 'num_follows', 'num_comments', 'num_blogs'] 
 
     def validate(self, attrs):
         _user = self.context['request'].user
         restaurant = Restaurant.objects.filter(owner=_user)
         if restaurant.exists():
             raise serializers.ValidationError({"Error": "User already owns a restaurant"})
+        
+        if 'postal' in attrs:
+            try:
+                validate_postal(attrs['postal'])
+            except:
+                raise serializers.ValidationError({"Value Error": "Invalid Postal Code"})
         return attrs
 
     def create(self, validated_data):
         owner = self.context['request'].user
-        restaurant = Restaurant.objects.create( #needs to be auto set to user calling this POST
+        restaurant = Restaurant.objects.create(
             owner=owner, **validated_data
         )
         restaurant.save()
@@ -39,11 +46,9 @@ class RestaurantSerializer(ModelSerializer):
         return restaurant
     
 class EditRestaurantSerializer(ModelSerializer):
-    # owner = serializers.CharField(source='owner.get_full_name', read_only=True)
-    # id = serializers.ReadOnlyField()
     class Meta:
         model = Restaurant
-        fields = ['name', 'address', 'postal', 'description'] #TODO: 'phone', carousel_img_1', 'carousel_img_2', 'carousel_img_3', image_1...
+        fields = ['name', 'address', 'postal', 'description', 'phone', 'carousel_img_1', 'carousel_img_2', 'carousel_img_3', 'image_1', 'image_2', 'image_3', 'image_4'] 
 
     def validate(self, attrs):
         _user = self.context['request'].user

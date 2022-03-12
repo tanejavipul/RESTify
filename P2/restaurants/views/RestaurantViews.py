@@ -9,11 +9,13 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from rest_framework.response import Response
+from django.db.models import Count
 from rest_framework import filters
+
 
 from restaurants.serializer.RestaurantSerializer import RestaurantSerializer, EditRestaurantSerializer, RestaurantLikeSerializer, SearchSerializer
 from restaurants.models import Restaurant
-
 
 
 class AddRestaurantView(CreateAPIView):
@@ -21,7 +23,7 @@ class AddRestaurantView(CreateAPIView):
     permission_classes =  [IsAuthenticated]
     serializer_class = RestaurantSerializer
 
-class EditRestaurantView(RetrieveUpdateAPIView): 
+class EditRestaurantView(UpdateAPIView): 
     queryset = Restaurant.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = EditRestaurantSerializer
@@ -32,8 +34,18 @@ class EditRestaurantView(RetrieveUpdateAPIView):
         # context["query_params"] = self.request.query_params
         return context
 
+class GetRestaurantView(RetrieveAPIView):
+    queryset = (Restaurant.objects
+                        .annotate(num_likes=Count('likes', distinct=True)) 
+                        .annotate(num_follows=Count('followers', distinct=True)) 
+                        .annotate(num_comments=Count('comments', distinct=True)) 
+                    )
+                    #.annotate(num_comments=Count('blogs', distinct=True)) TODO: add later
+    permission_classes = [AllowAny]
+    serializer_class = RestaurantSerializer
+
     def get_object(self):
-        return get_object_or_404(Restaurant, id=self.kwargs['restaurant_id'])
+        return get_object_or_404(self.queryset, id=self.kwargs['restaurant_id'])
 
 class AddRestaurantLikeView(CreateAPIView): #GET, POST, DELETE
     queryset = Restaurant.objects.all()
@@ -58,11 +70,14 @@ class RestaurantLikeView(RetrieveDestroyAPIView):
         return restaurant_like
 
 #name, foods, addresses
-class GetRestaurantsView(ListAPIView):
+class GetRestaurantListView(ListAPIView):
     permission_classes =  [AllowAny]
     serializer_class = RestaurantSerializer
-    queryset = Restaurant.objects.all()
-    search_fields = ['name', 'address', 'MenuItem__name'] #need to test menu item, it might be menuitem__name
+    queryset = Restaurant.objects.annotate(num_likes=Count('likes')).order_by('-num_likes') #does not show other num_values because they are not annotated
+    search_fields = ['name', 'address', 'menuitem__name']  #TODO: test menu item search
     filter_backends = (filters.SearchFilter,)
 
-    # def get_query_set
+
+
+        
+

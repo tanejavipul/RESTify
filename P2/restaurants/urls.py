@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from restaurants.views import NotificationSelector as NS
 from restaurants.views.MenuView import MenuView, EditMenuView, AddMenuView
 from restaurants.views.FollowView import FollowUnfollowView
-from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantsView
+from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, \
+    RestaurantLikeView, GetRestaurantsView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
-from restaurants.views.OwnerNotificationView import OwnerNotificationAddView, OwnerAllNotificationView
+from restaurants.views.OwnerNotificationView import OwnerNotificationAddView, OwnerNotificationView
 from restaurants.views.RestaurantNotificationView import RestaurantAddNotificationView, RestaurantNotificationView, \
     RestaurantAllNotificationView
 
@@ -36,16 +37,23 @@ urlpatterns = [
     # Restaurant Notification (Notification the User get if they follow)
     path('notification/all/', RestaurantAllNotificationView.as_view(), name='notificationAll'),
     path('notification/<int:rest_id>/', RestaurantNotificationView.as_view(), name='notificationRestaurant'),
-    path('notification/blog/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {'blogOrMenu': 'blog'}, name='notificationBlog'),
-    path('notification/menu/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {'blogOrMenu': 'menu'}, name='notificationMenu'),
+    path('notification/blog/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {NS.REST_NOTI: NS.BLOG},
+         name='notificationBlog'),
+    path('notification/menu/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {NS.REST_NOTI: NS.BLOG},
+         name='notificationMenu'),
 
     # Owner Notification (Notification the Restaurant Owner gets)
-    path('owner/update/', OwnerAllNotificationView.as_view(), {'Owner': 'blog'}, name='followRest'),
-    path('owner/update/follow/', OwnerNotificationAddView.as_view(), name='followRest'),
-    path('owner/update/like/rest/', OwnerNotificationAddView.as_view(), name='followRest'),
-    path('owner/update/like/blog/', OwnerNotificationAddView.as_view(), name='followRest'),
-    path('owner/update/comment/', OwnerNotificationAddView.as_view(), name='followRest'),
-    
+    path('owner/update/', OwnerNotificationView.as_view(), name='ownerNotifications'),
+
+    path('owner/update/follow/<int:rest_id>/', OwnerNotificationAddView.as_view(), {NS.OWNER_NOTI: NS.FOLLOW},
+         name='ownerNotifyFollow'),
+    path('owner/update/like/rest/<int:rest_id>/', OwnerNotificationAddView.as_view(), {NS.OWNER_NOTI: NS.LIKE_REST},
+         name='ownerNotifyRest'),
+    path('owner/update/like/blog/<int:rest_id>/', OwnerNotificationAddView.as_view(), {NS.OWNER_NOTI: NS.LIKE_BLOG},
+         name='ownerNotifyBlog'),
+    path('owner/update/comment/<int:rest_id>/', OwnerNotificationAddView.as_view(), {NS.OWNER_NOTI: NS.COMMENT},
+         name='ownerNotifyComment'),
+
     path('add/', AddRestaurantView.as_view(), name='addRestaurant'),
     path('<restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
     path('<restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),

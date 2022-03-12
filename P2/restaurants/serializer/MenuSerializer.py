@@ -12,10 +12,13 @@ class MenuSerializer(ModelSerializer):
         model = MenuItem
         fields = ['restaurant', 'name', 'description', 'price', 'type']
 
-#Not working yet
+
 class EditMenuSerializer(ModelSerializer):
-    # owner = serializers.CharField(source='owner.get_full_name', read_only=True)
-    # id = serializers.ReadOnlyField()
+
+    name = serializers.CharField(max_length=50, required=False)
+    description = serializers.CharField(max_length=100, required=False)
+    price = serializers.FloatField(required=False)
+    type = serializers.CharField(max_length=50, required=False)
 
     class Meta:
         model = MenuItem
@@ -25,24 +28,20 @@ class EditMenuSerializer(ModelSerializer):
         _user = self.context['request'].user
         r_id = self.context['restaurant_id']
 
-        print(_user)
-        print(_user.id)
-
         # make sure owner of restaurant to be edited is the current user
         restaurant = get_object_or_404(Restaurant, id=r_id)
-
         owner_id = restaurant.owner
 
-        print(owner_id)
+        # print(owner_id.id)
+        # print(attrs)
 
-        if owner_id != _user.id:
+        if owner_id.id != _user.id:
             raise serializers.ValidationError({"Error": "This restaurants menu does not belong to signed in user"})
 
         return attrs
 
     def update(self, instance, validated_data):
 
-        instance.restaurant = validated_data.get('restaurant', instance.restaurant)
         instance.name = validated_data.get('name', instance.name)
         instance.description = validated_data.get('description', instance.description)
         instance.price = validated_data.get('price', instance.price)

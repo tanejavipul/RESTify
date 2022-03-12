@@ -45,7 +45,7 @@ class OwnerNotification(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='ownerNotification')
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='ownerNotification')
     title = models.CharField(max_length=200)
-    time = models.DateTimeField(auto_now=True)
+    last_modified = models.DateTimeField(auto_now=True)
 
 class Comment(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='comments')

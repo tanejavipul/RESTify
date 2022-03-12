@@ -33,6 +33,9 @@ class EditRestaurantView(UpdateAPIView):
         context["restaurant_id"] = self.kwargs['restaurant_id']
         # context["query_params"] = self.request.query_params
         return context
+    
+    def get_object(self):
+        return get_object_or_404(self.queryset, id=self.kwargs['restaurant_id'])
 
 class GetRestaurantView(RetrieveAPIView):
     queryset = (Restaurant.objects

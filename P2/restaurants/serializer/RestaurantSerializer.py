@@ -14,6 +14,7 @@ import re
 from rest_framework.response import Response
 from django.http import JsonResponse
 
+
 class RestaurantSerializer(ModelSerializer):
     num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
     num_follows = serializers.IntegerField(read_only=True, required=False, default=0)
@@ -35,6 +36,16 @@ class RestaurantSerializer(ModelSerializer):
                 validate_postal(attrs['postal'])
             except:
                 raise serializers.ValidationError({"Value Error": "Invalid Postal Code"})
+        
+        if 'phone' not in attrs:
+            raise serializers.ValidationError({"phone": "This field is required"})
+
+        if attrs['phone'] == None:
+            raise serializers.ValidationError({"phone": "This field cannot be blank"})
+        
+        if 'logo' not in attrs:
+            raise serializers.ValidationError({"logo": "This field is required"})
+        
         return attrs
 
     def create(self, validated_data):
@@ -47,16 +58,19 @@ class RestaurantSerializer(ModelSerializer):
         return restaurant
     
 class EditRestaurantSerializer(ModelSerializer):
+    name = serializers.CharField(max_length=100, required=False)
+    address = serializers.CharField(max_length=100, required=False)
+    postal = serializers.CharField(max_length=10, required=False)
     class Meta:
         model = Restaurant
-        fields = ['name', 'address', 'postal', 'description', 'phone', 'carousel_img_1', 'carousel_img_2', 'carousel_img_3', 'image_1', 'image_2', 'image_3', 'image_4'] 
+        fields = ['name', 'address', 'postal', 'description', 'phone', 'logo', 'carousel_img_1', 'carousel_img_2', 'carousel_img_3', 'image_1', 'image_2', 'image_3', 'image_4'] 
 
     def validate(self, attrs):
         _user = self.context['request'].user
         r_id = self.context['restaurant_id'] #r_id existence already validated by django, 404 returned
         
         #make sure owner of restaurant to be edited is the current user
-        restaurant = get_object_or_404(Restaurant, id=r_id)
+        restaurant = get_object_or_404(Restaurant, pk=r_id)
         if restaurant.owner != _user:
             raise serializers.ValidationError({"Error": "Restaurant does not belong to user"})
 
@@ -65,15 +79,29 @@ class EditRestaurantSerializer(ModelSerializer):
                 validate_postal(attrs['postal'])
             except:
                 raise serializers.ValidationError({"Value Error": "Invalid Postal Code"})
-                
+        
+        #pre populate phone field
+        if 'phone' in attrs and attrs['phone'] == None:
+            attrs['phone'] = restaurant.phone
+
         return attrs
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
-        # instance.phone = validated_data.get('phone', instance.phone)
+        instance.phone = validated_data.get('phone', instance.phone)
         instance.address = validated_data.get('address', instance.address)
         instance.postal = validated_data.get('postal', instance.postal)
+
         instance.description = validated_data.get('description', instance.description)
+
+        instance.carousel_img_1 = validated_data.get('carousel_img_1', instance.carousel_img_1)
+        instance.carousel_img_2 = validated_data.get('carousel_img_2', instance.carousel_img_2)
+        instance.carousel_img_3 = validated_data.get('carousel_img_3', instance.carousel_img_3)
+
+        instance.image_1 = validated_data.get('image_1', instance.image_1)
+        instance.image_2 = validated_data.get('image_1', instance.image_2)
+        instance.image_3 = validated_data.get('image_1', instance.image_3)
+        instance.image_4 = validated_data.get('image_1', instance.image_4)
 
         instance.save()
         return instance
@@ -146,8 +174,6 @@ class RestaurantLikeSerializer(ModelSerializer):
 
 class SearchSerializer(Serializer):
     search = serializers.CharField(max_length=200)  
-
-
 
 #source https://stackoverflow.com/questions/29859743/python-canadian-address-regex-validation   
 def validate_postal(postal_code):

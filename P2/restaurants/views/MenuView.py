@@ -15,7 +15,6 @@ class MenuView(ListAPIView):
 
 
 class EditMenuView(UpdateAPIView):
-    # queryset = MenuItem.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = EditMenuSerializer
 

@@ -22,6 +22,3 @@ class AddCommentView(CreateAPIView):
         context = super().get_serializer_context()
         context["restaurant_id"] = self.kwargs['restaurant_id']
         return context
-
-    # def get_object(self):
-    #     get_object_or_404(Restaurant, id=self.kwargs['restaurant_id'])

@@ -10,7 +10,7 @@ class CommentSerializer(ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['comment']
+        fields = ['comment', 'datetime']
 
 
 class AddCommentSerializer(ModelSerializer):
@@ -20,7 +20,7 @@ class AddCommentSerializer(ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['comment', 'notificationAdded']
+        fields = ['comment', 'notificationAdded', 'datetime']
 
     def notification_added(self, obj):
         if self.notification == '':
@@ -44,7 +44,6 @@ class AddCommentSerializer(ModelSerializer):
         self.notification.save()
 
         if self.notification:
-            print('notification was created')
             self.notificationAdded = True
             return comment
 

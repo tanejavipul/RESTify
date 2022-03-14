@@ -1,9 +1,6 @@
-from rest_framework import pagination
 from rest_framework.generics import RetrieveAPIView, get_object_or_404
-from rest_framework.response import Response
-
 from blogs.models import BlogPost
-from blogs.serializer import BlogPostSerializer
+from blogs.serializers.BlogPostSerializer import BlogPostSerializer
 
 
 class BlogPostView(RetrieveAPIView):

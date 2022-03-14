@@ -22,6 +22,7 @@ from accounts.views import SignUpView, ProfileView
 app_name = 'accounts'
 
 urlpatterns = [
+
     path('signup/', SignUpView.as_view(), name='signup'),
 
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -30,8 +31,4 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/edit/', ProfileView.as_view(), name='profileEdit'),
 
-    # path('unfollow/<int:rest_id>/', FollowUnfollowView.as_view(), name='unfollowRest'),
-
-    # TODO DELETE TOKEN
-    # path('logout/', LogOutView.as_view(), name='logout'),
 ]

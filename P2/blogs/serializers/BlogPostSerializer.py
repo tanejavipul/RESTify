@@ -29,7 +29,7 @@ class BlogPostSerializer(ModelSerializer):
         try:
             restaurant = Restaurant.objects.get(owner_id=user.id)
         except:
-            return Response({'Error': "Not an owner of a restaurant"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'Error': "Not an owner of a restaurant"}, status=status.HTTP_400_BAD_REQUEST)
 
         new_post = BlogPost.objects.create(
             user_id=self.context['request'].user.id,

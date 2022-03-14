@@ -63,8 +63,8 @@ urlpatterns = [
 
     # Menu
     path('<int:restaurant_id>/menu/', MenuView.as_view(), name='viewMenu'),
-    path('<int:restaurant_id>/<int:menu_id>/editMenuItem/', EditMenuView.as_view(), name='editMenuItem'),
-    path('<int:restaurant_id>/addMenuItem/', AddMenuView.as_view(), name='addMenuItem'),
+    path('<int:menu_item_id>/editMenuItem/', EditMenuView.as_view(), name='editMenuItem'),
+    path('addMenuItem/', AddMenuView.as_view(), name='addMenuItem'),
 
     # Comment
     path('<int:restaurant_id>/viewComments/', CommentView.as_view(), name='viewComment'),

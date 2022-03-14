@@ -17,12 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from blogs.views.BlogPostEditView import BlogPostEditView
 from blogs.views.BlogPostCreateView import BlogPostCreateView
 from blogs.views.BlogPostView import BlogPostView
+from blogs.views.BlogPostHomeView import BlogPostHomeView
 
 app_name = 'blogs'
 
 urlpatterns = [
-    path('blogpost/<int:blogpost_id>/', BlogPostView.as_view(), name='view-blog'),
-    path('blogpost/create/', BlogPostCreateView.as_view(), name='create-blog'),
+    path('<int:blogpost_id>/', BlogPostView.as_view(), name='view-blog'),
+    path('create/', BlogPostCreateView.as_view(), name='create-blog'),
+    path('<int:blogpost_id>/edit/', BlogPostEditView.as_view(), name='edit-blog'),
+    path('home/', BlogPostHomeView.as_view(), name='blogs-home'),
 ]

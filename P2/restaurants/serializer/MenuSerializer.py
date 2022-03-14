@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import serializers, request
+from rest_framework import serializers, request, status
+from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.serializers import ModelSerializer
 
@@ -33,23 +34,11 @@ class EditMenuSerializer(ModelSerializer):
             return False
         return {'message': self.notification.title}
 
-    def validate(self, attrs):
-        _user = self.context['request'].user
-        r_id = self.context['restaurant_id']
-
-        # make sure owner of restaurant to be edited is the current user
-        restaurant = get_object_or_404(Restaurant, id=r_id)
-        self.context['restaurant'] = restaurant
-        owner_id = restaurant.owner
-
-        if owner_id.id != _user.id:
-            raise serializers.ValidationError({"Error": "This restaurants menu does not belong to signed in user"})
-
-        return attrs
-
     def update(self, instance, validated_data):
         user = self.context['request'].user
-        restaurant = self.context['restaurant']
+
+        rest_id = MenuItem.objects.get(id=self.context['menu_item_id']).restaurant_id
+        restaurant = Restaurant.objects.get(id=rest_id)
 
         instance.name = validated_data.get('name', instance.name)
         instance.description = validated_data.get('description', instance.description)
@@ -85,15 +74,6 @@ class AddMenuSerializer(ModelSerializer):
         return {'message': self.notification.title}
 
     def validate(self, attrs):
-        _user = self.context['request'].user
-        restaurant = get_object_or_404(Restaurant, id=self.context['restaurant_id'])
-        self.context['restaurant'] = restaurant
-
-        owner_id = restaurant.owner_id
-
-        if owner_id != _user.id:
-            raise serializers.ValidationError({"Error": "This restaurants menu does not belong to signed in user"})
-
         if attrs['price'] < 0:
             raise serializers.ValidationError({"Error": "Menu Item prices must be 0 or more"})
 
@@ -103,6 +83,11 @@ class AddMenuSerializer(ModelSerializer):
         user = self.context['request'].user
         restaurant = self.context['restaurant']
         owner_id = restaurant.owner_id
+
+        try:
+            restaurant = Restaurant.objects.get(owner_id=user.id)
+        except:
+            return Response({'Error': "Not an owner of a restaurant"}, status=status.HTTP_400_BAD_REQUEST)
 
         menu_item = MenuItem.objects.create(
             restaurant_id=owner_id, **validated_data

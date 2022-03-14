@@ -31,14 +31,12 @@ class RestaurantAddNotificationView(APIView):
             message = NS.getRestaurantNotificationTitle(kwargs.get(NS.REST_NOTI), restaurant)
             if message == "":
                 return Response({'Error': "Could not update"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            try:
-                new_update = RestaurantNotification.objects.create(
+
+            new_update = RestaurantNotification.objects.create(
                     restaurant=Restaurant.objects.get(id=self.kwargs['rest_id']), title=message)
-                return Response(
+            return Response(
                     {'id': new_update.id, 'title': new_update.title, 'restaurant': new_update.restaurant.name},
                     status=status.HTTP_200_OK)
-            except:
-                return Response({'Error': "Could not update."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response({'Error': "User not Authenticate."}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -46,6 +44,11 @@ class RestaurantAddNotificationView(APIView):
 class RestaurantNotificationView(ListAPIView):
     serializer_class = RestaurantNotificationSerializer
     queryset = RestaurantNotification.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        if not Restaurant.objects.filter(id=self.kwargs['rest_id']).exists():
+            return Response({'Error': "Restaurant not found."}, status=status.HTTP_404_NOT_FOUND)
+        return super().get(self, request, *args, **kwargs)
 
 
     def get_queryset(self):

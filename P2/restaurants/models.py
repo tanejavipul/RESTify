@@ -11,7 +11,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=100)
     postal = models.CharField(max_length=10)
     #phone
-    logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurant/Logo/logo.png', blank=False)  # TODO change NULL to default Profile Pic
+    logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurant/Logo/logo.png', blank=False)
 
     #extra fields on restaurant page
     description = models.TextField(max_length=2000, blank=True)

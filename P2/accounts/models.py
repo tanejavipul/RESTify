@@ -11,10 +11,10 @@ from restaurants.models import Restaurant
 
 
 class User(AbstractUser):
-    avatar = models.ImageField(upload_to='Avatars/', default='Avatars/avatar.png', blank=False)  # TODO change NULL to default Profile Pic
+    avatar = models.ImageField(upload_to='Avatars/', default='Avatars/avatar.png', blank=False)
     phone = PhoneNumberField(null=True, blank=True)
 
 
 class Following(models.Model):
-    user = models.ForeignKey(to=User, on_delete=CASCADE, null=True, related_name='following')
-    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='followers')
+    user = models.ForeignKey(to=User, on_delete=CASCADE, related_name='following')
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, related_name='followers')

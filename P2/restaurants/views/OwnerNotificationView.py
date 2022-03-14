@@ -26,8 +26,7 @@ class OwnerNotificationAddView(APIView):
             if message == "":
                 return Response({'Error': "Could not update"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             try:
-                rest = restaurant.objects.get(id=self.kwargs['rest_id'])
-                new_update = OwnerNotification.objects.create(restaurant=rest, title=message, user=request.user)
+                new_update = OwnerNotification.objects.create(restaurant=restaurant, title=message, user=request.user)
                 return Response(
                     {'id': new_update.id, 'title': new_update.title, 'restaurant': new_update.restaurant.name},
                     status=status.HTTP_200_OK)

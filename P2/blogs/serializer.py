@@ -73,10 +73,10 @@ class BlogPostLikeSerializer(ModelSerializer):
             self.notification.save()
             
         #TODO: remove later
-        if self.notification:
-            print('notification was created')
-        else:
-            print('like already exists, returning value')
+        # if self.notification:
+        #     print('notification was created')
+        # else:
+        #     print('like already exists, returning value')
 
         return blogpostLike
 

@@ -28,9 +28,10 @@ class RestaurantSerializer(ModelSerializer):
     def validate(self, attrs):
         _user = self.context['request'].user
         restaurant = Restaurant.objects.filter(owner=_user)
+
         if restaurant.exists():
             raise serializers.ValidationError({"Error": "User already owns a restaurant"})
-        
+
         if 'postal' in attrs:
             try:
                 validate_postal(attrs['postal'])
@@ -45,6 +46,8 @@ class RestaurantSerializer(ModelSerializer):
         
         if 'logo' not in attrs:
             raise serializers.ValidationError({"logo": "This field is required"})
+        
+        
         
         return attrs
 
@@ -63,7 +66,7 @@ class EditRestaurantSerializer(ModelSerializer):
     postal = serializers.CharField(max_length=10, required=False)
     class Meta:
         model = Restaurant
-        fields = ['name', 'address', 'postal', 'description', 'phone', 'logo', 'carousel_img_1', 'carousel_img_2', 'carousel_img_3', 'image_1', 'image_2', 'image_3', 'image_4'] 
+        fields = ['name', 'address', 'postal', 'phone', 'logo', 'description', 'cover_img', 'carousel_img_1', 'carousel_img_2', 'carousel_img_3', 'image_1', 'image_2', 'image_3', 'image_4'] 
 
     def validate(self, attrs):
         _user = self.context['request'].user
@@ -160,10 +163,10 @@ class RestaurantLikeSerializer(ModelSerializer):
             self.notification.save()
             
         #TODO: remove later
-        if self.notification:
-            print('notification was created')
-        else:
-            print('like already exists, returning value')
+        # if self.notification:
+        #     print('notification was created')
+        # else:
+        #     print('like already exists, returning value')
         return restaurantLike
 
 

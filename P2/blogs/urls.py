@@ -27,6 +27,6 @@ urlpatterns = [
     path('blogpost/create/', BlogPostCreateView.as_view(), name='create-blog'),
 
     #Blog Likes
-    path('blogpost/<int:blogpost_id>/like/add/', AddBlogPostLikeView.as_view(), name='addBlogPostLike'),
-    path('blogpost/<int:blogpost_id>/like/', BlogPostLikeView.as_view(), name='viewBlogPostLike'), #GET and DELETE
+    path('<int:blogpost_id>/like/add/', AddBlogPostLikeView.as_view(), name='addBlogPostLike'),
+    path('<int:blogpost_id>/like/', BlogPostLikeView.as_view(), name='viewBlogPostLike'), #GET and DELETE
 ]

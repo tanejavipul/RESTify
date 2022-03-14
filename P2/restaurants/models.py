@@ -17,6 +17,7 @@ class Restaurant(models.Model):
 
     #extra fields on restaurant page
     description = models.TextField(max_length=2000, blank=True)
+    cover_img = models.ImageField(upload_to='Restaurants/Cover/', default='Restaurant/Cover/image.png', blank=True)
     carousel_img_1 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True)
     carousel_img_2 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True)
     carousel_img_3 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True)

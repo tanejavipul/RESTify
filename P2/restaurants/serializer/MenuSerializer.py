@@ -12,7 +12,7 @@ class MenuSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItem
-        fields = ['restaurant', 'name', 'description', 'price', 'type']
+        fields = ['name', 'description', 'price', 'type']
 
 
 class EditMenuSerializer(ModelSerializer):
@@ -63,7 +63,7 @@ class AddMenuSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItem
-        fields = ['restaurant', 'name', 'description', 'price', 'type']
+        fields = ['name', 'description', 'price', 'type']
 
     def validate(self, attrs):
         if not (attrs['type'] in validTypes):

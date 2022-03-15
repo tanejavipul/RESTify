@@ -1,29 +1,20 @@
 
-from django.core.validators import validate_email
-from django.shortcuts import redirect, get_object_or_404
-from rest_framework import serializers, request, status
-from rest_framework.reverse import reverse
+from django.shortcuts import get_object_or_404
+from rest_framework import serializers
+
 from rest_framework.serializers import ModelSerializer, Serializer
-from rest_framework.validators import UniqueValidator
-
-from rest_framework.fields import CurrentUserDefault
-
 from restaurants.models import Restaurant, RestaurantLike, OwnerNotification
 from restaurants.views import NotificationSelector as NS
 import re
-from rest_framework.response import Response
-from django.http import JsonResponse
+
 
 
 class RestaurantSerializer(ModelSerializer):
     num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
-    num_follows = serializers.IntegerField(read_only=True, required=False, default=0)
-    num_comments = serializers.IntegerField(read_only=True, required=False, default=0)
-    num_blogs = serializers.IntegerField(read_only=True, required=False, default=0)
 
     class Meta:
         model = Restaurant
-        fields = ['name', 'address', 'postal', 'phone', 'logo', 'num_likes', 'num_follows', 'num_comments', 'num_blogs'] 
+        fields = ['name', 'address', 'postal', 'phone', 'logo', 'num_likes'] 
 
     def validate(self, attrs):
         _user = self.context['request'].user
@@ -57,7 +48,6 @@ class RestaurantSerializer(ModelSerializer):
             owner=owner, **validated_data
         )
         restaurant.save()
-        print(restaurant)
         return restaurant
     
 class EditRestaurantSerializer(ModelSerializer):
@@ -72,10 +62,7 @@ class EditRestaurantSerializer(ModelSerializer):
         _user = self.context['request'].user
         r_id = self.context['restaurant_id'] #r_id existence already validated by django, 404 returned
         
-        #make sure owner of restaurant to be edited is the current user
         restaurant = get_object_or_404(Restaurant, pk=r_id)
-        # if restaurant.owner != _user:
-        #     raise serializers.ValidationError({"Error": "Restaurant does not belong to user"})
 
         if 'postal' in attrs:
             try:
@@ -86,6 +73,20 @@ class EditRestaurantSerializer(ModelSerializer):
         #pre populate phone field
         if 'phone' in attrs and attrs['phone'] == None:
             attrs['phone'] = restaurant.phone
+
+        #delete images if in attrs but left blank
+        if 'cover_img' in attrs and attrs['cover_img'] == None:
+            attrs['cover_img'] = 'Restaurant/Cover/image.png'
+
+        for i in range(1, 4):
+            field_value = 'carousel_img_' + str(i)
+            if field_value in attrs and attrs[field_value] == None:
+                attrs[field_value] = 'Restaurant/Carousel/image.png'
+        
+        for i in range(1, 5):
+            field_value = 'image_' + str(i)
+            if field_value in attrs and attrs[field_value] == None:
+                attrs[field_value] = 'Restaurant/Image/image.png'
 
         return attrs
     
@@ -102,25 +103,42 @@ class EditRestaurantSerializer(ModelSerializer):
         instance.carousel_img_3 = validated_data.get('carousel_img_3', instance.carousel_img_3)
 
         instance.image_1 = validated_data.get('image_1', instance.image_1)
-        instance.image_2 = validated_data.get('image_1', instance.image_2)
-        instance.image_3 = validated_data.get('image_1', instance.image_3)
-        instance.image_4 = validated_data.get('image_1', instance.image_4)
+        instance.image_2 = validated_data.get('image_2', instance.image_2)
+        instance.image_3 = validated_data.get('image_3', instance.image_3)
+        instance.image_4 = validated_data.get('image_4', instance.image_4)
 
         instance.save()
         return instance
+
+class GetRestaurantSerializer(ModelSerializer):
+    num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
+    num_follows = serializers.IntegerField(read_only=True, required=False, default=0)
+    num_comments = serializers.IntegerField(read_only=True, required=False, default=0)
+    num_blogs = serializers.IntegerField(read_only=True, required=False, default=0)
+
+    class Meta:
+        model = Restaurant
+        fields = ['name', 'address', 'postal', 'phone', 'logo', 'description', 'cover_img',  'carousel_img_1', 'carousel_img_2', 
+        'carousel_img_3', 'image_1', 'image_2', 'image_3', 'image_4', 'num_likes', 'num_follows', 'num_comments', 'num_blogs'] 
 
 
 class RestaurantLikeSerializer(ModelSerializer):
     notification = ''
     #notificationAdded = serializers.SerializerMethodField('notification_added')
+    Success = serializers.SerializerMethodField('success_message')
     class Meta:
         model = RestaurantLike
-        fields = ['user', 'restaurant'] #will NOT be provided in POST body
+        fields = ['Success'] #will NOT be provided in POST body
     
     # def notification_added(self, obj):
     #     if self.notification == '':
     #         return False
     #     return {'message': self.notification.title}
+
+    def success_message(self, obj):
+        if self.notification == '':
+            return "User already likes the restaurant."
+        return "User now likes the restaurant."
 
     def validate(self, attrs):
         _user = self.context['request'].user
@@ -130,7 +148,7 @@ class RestaurantLikeSerializer(ModelSerializer):
         #     restaurant = Restaurant.objects.get(pk=r_id)
         # except:
         #     raise serializers.ValidationError({"Object Error": "No restaurant exists with given ID"})
-        get_object_or_404(Restaurant, pk=r_id)
+        restaurant = get_object_or_404(Restaurant, pk=r_id)
         
         if restaurant.owner == _user:
             raise serializers.ValidationError({"Error": "User cannot like their own restaurant"})
@@ -169,6 +187,13 @@ class RestaurantLikeSerializer(ModelSerializer):
         # else:
         #     print('like already exists, returning value')
         return restaurantLike
+
+class RestaurantLikeGetSerializer(Serializer):
+    result = serializers.SerializerMethodField('result_message')
+
+    def result_message(self, obj):
+        if obj:
+            return True
 
 
 class SearchSerializer(Serializer):

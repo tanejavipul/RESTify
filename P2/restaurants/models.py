@@ -17,14 +17,14 @@ class Restaurant(models.Model):
 
     #extra fields on restaurant page
     description = models.TextField(max_length=2000, blank=True)
-    cover_img = models.ImageField(upload_to='Restaurants/Cover/', default='Restaurant/Cover/image.png', blank=True)
-    carousel_img_1 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True)
-    carousel_img_2 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True)
-    carousel_img_3 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True)
-    image_1 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True)
-    image_2 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True)
-    image_3 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True)
-    image_4 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True)
+    cover_img = models.ImageField(upload_to='Restaurants/Cover/', default='Restaurant/Cover/image.png', blank=True, null=True)
+    carousel_img_1 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
+    carousel_img_2 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
+    carousel_img_3 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
+    image_1 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
+    image_2 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
+    image_3 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
+    image_4 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
     
 
     def __str__(self):

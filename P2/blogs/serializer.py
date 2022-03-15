@@ -1,6 +1,6 @@
 from rest_framework import status, serializers
 from rest_framework.response import Response
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, Serializer
 from django.shortcuts import get_object_or_404
 
 from blogs.models import BlogPost, BlogLike
@@ -32,14 +32,20 @@ class BlogPostSerializer(ModelSerializer):
 class BlogPostLikeSerializer(ModelSerializer):
     notification = ''
     #notificationAdded = serializers.SerializerMethodField('notification_added')
+    Success = serializers.SerializerMethodField('success_message')
     class Meta:
         model = BlogLike
-        fields = ['user', 'blog_post'] #will NOT be provided in POST body
+        fields = ['Success'] #will NOT be provided in POST body
     
     # def notification_added(self, obj):
     #     if self.notification == '':
     #         return False
     #     return {'message': self.notification.title}
+
+    def success_message(self, obj):
+        if self.notification == '':
+            return "User already likes the blog post."
+        return "User now likes the blog post."
 
     def validate(self, attrs):
         _user = self.context['request'].user
@@ -84,3 +90,9 @@ class BlogPostLikeSerializer(ModelSerializer):
 
         return blogpostLike
 
+class BlogLikeGetSerializer(Serializer):
+    result = serializers.SerializerMethodField('result_message')
+
+    def result_message(self, obj):
+        if obj:
+            return True

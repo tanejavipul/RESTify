@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
 from blogs.models import BlogPost
-from blogs.serializer import BlogPostLikeSerializer
+from blogs.serializer import BlogPostLikeSerializer, BlogLikeGetSerializer
 
 class AddBlogPostLikeView(CreateAPIView): #POST
     queryset = BlogPost.objects.all()
@@ -18,7 +18,7 @@ class AddBlogPostLikeView(CreateAPIView): #POST
 class BlogPostLikeView(RetrieveDestroyAPIView): #GET, DELETE
     queryset = BlogPost.objects.all()
     permission_classes =  [IsAuthenticated]
-    serializer_class = BlogPostLikeSerializer
+    serializer_class = BlogLikeGetSerializer
 
     def get_object(self):
         user_bloglikes = (self.request.user).blogLikes.all()

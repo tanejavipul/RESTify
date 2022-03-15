@@ -11,17 +11,12 @@ from restaurants.views import NotificationSelector as NS
 class BlogPostSerializer(ModelSerializer):
 
     notification = ''
-    notificationAdded = serializers.SerializerMethodField('notification_added')
+    restaurant = serializers.CharField(max_length=100)
 
     class Meta:
         model = BlogPost
         fields = ['restaurant', 'title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3',
-                  'last_modified', 'notificationAdded']
-
-    def notification_added(self, obj):
-        if self.notification == '':
-            return False
-        return {'message': self.notification.title}
+                  'last_modified']
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -30,6 +25,8 @@ class BlogPostSerializer(ModelSerializer):
             restaurant = Restaurant.objects.get(owner_id=user.id)
         except:
             return Response({'Error': "Not an owner of a restaurant"}, status=status.HTTP_400_BAD_REQUEST)
+
+        self.restaurant = restaurant.name
 
         new_post = BlogPost.objects.create(
             user_id=self.context['request'].user.id,
@@ -40,10 +37,6 @@ class BlogPostSerializer(ModelSerializer):
         message = NS.getRestaurantNotificationTitle(NS.BLOG, restaurant)
         self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message)
         self.notification.save()
-
-        if self.notification:
-            self.notificationAdded = True
-            return new_post
 
         return new_post
 

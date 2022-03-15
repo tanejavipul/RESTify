@@ -1,9 +1,6 @@
-from rest_framework import status
 from rest_framework.generics import get_object_or_404, UpdateAPIView, ListAPIView, CreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 
-from blogs.models import BlogPost
 from restaurants.models import MenuItem, Restaurant
 from restaurants.serializer.MenuSerializer import MenuSerializer, EditMenuSerializer, AddMenuSerializer
 
@@ -44,8 +41,3 @@ class EditMenuView(UpdateAPIView):
 class AddMenuView(CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = AddMenuSerializer
-
-    def get_serializer_context(self):
-        context = super().get_serializer_context()
-        context["restaurant_id"] = self.kwargs['restaurant_id']
-        return context

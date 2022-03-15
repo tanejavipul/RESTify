@@ -29,7 +29,7 @@ def getRestaurantNotificationTitle(message, rest):
 
 def getOwnerNotificationTitle(message, user, rest):
     # for now restaurant name not in use
-    user_name = user.name
+    user_name = user.username
     rest_name = rest.name
     if message == FOLLOW:
         return user_name + " is now following your restaurant."

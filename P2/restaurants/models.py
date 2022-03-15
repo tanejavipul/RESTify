@@ -3,34 +3,35 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import SET_NULL, IntegerField, DateTimeField, CASCADE
 from django.conf import settings
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 class Restaurant(models.Model):
     owner = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True, related_name='restaurant')
+
+    #fields required for adding new restaurant
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     postal = models.CharField(max_length=10)
-    #phone
-    logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurant/Logo/logo.png', blank=False)
+    phone = PhoneNumberField(null=True)
+    logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurant/Logo/logo.png', blank=False) 
 
     #extra fields on restaurant page
     description = models.TextField(max_length=2000, blank=True)
-    # num_likes
-    # num_followers
-    # num_blog_posts
-    # num_comments
-    # carousel_img
-    # image_1
-    # image_2
-    # image_3
-    # image_4
+    cover_img = models.ImageField(upload_to='Restaurants/Cover/', default='Restaurant/Cover/image.png', blank=True, null=True)
+    carousel_img_1 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
+    carousel_img_2 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
+    carousel_img_3 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
+    image_1 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
+    image_2 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
+    image_3 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
+    image_4 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
     
 
     def __str__(self):
         return self.name
 
 class MenuItem(models.Model):
-    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='items')
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='menuitem')
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
     price = models.FloatField()
@@ -60,3 +61,7 @@ class RestaurantLike(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='likes')
     def __str__(self):
         return "User:" + str(self.user) + " liked Restaurant:" + str(self.restaurant) + " page"
+
+class Following(models.Model):
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=CASCADE, related_name='following')
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, related_name='followers')

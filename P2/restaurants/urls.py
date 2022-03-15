@@ -20,8 +20,7 @@ from restaurants.views.CommentView import AddCommentView, CommentView
 from restaurants.views import NotificationSelector as NS
 from restaurants.views.MenuView import MenuView, EditMenuView, AddMenuView
 from restaurants.views.FollowView import FollowUnfollowView
-from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, \
-    RestaurantLikeView, GetRestaurantsView
+from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantListView, GetRestaurantView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from restaurants.views.OwnerNotificationView import OwnerNotificationAddView, OwnerNotificationView
@@ -40,11 +39,11 @@ urlpatterns = [
     path('notification/<int:rest_id>/', RestaurantNotificationView.as_view(), name='notificationRestaurant'),
     path('notification/blog/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {NS.REST_NOTI: NS.BLOG},
          name='notificationBlog'),
-    path('notification/menu/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {NS.REST_NOTI: NS.BLOG},
+    path('notification/menu/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {NS.REST_NOTI: NS.MENU},
          name='notificationMenu'),
 
     # Owner Notification (Notification the Restaurant Owner gets)
-    path('owner/update/', OwnerNotificationView.as_view(), name='ownerNotifications'),
+    path('owner/update/all/', OwnerNotificationView.as_view(), name='ownerNotifications'),
 
     path('owner/update/follow/<int:rest_id>/', OwnerNotificationAddView.as_view(), {NS.OWNER_NOTI: NS.FOLLOW},
          name='ownerNotifyFollow'),
@@ -55,12 +54,16 @@ urlpatterns = [
     path('owner/update/comment/<int:rest_id>/', OwnerNotificationAddView.as_view(), {NS.OWNER_NOTI: NS.COMMENT},
          name='ownerNotifyComment'),
 
+    #Restaurant
     path('add/', AddRestaurantView.as_view(), name='addRestaurant'),
-    path('<restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
-    path('<restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
-    path('<restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'),
-    path('search/', GetRestaurantsView.as_view(), name='getRestaurants'),
+    path('<int:restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
+    path('search/', GetRestaurantListView.as_view(), name='getRestaurants'),
+    path('<int:restaurant_id>/view/', GetRestaurantView.as_view(), name='viewRestaurant'),
 
+    #Restaurant Likes
+    path('<int:restaurant_id>/like/add/', AddRestaurantLikeView.as_view(), name='addRestaurantLike'),
+    path('<int:restaurant_id>/like/', RestaurantLikeView.as_view(), name='viewRestaurantLike'), #is both GET and DELETE
+    
     # Menu
     path('<int:restaurant_id>/menu/', MenuView.as_view(), name='viewMenu'),
     path('<int:menu_item_id>/editMenuItem/', EditMenuView.as_view(), name='editMenuItem'),

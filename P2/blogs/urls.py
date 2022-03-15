@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView
 
 from blogs.views.BlogPostEditView import BlogPostEditView
 from blogs.views.BlogPostCreateView import BlogPostCreateView
 from blogs.views.BlogPostView import BlogPostView
+from blogs.views.BlogPostLikesView import AddBlogPostLikeView, BlogPostLikeView
 from blogs.views.BlogPostHomeView import BlogPostHomeView
 
 app_name = 'blogs'
@@ -29,4 +29,8 @@ urlpatterns = [
     path('create/', BlogPostCreateView.as_view(), name='create-blog'),
     path('<int:blogpost_id>/edit/', BlogPostEditView.as_view(), name='edit-blog'),
     path('home/', BlogPostHomeView.as_view(), name='blogs-home'),
+
+    #Blog Likes
+    path('<int:blogpost_id>/like/add/', AddBlogPostLikeView.as_view(), name='addBlogPostLike'),
+    path('<int:blogpost_id>/like/', BlogPostLikeView.as_view(), name='viewBlogPostLike'), #GET and DELETE
 ]

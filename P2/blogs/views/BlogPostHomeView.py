@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
 
 from accounts.models import User
 from blogs.models import BlogPost
@@ -8,6 +9,7 @@ from blogs.serializers.BlogPostSerializer import BlogPostSerializer
 class BlogPostHomeView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = BlogPostSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
 

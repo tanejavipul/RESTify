@@ -23,7 +23,7 @@ class RestaurantSerializer(ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ['owner', 'name', 'address', 'postal', 'phone', 'logo', 'num_likes', 'num_follows', 'num_comments', 'num_blogs'] 
+        fields = ['name', 'address', 'postal', 'phone', 'logo', 'num_likes', 'num_follows', 'num_comments', 'num_blogs'] 
 
     def validate(self, attrs):
         _user = self.context['request'].user
@@ -74,8 +74,8 @@ class EditRestaurantSerializer(ModelSerializer):
         
         #make sure owner of restaurant to be edited is the current user
         restaurant = get_object_or_404(Restaurant, pk=r_id)
-        if restaurant.owner != _user:
-            raise serializers.ValidationError({"Error": "Restaurant does not belong to user"})
+        # if restaurant.owner != _user:
+        #     raise serializers.ValidationError({"Error": "Restaurant does not belong to user"})
 
         if 'postal' in attrs:
             try:
@@ -88,7 +88,7 @@ class EditRestaurantSerializer(ModelSerializer):
             attrs['phone'] = restaurant.phone
 
         return attrs
-
+    
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.phone = validated_data.get('phone', instance.phone)
@@ -96,7 +96,7 @@ class EditRestaurantSerializer(ModelSerializer):
         instance.postal = validated_data.get('postal', instance.postal)
 
         instance.description = validated_data.get('description', instance.description)
-
+        instance.cover_img = validated_data.get('cover_img', instance.cover_img)
         instance.carousel_img_1 = validated_data.get('carousel_img_1', instance.carousel_img_1)
         instance.carousel_img_2 = validated_data.get('carousel_img_2', instance.carousel_img_2)
         instance.carousel_img_3 = validated_data.get('carousel_img_3', instance.carousel_img_3)
@@ -112,24 +112,25 @@ class EditRestaurantSerializer(ModelSerializer):
 
 class RestaurantLikeSerializer(ModelSerializer):
     notification = ''
-    notificationAdded = serializers.SerializerMethodField('notification_added')
+    #notificationAdded = serializers.SerializerMethodField('notification_added')
     class Meta:
         model = RestaurantLike
-        fields = ['user', 'restaurant', 'notificationAdded'] #will NOT be provided in POST body
+        fields = ['user', 'restaurant'] #will NOT be provided in POST body
     
-    def notification_added(self, obj):
-        if self.notification == '':
-            return False
-        return {'message': self.notification.title}
+    # def notification_added(self, obj):
+    #     if self.notification == '':
+    #         return False
+    #     return {'message': self.notification.title}
 
     def validate(self, attrs):
         _user = self.context['request'].user
         r_id = self.context['restaurant_id']
         #check if restaurant with provided id exists
-        try:
-            restaurant = Restaurant.objects.get(pk=r_id)
-        except:
-            raise serializers.ValidationError({"Object Error": "No restaurant exists with given ID"})
+        # try:
+        #     restaurant = Restaurant.objects.get(pk=r_id)
+        # except:
+        #     raise serializers.ValidationError({"Object Error": "No restaurant exists with given ID"})
+        get_object_or_404(Restaurant, pk=r_id)
         
         if restaurant.owner == _user:
             raise serializers.ValidationError({"Error": "User cannot like their own restaurant"})

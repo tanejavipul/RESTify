@@ -34,6 +34,13 @@ class EditRestaurantView(UpdateAPIView):
         # context["query_params"] = self.request.query_params
         return context
     
+    def check_permissions(self, request):
+        user = request.user
+        restaurant = get_object_or_404(Restaurant, id=self.kwargs['restaurant_id'])
+        # not owner of the restaurant that owns the menu
+        if user != restaurant.owner:
+            self.permission_denied(self.request)
+    
     def get_object(self):
         return get_object_or_404(self.queryset, id=self.kwargs['restaurant_id'])
 

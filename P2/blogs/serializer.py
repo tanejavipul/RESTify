@@ -1,6 +1,7 @@
 from rest_framework import status, serializers
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
+from django.shortcuts import get_object_or_404
 
 from blogs.models import BlogPost, BlogLike
 from restaurants.models import Restaurant, OwnerNotification
@@ -30,25 +31,28 @@ class BlogPostSerializer(ModelSerializer):
 
 class BlogPostLikeSerializer(ModelSerializer):
     notification = ''
-    notificationAdded = serializers.SerializerMethodField('notification_added')
+    #notificationAdded = serializers.SerializerMethodField('notification_added')
     class Meta:
         model = BlogLike
-        fields = ['user', 'blog_post', 'notificationAdded'] #will NOT be provided in POST body
+        fields = ['user', 'blog_post'] #will NOT be provided in POST body
     
-    def notification_added(self, obj):
-        if self.notification == '':
-            return False
-        return {'message': self.notification.title}
+    # def notification_added(self, obj):
+    #     if self.notification == '':
+    #         return False
+    #     return {'message': self.notification.title}
 
     def validate(self, attrs):
         _user = self.context['request'].user
         b_id = self.context['blogpost_id']
+
         #check if blogpost with provided id exists
-        try:
-            blogPost = BlogPost.objects.get(pk=b_id)
-        except:
-            raise serializers.ValidationError({"Object Error": "No blog post exists with given ID"})
+        # try:
+        #     blogPost = BlogPost.objects.get(pk=b_id)
+        # except:
+        #     raise serializers.ValidationError({"Object Error": "No blog post exists with given ID"})
+        blogPost = get_object_or_404(BlogPost, pk=b_id)
         
+        #400 
         if blogPost.user == _user:
             raise serializers.ValidationError({"Error": "User cannot like their own blog post"})
         return attrs

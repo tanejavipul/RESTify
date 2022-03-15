@@ -8,10 +8,7 @@ from rest_framework.validators import UniqueValidator
 from accounts.models import User
 
 
-# https://medium.com/django-rest/django-rest-framework-login-and-register-user-fd91cf6029d5
 class SignUpSerializer(ModelSerializer):
-    # owner = serializers.CharField(source='owner.get_full_name', read_only=True)
-    # id = serializers.ReadOnlyField()
 
     password = serializers.CharField(write_only=True, required=True)
     password2 = serializers.CharField(write_only=True, required=True)
@@ -27,6 +24,9 @@ class SignUpSerializer(ModelSerializer):
             except:
                 raise serializers.ValidationError({"Email Error": "Enter Valid Email"})
 
+        if len(attrs['password']) < 8:
+            raise serializers.ValidationError({"Password Error": "Password To Short."})
+
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({"password": "Password fields didn't match."})
         return attrs
@@ -35,7 +35,7 @@ class SignUpSerializer(ModelSerializer):
         email = validated_data.get('email', '')
         first_name = validated_data.get('first_name', '')
         last_name = validated_data.get('last_name', '')
-        phone = validated_data.get('phone', '')
+        phone = validated_data.get('phone', '') #+12223334444
 
 
         user = User.objects.create(

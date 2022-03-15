@@ -61,3 +61,7 @@ class RestaurantLike(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='likes')
     def __str__(self):
         return "User:" + str(self.user) + " liked Restaurant:" + str(self.restaurant) + " page"
+
+class Following(models.Model):
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=CASCADE, related_name='following')
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, related_name='followers')

@@ -39,11 +39,11 @@ urlpatterns = [
     path('notification/<int:rest_id>/', RestaurantNotificationView.as_view(), name='notificationRestaurant'),
     path('notification/blog/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {NS.REST_NOTI: NS.BLOG},
          name='notificationBlog'),
-    path('notification/menu/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {NS.REST_NOTI: NS.BLOG},
+    path('notification/menu/<int:rest_id>/', RestaurantAddNotificationView.as_view(), {NS.REST_NOTI: NS.MENU},
          name='notificationMenu'),
 
     # Owner Notification (Notification the Restaurant Owner gets)
-    path('owner/update/', OwnerNotificationView.as_view(), name='ownerNotifications'),
+    path('owner/update/all/', OwnerNotificationView.as_view(), name='ownerNotifications'),
 
     path('owner/update/follow/<int:rest_id>/', OwnerNotificationAddView.as_view(), {NS.OWNER_NOTI: NS.FOLLOW},
          name='ownerNotifyFollow'),

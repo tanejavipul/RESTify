@@ -5,7 +5,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from accounts.models import User, Following
 from restaurants.models import Restaurant, OwnerNotification, RestaurantNotification
 from restaurants.serializer.OwnerNotificationSerializer import OwnerNotificationSerializer
 
@@ -37,6 +36,12 @@ class OwnerNotificationView(ListAPIView):
     serializer_class = OwnerNotificationSerializer
     queryset = OwnerNotification.objects.all()
     permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        if not Restaurant.objects.filter(owner=self.request.user).exists():
+            return Response({'Error': "You currently do not own a Restaurant"}, status=status.HTTP_400_BAD_REQUEST)
+        return super().get(self, request, *args, **kwargs)
+
 
     def get_queryset(self):
         x = OwnerNotification.objects.all().filter(restaurant=self.request.user.restaurant).order_by('-last_modified')

@@ -14,7 +14,3 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='Avatars/', default='Avatars/avatar.png', blank=False)
     phone = PhoneNumberField(null=True, blank=True)
 
-
-class Following(models.Model):
-    user = models.ForeignKey(to=User, on_delete=CASCADE, related_name='following')
-    restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, related_name='followers')

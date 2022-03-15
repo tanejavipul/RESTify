@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from accounts.models import User, Following
+from accounts.models import User
 from accounts.serializer import SignUpSerializer, ProfileSerializer
 from restaurants.models import Restaurant
 

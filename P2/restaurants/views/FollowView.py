@@ -7,8 +7,8 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from accounts.models import User, Following
-from restaurants.models import Restaurant, OwnerNotification
+from accounts.models import User
+from restaurants.models import Restaurant, OwnerNotification, Following
 from restaurants.views import NotificationSelector as NS
 
 # Create your views here.
@@ -31,10 +31,10 @@ class FollowUnfollowView(APIView):
             if not Restaurant.objects.filter(id=self.kwargs['rest_id']).exists():
                 return Response({'Error': "Restaurant not Found"}, status=status.HTTP_404_NOT_FOUND)
             restaurant = Restaurant.objects.get(id=self.kwargs['rest_id'])
-            message = NS.getOwnerNotificationTitle(kwargs.get(NS.OWNER_NOTI), self.request.user, restaurant)
+            message = NS.getOwnerNotificationTitle(NS.FOLLOW, self.request.user, restaurant)
             Following.objects.create(user=self.request.user, restaurant=restaurant)
             OwnerNotification.objects.create(restaurant=restaurant, title=message, user=self.request.user)
-            return Response({'Success': "User now follows the restaurant.", 'notification': True}, status=status.HTTP_200_OK)
+            return Response({'Success': "User now follows the restaurant."}, status=status.HTTP_200_OK)
 
         return Response({'Error': "User not Authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
 

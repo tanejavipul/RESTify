@@ -15,15 +15,9 @@ class SignUpSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'phone', 'last_name', 'email', 'avatar', 'password', 'password2']
+        fields = ['username', 'first_name', 'phone', 'last_name', 'email', 'password', 'password2']
 
     def validate(self, attrs):
-        if 'email' in attrs:
-            try:
-                validate_email(attrs['email'])
-            except:
-                raise serializers.ValidationError({"Email Error": "Enter Valid Email"})
-
         if len(attrs['password']) < 8:
             raise serializers.ValidationError({"Password Error": "Password To Short."})
 
@@ -37,7 +31,6 @@ class SignUpSerializer(ModelSerializer):
         last_name = validated_data.get('last_name', '')
         phone = validated_data.get('phone', '') #+12223334444
 
-
         user = User.objects.create(
             username=validated_data['username'],
             email=email,
@@ -49,14 +42,10 @@ class SignUpSerializer(ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
 
-
-        print(user)
         return user
 
 
 class ProfileSerializer(ModelSerializer):
-    # owner = serializers.CharField(source='owner.get_full_name', read_only=True)
-    # id = serializers.ReadOnlyField()
 
     username = serializers.CharField(read_only=True, required=False)  # username will only be printed out
     old_password = serializers.CharField(write_only=True, required=False)

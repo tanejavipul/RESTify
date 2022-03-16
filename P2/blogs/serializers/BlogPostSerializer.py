@@ -11,22 +11,25 @@ from restaurants.views import NotificationSelector as NS
 class BlogPostSerializer(ModelSerializer):
 
     notification = ''
-    restaurant = serializers.CharField(max_length=100)
+    rest_name = ''
+    restaurant_name = serializers.SerializerMethodField('get_restaurant_name')
 
     class Meta:
         model = BlogPost
-        fields = ['restaurant', 'title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3',
+        fields = ['restaurant_name', 'title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3',
                   'last_modified']
+
+    def get_restaurant_name(self, obj):
+        return self.rest_name
 
     def create(self, validated_data):
         user = self.context['request'].user
 
         try:
             restaurant = Restaurant.objects.get(owner_id=user.id)
+            self.rest_name = restaurant.name
         except:
-            return Response({'Error': "Not an owner of a restaurant"}, status=status.HTTP_400_BAD_REQUEST)
-
-        self.restaurant = restaurant.name
+            raise serializers.ValidationError({'Error': "Not an owner of a restaurant"})
 
         new_post = BlogPost.objects.create(
             user_id=self.context['request'].user.id,
@@ -63,3 +66,10 @@ class EditBlogPostSerializer(ModelSerializer):
         instance.save()
 
         return instance
+
+
+class BlogPostHomeSerializer(ModelSerializer):
+
+    class Meta:
+        model = BlogPost
+        fields = ['title', 'description', 'primary_photo', 'last_modified']

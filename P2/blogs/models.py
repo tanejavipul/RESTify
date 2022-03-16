@@ -11,11 +11,11 @@ class BlogPost(models.Model):
     user = models.ForeignKey(to=User, on_delete=CASCADE, null=True, related_name='blogpost')
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='blogpost')
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=100)
-    primary_photo = models.ImageField(upload_to='Blogs/Post/', blank=True)  # Allowing for no photos in blog post
-    photo_1 = models.ImageField(upload_to='Blogs/Post/', blank=True)
-    photo_2 = models.ImageField(upload_to='Blogs/Post/', blank=True)
-    photo_3 = models.ImageField(upload_to='Blogs/Post/', blank=True)
+    description = models.CharField(max_length=2500)
+    primary_photo = models.ImageField(upload_to='Blogs/Post/', blank=True, null=True)  # Allowing for no photos in blog post
+    photo_1 = models.ImageField(upload_to='Blogs/Post/', blank=True, null=True)
+    photo_2 = models.ImageField(upload_to='Blogs/Post/', blank=True, null=True)
+    photo_3 = models.ImageField(upload_to='Blogs/Post/', blank=True, null=True)
     last_modified = DateTimeField(auto_now=True, editable=True)
 
 

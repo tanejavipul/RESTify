@@ -29,11 +29,20 @@ class EditMenuSerializer(ModelSerializer):
         fields = ['name', 'description', 'price', 'type']
 
     def validate(self, attrs):
-        if not (attrs['type'] in validTypes):
-            raise serializers.ValidationError({"Error": "Please enter a valid item type "
-                                                        "(Ex: Appetizers, Main Course, Sides, Specials, Desserts, Drinks)"})
-        if attrs['price'] < 0:
-            raise serializers.ValidationError({"Error": "Menu Item prices must be 0 or more"})
+        errors = {}
+
+        item_type = attrs.get('type', None)
+        price = attrs.get('price', None)
+
+        if item_type is not None and item_type not in validTypes:
+            errors['type'] = 'Please enter a valid item type (Ex: Appetizers, Main Course, Sides, Specials, Desserts, Drinks)'
+
+        if price is not None and price < 0:
+            errors['price'] = "Menu Item prices must be 0 or more"
+
+        # return all validation errors in one
+        if len(errors) != 0:
+            raise serializers.ValidationError(errors)
 
         return attrs
 
@@ -66,11 +75,20 @@ class AddMenuSerializer(ModelSerializer):
         fields = ['name', 'description', 'price', 'type']
 
     def validate(self, attrs):
-        if not (attrs['type'] in validTypes):
-            raise serializers.ValidationError({"Error": "Please enter a valid item type "
-                                                        "(Ex: Appetizers, Main Course, Sides, Specials, Desserts, Drinks)"})
-        if attrs['price'] < 0:
-            raise serializers.ValidationError({"Error": "Menu Item prices must be 0 or more"})
+        errors = {}
+
+        item_type = attrs.get('type', None)
+        price = attrs.get('price', None)
+
+        if item_type is not None and item_type not in validTypes:
+            errors['type'] = 'Please enter a valid item type (Ex: Appetizers, Main Course, Sides, Specials, Desserts, Drinks)'
+
+        if price is not None and price < 0:
+            errors['price'] = "Menu Item prices must be 0 or more"
+
+        # return all validation errors in one
+        if len(errors) != 0:
+            raise serializers.ValidationError(errors)
 
         return attrs
 
@@ -81,7 +99,7 @@ class AddMenuSerializer(ModelSerializer):
             restaurant = Restaurant.objects.get(owner_id=user.id)
             rest_id = restaurant.id
         except:
-            return Response({'Error': "Not an owner of a restaurant"}, status=status.HTTP_400_BAD_REQUEST)
+            raise serializers.ValidationError({'Error': "Not an owner of a restaurant"})
 
         menu_item = MenuItem.objects.create(
             restaurant_id=rest_id, **validated_data

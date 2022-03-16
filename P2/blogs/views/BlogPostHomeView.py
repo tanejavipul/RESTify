@@ -3,12 +3,12 @@ from rest_framework.permissions import IsAuthenticated
 
 from accounts.models import User
 from blogs.models import BlogPost
-from blogs.serializers.BlogPostSerializer import BlogPostSerializer
+from blogs.serializers.BlogPostSerializer import BlogPostHomeSerializer
 
 
 class BlogPostHomeView(ListAPIView):
     queryset = User.objects.all()
-    serializer_class = BlogPostSerializer
+    serializer_class = BlogPostHomeSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):

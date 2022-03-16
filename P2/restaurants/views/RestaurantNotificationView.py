@@ -37,12 +37,13 @@ class RestaurantAddNotificationView(APIView):
                     {'id': new_update.id, 'title': new_update.title, 'restaurant': new_update.restaurant.name},
                     status=status.HTTP_200_OK)
 
-        return Response({'Error': "User not Authenticate."}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'Error': "User not Authenticated."}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class RestaurantNotificationView(ListAPIView):
     serializer_class = RestaurantNotificationSerializer
     queryset = RestaurantNotification.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         if not Restaurant.objects.filter(id=self.kwargs['rest_id']).exists():

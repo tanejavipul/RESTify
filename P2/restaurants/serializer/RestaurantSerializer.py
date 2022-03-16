@@ -8,7 +8,6 @@ from restaurants.views import NotificationSelector as NS
 import re
 
 
-
 class RestaurantSerializer(ModelSerializer):
     num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
 
@@ -23,23 +22,24 @@ class RestaurantSerializer(ModelSerializer):
         if restaurant.exists():
             raise serializers.ValidationError({"Error": "User already owns a restaurant"})
 
+        errors = {}
+
         if 'postal' in attrs:
             try:
                 validate_postal(attrs['postal'])
             except:
-                raise serializers.ValidationError({"Value Error": "Invalid Postal Code"})
-        
-        if 'phone' not in attrs:
-            raise serializers.ValidationError({"phone": "This field is required"})
+                errors['postal'] = 'Invalid Postal Code'
 
-        if attrs['phone'] == None:
-            raise serializers.ValidationError({"phone": "This field cannot be blank"})
-        
-        if 'logo' not in attrs:
-            raise serializers.ValidationError({"logo": "This field is required"})
-        
-        
-        
+        value = attrs.get('phone', None)
+        if value is None:
+            errors['phone'] = 'This field cannot be blank.'
+
+        if 'phone' not in attrs:
+            errors['phone'] = 'This field is required.'
+
+        # return all validation errors in one
+        if len(errors) != 0:
+            raise serializers.ValidationError(errors)
         return attrs
 
     def create(self, validated_data):
@@ -49,7 +49,8 @@ class RestaurantSerializer(ModelSerializer):
         )
         restaurant.save()
         return restaurant
-    
+
+
 class EditRestaurantSerializer(ModelSerializer):
     name = serializers.CharField(max_length=100, required=False)
     address = serializers.CharField(max_length=100, required=False)
@@ -60,7 +61,7 @@ class EditRestaurantSerializer(ModelSerializer):
 
     def validate(self, attrs):
         _user = self.context['request'].user
-        r_id = self.context['restaurant_id'] #r_id existence already validated by django, 404 returned
+        r_id = self.context['restaurant_id'] # r_id existence already validated by django, 404 returned
         
         restaurant = get_object_or_404(Restaurant, pk=r_id)
 
@@ -70,11 +71,11 @@ class EditRestaurantSerializer(ModelSerializer):
             except:
                 raise serializers.ValidationError({"Value Error": "Invalid Postal Code"})
         
-        #pre populate phone field
+        # pre populate phone field
         if 'phone' in attrs and attrs['phone'] == None:
             attrs['phone'] = restaurant.phone
 
-        #delete images if in attrs but left blank
+        # delete images if in attrs but left blank
         if 'cover_img' in attrs and attrs['cover_img'] == None:
             attrs['cover_img'] = 'Restaurant/Cover/image.png'
 
@@ -95,6 +96,7 @@ class EditRestaurantSerializer(ModelSerializer):
         instance.phone = validated_data.get('phone', instance.phone)
         instance.address = validated_data.get('address', instance.address)
         instance.postal = validated_data.get('postal', instance.postal)
+        instance.logo = validated_data.get('logo', instance.logo)
 
         instance.description = validated_data.get('description', instance.description)
         instance.cover_img = validated_data.get('cover_img', instance.cover_img)
@@ -110,6 +112,7 @@ class EditRestaurantSerializer(ModelSerializer):
         instance.save()
         return instance
 
+
 class GetRestaurantSerializer(ModelSerializer):
     num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
     num_follows = serializers.IntegerField(read_only=True, required=False, default=0)
@@ -124,16 +127,11 @@ class GetRestaurantSerializer(ModelSerializer):
 
 class RestaurantLikeSerializer(ModelSerializer):
     notification = ''
-    #notificationAdded = serializers.SerializerMethodField('notification_added')
     Success = serializers.SerializerMethodField('success_message')
+
     class Meta:
         model = RestaurantLike
-        fields = ['Success'] #will NOT be provided in POST body
-    
-    # def notification_added(self, obj):
-    #     if self.notification == '':
-    #         return False
-    #     return {'message': self.notification.title}
+        fields = ['Success'] # will NOT be provided in POST body
 
     def success_message(self, obj):
         if self.notification == '':
@@ -159,7 +157,7 @@ class RestaurantLikeSerializer(ModelSerializer):
         restaurant_id = self.context["restaurant_id"]
         _restaurant = Restaurant.objects.get(pk=restaurant_id)
 
-        #do not create new RestaurantLike object if it already exists
+        # do not create new RestaurantLike object if it already exists
         # user_likes = _user.likes.all()
         # if user_likes.exists():
         #     restaurant_like = user_likes.filter(restaurant=_restaurant) 
@@ -170,23 +168,19 @@ class RestaurantLikeSerializer(ModelSerializer):
         try:
             restaurantLike = _user.likes.get(restaurant = _restaurant)
         except:
-        # otherwise create new object
+            # otherwise create new object
             restaurantLike = RestaurantLike.objects.create(
                 user=_user, restaurant=_restaurant
             )
             restaurantLike.save()
 
-            #create new notification for liking the restaurant
+            # create new notification for liking the restaurant
             message = NS.getOwnerNotificationTitle(NS.LIKE_REST, _user, _restaurant)
             self.notification = OwnerNotification.objects.create(restaurant=_restaurant, user=_user, title=message)
             self.notification.save()
-            
-        #TODO: remove later
-        # if self.notification:
-        #     print('notification was created')
-        # else:
-        #     print('like already exists, returning value')
+
         return restaurantLike
+
 
 class RestaurantLikeGetSerializer(Serializer):
     result = serializers.SerializerMethodField('result_message')
@@ -199,7 +193,8 @@ class RestaurantLikeGetSerializer(Serializer):
 class SearchSerializer(Serializer):
     search = serializers.CharField(max_length=200)  
 
-#source https://stackoverflow.com/questions/29859743/python-canadian-address-regex-validation   
+
+# source https://stackoverflow.com/questions/29859743/python-canadian-address-regex-validation
 def validate_postal(postal_code):
     if re.search("[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]", postal_code , re.IGNORECASE | re.DOTALL):
         return True

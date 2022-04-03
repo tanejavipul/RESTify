@@ -8,3 +8,6 @@ __pycache__/
 *.py[cod]
 
 P2/manage.py
+/P1/.idea/vcs.xml
+/P1/.idea/P1.iml
+/P1/.idea/modules.xml

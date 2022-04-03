@@ -11,63 +11,188 @@ import passwordSVG from "../../assets/Icons/lock.svg"
 import confirmPasswordSVG from "../../assets/Icons/enhanced_lock.svg"
 
 const SignupForm = () => {
-    const [firstName, setFirstName] = useState()
-    const [lastName, setLastName] = useState()
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [username, setUsername] = useState("")
-    const [email, setEmail] = useState()
-    const [phone, setPhone] = useState()
-    const [password, setPassword] = useState()
-    const [confirmPass, setConfirmPass] = useState()
-    const [error, setError] = useState()
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [password, setPassword] = useState("")
+    const [password2, setPassword2] = useState("")
+
+    const [firstnameError, setFirstNameError] = useState("")
+    const [lastnameError, setLastNameError] = useState("")
+    const [userError, setUserError] = useState("")
+    const [emailError, setEmailError] = useState("")
+    const [phoneError, setPhoneError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+    const [password2Error, setPassword2Error] = useState("")
 
 
+    useEffect(() => {
+        nameValid()
+    }, [firstName, lastName])
 
+    useEffect(() => {
+        userValid()
+    }, [username])
 
+    useEffect(() => {
+        pass1Valid()
+        pass2Valid()
+    }, [password, password2])
 
-    // console.log(event.target.name)
+    useEffect(() => {
+        phoneValid()
+    }, [phone])
+
+    useEffect(() => {
+        emailValid()
+    }, [email])
 
 
     function update(event) {
-        if (event.target.name === 'first-name')
+        console.log(event.target.name)
+        if (event.target.name === 'first-name') {
             setFirstName(event.target.value)
-        if (event.target.name === 'last-name')
+        }
+        if (event.target.name === 'last-name') {
             setLastName(event.target.value)
-        if (event.target.name === 'username')
+        }
+        if (event.target.name === 'username') {
             setUsername(event.target.value)
-
-        if (event.target.name === 'email')
+        }
+        if (event.target.name === 'email') {
             setEmail(event.target.value)
-        if (event.target.name === 'phone')
+        }
+        if (event.target.name === 'phone') {
             setPhone(event.target.value)
-        if (event.target.name === 'password')
+        }
+        if (event.target.name === 'password1') {
             setPassword(event.target.value)
-        if (event.target.name === 'confirm-pass')
-            setConfirmPass(event.target.value)
+        }
+        if (event.target.name === 'password2') {
+            setPassword2(event.target.value)
+        }
     }
 
 
 
-
-    return (
-        <>
+    return (<>
             <div className="col  login-container">
                 <h3>Sign Up</h3>
                 <form>
                     <IconInput icon={nameBadgeSVG} place_holder={"First Name"} input_name={"first-name"} two={true}
-                               place_holder2={"Last Name"} input_name2={"last-name"} />
-                    <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username} update={update}/>
-                    <IconInput icon={emailSVG} place_holder={"Email"} input_name={"email"}/>
-                    <IconInput icon={phoneSVG} place_holder={"+1###-###-#### (optional)"} input_name={"phone"} req={false}/>
-                    <IconInput icon={passwordSVG} place_holder={"Password"} input_name={"password"}/>
-                    <IconInput icon={confirmPasswordSVG} place_holder={"Confirm Password"} input_name={"confirm-pass"}/>
+                               place_holder2={"Last Name"} input_name2={"last-name"} value1={firstName} value2={lastName}
+                               error={firstnameError} error2={lastnameError} update={update}/>
+                    <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username}
+                               update={update} error={userError}/>
+                    <IconInput icon={emailSVG} place_holder={"Email"} input_name={"email"} value1={email} update={update}
+                               error={emailError}/>
+                    <IconInput icon={phoneSVG} place_holder={"+1###-###-#### (optional)"} value1={phone} update={update}
+                               input_name={"phone"} req={false} error={phoneError}/>
+                    <IconInput icon={passwordSVG} place_holder={"Password"} input_name={"password1"} value1={password}
+                               update={update} error={passwordError} type={"password"}/>
+                    <IconInput icon={confirmPasswordSVG} place_holder={"Confirm Password"} input_name={"password2"}
+                               value1={password2} update={update} error={password2Error} type={"password"}/>
                     <input type="submit" value="SIGN UP" className="form-control btn btn-outline-primary  shadow-none rounded-pill"/>
-                    <hr/>
-                    <a className="form-control btn btn-outline-primary  shadow-none rounded-pill">ALREADY HAVE AN ACCOUNT?</a>
                 </form>
+                <hr/>
+                <a className="form-control btn btn-outline-primary  shadow-none rounded-pill">ALREADY HAVE AN ACCOUNT?</a>
+
             </div>
         </>
     )
 
+
+    function nameValid() {
+        let output = true
+        if(firstName.length < 4 && lastName.length < 4 && firstName !== "" && lastName !== "" ) {
+            setFirstNameError("First and last name should be at least a length of 4")
+            setLastNameError("")
+            output = false
+        }
+        else if (firstName.length < 4 && firstName !== "")
+        {
+            setFirstNameError("First name should be at least a length of 4")
+            setLastNameError("")
+            output = false
+        }
+        else if (lastName.length < 4 && lastName !== "")
+        {
+            setLastNameError("Last name should be at least a length of 4")
+            setFirstNameError("")
+            output = false
+        }
+        else {
+            setFirstNameError("")
+            setLastNameError("")
+        }
+
+        return output
+    }
+
+    function userValid() {
+        let output = true
+        if(username.length < 4 && username !== "") {
+            setUserError("Username must be at least a length of 4 with only have characters and numbers")
+            output = false
+        }
+        else {
+            setUserError("")
+        }
+        return output
+    }
+
+
+    function pass1Valid() {
+        let output = true
+        if(password.length < 4 && password !== "") {
+            setPasswordError("Password must at least be a length of 8")
+            output = false
+        }
+        else {
+            setPasswordError("")
+        }
+        return output
+    }
+
+    function pass2Valid() {
+        let output = true
+        if(password !== password2 && password2 !== "") {
+            setPassword2Error("Passwords do not match!")
+            output = false
+        }
+        else {
+            setPassword2Error("")
+        }
+        return output
+    }
+
+    function phoneValid(){
+        let output = true
+        if (phone.match(/^[+][1][(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}$/g) == null){
+            setPhoneError("Please provide a valid phone number in format +1(###)-###-####")
+            output = false
+        }
+        else
+        {
+            setPhoneError("")
+        }
+        return output
+    }
+
+    function emailValid(){
+        let output = true
+        if (email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g) == null){
+            setEmailError("Please provide a valid email address")
+            output = false
+        }
+        else
+        {
+            setEmailError("")
+        }
+        return output
+    }
 }
 
 

@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from "./components/Login/Login";
 import {useEffect} from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import * as PropTypes from "prop-types";
+import Signup from "./components/Signup/Signup";
 
 
 
@@ -14,7 +17,14 @@ function App() {
 
   return (
 
-      <Login/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Login />} />
+          <Route path="/signup" element={<Signup/>} />
+          <Route path="/login/*" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+
 
 
     // <div className="App">

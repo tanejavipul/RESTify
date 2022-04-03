@@ -1,4 +1,4 @@
-import IconInput from "../../CP/LoginInput/IconInput";
+import IconInput from "../../CP/IconInput/IconInput";
 import {useEffect, useState} from "react";
 
 import "../login.css"

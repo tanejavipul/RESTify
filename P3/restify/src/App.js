@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Login from "./components/login/Login";
+import Login from "./components/Login/Login";
 import {useEffect} from "react";
 
 

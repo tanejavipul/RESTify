@@ -3,7 +3,6 @@ import {useEffect} from "react";
 import ProfileForm from "./ProfileForm/ProfileForm";
 import "./profile.css"
 import ProfilePassword from "./ProfilePassword/ProfilePassword";
-import ProfileIMG from "./ProfileIMG/ProfileIMG";
 
 
 const Profile = () => {
@@ -22,6 +21,7 @@ const Profile = () => {
                         <div className="row row-content-adjust">
                             <ProfileForm/>
                             <ProfilePassword/>
+
                         </div>
                     </div>
                 </div>

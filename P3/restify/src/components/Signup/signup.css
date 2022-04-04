@@ -1,7 +1,7 @@
 @import url('../Login/login.css');
 
 /*OVERRIDE LOGIN CSS*/
-#intro {
+#signup {
     background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
     url('../assets/Signup/La-Societe-Patio-Pic.jpeg');
     background-size: cover;
@@ -9,8 +9,7 @@
     height: 100vh;
 }
 
-
-.align-b {
+.signup-align-b {
     margin-bottom: 4em;
 }
 
@@ -23,11 +22,25 @@
     max-height: 380px;
 }
 
+/*TODO CHANGE FOR CARASOUL*/
 img {
     max-height: 380px;
 }
+.signup-img {
+    max-height: 380px;
+}
 
-.login-container {
+
+.signup-container {
+    padding-top: 1em;
+    padding-bottom: 2em;
+
+    /*width: 25rem;*/
+    background-color: white;
+    padding-left: 4em;
+    padding-right: 4em;
+    border-radius: 40px;
+    box-shadow: 5px 5px 10px var(--blue-main);
     margin-left: 6em;
 }
 
@@ -35,6 +48,11 @@ img {
     background-color: #231F20;
 }
 
+/*TODO CHANGE FOR CARASOUL*/
 h5 {
+    color: white;
+}
+
+.signin-h5 {
     color: white;
 }

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import LogoName from "../CP/LogoName/LogoName";
 import SignupCarousel from "./SignupCarousel/SignupCarousel";
 import SignupForm from "./SignupForm/SigninForm";
-import "./signup.css"
+import "./signup.css" //TODO causing issues in login
 
 const Signup = () => {
 
@@ -13,11 +13,11 @@ const Signup = () => {
 
     return (
         <>
-            <div id="intro">
+            <div id="signup">
                 <div className="mask d-flex align-items-center h-100 tone-down-bg">
                     <div className="container">
                         <div className="row">
-                            <LogoName/>
+                            <LogoName logoClassName={"signup-align-b"}/>
                             <SignupCarousel/>
                             <SignupForm/>
                         </div>

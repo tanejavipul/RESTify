@@ -24,19 +24,23 @@ const LoginForm = () => {
 
     // setError("INVALID USERNAME OR PASSWORD!")
     // TODO ADD API CALL
+    function loginAPI() {
+        console.log("clicked")
+    }
 
 
     return <>
             <div className="col-lg-4  login-container">
                 <h3>Login</h3>
                 <form>
-                    <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username} update={update}/>
-                    <IconInput icon={passwordSVG} place_holder={"Password"} input_name={"password"} value1={password} update={update} type={"password"}/>
+                    <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username} update={update} />
+                    <IconInput icon={passwordSVG} place_holder={"Password"} input_name={"password"} value1={password} update={update} type={"password"} />
+
+                    <input type="submit" value="LOG IN" onClick={loginAPI} className="form-control btn btn-outline-primary shadow-none rounded-pill"/>
+                    <div className="text-danger d-flex justify-content-center">{error}</div>
                 </form>
-                <a className={"form-control btn btn-outline-primary  shadow-none rounded-pill"}>Log In</a>
-                <div className="text-danger d-flex justify-content-center">{error}</div>
                 <hr/>
-                <h5 className={"text-center"}>New Here?</h5>
+                <h5 className={"login-h3-h5 text-center"}>New Here?</h5>
                 <Link to={'/signup'} className={"form-control btn btn-outline-primary  shadow-none rounded-pill"}>CREATE AN ACCOUNT</Link>
             </div>
         </>

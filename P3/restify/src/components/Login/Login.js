@@ -14,12 +14,12 @@ const Login = () => {
 
     return (
         <>
-            <div id="intro">
+            <div id="login">
                 <div className="mask d-flex align-items-center h-100 tone-down-bg">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-7">
-                                <LogoName/>
+                                <LogoName logoClassName={"login-align-b"}/>
                             </div>
                                 <LoginForm/>
                         </div>

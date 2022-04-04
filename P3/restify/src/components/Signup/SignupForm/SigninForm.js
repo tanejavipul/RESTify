@@ -66,7 +66,7 @@ const SignupForm = () => {
 
 
     return (<>
-            <div className="col  login-container">
+            <div className="col signup-container">
                 <h3>Sign Up</h3>
                 <form>
                     <IconInput icon={nameBadgeSVG} place_holder={"First Name"} input_name={"first-name"} two={true}

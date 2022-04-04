@@ -4,7 +4,6 @@ import {useState} from "react";
 const IconInput = ({icon, place_holder, input_name, two = false, place_holder2 = "", input_name2 = "",
                        req = true, value1, value2, update, error ,error2, type='text'}) => {
 
-    console.log(value1)
     return <>
         <div className="text-danger px-5">{(error) ? error : error2}</div>
         <div className="input-group mb-3">

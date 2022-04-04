@@ -7,6 +7,7 @@ import {useEffect} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import * as PropTypes from "prop-types";
 import Signup from "./components/Signup/Signup";
+import Profile from "./components/Profile/Profile";
 
 
 
@@ -19,9 +20,10 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" exact element={<Login />} />
-          <Route path="/signup" element={<Signup/>} />
-          <Route path="/login/" element={<Login />} />
+          <Route path="/" exact   element={<Login />} />
+          <Route path="/signup"   element={<Signup/>} />
+          <Route path="/login/"   element={<Login />} />
+          <Route path="/profile/" element={<Profile />} />
         </Routes>
       </BrowserRouter>
 

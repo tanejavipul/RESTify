@@ -12,7 +12,7 @@ const ProfileDropDown = () => {
                         data-bs-toggle="dropdown" aria-expanded="false"><img src={profileSVG} alt=""/>Profile
                 </button>
 
-                <ul className="dropdown-menu navbar-background dropdown-padding" aria-labelledby="dropdownprofilebutton">
+                <ul className="dropdown-menu navbar-background dropdown-padding">
                     <li>
                         <Link to="/profile" className="dropdown-item nav-dropdown-item">
                         <img src={avatar} className="profile-avatar" alt=""/>FULL NAME</Link>

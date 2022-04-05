@@ -1,5 +1,4 @@
 import React from 'react';
-import {useState} from "react";
 
 const IconInput = ({icon, place_holder, input_name, two = false, place_holder2 = "", input_name2 = "",
                        req = true, value1, value2, update, error ,error2, type='text'}) => {

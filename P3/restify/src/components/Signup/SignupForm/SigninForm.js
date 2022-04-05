@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
-import LogoName from "../../CP/LogoName/LogoName";
-import {Carousel} from "react-bootstrap";
+
 import IconInput from "../../CP/IconInput/IconInput";
 
 import nameBadgeSVG from "../../assets/Icons/name_badge.svg"

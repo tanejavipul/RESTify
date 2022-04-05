@@ -25,9 +25,37 @@ const LoginForm = () => {
     // setError("INVALID USERNAME OR PASSWORD!")
     // TODO ADD API CALL
     function loginAPI() {
-        console.log("clicked")
+        fetch("/accounts/login/", {
+
+            // Adding method type
+            method: "POST",
+
+            // Adding body or contents to send
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then( (result) => {
+            console.log(result)
+        })
+
     }
 
+
+    //
+    // axios.post("/accounts/login/", {
+    //
+    //     // Adding body or contents to send
+    //     body: JSON.stringify({
+    //         username: username,
+    //         password: password,
+    //     }),
+    // }).then( (result) => {
+    //     console.log(result)
+    // })
 
     return <>
             <div className="col-lg-4  login-container">
@@ -36,7 +64,7 @@ const LoginForm = () => {
                     <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username} update={update} />
                     <IconInput icon={passwordSVG} place_holder={"Password"} input_name={"password"} value1={password} update={update} type={"password"} />
 
-                    <input type="submit" value="LOG IN" onClick={loginAPI} className="form-control btn btn-outline-primary shadow-none rounded-pill"/>
+                    <button onClick={loginAPI} className="form-control btn btn-outline-primary shadow-none rounded-pill">LOG IN</button>
                     <div className="text-danger d-flex justify-content-center">{error}</div>
                 </form>
                 <hr/>

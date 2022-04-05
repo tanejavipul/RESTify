@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     # May need to uncomment this later
-    # 'corsheaders',
+    'corsheaders',
     'accounts',
     'restaurants',
     'blogs',
@@ -49,9 +49,9 @@ INSTALLED_APPS = [
 ]
 
 # May need to uncomment this later
-# CORS_ORIGIN_WHITELIST = [
-#      'http://localhost:3000'
-# ]
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # May need to uncomment this after
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'RESTify.urls'

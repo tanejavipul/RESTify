@@ -4,13 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from "./components/Login/Login";
 import {useEffect} from "react";
-import {BrowserRouter, Route, Routes, Router, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 // import {Route, Routes} from "react-router";
 import * as PropTypes from "prop-types";
 import Signup from "./components/Signup/Signup";
 // import Profile from "./components/Profile/Profile";
 // import Navbar from "./components/Navbar/Navbar";
 import BlogPostPage from './components/BlogPost/BlogPostPage';
+
 
 
 function App() {

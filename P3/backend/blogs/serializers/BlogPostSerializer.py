@@ -13,14 +13,23 @@ class BlogPostSerializer(ModelSerializer):
     notification = ''
     rest_name = ''
     restaurant_name = serializers.SerializerMethodField('get_restaurant_name')
+    restaurant_id = serializers.SerializerMethodField('get_restaurant_id')
+    num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
 
     class Meta:
         model = BlogPost
-        fields = ['restaurant_name', 'title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3',
-                  'last_modified']
+        fields = ['restaurant_name', 'restaurant_id', 'title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3', 
+                  'num_likes', 'last_modified']
 
     def get_restaurant_name(self, obj):
+        if self.rest_name == '':
+            print(self.context)
+            rest_id = BlogPost.objects.get(id=self.context['blogpost_id']).restaurant_id
+            self.rest_name = Restaurant.objects.get(id=rest_id).name
         return self.rest_name
+
+    def get_restaurant_id(self, obj):
+        return BlogPost.objects.get(id=self.context['blogpost_id']).restaurant_id
 
     def create(self, validated_data):
         user = self.context['request'].user

@@ -3,14 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./blogPost.css";
 
+import axios from "axios";
+import { useParams } from 'react-router-dom';
+
+
 function BlogPost(props) {
 
-    const [liked, setLiked] = useState(false);
-
-    useEffect(() => {
-        document.title = "RESTify"
-    }, []);
-
+    const { id } = useParams();
+    const [numLikes, setNumLikes] = useState(0);
 
     return (
         <>
@@ -18,18 +18,19 @@ function BlogPost(props) {
             <div class="col-lg-8 m-15px-tb">
                 <article class="article">
                     <div class="article-img">
-                        <img src="Images/restaurant-blog-page.jpg" title="Restaurant Image" alt="Image of restaurant" />
+                        <img src={props.primary_photo} title="Restaurant Image" alt="Primary Photo" />
                     </div>
                     <div class="article-title">
-                        <h2>Blog Post Title</h2>
+                        <h2>{props.title}</h2>
                         <ul class="post-meta list-inline d-flex justify-content-between">
                             <li class="list-inline-item">
                                 <i class="fa fa-cutlery fa-3x" aria-hidden="true"></i>
-                                <h5>Pizza Pizza</h5>
+                                <h5>{props.restaurant_name}</h5>
                             </li>
                             <li class="list-inline-item">
                                 <i class="fa fa-calendar-o fa-3x"></i>
-                                <h5>29 Feb 2022</h5>
+                                {/* convert timestamp */}
+                                <h5>{props.last_modified}</h5>
                             </li>
                             <li class="list-inline-item">
                                 <div class="d-flex">
@@ -40,7 +41,7 @@ function BlogPost(props) {
                                     </button>
                                     <div>
                                         <h5>Like this Blog Post!</h5><br />
-                                        <div class="h7">400 Likes</div>
+                                        <div class="h7">{props.num_likes} Likes</div>
                                     </div>
                                 </div>
                                 
@@ -48,12 +49,12 @@ function BlogPost(props) {
                         </ul>
                     </div>
                     <div class="article-content">
-                        <p>{pulledData}</p>
+                        <p>{props.description}</p>
                         <h4>Some images from the Blog Post</h4>
                         <div class="d-flex flex-row">
-                            <img class="blog-img" src="Images/restaurant-blog-page.jpg" title="Restaurant Image" alt="Image of restaurant" />
-                            <img class="blog-img" src="Images/ithaa-1.jpeg" title="Restaurant Image" alt="Image of restaurant" />
-                            <img class="blog-img" src="Images/oliver-bonacini-hospitality-lena-restaurant-event-space-semi-private-dining-bar-overview-1024x682.jpeg" title="Restaurant Image" alt="Image of restaurant" />
+                            <img class="blog-img" src={props.photo_1} title="BlogPost Image 1" alt="BlogPost Image 1" />
+                            <img class="blog-img" src={props.photo_2} title="BlogPost Image 2" alt="BlogPost Image 2" />
+                            <img class="blog-img" src={props.photo_3} title="BlogPost Image 3" alt="BlogPost Image 3" />
                         </div>
                     </div>
                 </article>

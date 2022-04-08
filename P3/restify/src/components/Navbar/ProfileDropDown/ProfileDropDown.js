@@ -7,6 +7,7 @@ const ProfileDropDown = () => {
 
     return (
         <>
+
             <div className="dropdown navbar-dropdown">
                 <button className="btn  navbar-button-styling dropdown-toggle " type="button" id="dropdownprofilebutton"
                         data-bs-toggle="dropdown" aria-expanded="false"><img src={profileSVG} alt=""/>Profile

@@ -49,21 +49,30 @@ const ProfileForm = () => {
 
     const editProfileAPI = event => {
 
+        event.preventDefault()
         axios.post(`/accounts/profile/edit/`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access")}`
             },
+            body: JSON.stringify({
+                first_name:firstName,
+                last_name:lastName,
+                email:email,
+                phone:phone
+            })
         })
             .then((resp) => {
                 // could do something here if failed return like oh please sign in otherwise it just doesn't change
-                if (resp.status === 200) {
+                if (resp.status === 400) {
                     setFirstName(resp.data.first_name)
                     setLastName(resp.data.last_name)
                     setPhone(resp.data.phone)
                     setEmail(resp.data.email)
-                } else {
-
                 }
+                else {
+                    console.log(resp)
+                }
+
             });
     }
 
@@ -75,7 +84,7 @@ const ProfileForm = () => {
         <>
             <h2 className="profile-h2-h4">Edit Profile</h2>
             <ProfileIMG/>
-            <form className="row mx-0">
+            <form className="row mx-0" onSubmit={editProfileAPI}>
                 <ProfileInput name={"firstname"} placeHolder={"First Name"} label={"FIRST NAME"} value={firstName} update={update}/>
                 <ProfileInput name={"lastname"} placeHolder={"Last Name"} label={"LAST NAME"} value={lastName} update={update}/>
                 <ProfileInput name={"email"} placeHolder={"Email"} label={"EMAIL"} value={email} update={update}/>

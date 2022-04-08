@@ -33,7 +33,7 @@ function LatestBlogs(props) {
                         </div>
                         <div class="lpa-right">
                             <a href="#">
-                                <img src="idk what this is" title="" alt="" />
+                                <img src="Images/restaurant-blog-page.jpg" title="" alt="" />
                             </a>
                         </div>
                     </div>

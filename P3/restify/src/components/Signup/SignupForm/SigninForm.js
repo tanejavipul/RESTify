@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import IconInput from "../../CP/IconInput/IconInput";
+import { Navigate } from "react-router-dom";
 
 import nameBadgeSVG from "../../assets/Icons/name_badge.svg"
 import usernameSVG from "../../assets/Icons/email.svg"
@@ -11,8 +12,6 @@ import confirmPasswordSVG from "../../assets/Icons/enhanced_lock.svg"
 import {Link} from "react-router-dom";
 
 const SignupForm = () => {
-    // TODO UPDATE SIGNUP_API
-    let SIGNUP_API = ""
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [username, setUsername] = useState("")
@@ -29,6 +28,8 @@ const SignupForm = () => {
     const [passwordError, setPasswordError] = useState("")
     const [password2Error, setPassword2Error] = useState("")
 
+    const [success, setSuccess] = useState("")
+    const [submitError, setSubmitError] = useState("")
 
     useEffect(() => {
         nameValid()
@@ -60,17 +61,74 @@ const SignupForm = () => {
         if (event.target.name === 'phone')      { setPhone(event.target.value) }
         if (event.target.name === 'password1')  { setPassword(event.target.value) }
         if (event.target.name === 'password2')  { setPassword2(event.target.value) }
+        setSubmitError("")
+        setSuccess("")
+    }
+
+    const signupAPI = event => {
+        event.preventDefault();
+        const check = nameValid() && userValid() && phoneValid() && emailValid() && pass1Valid() && pass2Valid()
+        if (check && basicLengthValidation()) {
+            fetch("/accounts/signup/", {
+
+                // Adding method type
+                method: "POST",
+
+                // Adding body or contents to send
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                    password2: password2,
+                    phone: phone,
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => {
+                    return Promise.all([response.json(), response])
+                })
+                .then(([data, response]) => {
+                    if (response.status === 201) {
+                        setSuccess("Account Created Successfully")
+                        setFirstName("")
+                        setLastName("")
+                        setUsername("")
+                        setEmail("")
+                        setPhone("")
+                        setPassword("")
+                        setPassword2("")
+                    }
+                    else {
+                        setUserError(data.username)
+                        setEmailError(data.email)
+                        setPhoneError(data.phone)
+                        setPasswordError(data.password)
+                    }
+
+                })
+        }
+        else{
+            setSubmitError("Please Fill Out all Input Forms (Phone is optional)")
+        }
+
+
     }
 
 
 
     return (<>
+
             <div className="col signup-container">
                 <h3>Sign Up</h3>
-                <form>
+
+                <form onSubmit={signupAPI}>
                     <IconInput icon={nameBadgeSVG} place_holder={"First Name"} input_name={"first-name"} two={true}
                                place_holder2={"Last Name"} input_name2={"last-name"} value1={firstName} value2={lastName}
-                               error={firstnameError} error2={lastnameError} c/>
+                               error={firstnameError} error2={lastnameError} update={update}/>
                     <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username}
                                update={update} error={userError}/>
                     <IconInput icon={emailSVG} place_holder={"Email"} input_name={"email"} value1={email} update={update}
@@ -81,25 +139,15 @@ const SignupForm = () => {
                                update={update} error={passwordError} type={"password"}/>
                     <IconInput icon={confirmPasswordSVG} place_holder={"Confirm Password"} input_name={"password2"}
                                value1={password2} update={update} error={password2Error} type={"password"}/>
-                    <input type="submit" value="SIGN UP" onClick={signupAPI} className="form-control btn btn-outline-primary  shadow-none rounded-pill"/>
+                    <div className="text-danger px-5">{submitError}</div>
+                    {success ? <Navigate to="/login/"  replace={true}/> : ""}
+                    <input type="submit" value="SIGN UP" className="form-control btn btn-outline-primary  shadow-none rounded-pill"/>
                 </form>
                 <hr/>
-                {/*<a  className="form-control btn btn-outline-primary  shadow-none rounded-pill"></a>*/}
                 <Link to={"/"} className={"form-control btn btn-outline-primary  shadow-none rounded-pill"}>ALREADY HAVE AN ACCOUNT?</Link>
             </div>
         </>
     )
-
-    // TODO FIX
-    function signupAPI() {
-        console.log("pressed")
-        fetch(SIGNUP_API)
-            .then(response => response.json())
-            .then(json => {
-
-            })
-    }
-
 
     function nameValid() {
         let output = true
@@ -143,7 +191,7 @@ const SignupForm = () => {
 
     function pass1Valid() {
         let output = true
-        if(password.length < 4 && password !== "") {
+        if(password.length < 8 && password !== "") {
             setPasswordError("Password must at least be a length of 8")
             output = false
         }
@@ -191,6 +239,11 @@ const SignupForm = () => {
         }
         return output
     }
+
+    function basicLengthValidation() {
+        return username !== "" && password !== "" && firstName !== "" && lastName !== "" && email !== "";
+    }
+
 }
 
 

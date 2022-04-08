@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import ProfileInput from "../ProfileInput/ProfileInput";
 import ProfileIMG from "../ProfileIMG/ProfileIMG";
 import axios from "axios";
@@ -48,26 +48,31 @@ const ProfileForm = () => {
 
 
     const editProfileAPI = event => {
+        console.log(firstName)
 
         event.preventDefault()
-        axios.post(`/accounts/profile/edit/`, {
+        axios.put(`/accounts/profile/edit/`,
+            {
+
+                "first_name": firstName,
+                "last_name": lastName,
+                "email": email,
+                "phone": phone
+            },
+            {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access")}`
             },
-            body: JSON.stringify({
-                first_name:firstName,
-                last_name:lastName,
-                email:email,
-                phone:phone
             })
-        })
             .then((resp) => {
+                console.log(resp)
                 // could do something here if failed return like oh please sign in otherwise it just doesn't change
-                if (resp.status === 400) {
+                if (resp.status === 200) {
                     setFirstName(resp.data.first_name)
                     setLastName(resp.data.last_name)
                     setPhone(resp.data.phone)
                     setEmail(resp.data.email)
+
                 }
                 else {
                     console.log(resp)
@@ -89,9 +94,12 @@ const ProfileForm = () => {
                 <ProfileInput name={"lastname"} placeHolder={"Last Name"} label={"LAST NAME"} value={lastName} update={update}/>
                 <ProfileInput name={"email"} placeHolder={"Email"} label={"EMAIL"} value={email} update={update}/>
                 <ProfileInput name={"phone"} placeHolder={"phone"} label={"PHONE"} value={phone} update={update}/>
-                <div className="col-9"> </div>
+                <div className="col-9">
+
+                </div>
                 <div className="align-items-end col-3">
                     <input value="SAVE CHANGES" type="submit" className="save-btn btn shadow-none save-btn"/>
+
                 </div>
             </form>
         </>

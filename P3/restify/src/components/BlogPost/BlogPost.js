@@ -5,12 +5,48 @@ import "./blogPost.css";
 
 import axios from "axios";
 import { useParams } from 'react-router-dom';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as faHeartFill, faCutlery } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faCalendar } from '@fortawesome/free-regular-svg-icons';
 
 function BlogPost(props) {
 
     const { id } = useParams();
     const [numLikes, setNumLikes] = useState(0);
+    const [liked, setLiked] = useState(false);
+
+    useEffect(() => {
+        setLiked(props.liked);
+        setNumLikes(props.num_likes);
+    }, [props]);
+    
+    function updateLike(like) {
+        console.log('clicked');
+        // follow bool to check if we are liking or unliking
+        if (like) {
+            axios.post(`/blogs/${id}/like/add/`, {}, {  
+                headers: {
+                    Authorization : `Bearer ${localStorage.getItem("accessToken")}`
+                },
+            })
+            .then((resp) => {
+                // could do something here if failed return like oh please sign in otherwise it just doesn't change
+                setLiked(true);
+                setNumLikes(numLikes+1);
+            });
+        } else {
+            // i think axios handles headers diff for delete
+            const headers = {
+                'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+            }
+            axios.delete(`/blogs/${id}/like/`, {headers} )
+            .then((resp) => {
+                // could do something here if failed return like oh please sign in otherwise it just doesn't change
+                setLiked(false);
+                setNumLikes(numLikes-1);
+            });
+        }
+    }
 
     return (
         <>
@@ -24,24 +60,29 @@ function BlogPost(props) {
                         <h2>{props.title}</h2>
                         <ul class="post-meta list-inline d-flex justify-content-between">
                             <li class="list-inline-item">
-                                <i class="fa fa-cutlery fa-3x" aria-hidden="true"></i>
+                                <FontAwesomeIcon icon={faCutlery} size="3x" />
+                                {/* <i class="fa fa-cutlery fa-3x" aria-hidden="true"></i> */}
                                 <h5>{props.restaurant_name}</h5>
                             </li>
                             <li class="list-inline-item">
-                                <i class="fa fa-calendar-o fa-3x"></i>
+                                <FontAwesomeIcon icon={faCalendar} size="3x" />
+                                {/* <i class="fa fa-calendar-o fa-3x"></i> */}
                                 {/* convert timestamp */}
                                 <h5>{props.last_modified}</h5>
                             </li>
                             <li class="list-inline-item">
                                 <div class="d-flex">
                                     <button type="button" class="like-btn">
-                                        <i class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
-                                        {/* <!-- ON CLICK CHANGE TO THIS and red will be adjusted with javascript --> */}
+                                        {/* <i class="fa fa-heart-o fa-3x" aria-hidden="true"></i> */}
+                                        {liked ?
+                                            <FontAwesomeIcon icon={faHeartFill} size="3x" color="red" onClick={() => updateLike(false)} /> :
+                                            <FontAwesomeIcon icon={faHeart} size="3x" onClick={() => updateLike(true)} />
+                                        }
                                         {/* <!-- <i class="fa fa-heart fa-3x" aria-hidden="true"></i> --> */}
                                     </button>
                                     <div>
                                         <h5>Like this Blog Post!</h5><br />
-                                        <div class="h7">{props.num_likes} Likes</div>
+                                        <div class="h7">{numLikes} Likes</div>
                                     </div>
                                 </div>
                                 

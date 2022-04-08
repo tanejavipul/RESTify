@@ -9,14 +9,13 @@ import { useParams } from 'react-router-dom';
 
 function FollowRestaurant(props) {
 
-    const { id } = useParams();
-
-    const [followed, setFollowed] = useState(false);
+    const [following, setFollowing] = useState(false);
     const [restaurantBio, setBio] = useState("");
     const [logo, setLogo] = useState("");
 
     useEffect(() => {
         getRestaurantInfo();
+        setFollowing(props.is_following);
     }, [props]);
 
     function getRestaurantInfo() {
@@ -31,6 +30,32 @@ function FollowRestaurant(props) {
         });
     }
 
+    function updateFollow(follow) {
+        console.log('clicked');
+        // follow bool to check if we are following or unfollowing
+        if (follow) {
+            axios.post(`/restaurants/follow/${props.restaurant_id}/`, {}, {  
+                headers: {
+                    Authorization : `Bearer ${localStorage.getItem("accessToken")}`
+                },
+            })
+            .then((resp) => {
+                // could do something here if failed return like oh please sign in otherwise it just doesn't change
+                setFollowing(true);
+            });
+        } else {
+            // i think axios handles headers diff for delete
+            const headers = {
+                'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+            }
+            axios.delete(`/restaurants/follow/${props.restaurant_id}/`, {headers} )
+            .then((resp) => {
+                // could do something here if failed return like oh please sign in otherwise it just doesn't change
+                setFollowing(false);
+            });
+        }
+    }
+
 
     return (
         // Inspired By: https://www.bootdey.com/snippets/view/blog-detail-page
@@ -42,7 +67,7 @@ function FollowRestaurant(props) {
             <div class="widget-body">
                 <div class="media align-items-center d-flex flex-row">
                     {/* Not sure if link is right for now just temp */}
-                    <a href={`restaurantPages/${props.restaurant_id}/view/`} class="text-decoration-none">
+                    <a href={`restaurantPages/${props.restaurant_id}/`} class="text-decoration-none">
                         <div class="avatar">
                             <img src={logo} title="" alt="" />
                         </div>
@@ -53,7 +78,10 @@ function FollowRestaurant(props) {
                 </div>
                 <p class="text-center m-3">{restaurantBio}</p>
                 <div class="d-grid mt-2">
-                    <button class="d-flex justify-content-center btn btn-primary fa" type="button">Follow {props.restaurant_name}</button>
+                    {following ?
+                        <button class="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(false)} >Unfollow {props.restaurant_name}</button> :
+                        <button class="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(true)} >Follow {props.restaurant_name}</button>
+                    }
                 </div>
             </div>
         </div>

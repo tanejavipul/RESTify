@@ -11,6 +11,7 @@ import Signup from "./components/Signup/Signup";
 // import Profile from "./components/Profile/Profile";
 // import Navbar from "./components/Navbar/Navbar";
 import BlogPostPage from './components/BlogPost/BlogPostPage';
+import Home from './components/BlogPost/Home';
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" exact   element={<Login />} />
         <Route path="/signup/"   element={<Signup/>} />
         <Route path="/login/"   element={<Login />} />
+        <Route path="/home/"    element={<Home />} />
         {/* <Route path="/profile/" element={<Profile />} /> */}
         {/* <Route path="/nav/"     element={<Navbar />} /> */}
         <Route 

@@ -78,7 +78,7 @@ class EditBlogPostSerializer(ModelSerializer):
 
 
 class BlogPostHomeSerializer(ModelSerializer):
-
+    
     class Meta:
         model = BlogPost
-        fields = ['title', 'description', 'primary_photo', 'last_modified']
+        fields = ['id', 'title', 'description', 'primary_photo', 'last_modified', 'bloglikes'] # not sure if i should use bloglikes or something else but seems to work

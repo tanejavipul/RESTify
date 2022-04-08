@@ -10,7 +10,6 @@ import * as PropTypes from "prop-types";
 import Signup from "./components/Signup/Signup";
 import Profile from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
-import {APIContext} from "./Contexts/APIContext";
 import BlogPostPage from './components/BlogPost/BlogPostPage';
 import Home from './components/BlogPost/Home';
 
@@ -18,13 +17,11 @@ import Home from './components/BlogPost/Home';
 
 function App() {
 
-  const [access, setAccess] = useState()
   useEffect(() => {
     document.title = "RESTify"
   }, []);
 
   return (
-      <APIContext.Provider value={{access, setAccess}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" exact   element={<Login />} />
@@ -38,7 +35,6 @@ function App() {
           /> 
         </Routes>
       </BrowserRouter>
-      </APIContext.Provider>
 
 
 

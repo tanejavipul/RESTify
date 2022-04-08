@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import IconInput from "../../CP/IconInput/IconInput";
 import { Navigate } from "react-router-dom";
@@ -123,7 +123,7 @@ const SignupForm = () => {
     return (<>
 
             <div className="col signup-container">
-                <h3>Sign Up</h3>
+                <h3 className={"login-h3-h5"}>Sign Up</h3>
 
                 <form onSubmit={signupAPI}>
                     <IconInput icon={nameBadgeSVG} place_holder={"First Name"} input_name={"first-name"} two={true}
@@ -140,7 +140,7 @@ const SignupForm = () => {
                     <IconInput icon={confirmPasswordSVG} place_holder={"Confirm Password"} input_name={"password2"}
                                value1={password2} update={update} error={password2Error} type={"password"}/>
                     <div className="text-danger px-5">{submitError}</div>
-                    {success ? <Navigate to="/login/"  replace={true}/> : ""}
+                    {success ? <Navigate to="/login-success/"  replace={true}/> : ""}
                     <input type="submit" value="SIGN UP" className="form-control btn btn-outline-primary  shadow-none rounded-pill"/>
                 </form>
                 <hr/>

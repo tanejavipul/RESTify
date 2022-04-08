@@ -1,7 +1,4 @@
-import React, {useEffect, useState} from "react";
-
-
-const ProfileInput = ({name, placeHolder, label, value}) => {
+const ProfileInput = ({name, placeHolder, label, value, update}) => {
 
 
     return <>
@@ -9,8 +6,7 @@ const ProfileInput = ({name, placeHolder, label, value}) => {
             <div className="input-group mb-3">
                 <label htmlFor={name} className="col-4 profile-label">{label + ":"}</label>
                 <input id={name} type="text" className="form-control col-8 input-text-styling shadow-none"
-                       placeholder={placeHolder}
-                       name={name} required value={value}/>
+                       placeholder={placeHolder} name={name} required value={value} onChange={event => update(event)}/>
             </div>
         </div>
     </>

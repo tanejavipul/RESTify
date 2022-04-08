@@ -1,18 +1,14 @@
 import IconInput from "../CP/IconInput/IconInput";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import LoginForm from "./LoginForm/LoginForm";
 import LogoName from "../CP/LogoName/LogoName";
-import loadLocalAccess from "../CP/Access/AccessValidation";
-import {APIContext} from "../../Contexts/APIContext";
 
 
 
-const Login = (signup=true) => {
-    const { access, setAccess } = useContext(APIContext)
+const Login = (signup=false) => {
 
     useEffect(() => {
         document.title = "RESTify"
-        loadLocalAccess(access, setAccess)
     }, []);
 
 
@@ -26,7 +22,7 @@ const Login = (signup=true) => {
                             <div className="col-lg-7">
                                 <LogoName logoClassName={"login-align-b"}/>
                             </div>
-                                <LoginForm signup={signup}/>
+                                <LoginForm signup={signup.signup}/>
                         </div>
                     </div>
                 </div>

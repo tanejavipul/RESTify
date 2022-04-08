@@ -4,21 +4,22 @@ import React, {useContext, useEffect, useState} from "react";
 import "../login.css"
 import usernameSVG from "../../assets/Icons/email.svg"
 import passwordSVG from "../../assets/Icons/lock.svg"
-import {Link} from "react-router-dom";
-import {APIContext} from "../../../Contexts/APIContext";
+import {Link, Navigate} from "react-router-dom";
 
-const LoginForm = (signup=false) => {
+const LoginForm = (signup= false) => {
 
     const error_message = "Username or Password incorrect!"
-    const { access, setAccess } = useContext(APIContext)
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [signupMessage, setSignupMessage] = useState("");
+    const [navi, setNavi] = useState("");
+
 
     useEffect(() => {
         document.title = "RESTify"
-        if(signup){
+        console.log(signup.signup)
+        if(signup.signup === true){
             setSignupMessage("Account Created Successfully")
         }
     }, []);
@@ -56,9 +57,8 @@ const LoginForm = (signup=false) => {
                         setPassword("")
                     }
                     if (response.status === 200){
-                        setAccess(data.access)
                         localStorage.setItem('access', data.access)
-                        console.log("sucesss")
+                        setNavi("true")
                     }
 
             })
@@ -76,8 +76,10 @@ const LoginForm = (signup=false) => {
     // })
 
     return <>
+        {/*// TODO CHANGE THE LINK TO HOME*/}
+        {navi? <Navigate to="/profile/"/> : ""}
             <div className="col-lg-4  login-container">
-                <h3>Login</h3>
+                <h3 className={"login-h3-h5"}>Login</h3>
                 <form onSubmit={loginAPI}>
                     { signup? <div className="fw-bold text-success text-center">{signupMessage}</div> : ""}
                     <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username} update={update} />

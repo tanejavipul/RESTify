@@ -18,12 +18,11 @@ function BlogPostPage(props) {
                                                     "num_likes": 0, "last_modified": "" });
 
     useEffect(() => {
-        localStorage.setItem('accessToken', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ5NDUyNDIyLCJpYXQiOjE2NDkzNjYwMjIsImp0aSI6IjM1NmYxOGQ0YTZlZTRmMTc5MmE2YTQzY2IxNDBjZmRkIiwidXNlcl9pZCI6M30.vV9Hkq8px0O-YbvqLNMzwrFeJB9qPF5_l11JqsrwDqU');
         console.log(`ID: ${id}`);
         
         async function pullFollowing(restaurant_id) {
             const headers = {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
             }
             axios.get(`/restaurants/follow/${restaurant_id}/`, {headers})
             .then((response) => {
@@ -35,7 +34,7 @@ function BlogPostPage(props) {
 
         async function pullLiked() {
             const headers = {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
             }
             axios.get(`/blogs/${id}/like/`, {headers})
             .then((response) => {

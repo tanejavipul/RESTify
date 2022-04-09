@@ -13,7 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import BlogPostPage from './components/BlogPost/BlogPostPage';
 import Home from './components/BlogPost/Home';
 import RestaurantAdd from './components/Restaurant/RestaurantAdd';
-
+import CommentSection from './components/Restaurant/CommentSection';
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
           <Route path="/nav/"     element={<Navbar />} />
           <Route path="/blogs/:id"  element={<BlogPostPage />} />
           <Route path="/restaurant/add/" element={<RestaurantAdd />} />
+          <Route path="/:id/comments/" element={<CommentSection />} />
         </Routes>
       </BrowserRouter>
 

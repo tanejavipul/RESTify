@@ -1,4 +1,5 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 
 const ProfilePassword = () => {
@@ -7,28 +8,70 @@ const ProfilePassword = () => {
     const [newPassword, setNewPassword] = useState("")
     const [newPassword2, setNewPassword2] = useState("")
 
+
+    function update(event) {
+        if (event.target.name === 'old-pass') { setOldPassword(event.target.value) }
+        if (event.target.name === 'new-pass')  { setNewPassword(event.target.value) }
+        if (event.target.name === 'new-pass2')      { setNewPassword2(event.target.value) }
+    }
+
+
+    const updatePasswordAPI = event => {
+
+        event.preventDefault()
+        axios.put(`/accounts/profile/edit/`,
+            {
+                "old_password": oldPassword,
+                "new_password": newPassword,
+                "new_password2": newPassword2,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("access")}`
+                },
+            })
+            .then((resp) => {
+                console.log(resp)
+                // could do something here if failed return like oh please sign in otherwise it just doesn't change
+                if (resp.status === 200) {
+                    setOldPassword("")
+                    setNewPassword("")
+                    setNewPassword2("")
+                }
+                else {
+                    console.log(resp)
+                    // TODO ADD ERROR!!
+                }
+
+            });
+    }
+
     return (
         <>
             <h4 className="profile-h2-h4 profile-h4">Change Password </h4>
-            <form className="row mx-0">
+            <form className="row mx-0" onSubmit={updatePasswordAPI}>
                 <div className="input-group mb-3">
-                    <label htmlFor="old-pass" className="px-075em profile-label col-4 shadow-none">Old Password</label>
-                    <label htmlFor="new-pass" className="px-075em profile-label col-4 shadow-none">New Password</label>
-                    <label htmlFor="confirm-new-pass" className="px-075em profile-label col-4 shadow-none">Confirm New
-                        Password</label>
+                    <label htmlFor="old-pass" className="px-075em profile-label col-4 shadow-none">OLD PASSWORD</label>
+                    <label htmlFor="new-pass" className="px-075em profile-label col-4 shadow-none">NEW PASSWORD</label>
+                    <label htmlFor="new-pass2" className="px-075em profile-label col-4 shadow-none">CONFIRM NEW
+                        PASSWORD</label>
 
                 </div>
 
                 <div className="input-group mb-3">
-                    <input id="old-pass" type="text" className="form-control input-text-styling shadow-none"
-                           placeholder="Old Password"  name="old-pass" required/>
+                    <input id="old-pass" type="password" className="form-control input-text-styling shadow-none" required
+                           placeholder="Old Password"  value={oldPassword} name="old-pass"
+                           onChange={event => update(event)}/>
 
-                    <input id="new-pass" type="text" className="form-control  input-text-styling shadow-none"
-                           placeholder="New Password" name="new-pass" required/>
+                    <input id="new-pass" type="password" className="form-control  input-text-styling shadow-none" required
+                           placeholder="New Password" value={newPassword} name="new-pass"
+                           onChange={event => update(event)}/>
 
-                    <input id="confirm-new-pass" type="text" className="form-control  input-text-styling shadow-none"
-                           placeholder="Confirm New Password" name="confirm-new-pass" required/>
+                    <input id="new-pass2" type="password" className="form-control  input-text-styling shadow-none" required
+                           placeholder="Confirm New Password" value={newPassword2} name="new-pass2"
+                           onChange={event => update(event)}/>
                 </div>
+
                 <div className="col-9"> </div>
                 <div className="align-items-end col-3">
                     <input value="SAVE PASSWORD" type="submit" className="save-btn btn shadow-none"/>

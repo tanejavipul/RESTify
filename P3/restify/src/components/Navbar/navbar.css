@@ -70,6 +70,31 @@
     background-color: #0096C7;
 }
 
+.dropdown-toggle-background {
+    background-color: rgba(0,0,0,0.8);
+    border: rgba(0,0,0,0.8);
+}
+
+.dropdown-toggle-background:hover {
+    border: rgba(0,0,0,0.8);
+}
+.dropdown-toggle-background:active {
+    border: rgba(0,0,0,0.8);
+}
+
+.dropdown-toggle-background:focus {
+    border: rgba(0,0,0,0.8);
+}
+
+.select-profile:hover {
+    background-color: var(--blue-main);
+}
+
+.navbar-inline {
+    display: inline;
+}
+
+
 .navbar-dropdown {
     display: inline;
 }
@@ -133,4 +158,9 @@
 
 .notification-button:hover {
     background-color: #0096C7;
+}
+
+.profile-name-text {
+    color: #0096C7;
+    font-weight: bold;
 }

@@ -13,6 +13,7 @@ import Profile from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import BlogPostPage from './components/BlogPost/BlogPostPage';
 import Home from './components/BlogPost/Home';
+import RestaurantAdd from './components/Restaurant/RestaurantAdd';
 
 
 
@@ -32,8 +33,8 @@ function App() {
 
           <Route path="/profile/" element={<Profile />} />
           <Route path="/nav/"     element={<Navbar />} />
-          <Route path="/blogs/:id"  element={<BlogPostPage />}
-          /> 
+          <Route path="/blogs/:id"  element={<BlogPostPage />} />
+          <Route path="/restaurant/add/" element={<RestaurantAdd />} />
         </Routes>
       </BrowserRouter>
 

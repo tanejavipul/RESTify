@@ -62,7 +62,8 @@ class RestaurantAllNotificationView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        x = RestaurantNotification.objects.all().prefetch_related('restaurant__owner', 'restaurant__followers').filter(restaurant__followers__user=self.request.user).order_by('-last_modified')
+        x = RestaurantNotification.objects.all().prefetch_related('restaurant__owner', 'restaurant__followers')\
+            .filter(restaurant__followers__user=self.request.user).order_by('-last_modified')
         # print(x)
         # print(len(x))
         return x

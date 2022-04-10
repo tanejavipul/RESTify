@@ -105,7 +105,10 @@
 }
 
 .dropdown-padding {
-    padding: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: white;
+
 }
 
 .dropdown-menu-width {
@@ -163,4 +166,8 @@
 .profile-name-text {
     color: #0096C7;
     font-weight: bold;
+}
+
+.border05 {
+    border-bottom: 3em;
 }

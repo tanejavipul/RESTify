@@ -59,15 +59,15 @@ const ProfilePassword = () => {
                 </div>
 
                 <div className="input-group mb-3">
-                    <input id="old-pass" type="password" className="form-control input-text-styling shadow-none" required
+                    <input id="old-pass" type="password" className="form-control login-form-control input-text-styling shadow-none" required
                            placeholder="Old Password"  value={oldPassword} name="old-pass"
                            onChange={event => update(event)}/>
 
-                    <input id="new-pass" type="password" className="form-control  input-text-styling shadow-none" required
+                    <input id="new-pass" type="password" className="form-control login-form-control input-text-styling shadow-none" required
                            placeholder="New Password" value={newPassword} name="new-pass"
                            onChange={event => update(event)}/>
 
-                    <input id="new-pass2" type="password" className="form-control  input-text-styling shadow-none" required
+                    <input id="new-pass2" type="password" className="form-control login-form-control input-text-styling shadow-none" required
                            placeholder="Confirm New Password" value={newPassword2} name="new-pass2"
                            onChange={event => update(event)}/>
                 </div>

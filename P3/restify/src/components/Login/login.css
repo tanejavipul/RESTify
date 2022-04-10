@@ -83,13 +83,13 @@ h1 {
 }
 
 
-.form-control::placeholder {
+.login-form-control::placeholder {
     color: var(--blue-main);
 
 }
 
 
-.form-control {
+.login-form-control {
     color: var(--blue-main);
 }
 
@@ -97,7 +97,7 @@ h1 {
 /*    border-color: var(--blue-main);*/
 /*}*/
 
-.form-control:active {
+.login-form-control:active {
     color: var(--blue-main);
 }
 

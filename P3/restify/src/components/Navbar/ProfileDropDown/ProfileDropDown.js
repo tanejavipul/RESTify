@@ -50,18 +50,18 @@ const ProfileDropDown = () => {
                 </Dropdown.Menu>
             </Dropdown>
 
-            {/*<div className="dropdown navbar-dropdown">*/}
-            {/*    <button className="btn  navbar-button-styling dropdown-toggle " type="button" id="dropdownprofilebutton"*/}
-            {/*            data-bs-toggle="dropdown" aria-expanded="false"><img src={profileSVG} alt=""/>Profile*/}
-            {/*    </button>*/}
+            <div className="dropdown navbar-dropdown">
+                <button className="btn  navbar-button-styling dropdown-toggle border05" type="button" id="dropdownprofilebutton"
+                        data-bs-toggle="dropdown" aria-expanded="false"><img src={profileSVG} alt=""/>Profile
+                </button>
 
-            {/*    <ul className="dropdown-menu navbar-background dropdown-padding">*/}
-            {/*        <li>*/}
-            {/*            <Link to="/profile" className="dropdown-item nav-dropdown-item">*/}
-            {/*            <img src={avatar} className="profile-avatar" alt=""/>FULL NAME</Link>*/}
-            {/*        </li>*/}
-            {/*    </ul>*/}
-            {/*</div>*/}
+                <ul className="dropdown-menu navbar-background dropdown-padding">
+                    <li>
+                        <Link to="/profile" className="dropdown-item nav-dropdown-item">
+                        <img src={image} className="profile-avatar avatar-img " alt=""/>FULL NAME</Link>
+                    </li>
+                </ul>
+            </div>
 
         </>
     )

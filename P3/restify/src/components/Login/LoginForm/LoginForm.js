@@ -85,12 +85,12 @@ const LoginForm = (signup= false) => {
                     <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username} update={update} />
                     <IconInput icon={passwordSVG} place_holder={"Password"} input_name={"password"} value1={password} update={update} type={"password"} />
 
-                    <button className="form-control btn btn-outline-primary shadow-none rounded-pill">LOG IN</button>
+                    <button className="form-control login-form-control btn btn-outline-primary shadow-none rounded-pill">LOG IN</button>
                     <div className="text-danger d-flex justify-content-center">{error}</div>
                 </form>
                 <hr/>
                 <h5 className={"login-h3-h5 text-center"}>New Here?</h5>
-                <Link to={'/signup'} className={"form-control btn btn-outline-primary  shadow-none rounded-pill"}>CREATE AN ACCOUNT</Link>
+                <Link to={'/signup'} className={"form-control login-form-control btn btn-outline-primary  shadow-none rounded-pill"}>CREATE AN ACCOUNT</Link>
             </div>
         </>
 

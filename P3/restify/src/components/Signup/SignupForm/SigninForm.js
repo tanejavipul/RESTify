@@ -167,10 +167,10 @@ const SignupForm = () => {
                     <div className="text-danger px-5">{submitError}</div>
                     {success ? <Navigate to="/login-success/" replace={true}/> : ""}
                     <input type="submit" value="SIGN UP"
-                           className="form-control btn btn-outline-primary  shadow-none rounded-pill"/>
+                           className="form-control login-form-control btn btn-outline-primary  shadow-none rounded-pill"/>
                 </form>
                 <hr/>
-                <Link to={"/"} className={"form-control btn btn-outline-primary  shadow-none rounded-pill"}>ALREADY HAVE
+                <Link to={"/"} className={"form-control login-form-control btn btn-outline-primary  shadow-none rounded-pill"}>ALREADY HAVE
                     AN ACCOUNT?</Link>
             </div>
         </>

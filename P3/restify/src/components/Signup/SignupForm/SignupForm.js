@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 
-import IconInput from "../../CP/IconInput/IconInput";
 import {Navigate} from "react-router-dom";
 
 import nameBadgeSVG from "../../assets/Icons/name_badge.svg"
@@ -19,6 +18,8 @@ import {
     phoneValid,
     userValid
 } from "../../CP/SignUpFormValidation/SignUpFormValidation";
+import NameInput from "../SignupInput/NameInput";
+import SignupInput from "../SignupInput/SignupInput";
 
 const SignupForm = () => {
     const [firstName, setFirstName] = useState("")
@@ -29,8 +30,8 @@ const SignupForm = () => {
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
 
-    const [firstnameError, setFirstNameError] = useState("")
-    const [lastnameError, setLastNameError] = useState("")
+    const [nameError, setNameError] = useState("")
+    const [nameTypeError, setNameTypeError] = useState(0)
     const [userError, setUserError] = useState("")
     const [emailError, setEmailError] = useState("")
     const [phoneError, setPhoneError] = useState("")
@@ -41,7 +42,7 @@ const SignupForm = () => {
     const [submitError, setSubmitError] = useState("")
 
     useEffect(() => {
-        nameValid(firstName, lastName, setFirstNameError, setLastNameError)
+        nameValid(firstName, lastName, setNameError, setNameTypeError)
     }, [firstName, lastName])
 
     useEffect(() => {
@@ -91,7 +92,7 @@ const SignupForm = () => {
     const signupAPI = event => {
         event.preventDefault();
         const check =
-            nameValid(firstName, lastName, setFirstNameError, setLastNameError) &&
+            nameValid(firstName, lastName, setNameError, setNameTypeError) &&
             userValid(username, setUserError) &&
             phoneValid(phone, setPhoneError) &&
             emailValid(email, setEmailError) &&
@@ -147,25 +148,24 @@ const SignupForm = () => {
     return (<>
             <div className="col signup-container">
                 <h3 className={"login-h3-h5"}>Sign Up</h3>
-
+                <div className="fw-bold text-success text-center">{success}</div>
                 <form onSubmit={signupAPI}>
-                    <IconInput icon={nameBadgeSVG} place_holder={"First Name"} input_name={"first-name"} two={true}
-                               place_holder2={"Last Name"} input_name2={"last-name"} value1={firstName}
-                               value2={lastName}
-                               error={firstnameError} error2={lastnameError} update={update}/>
-                    <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username}
+                    <NameInput icon={nameBadgeSVG} place_holder={"First Name"} input_name={"first-name"}
+                               place_holder2={"Last Name"} input_name2={"last-name"}
+                               value1={firstName} value2={lastName} req={false}
+                               error={nameError} invalid={nameTypeError} update={update}/>
+                    <SignupInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username}
                                update={update} error={userError}/>
-                    <IconInput icon={emailSVG} place_holder={"Email"} input_name={"email"} value1={email}
+                    <SignupInput icon={emailSVG} place_holder={"Email"} input_name={"email"} value1={email}
                                update={update}
                                error={emailError}/>
-                    <IconInput icon={phoneSVG} place_holder={"+1###-###-#### (optional)"} value1={phone} update={update}
+                    <SignupInput icon={phoneSVG} place_holder={"+1###-###-#### (optional)"} value1={phone} update={update}
                                input_name={"phone"} req={false} error={phoneError}/>
-                    <IconInput icon={passwordSVG} place_holder={"Password"} input_name={"password1"} value1={password}
+                    <SignupInput icon={passwordSVG} place_holder={"Password"} input_name={"password1"} value1={password}
                                update={update} error={passwordError} type={"password"}/>
-                    <IconInput icon={confirmPasswordSVG} place_holder={"Confirm Password"} input_name={"password2"}
+                    <SignupInput icon={confirmPasswordSVG} place_holder={"Confirm Password"} input_name={"password2"}
                                value1={password2} update={update} error={password2Error} type={"password"}/>
                     <div className="text-danger px-5">{submitError}</div>
-                    {success ? <Navigate to="/login-success/" replace={true}/> : ""}
                     <input type="submit" value="SIGN UP"
                            className="form-control login-form-control btn btn-outline-primary  shadow-none rounded-pill"/>
                 </form>

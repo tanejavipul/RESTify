@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./restaurantForms.css";
+// import "./restaurantForms.css";
 
 import axios from "axios";
 import { useParams } from 'react-router-dom';

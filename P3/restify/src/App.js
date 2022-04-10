@@ -35,6 +35,8 @@ function App() {
           <Route path="/nav/"            element={<Navbar />} />
           <Route path="/blogs/:id"       element={<BlogPostPage />} />
           <Route path="/restaurant/add/" element={<RestaurantAdd />} />
+          {/*<Route path='*' exact={true} component={errorcomponent} />*/} {/* TODO for 404 NOT FOUND pages and etc */}
+
         </Routes>
       </BrowserRouter>
 

@@ -1,30 +1,28 @@
 // https://stackoverflow.com/questions/54199264/how-can-i-use-a-function-from-another-file-in-react
 
-export const nameValid = (firstName, lastName, setFirstNameError, setLastNameError) => {
-    let output = true
-    if(firstName.length < 4 && lastName.length < 4 && firstName !== "" && lastName !== "" ) {
-        setFirstNameError("First and last name should be at least a length of 4")
-        setLastNameError(" ")
-        output = false
+export const nameValid = (firstName, lastName, setNameError, setNameTypeError) => {
+    let first = firstName.match(/^[A-Za-z][A-Za-z' ]*$/g)
+    let last = lastName.match(/^[A-Za-z][A-Za-z' ]*$/g)
+    if( first === null && last === null && firstName !== "" && lastName !== "" ) {
+        setNameError("Names can only contain letters, spaces and '")
+        setNameTypeError(3)
+        return false
     }
-    else if (firstName.length < 4 && firstName !== "")
+    else if (first === null && firstName !== "")
     {
-        setFirstNameError("First name should be at least a length of 4")
-        setLastNameError("")
-        output = false
+        setNameError("Names can only contain letters and spaces.")
+        setNameTypeError(1)
+        return false
     }
-    else if (lastName.length < 4 && lastName !== "")
+    else if (last === null && lastName !== "")
     {
-        setLastNameError("Last name should be at least a length of 4")
-        setFirstNameError("")
-        output = false
+        setNameError("Names can only contain letters and spaces.")
+        setNameTypeError(2)
+        return false
     }
-    else {
-        setFirstNameError("")
-        setLastNameError("")
-    }
-
-    return output
+    setNameError("")
+    setNameTypeError(0)
+    return true
 }
 
 

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import LogoName from "../CP/LogoName/LogoName";
 import SignupCarousel from "./SignupCarousel/SignupCarousel";
-import SignupForm from "./SignupForm/SigninForm";
+import SignupForm from "./SignupForm/SignupForm";
 import "./signup.css" //TODO causing issues in login
 
 const Signup = () => {

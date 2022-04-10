@@ -1,7 +1,6 @@
-import IconInput from "../CP/IconInput/IconInput";
 import {useEffect, useState} from "react";
 import LoginForm from "./LoginForm/LoginForm";
-import LogoName from "../CP/LogoName/LogoName";
+import LoginLogo from "./LoginLogo/LoginLogo";
 
 
 
@@ -12,7 +11,6 @@ const Login = (signup=false) => {
     }, []);
 
 
-
     return (
         <>
             <div id="login">
@@ -20,9 +18,9 @@ const Login = (signup=false) => {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-7">
-                                <LogoName logoClassName={"login-align-b"}/>
+                                <LoginLogo/>
                             </div>
-                                <LoginForm signup={signup.signup}/>
+                                <LoginForm/>
                         </div>
                     </div>
                 </div>

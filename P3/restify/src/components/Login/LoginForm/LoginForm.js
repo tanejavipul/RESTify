@@ -1,99 +1,81 @@
-import IconInput from "../../CP/IconInput/IconInput";
 import React, {useContext, useEffect, useState} from "react";
 
 import "../login.css"
 import usernameSVG from "../../assets/Icons/email.svg"
 import passwordSVG from "../../assets/Icons/lock.svg"
 import {Link, Navigate} from "react-router-dom";
+import LoginInput from "../LoginInput/LoginInput";
 
-const LoginForm = (signup= false) => {
+const LoginForm = () => {
 
-    const error_message = "Username or Password incorrect!"
+    const error_message = "Username or Password Invalid!"
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [signupMessage, setSignupMessage] = useState("");
     const [navi, setNavi] = useState("");
 
 
     useEffect(() => {
         document.title = "RESTify"
-        console.log(signup.signup)
-        if(signup.signup === true){
-            setSignupMessage("Account Created Successfully")
-        }
     }, []);
 
 
     function update(event) {
         if (event.target.name === 'username')  { setUsername(event.target.value) }
         if (event.target.name === 'password')  { setPassword(event.target.value) }
-        setSignupMessage("")
+        setError("")
     }
 
 
     const loginAPI = event => {
         event.preventDefault();
-        fetch("/accounts/login/", {
-
-            // Adding method type
-            method: "POST",
-
-            // Adding body or contents to send
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => {
-                return Promise.all([response.json(), response])
+        if(username.length < 1 || password.length < 8) {
+            setError(error_message)
+        }
+        else {
+            fetch("/accounts/login/", {
+                method: "POST",
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             })
-            .then(([data,response]) => {
-                    if (response.status === 401){
+                .then(response => {
+                    return Promise.all([response.json(), response])
+                })
+                .then(([data, response]) => {
+                    if (response.status === 401) {
                         setError(error_message)
                         setPassword("")
                     }
-                    if (response.status === 200){
+                    if (response.status === 200) {
                         localStorage.setItem('access', data.access)
                         setNavi("true")
                     }
+                })
 
-            })
-
+        }
     }
-    // axios.post("/accounts/login/", {
-    //
-    //     // Adding body or contents to send
-    //     body: JSON.stringify({
-    //         username: username,
-    //         password: password,
-    //     }),
-    // }).then( (result) => {
-    //     console.log(result)
-    // })
 
     return <>
-        {/*// TODO CHANGE THE LINK TO HOME*/}
-        {navi? <Navigate to="/profile/"/> : ""}
+        {navi? <Navigate to="/home/"/> : ""}
             <div className="col-lg-4  login-container">
                 <h3 className={"login-h3-h5"}>Login</h3>
                 <form onSubmit={loginAPI}>
-                    { signup? <div className="fw-bold text-success text-center">{signupMessage}</div> : ""}
-                    <IconInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username} update={update} />
-                    <IconInput icon={passwordSVG} place_holder={"Password"} input_name={"password"} value1={password} update={update} type={"password"} />
+                    <LoginInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username} update={update} />
+                    <LoginInput icon={passwordSVG} place_holder={"Password"} input_name={"password"} value1={password} update={update} type={"password"} />
 
                     <button className="form-control login-form-control btn btn-outline-primary shadow-none rounded-pill">LOG IN</button>
-                    <div className="text-danger d-flex justify-content-center">{error}</div>
+                    <div className=" fw-bold text-danger d-flex justify-content-center">{error}</div>
                 </form>
                 <hr/>
                 <h5 className={"login-h3-h5 text-center"}>New Here?</h5>
                 <Link to={'/signup'} className={"form-control login-form-control btn btn-outline-primary  shadow-none rounded-pill"}>CREATE AN ACCOUNT</Link>
             </div>
         </>
-
 
 }
 export default LoginForm

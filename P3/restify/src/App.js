@@ -26,14 +26,14 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" exact   element={<Login />} />
-          <Route path="/signup"   element={<Signup/>} />
-          <Route path="/login-success/"   element={<Login signup={true}/>} />
-          <Route path="/home/"    element={<Home />} />
+          <Route path="/" exact          element={<Login />} />
+          <Route path="/signup/"          element={<Signup/>} />
+          <Route path="/login-success/"  element={<Login />} />
+          <Route path="/home/"           element={<Home />} />
 
-          <Route path="/profile/" element={<Profile />} />
-          <Route path="/nav/"     element={<Navbar />} />
-          <Route path="/blogs/:id"  element={<BlogPostPage />} />
+          <Route path="/profile/"        element={<Profile />} />
+          <Route path="/nav/"            element={<Navbar />} />
+          <Route path="/blogs/:id"       element={<BlogPostPage />} />
           <Route path="/restaurant/add/" element={<RestaurantAdd />} />
         </Routes>
       </BrowserRouter>

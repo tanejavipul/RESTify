@@ -14,6 +14,9 @@ import Navbar from "./components/Navbar/Navbar";
 import BlogPostPage from './components/BlogPost/BlogPostPage';
 import Home from './components/BlogPost/Home';
 import RestaurantAdd from './components/Restaurant/RestaurantAdd';
+import RestaurantEdit from './components/Restaurant/RestaurantEdit';
+import Restaurant from './components/Restaurant/Restaurant';
+import Search from './components/Search/Search';
 
 
 
@@ -35,6 +38,9 @@ function App() {
           <Route path="/nav/"            element={<Navbar />} />
           <Route path="/blogs/:id"       element={<BlogPostPage />} />
           <Route path="/restaurant/add/" element={<RestaurantAdd />} />
+          <Route path="/restaurant/edit/" element={<RestaurantEdit />} />
+          <Route path="/restaurant/:id" element={<Restaurant />} />
+          <Route path="/search" element={<Search />} />
           {/*<Route path='*' exact={true} component={errorcomponent} />*/} {/* TODO for 404 NOT FOUND pages and etc */}
 
         </Routes>

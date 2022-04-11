@@ -27,6 +27,22 @@ export const nameValid = (firstName, lastName, setNameError, setNameTypeError) =
 }
 
 
+export const singleNameValid = (name, setNameError ) => {
+    //^([A-Za-z]+[' .-]?)*$
+    let nameCheck = name.match(/^([A-Za-z][A-Za-z' .-]*)$/g)
+    let error = "Names can only contain letters, spaces and '.-"
+    // 1 -> first error, 2 -> last error, 3 -> both error,   0 -> no error
+    if (nameCheck === null && name !== "")
+    {
+        setNameError(error)
+        return false
+    }
+    setNameError("")
+    return true
+}
+
+
+
 export const userValid = (username, setUserError) => {
     let output = true
     if(username.match(/^([A-Za-z][A-Za-z0-9_.-]*){4,}$/g) === null && username !== "") {
@@ -56,7 +72,7 @@ export const emailValid = (email, setEmailError) => {
 
 export const phoneValid = (phone, setPhoneError) => {
     let output = true
-    if (phone.match(/^[+][1][(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}$/g) == null && phone !== ""){
+    if (phone.match(/^(([+][1][(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4})||([+1][0-9]{11}))$/g) == null && phone !== ""){
         setPhoneError("Please provide a valid phone number in format +1(###)-###-####")
         output = false
     }

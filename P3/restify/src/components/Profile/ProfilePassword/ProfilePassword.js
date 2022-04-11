@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {singleNameValid} from "../../CP/SignUpFormValidation/SignUpFormValidation";
 
 
 const ProfilePassword = () => {
@@ -8,15 +9,23 @@ const ProfilePassword = () => {
     const [newPassword, setNewPassword] = useState("")
     const [newPassword2, setNewPassword2] = useState("")
 
+    const [error, setError] = useState("")
+    const [success, setSuccess] = useState("")
+
+    useEffect(() => {
+
+    }, [oldPassword, newPassword, newPassword2]);
+
 
     function update(event) {
-        if (event.target.name === 'old-pass') { setOldPassword(event.target.value) }
-        if (event.target.name === 'new-pass')  { setNewPassword(event.target.value) }
-        if (event.target.name === 'new-pass2')      { setNewPassword2(event.target.value) }
+        if (event.target.name === 'old-pass')    { setOldPassword(event.target.value) }
+        if (event.target.name === 'new-pass')    { setNewPassword(event.target.value) }
+        if (event.target.name === 'new-pass2')   { setNewPassword2(event.target.value) }
     }
 
 
     const updatePasswordAPI = event => {
+        console.log("here")
 
         event.preventDefault()
         axios.put(`/accounts/profile/edit/`,
@@ -31,7 +40,7 @@ const ProfilePassword = () => {
                 },
             })
             .then((resp) => {
-                console.log(resp)
+
                 // could do something here if failed return like oh please sign in otherwise it just doesn't change
                 if (resp.status === 200) {
                     setOldPassword("")
@@ -39,11 +48,13 @@ const ProfilePassword = () => {
                     setNewPassword2("")
                 }
                 else {
-                    console.log(resp)
-                    // TODO ADD ERROR!!
+                    console.log(resp.data)
                 }
-
-            });
+            //TODO FIXME
+            }).catch(function (err) {
+                console.log(err)
+        })
+        ;
     }
 
     return (
@@ -72,7 +83,12 @@ const ProfilePassword = () => {
                            onChange={event => update(event)}/>
                 </div>
 
-                <div className="col-9"> </div>
+                <div className="col-9">
+                    <div className={"fw-bold save-error " +
+                        ((error !== "") ? " text-danger " : " ") +
+                        ((success !== "") ? " text-success " : " ")}>{error}{success}
+                    </div>
+                </div>
                 <div className="align-items-end col-3">
                     <input value="SAVE PASSWORD" type="submit" className="save-btn btn shadow-none"/>
                 </div>

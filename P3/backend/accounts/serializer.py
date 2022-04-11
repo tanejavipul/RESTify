@@ -21,11 +21,12 @@ class SignUpSerializer(ModelSerializer):
     def validate(self, attrs):
         # NAMES
         # ^([A-Za-z]+[' .-]?)*$
-        if re.search("^[A-Za-z][A-Za-z' .-]*$", attrs['first_name']) is None and len(attrs['first_name']) != 0:
-            raise serializers.ValidationError({"name": "Names can only contain letters, spaces and '-."})
-
-        if re.search("^[A-Za-z][A-Za-z' .-]*$", attrs['last_name']) is None and len(attrs['last_name']) != 0:
-            raise serializers.ValidationError({"name": "Names can only contain letters, spaces and '-."})
+        if 'first_name' in attrs:
+            if re.search("^[A-Za-z][A-Za-z' .-]*$", attrs['first_name']) is None and len(attrs['first_name']) != 0:
+                raise serializers.ValidationError({"name": "Names can only contain letters, spaces and '-."})
+        if 'last_name' in attrs:
+            if re.search("^[A-Za-z][A-Za-z' .-]*$", attrs['last_name']) is None and len(attrs['last_name']) != 0:
+                raise serializers.ValidationError({"name": "Names can only contain letters, spaces and '-."})
 
         #USERNAME
         if re.search("^([A-Za-z][A-Za-z0-9_.-]*){4,}$", attrs['username']) is None:
@@ -70,22 +71,32 @@ class ProfileSerializer(ModelSerializer):
         fields = ['username', 'first_name', 'last_name', 'email', 'phone', 'avatar', 'old_password', 'new_password', 'new_password2']
 
     def validate(self, attrs):
+        # NAMES
+        # ^([A-Za-z]+[' .-]?)*$
+        if 'first_name' in attrs:
+            if re.search("^[A-Za-z][A-Za-z' .-]*$", attrs['first_name']) is None and len(attrs['first_name']) != 0:
+                raise serializers.ValidationError({"firstname": "Names can only contain letters, spaces and '-."})
+
+        if 'last_name' in attrs:
+            if re.search("^[A-Za-z][A-Za-z' .-]*$", attrs['last_name']) is None and len(attrs['last_name']) != 0:
+                raise serializers.ValidationError({"lastname": "Names can only contain letters, spaces and '-."})
+
         if 'email' in attrs:
             try:
                 validate_email(attrs['email'])
             except:
-                raise serializers.ValidationError({"Email Error": "Enter Valid Email"})
+                raise serializers.ValidationError({"email": "Please provide a valid email address"})
 
         if 'old_password' in attrs and 'new_password' not in attrs:
-            raise serializers.ValidationError({"Password Error": "New Password Not Provided"})
+            raise serializers.ValidationError({"password": "New Password Not Provided"})
 
         if 'new_password' in attrs:
             if not self.instance.check_password(attrs['old_password']):
-                raise serializers.ValidationError({"Password Error": "Old Password Incorrect."})
+                raise serializers.ValidationError({"password": "Old Password Incorrect."})
             if len(attrs['new_password']) < 8:
-                raise serializers.ValidationError({"Password Error": "Password To Short."})
+                raise serializers.ValidationError({"password": "Password To Short."})
             if 'new_password2' not in attrs or attrs['new_password'] != attrs['new_password2']:
-                raise serializers.ValidationError({"Password Error": "New Password Field's Did Not Match."})
+                raise serializers.ValidationError({"password": "New Password Field's Did Not Match."})
         return attrs
 
     def update(self, instance, validated_data):

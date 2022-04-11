@@ -143,6 +143,11 @@ label {
     margin-top: 1em;
 }
 
+.save-error {
+    margin-top: 1em;
+    padding-top: .375em;
+}
+
 .save-btn:hover {
     color: var(--blue-main);
     transition: all .1s ease-in-out;

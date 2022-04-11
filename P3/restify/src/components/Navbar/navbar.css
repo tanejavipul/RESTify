@@ -8,7 +8,7 @@
 
 .navbar-background {
     /* FIXME CHANGE THIS IF YOU DONT WANT IT TRANSPARENT*/
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.5);
 }
 
 .navbar-logo-color {
@@ -24,7 +24,7 @@
 
 /*when click, it make the text blend in with background*/
 .navbar-logo-color:active {
-    color: rgba(0,0,0,0);
+    color: rgba(0,0,0,0.5);
 }
 
 .navbar-button-styling {
@@ -41,7 +41,7 @@
 
 /*when click, it make the text blend in with background*/
 .navbar-button-styling:active{
-    color: rgba(0,0,0,0);
+    color: rgba(0,0,0,0.5);
 }
 
 .navbar-button-styling:focus {
@@ -71,19 +71,19 @@
 }
 
 .dropdown-toggle-background {
-    background-color: rgba(0,0,0,0.8);
-    border: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.5);
+    border: rgba(0,0,0,0.5);
 }
 
 .dropdown-toggle-background:hover {
-    border: rgba(0,0,0,0.8);
+    border: rgba(0,0,0,0.5);
 }
 .dropdown-toggle-background:active {
-    border: rgba(0,0,0,0.8);
+    border: rgba(0,0,0,0.5);
 }
 
 .dropdown-toggle-background:focus {
-    border: rgba(0,0,0,0.8);
+    border: rgba(0,0,0,0.5);
 }
 
 .select-profile:hover {

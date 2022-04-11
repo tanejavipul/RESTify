@@ -8,7 +8,6 @@ import axios from "axios";
 const ProfileDropDown = () => {
 
     const [image, setImage] = useState("")
-    const [username, setUsername] = useState("")
 
     useEffect(() => {
         getProfileAPI()
@@ -22,7 +21,6 @@ const ProfileDropDown = () => {
         }).then((resp) => {
             if (resp.status === 200) {
                 setImage(resp.data.avatar)
-                setUsername(resp.data.username)
             } else {
                 setImage(avatar)
             }
@@ -33,22 +31,22 @@ const ProfileDropDown = () => {
 
     return (
         <>
-            <Dropdown className="navbar-inline shadow-none dropdown-toggle-background ">
-                <Dropdown.Toggle variant={"dark"} className="btn shadow-none navbar-button-styling  dropdown-toggle-background" >
-                    <img src={profileSVG} className={""}/>Profile
-                </Dropdown.Toggle>
+            {/*<Dropdown className="navbar-inline shadow-none dropdown-toggle-background ">*/}
+            {/*    <Dropdown.Toggle variant={"dark"} className="btn shadow-none navbar-button-styling  dropdown-toggle-background" >*/}
+            {/*        <img src={profileSVG} className={""}/>Profile*/}
+            {/*    </Dropdown.Toggle>*/}
 
-                <Dropdown.Menu >
-                    <Link to={"/profile/"} className={"select-profile"} style={{ textDecoration: 'none'}}>
+            {/*    <Dropdown.Menu >*/}
+            {/*        <Link to={"/profile/"} className={"select-profile"} style={{ textDecoration: 'none'}}>*/}
 
-                        <Dropdown.Item href="/profile" className={"select-profile profile-name-text "}>
-                                <img src={image} className="profile-avatar avatar-img " alt=""/>
-                                {username}
-                        </Dropdown.Item>
-            </Link>
+            {/*            <Dropdown.Item href="/profile" className={"select-profile profile-name-text "}>*/}
+            {/*                    <img src={image} className="profile-avatar avatar-img " alt=""/>*/}
+            {/*                    {username}*/}
+            {/*            </Dropdown.Item>*/}
+            {/*</Link>*/}
 
-                </Dropdown.Menu>
-            </Dropdown>
+            {/*    </Dropdown.Menu>*/}
+            {/*</Dropdown>*/}
 
             <div className="dropdown navbar-dropdown">
                 <button className="btn  navbar-button-styling dropdown-toggle border05" type="button" id="dropdownprofilebutton"
@@ -56,9 +54,9 @@ const ProfileDropDown = () => {
                 </button>
 
                 <ul className="dropdown-menu navbar-background dropdown-padding">
-                    <li>
-                        <Link to="/profile" className="dropdown-item nav-dropdown-item">
-                        <img src={image} className="profile-avatar avatar-img " alt=""/>FULL NAME</Link>
+                    <li className={"select-profile"}>
+                        <Link to="/profile" className="nav-dropdown-item dropdown-item nav-dropdown-item">
+                        <img src={image} className="fw-bold profile-avatar avatar-img " alt=""/>PROFILE</Link>
                     </li>
                 </ul>
             </div>

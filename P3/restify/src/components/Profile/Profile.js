@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import ProfileForm from "./ProfileForm/ProfileForm";
 import "./profile.css"
 import ProfilePassword from "./ProfilePassword/ProfilePassword";
+import Navbar from "../Navbar/Navbar";
 
 
 const Profile = () => {
@@ -15,6 +16,7 @@ const Profile = () => {
 
     return (
         <>
+            <Navbar/>
             <div id="profile">
                 <div className="mask d-flex align-items-center h-100 tone-down-bg">
                     <div className="container">

@@ -111,3 +111,19 @@ export const pass2Valid = (password, password2, setPassword2Error) =>{
 export const basicLengthValidation = (username, password) => {
     return username !== "" && password !== "";
 }
+
+
+
+
+export const profileEditPasswordValid = (pass1, pass2, setError) => {
+    if(pass1.length < 8 && pass1 !== "") {
+        setError("Password must at least be a length of 8")
+        return false
+    }
+    else if(pass1 !== "" && pass2 !== "" && pass2 !== pass1){
+        setError("Passwords do not match!")
+        return false
+    }
+    setError("")
+    return true
+}

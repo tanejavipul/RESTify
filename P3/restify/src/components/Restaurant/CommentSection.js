@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import styles from 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./comment.css";
+import styles from "./comment.css";
 
 import axios from "axios";
 import { useParams } from 'react-router-dom';
@@ -16,13 +17,17 @@ function CommentSection(props) {
     const [nextToken, setNextToken] = useState(""); // TODO
 
     useEffect(() => {
-        // localStorage.setItem('access', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ5NjE5MzUxLCJpYXQiOjE2NDk1MzI5NTEsImp0aSI6IjUzMTU0ZjBhOWQ0ZjQ5MTdhNmJiODA4MTVmMmU1M2UxIiwidXNlcl9pZCI6M30.FP5iKHavSBoSYCRhI1Jh-ILazqXneDYcnzWCPXmWeWQ');
+        // localStorage.setItem('access', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ5Nzc5ODkwLCJpYXQiOjE2NDk2OTM0OTAsImp0aSI6ImE5ZjhkMTU1NTJiMTQ3MWQ4ODc5NDg1ZmM4Mjk1YzdlIiwidXNlcl9pZCI6M30.mysGFQOjpq7RxVDtyrW4wCDmK_cw6mZH_D9Grat6TeE');
         getComments();
     }, []);
 
     function getComments() {
-        const headers = {
-            'Authorization': `Bearer ${localStorage.getItem("access")}`
+        let headers;
+        console.log(localStorage.getItem('access'));
+        if (localStorage.getItem('access') !== null) {
+            headers = {
+                'Authorization': `Bearer ${localStorage.getItem("access")}`
+            }
         }
 
         axios.get(`/restaurants/${id}/viewComments/`, {headers})
@@ -53,19 +58,19 @@ function CommentSection(props) {
 
     return (
         // Inspired by https://www.bootdey.com/snippets/view/Simple-Comment-panel
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-8 col-sm-12">
-                    <div class="comment-wrapper">
-                        <div class="panel panel-info">
-                            <div class="panel-body">
-                                <textarea id="comment-text" class="form-control" placeholder="Write a Comment..." rows="3"></textarea>
+        <div className={"container"}>
+            <div className={"row d-flex justify-content-center"}>
+                <div className={"col-md-8 col-sm-12"}>
+                    <div className={"comment-wrapper"}>
+                        <div className={"panel panel-info"}>
+                            <div className={"comment-panel-body"}>
+                                <textarea id="comment-text" className="form-control" placeholder="Write a Comment..." rows="3"></textarea>
                                 <br />
-                                <div class="d-flex justify-content-end mr-1">
-                                    <button class="post-btn" type="button" onClick={() => postComment(document.getElementById('comment-text').value)} >Post</button>
+                                <div className={"d-flex justify-content-end comment-mr-1"}>
+                                    <button className={"post-comment-btn"} type="button" onClick={() => postComment(document.getElementById('comment-text').value)} >Post</button>
                                 </div>
                                 <hr />
-                                <div class="d-flex flex-column">
+                                <div className={"d-flex flex-column"}>
                                     {comments.map(function(object, i) {
                                         return <Comment username={object['username']} timestamp={object['datetime']} comment={object['comment']} profile_pic={object['profile_pic']} />
                                     })}

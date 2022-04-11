@@ -21,12 +21,12 @@ const ProfilePassword = () => {
         if (event.target.name === 'old-pass')    { setOldPassword(event.target.value) }
         if (event.target.name === 'new-pass')    { setNewPassword(event.target.value) }
         if (event.target.name === 'new-pass2')   { setNewPassword2(event.target.value) }
+        setError("")
+        setSuccess("")
     }
 
 
     const updatePasswordAPI = event => {
-        console.log("here")
-
         event.preventDefault()
         axios.put(`/accounts/profile/edit/`,
             {
@@ -46,15 +46,16 @@ const ProfilePassword = () => {
                     setOldPassword("")
                     setNewPassword("")
                     setNewPassword2("")
+                    setSuccess("Password Change Successfully.")
                 }
-                else {
-                    console.log(resp.data)
+            }).catch(err => {
+                if(err.response.status === 400) {
+                    console.log(err.response.data.password[0])
+                    console.log(err.response.data)
+                    setError("Error: " + err.response.data.password[0])
                 }
-            //TODO FIXME
-            }).catch(function (err) {
-                console.log(err)
-        })
-        ;
+
+        });
     }
 
     return (

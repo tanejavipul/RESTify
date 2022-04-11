@@ -4,16 +4,21 @@
 #signup {
     background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
     url('../assets/Signup/La-Societe-Patio-Pic.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
     background-position: center center;
-    height: 100vh;
+    /*height: 100vh;*/   /* so background wont run out when scrolling so had to remove*/
+
 }
 
 .signup-align-b {
     margin-bottom: 4em;
 }
 
-
+.placeholder-bold::-webkit-input-placeholder{
+    font-weight: bold;
+}
 .rounding {
     border-radius: 40px;
 }

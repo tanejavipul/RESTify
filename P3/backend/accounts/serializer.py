@@ -4,6 +4,7 @@ from rest_framework import serializers, request
 from rest_framework.reverse import reverse
 from rest_framework.serializers import ModelSerializer
 from rest_framework.validators import UniqueValidator
+import re
 
 from accounts.models import User
 
@@ -18,9 +19,21 @@ class SignUpSerializer(ModelSerializer):
         fields = ['username', 'first_name', 'phone', 'last_name', 'email', 'password', 'password2']
 
     def validate(self, attrs):
-        if len(attrs['password']) < 8:
-            raise serializers.ValidationError({"Password Error": "Password To Short."})
+        # NAMES
+        # ^([A-Za-z]+[' .-]?)*$
+        if re.search("^[A-Za-z][A-Za-z' .-]*$", attrs['first_name']) is None and len(attrs['first_name']) != 0:
+            raise serializers.ValidationError({"name": "Names can only contain letters, spaces and '-."})
 
+        if re.search("^[A-Za-z][A-Za-z' .-]*$", attrs['last_name']) is None and len(attrs['last_name']) != 0:
+            raise serializers.ValidationError({"name": "Names can only contain letters, spaces and '-."})
+
+        #USERNAME
+        if re.search("^([A-Za-z][A-Za-z0-9_.-]*){4,}$", attrs['username']) is None:
+            raise serializers.ValidationError(
+                {"username": "Username must start with a letter. Can contain numbers and (-_.). (Minimum Length: 4)"})
+
+        if len(attrs['password']) < 8:
+            raise serializers.ValidationError({"password": "Password To Short."})
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({"password": "Password fields didn't match."})
         return attrs

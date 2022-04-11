@@ -99,7 +99,7 @@ const SignupForm = () => {
             pass1Valid(password, setPasswordError) &&
             pass2Valid(password, password2, setPassword2Error)
 
-        if (check && basicLengthValidation(username, password, firstName, lastName, email)) {
+        if (check && basicLengthValidation(username, password)) {
             fetch("/accounts/signup/", {
 
                 // Adding method type
@@ -133,14 +133,22 @@ const SignupForm = () => {
                         setPassword("")
                         setPassword2("")
                     } else {
+                        setNameError(data.name)
                         setUserError(data.username)
                         setEmailError(data.email)
                         setPhoneError(data.phone)
                         setPasswordError(data.password)
+                        setSubmitError("Please fix error above")
                     }
                 })
         } else {
-            setSubmitError("Please Fill Out all Input Forms (Phone is optional)")
+            if(check === false) {
+                setSubmitError("Please fix errors above")
+
+            }
+            else {
+                setSubmitError("Please fill out all inputs with an asterisk *")
+            }
         }
     }
 
@@ -154,18 +162,17 @@ const SignupForm = () => {
                                place_holder2={"Last Name"} input_name2={"last-name"}
                                value1={firstName} value2={lastName} req={false}
                                error={nameError} invalid={nameTypeError} update={update}/>
-                    <SignupInput icon={usernameSVG} place_holder={"Username"} input_name={"username"} value1={username}
-                               update={update} error={userError}/>
+                    <SignupInput icon={usernameSVG} place_holder={"*Username*"} input_name={"username"} value1={username}
+                               update={update} error={userError} bold={true}/>
                     <SignupInput icon={emailSVG} place_holder={"Email"} input_name={"email"} value1={email}
-                               update={update}
-                               error={emailError}/>
-                    <SignupInput icon={phoneSVG} place_holder={"+1###-###-#### (optional)"} value1={phone} update={update}
-                               input_name={"phone"} req={false} error={phoneError}/>
-                    <SignupInput icon={passwordSVG} place_holder={"Password"} input_name={"password1"} value1={password}
-                               update={update} error={passwordError} type={"password"}/>
-                    <SignupInput icon={confirmPasswordSVG} place_holder={"Confirm Password"} input_name={"password2"}
-                               value1={password2} update={update} error={password2Error} type={"password"}/>
-                    <div className="text-danger px-5">{submitError}</div>
+                               update={update} error={emailError} req={false}/>
+                    <SignupInput icon={phoneSVG} place_holder={"+1(###)-###-####"} value1={phone} update={update}
+                               input_name={"phone"} req={false} error={phoneError} req={false}/>
+                    <SignupInput icon={passwordSVG} place_holder={"*Password*"} input_name={"password1"} value1={password}
+                               update={update} error={passwordError} type={"password"} bold={true}/>
+                    <SignupInput icon={confirmPasswordSVG} place_holder={"*Confirm Password*"} input_name={"password2"}
+                               value1={password2} update={update} error={password2Error} type={"password"} bold={true}/>
+                    <div className=" text-center text-danger px-5">{submitError}</div>
                     <input type="submit" value="SIGN UP"
                            className="form-control login-form-control btn btn-outline-primary  shadow-none rounded-pill"/>
                 </form>

@@ -26,7 +26,7 @@ function BlogPost(props) {
         if (like) {
             axios.post(`/blogs/${id}/like/add/`, {}, {  
                 headers: {
-                    Authorization : `Bearer ${localStorage.getItem("accessToken")}`
+                    Authorization : `Bearer ${localStorage.getItem("access")}`
                 },
             })
             .then((resp) => {
@@ -37,7 +37,7 @@ function BlogPost(props) {
         } else {
             // i think axios handles headers diff for delete
             const headers = {
-                'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+                'Authorization': `Bearer ${localStorage.getItem("access")}`
             }
             axios.delete(`/blogs/${id}/like/`, {headers} )
             .then((resp) => {

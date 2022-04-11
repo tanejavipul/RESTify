@@ -8,6 +8,7 @@ function Home(props) {
 
     const [blogs, setBlogs] = useState([]);
     const [numPosts, setNumPosts] = useState(0);
+    const [nextToken, setNextToken] = useState(""); // TODO
 
     useEffect(() => {
         getHomePosts();
@@ -22,6 +23,7 @@ function Home(props) {
         .then((response) => {
             setBlogs(response['data']['results']);
             setNumPosts(response['data']['count']);
+            setNextToken(response['data']['next']);
             return;
         });
     }

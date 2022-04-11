@@ -1,7 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min';
 
 import Login from "./components/Login/Login";
 import {useEffect, useState} from "react";
@@ -18,6 +15,7 @@ import RestaurantEdit from './components/Restaurant/RestaurantEdit';
 import Restaurant from './components/Restaurant/Restaurant';
 import Search from './components/Search/Search';
 
+import CommentSection from './components/Restaurant/CommentSection';
 
 
 function App() {
@@ -29,20 +27,19 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" exact          element={<Login />} />
-          <Route path="/signup/"          element={<Signup/>} />
-          <Route path="/login-success/"  element={<Login />} />
-          <Route path="/home/"           element={<Home />} />
+          <Route path="/" exact   element={<Login />} />
+          <Route path="/signup"   element={<Signup/>} />
+          <Route path="/login-success/"   element={<Login signup={true}/>} />
+          <Route path="/home/"    element={<Home />} />
 
-          <Route path="/profile/"        element={<Profile />} />
-          <Route path="/nav/"            element={<Navbar />} />
-          <Route path="/blogs/:id"       element={<BlogPostPage />} />
+          <Route path="/profile/" element={<Profile />} />
+          <Route path="/nav/"     element={<Navbar />} />
+          <Route path="/blogs/:id"  element={<BlogPostPage />} />
           <Route path="/restaurant/add/" element={<RestaurantAdd />} />
           <Route path="/restaurant/edit/" element={<RestaurantEdit />} />
           <Route path="/restaurant/:id" element={<Restaurant />} />
           <Route path="/search" element={<Search />} />
-          {/*<Route path='*' exact={true} component={errorcomponent} />*/} {/* TODO for 404 NOT FOUND pages and etc */}
-
+          <Route path="/:id/comments/" element={<CommentSection />} />
         </Routes>
       </BrowserRouter>
 

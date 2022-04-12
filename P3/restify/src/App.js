@@ -1,12 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min'
 
-import Login from "./components/Login/Login";
 import {useEffect} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 // import {Route, Routes} from "react-router";
+
+// Vipul
+import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Profile from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
+
 import BlogPostPage from './components/BlogPost/BlogPostPage';
 import Home from './components/BlogPost/Home';
 import RestaurantAdd from './components/Restaurant/RestaurantAdd';

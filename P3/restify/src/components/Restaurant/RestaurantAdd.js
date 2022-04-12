@@ -33,7 +33,7 @@ function RestaurantAdd(props) {
 
         axios.post(`/restaurants/add/`, body, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                Authorization: `Bearer ${localStorage.getItem("access")}`
             },
         })
             .then((resp) => {

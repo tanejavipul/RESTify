@@ -144,7 +144,7 @@ label {
     border-right: none;
 }
 
-.save-btn {
+.save-btn-profile {
     color: var(--blue-main);
     border: none;
     margin-top: 1em;
@@ -155,7 +155,7 @@ label {
     padding-top: .375em;
 }
 
-.save-btn:hover {
+.save-btn-profile:hover {
     color: var(--blue-main);
     transition: all .1s ease-in-out;
     transform: scale(1.05);

@@ -96,7 +96,7 @@ const ProfilePassword = () => {
                     </div>
                 </div>
                 <div className="align-items-end col-3">
-                    <input value="SAVE PASSWORD" type="submit" className="save-btn btn shadow-none"/>
+                    <input value="SAVE PASSWORD" type="submit" className="save-btn save-btn-profile btn shadow-none"/>
                 </div>
             </form>
 

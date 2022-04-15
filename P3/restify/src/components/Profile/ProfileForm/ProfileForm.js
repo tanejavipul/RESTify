@@ -146,7 +146,7 @@ const ProfileForm = () => {
                 </div>
                 <div className="align-items-end col-3">
 
-                    <input value="SAVE CHANGES" type="submit" className="save-btn btn shadow-none"/>
+                    <input value="SAVE CHANGES" type="submit" className="save-btn save-btn-profile btn shadow-none"/>
 
                 </div>
             </form>

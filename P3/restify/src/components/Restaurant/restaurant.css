@@ -42,17 +42,25 @@
 }
 
 .blog-edit-button {
-    z-index: 1; /* prevents button from dissapearing on hover*/
+    /* added */
+    /* z-index: 1; prevents button from dissapearing on hover
     position: absolute;
     left: 0;
-    top: 5px;
+    top: 7px;
+    font-size: inherit;
+    text-rendering: auto; */
+    font: normal normal normal 14px/1 FontAwesome;
 }
 
 .blog-delete-button {
-    z-index: 1; /* prevents button from dissapearing on hover*/
+    /* added */
+    /* z-index: 1; prevents button from dissapearing on hover
     position: absolute;
     left: 0;
     top: 45px;
+    font-size: inherit;
+    text-rendering: auto; */
+    font: normal normal normal 14px/1 FontAwesome;
 }
 
 .nav-item {

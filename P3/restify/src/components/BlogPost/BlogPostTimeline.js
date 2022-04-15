@@ -17,7 +17,7 @@ function BlogPostTimeline(props) {
     
         async function pullLiked() {
             const headers = {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
             }
             axios.get(`/blogs/${props.blog_id}/like/`, {headers})
             .then((response) => {
@@ -37,7 +37,7 @@ function BlogPostTimeline(props) {
         if (like) {
             axios.post(`/blogs/${props.blog_id}/like/add/`, {}, {  
                 headers: {
-                    Authorization : `Bearer ${localStorage.getItem("accessToken")}`
+                    Authorization : `Bearer ${localStorage.getItem("access")}`
                 },
             })
             .then((resp) => {
@@ -48,7 +48,7 @@ function BlogPostTimeline(props) {
         } else {
             // i think axios handles headers diff for delete
             const headers = {
-                'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+                'Authorization': `Bearer ${localStorage.getItem("access")}`
             }
             axios.delete(`/blogs/${props.blog_id}/like/`, {headers} )
             .then((resp) => {

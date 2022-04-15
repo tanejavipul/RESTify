@@ -154,14 +154,25 @@ label {
     transform: scale(1.05);
 }
 
-.form-control::placeholder, input, .form-control:focus {
+.form-controlAdd::placeholder, input, .form-controlAdd:focus{
     font-style: italic;
     font-family: 'Nunito', sans-serif;
 }
 
-.form-control:focus {
+.form-controlAdd:focus{
     color: #0096C7;
 }
+
+
+
+/*.form-control::placeholder, input, .form-control:focus {*/
+/*    font-style: italic;*/
+/*    font-family: 'Nunito', sans-serif;*/
+/*}*/
+
+/*.form-control:focus {*/
+/*    color: #0096C7;*/
+/*}*/
 
 .px-075em {
     padding-left: 0.75em;

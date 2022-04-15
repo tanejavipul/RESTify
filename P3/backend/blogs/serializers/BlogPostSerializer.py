@@ -15,10 +15,11 @@ class BlogPostSerializer(ModelSerializer):
     restaurant_name = serializers.SerializerMethodField('get_restaurant_name')
     restaurant_id = serializers.SerializerMethodField('get_restaurant_id')
     num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
+    is_owner = serializers.SerializerMethodField('get_owner_status')
 
     class Meta:
         model = BlogPost
-        fields = ['restaurant_name', 'restaurant_id', 'title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3', 
+        fields = ['is_owner', 'restaurant_name', 'restaurant_id', 'title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3', 
                   'num_likes', 'last_modified']
 
     def get_restaurant_name(self, obj):
@@ -27,6 +28,16 @@ class BlogPostSerializer(ModelSerializer):
             rest_id = BlogPost.objects.get(id=self.context['blogpost_id']).restaurant_id
             self.rest_name = Restaurant.objects.get(id=rest_id).name
         return self.rest_name
+
+    def get_owner_status(self, obj):
+        user_id = self.context['request'].user.id
+        blog_post = get_object_or_404(BlogPost, id=self.context['blogpost_id'])
+
+        if blog_post.user_id == user_id:
+            self.is_owner = True
+        else:
+            self.is_owner = False
+        return self.is_owner
 
     def get_restaurant_id(self, obj):
         return BlogPost.objects.get(id=self.context['blogpost_id']).restaurant_id

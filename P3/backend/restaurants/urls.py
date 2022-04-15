@@ -27,6 +27,8 @@ from restaurants.views.OwnerNotificationView import OwnerNotificationAddView, Ow
 from restaurants.views.RestaurantNotificationView import RestaurantAddNotificationView, RestaurantNotificationView, \
     RestaurantAllNotificationView
 
+from blogs.views.BlogPostHomeView import BlogPostRestaurantHomeView
+
 app_name = 'restaurants'
 
 urlpatterns = [
@@ -68,6 +70,9 @@ urlpatterns = [
     path('<int:restaurant_id>/menu/', MenuView.as_view(), name='viewMenu'),
     path('<int:menu_item_id>/editMenuItem/', EditMenuView.as_view(), name='editMenuItem'),
     path('addMenuItem/', AddMenuView.as_view(), name='addMenuItem'),
+
+    # Blogs
+    path('<int:restaurant_id>/blogs/', BlogPostRestaurantHomeView.as_view(), name='restaurantBlogs'),
 
     # Comment
     path('<int:restaurant_id>/viewComments/', CommentView.as_view(), name='viewComment'),

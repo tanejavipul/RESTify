@@ -21,3 +21,17 @@ class BlogPostHomeView(ListAPIView):
             .filter(restaurant__followers__user=self.request.user).order_by('-last_modified')
 
         return blogs
+
+
+class BlogPostRestaurantHomeView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = BlogPostHomeSerializer
+
+    def get_queryset(self):
+
+        # find all the blog posts associated with the restaurant id
+
+        blogs = BlogPost.objects.all()\
+            .filter(restaurant_id=self.kwargs['restaurant_id']).order_by('-last_modified')
+
+        return blogs

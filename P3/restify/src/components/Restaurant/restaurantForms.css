@@ -31,7 +31,7 @@
 }
 
 
-.img-thumbnail {
+.rForm-img-thumbnail {
     object-fit: cover;
     height: 100px;
     width: 100px;
@@ -39,7 +39,7 @@
     border: none;
     object-position: center;
 }
-.img-thumbnail:hover{
+.rForm-img-thumbnail:hover{
     height: 95px;
     width: 95px;
 }

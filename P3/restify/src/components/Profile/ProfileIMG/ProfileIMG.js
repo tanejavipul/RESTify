@@ -34,9 +34,9 @@ const ProfileIMG = () => {
         <>
             <div className="col-lg-12">
                 <label htmlFor="avatar-input" className="avatar-img mb-3">
-                    <img src={image} className="img-thumbnail" alt="..."/>
+                    <img src={image} className="img-thumbnail img-thumbnail-profile" alt="..."/>
                 </label>
-                <label htmlFor="avatar-input" className="label-file">
+                <label htmlFor="avatar-input" className="label-file-profile">
                     CHANGE PHOTO
                     <input id="avatar-input" type="file" onChange={event => ImageUploader(event)} className="btn shadow-none avatar-btn"/>
                 </label>

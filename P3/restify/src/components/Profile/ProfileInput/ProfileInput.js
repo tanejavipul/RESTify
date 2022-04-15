@@ -9,7 +9,7 @@ const ProfileInput = ({name, placeHolder, label, value, update, error}) => {
                     <label htmlFor={name} className="col-4 profile-label">{label + ":"}</label>
 
                 <input id={name}
-                       type="text" className={"form-control login-form-control col-8 input-text-styling shadow-none"}
+                       type="text" className={"form-controlAdd form-control login-form-control col-8 input-text-styling shadow-none"}
                        placeholder={placeHolder} name={name} required value={value} onChange={event => update(event)}/>
             </div>
             <div>

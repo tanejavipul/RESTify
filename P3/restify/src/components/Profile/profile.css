@@ -95,6 +95,11 @@ input[type="file"] {
     display: none;
 }
 
+
+.success-file-profile {
+    padding-left: 2em;
+}
+
 .label-file-profile {
     color: var(--blue-main);
     border: none;

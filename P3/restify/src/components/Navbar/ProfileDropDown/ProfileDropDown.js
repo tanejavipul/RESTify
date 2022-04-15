@@ -5,13 +5,19 @@ import {Dropdown} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-const ProfileDropDown = () => {
+const ProfileDropDown = ({profileUpdate}) => {
 
     const [image, setImage] = useState("")
 
     useEffect(() => {
         getProfileAPI()
     }, []);
+
+    useEffect(() => {
+        getProfileAPI()
+    }, [profileUpdate]);
+
+
 
     const getProfileAPI = event => {
         axios.get(`/accounts/profile/`, {

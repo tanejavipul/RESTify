@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import avatar from "../../assets/Profile/avatar.png"
 import axios from "axios";
 
-const ProfileIMG = () => {
+const ProfileIMG = ({profileUpdate}) => {
 
     const [image, setImage] = useState("")
     const [success, setSuccess] = useState(false)
@@ -29,6 +29,7 @@ const ProfileIMG = () => {
                     },
         }).then((resp) => {
             setSuccess(true)
+            profileUpdate(11)
             setImage(resp.data.avatar)
         })
     }

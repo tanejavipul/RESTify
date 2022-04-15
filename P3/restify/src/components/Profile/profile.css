@@ -52,7 +52,7 @@ h4 {
     padding: 2.5em 6em 2.5em 6em;
 }
 
-.img-thumbnail {
+.img-thumbnail-profile {
     object-fit: cover;
     height: 100px;
     width: 100px;
@@ -61,7 +61,7 @@ h4 {
     object-position: center;
 }
 
-.img-thumbnail:hover{
+.img-thumbnail-profile:hover{
     transition: all .1s ease-in-out;
     transform: scale(1.1);
     border: #0096C7 1px solid;
@@ -95,7 +95,7 @@ input[type="file"] {
     display: none;
 }
 
-.label-file {
+.label-file-profile {
     color: var(--blue-main);
     border: none;
     display: inline-block;
@@ -103,14 +103,16 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.label-file:hover{
+.label-file-profile:hover{
     transition: all .1s ease-in-out;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
-.label-file:active{
+.label-file-profile:active{
     color: white;
 }
+
+
 
 /*To make label in the middle of the text box*/
 /* TODO */

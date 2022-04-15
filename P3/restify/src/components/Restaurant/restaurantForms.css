@@ -110,14 +110,14 @@ label {
     border-right: none;
 }
 
-.save-btn {
+.rForm-save-btn {
     color: var(--blue-main);
     border: none;
     margin-top: 1em;
     font-style: italic;
 }
 
-.save-btn:hover {
+.rForm-save-btn:hover {
     color: var(--blue-4);
     transition: all .1s ease-in-out;
     transform: scale(1.4);

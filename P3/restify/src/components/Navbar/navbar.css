@@ -104,6 +104,10 @@
     border-radius: 0;
 }
 
+.badge-navbar {
+    background-color: red;
+}
+
 .dropdown-padding {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -113,6 +117,7 @@
 
 .dropdown-menu-width {
     min-width: 20em;
+    min-height: 40em;
 }
 
 .noti-load:hover {
@@ -171,3 +176,8 @@
 .border05 {
     border-bottom: 3em;
 }
+
+.notification-drop {
+    height: 400px;
+}
+

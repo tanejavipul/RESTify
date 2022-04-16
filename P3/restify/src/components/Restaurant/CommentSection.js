@@ -17,7 +17,6 @@ function CommentSection(props) {
     const [nextToken, setNextToken] = useState(""); // TODO
 
     useEffect(() => {
-        // localStorage.setItem('access', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ5Nzc5ODkwLCJpYXQiOjE2NDk2OTM0OTAsImp0aSI6ImE5ZjhkMTU1NTJiMTQ3MWQ4ODc5NDg1ZmM4Mjk1YzdlIiwidXNlcl9pZCI6M30.mysGFQOjpq7RxVDtyrW4wCDmK_cw6mZH_D9Grat6TeE');
         getComments();
     }, []);
 

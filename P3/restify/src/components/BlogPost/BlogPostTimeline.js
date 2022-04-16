@@ -12,6 +12,7 @@ function BlogPostTimeline(props) {
 
     const [numLikes, setNumLikes] = useState(0);
     const [liked, setLiked] = useState(false);
+    const [time, setTime] = useState("");
 
     useEffect(() => {
     
@@ -28,8 +29,14 @@ function BlogPostTimeline(props) {
         }
         pullLiked();
         setNumLikes(props.num_likes);
-    
+        getTime();
     }, []);
+
+    function getTime() {
+        let date = new Date(props.last_modified);
+        let finalTime = date.toLocaleDateString('en-US');
+        setTime(`${finalTime}`);
+    }
 
     function updateLike(like) {
         console.log('clicked');
@@ -65,16 +72,14 @@ function BlogPostTimeline(props) {
             <div class="vtimeline-point">
                 <div class="vtimeline-icon">
                     <FontAwesomeIcon icon={faCalendar} />
-                    {/* <i class="fa fa-calendar-o"></i> */}
                 </div>
                 <div class="vtimeline-block">
-                    <span class="vtimeline-date">{props.last_modified}</span>
+                    <span class="vtimeline-date">{time}</span>
                     <div class="vtimeline-content">
                         <img src={props.primary_photo} alt="" class="img-fluid mb20" />
                         <div class="d-flex justify-content-around">
                             <h2 class="blog-title">{props.title}</h2>
                             <div class="restaurant-icon d-flex flex-column justify-content-center align-items-center">
-                                {/* <i class="fa fa-cutlery fa-2x" aria-hidden="true"></i> */}
                                 <FontAwesomeIcon icon={faCutlery} size="2x" />
                                 <a class="text-decoration-none text-center" href="restaurantPages/restaurant.html"><h5>{props.restaurant_name}</h5></a>
                             </div>
@@ -91,11 +96,9 @@ function BlogPostTimeline(props) {
                                     <FontAwesomeIcon icon={faHeartFill} size="2x" color="red" onClick={() => updateLike(false)} /> :
                                     <FontAwesomeIcon icon={faHeart} size="2x" onClick={() => updateLike(true)} />
                                 }
-                                {/* <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i> */}
                             </button>
                             <a href={`/blogs/${props.blog_id}/`} class="blog-btn read-more">Read More</a>
                             <button type="button" class="blog-btn share-btns">
-                                {/* <i class="fa fa-share fa-2x" aria-hidden="true"></i> */}
                                 {/* Idk functionality for this lul */}
                                 <FontAwesomeIcon icon={faShare} size="2x" />
                             </button>

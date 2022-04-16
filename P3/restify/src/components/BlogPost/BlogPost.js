@@ -14,12 +14,20 @@ function BlogPost(props) {
     const { id } = useParams();
     const [numLikes, setNumLikes] = useState(0);
     const [liked, setLiked] = useState(false);
+    const [time, setTime] = useState("");
 
     useEffect(() => {
         setLiked(props.liked);
         setNumLikes(props.num_likes);
+        getTime();
     }, [props]);
     
+    function getTime() {
+        let date = new Date(props.last_modified);
+        let finalTime = date.toLocaleDateString('en-US');
+        setTime(`${finalTime}`);
+    }
+
     function updateLike(like) {
         console.log('clicked');
         // follow bool to check if we are liking or unliking
@@ -61,14 +69,11 @@ function BlogPost(props) {
                         <ul class="post-meta list-inline d-flex justify-content-between">
                             <li class="list-inline-item">
                                 <FontAwesomeIcon icon={faCutlery} size="3x" />
-                                {/* <i class="fa fa-cutlery fa-3x" aria-hidden="true"></i> */}
                                 <h5>{props.restaurant_name}</h5>
                             </li>
                             <li class="list-inline-item">
                                 <FontAwesomeIcon icon={faCalendar} size="3x" />
-                                {/* <i class="fa fa-calendar-o fa-3x"></i> */}
-                                {/* convert timestamp */}
-                                <h5>{props.last_modified}</h5>
+                                <h5>{time}</h5>
                             </li>
                             <li class="list-inline-item">
                                 <div class="d-flex">

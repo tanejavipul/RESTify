@@ -40,6 +40,7 @@ function App() {
           <Route path="/profile/" element={<Profile />} />
           <Route path="/nav/"     element={<Navbar />} />
           <Route path="/blogs/:id/"  element={<BlogPostPage />} />
+          <Route path="/blogs/addBlog/" element={<BlogPostEdit />} />
           <Route path="/blogs/:id/edit/"  element={<BlogPostEdit />} />
           <Route path="/restaurant/add/" element={<RestaurantAdd />} />
           <Route path="/restaurant/edit/" element={<RestaurantEdit />} />

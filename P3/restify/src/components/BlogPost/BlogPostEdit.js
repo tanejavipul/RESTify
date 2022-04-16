@@ -20,11 +20,13 @@ function BlogPostEdit(props) {
     }, []);
 
     async function pullBlogPost() {
-        const headers = {
-            'Authorization': `Bearer ${localStorage.getItem('access')}`
+        if (typeof id !== "undefined") {
+            const headers = {
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
+            }
+            let response = await axios.get(`/blogs/${id}/`, {headers});
+            setBlogPostInfo(response['data']);
         }
-        let response = await axios.get(`/blogs/${id}/`, {headers});
-        setBlogPostInfo(response['data']);
     }
     
     function submitChanges(e) {
@@ -44,11 +46,20 @@ function BlogPostEdit(props) {
         const headers = {
             Authorization : `Bearer ${localStorage.getItem("access")}`,
         };
-        axios.put(`/blogs/${id}/edit/`, formData, {headers})
-        .then((resp) => {
-            console.log(resp);
-            window.location.replace(`/blogs/${id}/`);
-        });   
+        if (typeof id !== "undefined") {
+            axios.put(`/blogs/${id}/edit/`, formData, {headers})
+            .then((resp) => {
+                console.log(resp);
+                window.location.replace(`/blogs/${id}/`);
+            });
+        } else {
+            axios.post(`/blogs/create/`, formData, {headers})
+            .then((resp) => {
+                console.log(resp);
+                let blogId = resp['data']['id']
+                window.location.replace(`/blogs/${blogId}/`);
+            }); 
+        }
     }
 
     const changeImage = event => {

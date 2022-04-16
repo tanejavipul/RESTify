@@ -9,13 +9,18 @@ import Signup from "./components/Signup/Signup";
 import Profile from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import BlogPostPage from './components/BlogPost/BlogPostPage';
+import BlogPostEdit from './components/BlogPost/BlogPostEdit';
 import Home from './components/BlogPost/Home';
 import RestaurantAdd from './components/Restaurant/RestaurantAdd';
 import RestaurantEdit from './components/Restaurant/RestaurantEdit';
 import Restaurant from './components/Restaurant/Restaurant';
+import RestaurantBlogs from './components/Restaurant/RestaurantBlogs';
 import Search from './components/Search/Search';
 
 import CommentSection from './components/Restaurant/CommentSection';
+import MenuSection from './components/Restaurant/MenuSection';
+import EditMenu from './components/Restaurant/EditMenu';
+
 
 
 function App() {
@@ -34,12 +39,17 @@ function App() {
 
           <Route path="/profile/" element={<Profile />} />
           <Route path="/nav/"     element={<Navbar />} />
-          <Route path="/blogs/:id"  element={<BlogPostPage />} />
+          <Route path="/blogs/:id/"  element={<BlogPostPage />} />
+          <Route path="/blogs/:id/edit/"  element={<BlogPostEdit />} />
           <Route path="/restaurant/add/" element={<RestaurantAdd />} />
           <Route path="/restaurant/edit/" element={<RestaurantEdit />} />
           <Route path="/restaurant/:id" element={<Restaurant />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/:id/comments/" element={<CommentSection />} />
+          <Route path="/restaurant/:id/blogs/" element={<RestaurantBlogs />} />
+          <Route path="/restaurant/:id/comments/" element={<CommentSection />} />
+          <Route path="/restaurant/:id/menu/" element={<MenuSection />} />
+          <Route path="/restaurant/:id/editMenu/" element={<EditMenu />} />
+
         </Routes>
       </BrowserRouter>
 

@@ -71,7 +71,7 @@ function BlogPostPage(props) {
                         {blogPostInfo['is_owner'] ? 
                             <>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-primary btn-lg blog-edit-button" href={`/blogs/${props.blog_id}/edit/`} role="button">
+                                    <a class="btn btn-primary btn-lg blog-edit-button" href={`/blogs/${id}/edit/`} role="button">
                                         <FontAwesomeIcon icon={faPencil} />
                                         &nbsp; Edit Blog Post
                                     </a>

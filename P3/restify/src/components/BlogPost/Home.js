@@ -16,7 +16,7 @@ function Home(props) {
 
     function getHomePosts() {
         const headers = {
-            'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+            'Authorization': `Bearer ${localStorage.getItem("access")}`
         }
 
         axios.get(`/blogs/home/`, {headers})

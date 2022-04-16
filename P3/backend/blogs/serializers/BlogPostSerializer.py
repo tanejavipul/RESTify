@@ -20,27 +20,36 @@ class BlogPostSerializer(ModelSerializer):
     class Meta:
         model = BlogPost
         fields = ['is_owner', 'restaurant_name', 'restaurant_id', 'title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3', 
-                  'num_likes', 'last_modified']
+                  'num_likes', 'last_modified', 'id']
 
     def get_restaurant_name(self, obj):
         if self.rest_name == '':
             print(self.context)
-            rest_id = BlogPost.objects.get(id=self.context['blogpost_id']).restaurant_id
-            self.rest_name = Restaurant.objects.get(id=rest_id).name
+            if 'blogpost_id' in self.context:
+                rest_id = BlogPost.objects.get(id=self.context['blogpost_id']).restaurant_id
+                self.rest_name = Restaurant.objects.get(id=rest_id).name
+            else:
+                user_id = self.context['request'].user.id
+                self.rest_name = Restaurant.objects.get(owner_id=user_id).name
+            
         return self.rest_name
 
     def get_owner_status(self, obj):
         user_id = self.context['request'].user.id
-        blog_post = get_object_or_404(BlogPost, id=self.context['blogpost_id'])
-
-        if blog_post.user_id == user_id:
-            self.is_owner = True
-        else:
-            self.is_owner = False
-        return self.is_owner
+        if 'blogpost_id' in self.context:
+            blog_post = get_object_or_404(BlogPost, id=self.context['blogpost_id'])
+            if blog_post.user_id == user_id:
+                self.is_owner = True
+            else:
+                self.is_owner = False
+            return self.is_owner
 
     def get_restaurant_id(self, obj):
-        return BlogPost.objects.get(id=self.context['blogpost_id']).restaurant_id
+        if 'blogpost_id' in self.context:
+            return BlogPost.objects.get(id=self.context['blogpost_id']).restaurant_id
+        else:
+            user_id = self.context['request'].user.id
+            return Restaurant.objects.get(owner_id=user_id).id
 
     def create(self, validated_data):
         user = self.context['request'].user

@@ -6,7 +6,7 @@ from restaurants.models import RestaurantNotification
 
 class RestaurantNotificationSerializer(ModelSerializer):
     logo = serializers.ImageField(source='restaurant.logo')
-    last_modified = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    last_modified = serializers.DateTimeField(format="%a %B %d %Y, %I:%M%p")
     class Meta:
         model = RestaurantNotification
-        fields = ['restaurant', 'title', 'last_modified', 'logo']
+        fields = ['id', 'restaurant', 'title', 'last_modified', 'logo']

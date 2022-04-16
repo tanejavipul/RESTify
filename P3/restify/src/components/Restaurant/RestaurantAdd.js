@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from "axios";
@@ -6,11 +6,11 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
-import "./restaurantForms.css"; 
+import "./restaurantForms.css";
 // TODO: Check if user is logged in?
 // printing error messages
 // updating logo
-// POSSIBLE ISSUE: phone validiation on input and differnet validation in backend
+//phone validation is different from sign up page?
 
 function RestaurantAdd(props) {
     const [rName, setrName] = useState('');
@@ -18,6 +18,8 @@ function RestaurantAdd(props) {
     const [rPhone, setrPhone] = useState('');
     const [rPostal, setrPostal] = useState('');
     const [rLogo, setrLogo] = useState('');
+
+    const [errors, setErrors] = useState({});
 
     function createRestaurant() {
         //Maybe need to validate fields first?
@@ -44,7 +46,15 @@ function RestaurantAdd(props) {
             })
             .catch(error => {
                 //this.setState({ errorMessage: error.message });
-                console.error('There was an error!', error);
+                if (error.response.status == 400) {
+                    setErrors(error.response.data);
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else { //401 Unauthorized
+                    //TODO, redirect?
+                    console.log("Please log in or sign up first");
+                }
             });
 
     }
@@ -91,8 +101,7 @@ function RestaurantAdd(props) {
                                 <div className="input-group mb-4">
                                     <label htmlFor="inputRestaurantNumber" className="col-3 profile-label">RESTAURANT NUMBER:</label>
                                     <input type="tel" className="form-control col-9 input-text-styling shadow-none" id="inputRestaurantNumber"
-                                        name="telphone" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxLength="12"
-                                        title="Ten digits code" onChange={e => setrPhone(e.target.value)} required />
+                                        name="telephone" placeholder="+1(###)-###-####" onChange={e => setrPhone(e.target.value)} required />
                                 </div>
                             </div>
 
@@ -114,6 +123,17 @@ function RestaurantAdd(props) {
                                         onChange={e => setrPostal(e.target.value)} required />
                                 </div>
                             </div>
+
+                            {Object.keys(errors).length > 0 &&
+                                <div className="col-lg-12">
+                                    <i>Please fix the following errors</i>
+                                    {
+                                        Object.keys(errors).map(name => (
+                                            <div style={{color: 'red'}}>{name} : {errors[name]}</div>
+                                        ))
+                                    }
+                                </div>
+                            }
 
 
                             <div className="col-9"></div>

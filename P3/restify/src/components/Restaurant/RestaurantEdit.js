@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 // import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,11 +14,15 @@ import "./restaurantForms.css";
 // POSSIBLE ISSUE: phone validiation on input and differnet validation in backend
 
 function RestaurantEdit(props) {
+    const { id } = useParams();
+
     const [rName, setrName] = useState('');
     const [rAddr, setrAddr] = useState('');
     const [rPhone, setrPhone] = useState('');
     const [rPostal, setrPostal] = useState('');
     const [rLogo, setrLogo] = useState('');
+
+    const [errors, setErrors] = useState({});
 
     function createRestaurant() {
         //Maybe need to validate fields first?
@@ -32,20 +36,24 @@ function RestaurantEdit(props) {
 
         console.log(body);
 
-        axios.post(`/restaurants/add/`, body, {
+        axios.put(`/restaurants/${id}/edit/`, body, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access")}`
             },
         })
             .then((resp) => {
-                // could do something here if failed return like oh please sign in otherwise it just doesn't change
-                // setLiked(true);
-                // setNumLikes(numLikes+1);
-                console.log("Restaurant added succesfully: ", resp);
+                console.log("Restaurant edited succesfully: ", resp);
             })
             .catch(error => {
-                //this.setState({ errorMessage: error.message });
-                console.error('There was an error!', error);
+               if (error.response.status == 400) {
+                    setErrors(error.response.data);
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else { //401 Unauthorized
+                    //TODO, redirect?
+                    console.log("Please log in or sign up first");
+                }
             });
 
     }
@@ -235,7 +243,16 @@ function RestaurantEdit(props) {
                                 </div>
                             </div>
 
-                         
+                            {Object.keys(errors).length > 0 &&
+                                <div className="col-lg-12">
+                                    <i>Please fix the following errors</i>
+                                    {
+                                        Object.keys(errors).map(name => (
+                                            <div style={{color: 'red'}}>{name} : {errors[name]}</div>
+                                        ))
+                                    }
+                                </div>
+                            }
 
 
                             <div className="col-9"></div>

@@ -1,19 +1,54 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import axios from "axios";
-// import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMap, faPhone, faPencil } from '@fortawesome/free-solid-svg-icons';
 
+import axios from "axios";
+import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMap, faPhone, faPencil, faHeart } from '@fortawesome/free-solid-svg-icons';
+
+import RestaurantInfo from './RestaurantInfo';
 
 
 import "./restaurant.css";
 // TODO: Check if user is logged in?
 //populating images, and data via backend
 //import various components and swap them based on tab
+//probably need to add slogan, otherwise remove
+//ADD ID TO API
+//EDIT buttons only show up if user is owner of restaurant!
 
 function Restaurant(props) {
+    const { id } = useParams();
+    const [restaurantInfo, setRestaurantInfo] = useState({
+        "name": "", "address": "", "postal": "", "phone": "",
+        "logo": "", "description": "", "cover_img": "", "carousel_img_1": "",
+        "carousel_img_2": 0, "carousel_img_3": "", "image_1": "", "image_2": "", "image_3": ""
+        , "image_4": "", "num_likes": 0, "num_follows": 0, "num_comments": 0, "num_blogs": 0
+    });
+
+    const [activeTab, setActiveTab] = useState("info");
+
+    useEffect(() => {
+        async function getRestaurantInfo() {
+            let headers;
+            if (localStorage.getItem('access') !== null) {
+                headers = {
+                    'Authorization': `Bearer ${localStorage.getItem("access")}`
+                }
+            }
+
+            axios.get(`/restaurants/${id}/view/`, { headers })
+                .then((response) => {
+                    console.log(response);
+                    setRestaurantInfo(response['data']);
+                    return;
+                });
+        }
+
+        getRestaurantInfo();
+        console.log(restaurantInfo)
+    }, []);
 
     return (
         <>
@@ -26,11 +61,11 @@ function Restaurant(props) {
                                     <button className="btn btn-primary fa" style={{ marginTop: '70px' }} type="button">Follow</button>
                                 </div>
                                 <div className=" mt-2">
-                                    <button className="btn btn-primary fa fa-heart bg-danger border-danger" type="button"> Like</button>
+                                    <button className="btn btn-primary fa fa-heart bg-danger border-danger" type="button"> <FontAwesomeIcon icon={faHeart} style={{ paddingRight: '5px' }} />Like</button>
                                 </div>
                                 <div className="text-center text-white">
                                     <img src="../Images/logo.png" className="rlogo" alt="..." />
-                                    <h1>Pizza Pizza</h1>
+                                    <h1 className="r-title">{restaurantInfo['name']}</h1>
                                     <i>“Always our best food, made especially for you”</i>
                                 </div>
                             </div>
@@ -46,199 +81,57 @@ function Restaurant(props) {
                                     <div className="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                         <div className="nav-item">
 
-                                            <a className="btn btn-primary btn-lg edit-button " href="editRestaurant.html"
+                                            {activeTab == "info" ? <a className="btn btn-primary btn-md edit-button " href="editRestaurant.html"
                                                 role="button">
-                                                    <FontAwesomeIcon icon={faPencil} size="1x" style={{paddingRight: '10px'}}/> 
-                                                 Edit
-                                            </a>
+                                                <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />
+                                                Edit
+                                            </a> : ''}
 
-                                            <a className="nav-item nav-link active" id="nav-home-tab" href="#" role="tab"
-                                                aria-controls="nav-home" aria-selected="true">Info</a>
+                                            <a className={activeTab == "info" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-info-tab" href="#nav-info" role="tab"
+                                                onClick={() => setActiveTab("info")}>Info</a>
                                         </div>
                                         <div className="nav-item">
-                                            <a className="nav-item nav-link" id="nav-profile-tab" href="menu.html" role="tab"
-                                                aria-controls="nav-profile" aria-selected="false">Menu</a>
+                                            {activeTab == "menu" ? <a className="btn btn-primary btn-md edit-button " href="editRestaurant.html"
+                                                role="button">
+                                                <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />
+                                                Edit
+                                            </a> : ''}
+                                            <a className={activeTab == "menu" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-menu-tab" href="#nav-menu" role="tab"
+                                                onClick={() => setActiveTab("menu")}>Menu </a>
                                         </div>
                                         <div className="nav-item">
-                                            <a className="nav-item nav-link" id="nav-contact-tab" href="restaurantBlogs.html" role="tab"
-                                                aria-controls="nav-contact" aria-selected="false">Blogs</a>
+                                            {activeTab == "blogs" ? <a className="btn btn-primary btn-md edit-button " href="editRestaurant.html"
+                                                role="button">
+                                                <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />
+                                                Add New Blog Post
+                                            </a> : ''}
+                                            <a className={activeTab == "blogs" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-blogs-tab" href="#nav-blogs" role="tab"
+                                                onClick={() => setActiveTab("blogs")}>Blogs </a>
                                         </div>
                                         <div className="nav-item">
-                                            <a className="nav-item nav-link" id="nav-about-tab" href="comments.html" role="tab"
-                                                aria-controls="nav-about" aria-selected="false">Comments</a>
+                                            <a className={activeTab == "comments" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-comments-tab" href="#nav-comments" role="tab"
+                                                onClick={() => setActiveTab("comments")}>Comments </a>
                                         </div>
 
                                     </div>
                                 </nav>
 
                                 <div className="tab-content py-3 px-3 px-sm-0 border-0 bg-transparent" id="nav-tabContent">
-                                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                        aria-labelledby="nav-home-tab">
-                                        <div className="row justify-content-center mb-4 ">
-                                            <div className="col-md-8">
-                                                <div className="card border-primary mx-sm-1 p-3">
-                                                    <div className="row">
-                                                        <div className="card border-primary shadow text-primary p-2 my-card col-md-2">
-                                                        <FontAwesomeIcon icon={faMap} size="1x"/> 
-                                                        </div>
-                                                        <div className="text-primary col-md-10 d-flex align-items-center">
-                                                            <h6 className="m-0">1234 New York Drive, Vasilievsky Island ON</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-4">
-                                                <div className="card border-primary mx-sm-1 p-3">
-                                                    <div className="row">
-                                                        <div className="card border-primary shadow text-primary p-2 my-card col-md-2">
-                                                        <FontAwesomeIcon icon={faPhone} size="1x"/> 
-                                                        </div>
-                                                        <div className="text-primary col-md-10 d-flex align-items-center">
-                                                            <h6 className="m-0">888-888-8888</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div className="row justify-content-center">
-                                                <div className="col-md-3">
-                                                    <div className="card border-info mx-sm-1 p-3">
-                                                        <div className="text-info text-center mt-3">
-                                                            <h4>Likes</h4>
-                                                        </div>
-                                                        <div className="text-info text-center mt-2">
-                                                            <h1>234</h1>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-3">
-                                                    <div className="card border-success mx-sm-1 p-3">
-                                                    
-                                                        <div className="text-success text-center mt-3">
-                                                            <h4>Followers</h4>
-                                                        </div>
-                                                        <div className="text-success text-center mt-2">
-                                                            <h1>9332</h1>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-3">
-                                                    <div className="card border-danger mx-sm-1 p-3">
-                                                        
-                                                        <div className="text-danger text-center mt-3">
-                                                            <h4>Blog Posts</h4>
-                                                        </div>
-                                                        <div className="text-danger text-center mt-2">
-                                                            <h1>346</h1>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-3">
-                                                    <div className="card border-warning mx-sm-1 p-3">
-                                                       
-                                                        <div className="text-warning text-center mt-3">
-                                                            <h4>Comments</h4>
-                                                        </div>
-                                                        <div className="text-warning text-center mt-2">
-                                                            <h1>346</h1>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="row mt-4">
-                                            <div className="col-md-12">
-                                                <div className="p-4 bg-light rounded" style={{height: '100%'}}>
-                                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                                    nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                                    nulla
-                                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                                    officia
-                                                    deserunt mollit anim id est laborum. "Lorem ipsum dolor sit amet, consectetur
-                                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                                    aliqua.
-                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                                    velit
-                                                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                                    non
-                                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.""
-                                                </div>
-                                            </div>
-                                
-                                        </div>
-
-                                        <div id="carouselExampleIndicators" className="carousel slide mt-4" data-bs-ride="carousel">
-                                            <div className="carousel-indicators">
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                    data-bs-slide-to="0" className="active" aria-current="true"
-                                                    aria-label="Slide 1"></button>
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                    data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                    data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                            </div>
-                                            <div className="carousel-inner">
-                                                <div className="carousel-item active">
-                                                    <img src="../Images/bbb-splash.png" className="d-block w-100" alt="..." />
-                                                </div>
-                                                <div className="carousel-item">
-                                                    <img src="../Images/design.png" className="d-block w-100" alt="..." />
-                                                </div>
-                                                <div className="carousel-item">
-                                                    <img src="../Images/food.png" className="d-block w-100" alt="..." />
-                                                </div>
-                                            </div>
-                                            <button className="carousel-control-prev" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span className="visually-hidden">Previous</span>
-                                            </button>
-                                            <button className="carousel-control-next" type="button"
-                                                data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span className="visually-hidden">Next</span>
-                                            </button>
-                                        </div>
-                                        <div className="row mt-4 d-flex h-100 mb-4">
-                                            <div className="col-md-3 ">
-                                                <img src="../Images/chania.jpg" alt="..." className="img-thumbnail w-100"
-                                                    style={{height: '250px'}} />
-                                            </div>
-                                            <div className="col-md-3">
-                                                <img src="../Images/nature.jpg" alt="..." className="img-thumbnail w-100"
-                                                    style={{height: '250px'}} />
-                                            </div>
-                                            <div className="col-md-3">
-                                                <img src="../Images/lights.jpg" alt="..." className="img-thumbnail w-100"
-                                                    style={{height: '250px'}} />
-                                            </div>
-                                            <div className="col-md-3">
-                                                <img src="../Images/fjords.jpg" alt="..." className="img-thumbnail w-100"
-                                                    style={{height: '250px'}} />
-                                            </div>
-                                        </div>
-
-
-
-
-
+                                    <div className={activeTab == "info" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-info" role="tabpanel"
+                                        aria-labelledby="nav-info-tab">
+                                        <RestaurantInfo address={restaurantInfo['address']} phone={restaurantInfo['phone']} postal={restaurantInfo['postal']}
+                                            num_likes={restaurantInfo['num_likes']} num_follows={restaurantInfo['num_follows']} num_blogs={restaurantInfo['num_blogs']} num_comments={restaurantInfo['num_comments']}
+                                            carousel_img_1={restaurantInfo['carousel_img_1']} carousel_img_2={restaurantInfo['carousel_img_2']} carousel_img_3={restaurantInfo['carousel_img_3']}
+                                            image_1={restaurantInfo['image_1']} image_2={restaurantInfo['image_2']} image_3={restaurantInfo['image_3']} image_4={restaurantInfo['image_4']} />
                                     </div>
-                                    <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                        2
+                                    <div className={activeTab == "menu" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab">
+                                        <div>Component menu</div>
                                     </div>
-                                    <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                        3
+                                    <div className={activeTab == "blogs" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-blogs" role="tabpanel" aria-labelledby="nav-blogs-tab">
+                                        <div>Component blogs</div>
                                     </div>
-                                    <div className="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                        4
+                                    <div className={activeTab == "comments" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
+                                        <div>Component comments</div>
                                     </div>
                                 </div>
 

@@ -10,10 +10,11 @@ import re
 
 class RestaurantSerializer(ModelSerializer):
     num_likes = serializers.IntegerField(read_only=True, required=False, default=0)
+    id = serializers.ReadOnlyField()
 
     class Meta:
         model = Restaurant
-        fields = ['name', 'address', 'postal', 'phone', 'logo', 'num_likes'] 
+        fields = ['id', 'name', 'address', 'postal', 'phone', 'logo', 'num_likes'] 
 
     def validate(self, attrs):
         _user = self.context['request'].user

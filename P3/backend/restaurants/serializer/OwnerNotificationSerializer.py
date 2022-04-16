@@ -8,4 +8,4 @@ class OwnerNotificationSerializer(ModelSerializer):
     last_modified = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     class Meta:
         model = OwnerNotification
-        fields = ['restaurant', 'title', 'last_modified']
+        fields = ['id', 'restaurant', 'title', 'last_modified']

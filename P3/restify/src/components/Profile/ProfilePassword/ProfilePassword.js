@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {singleNameValid} from "../../CP/SignUpFormValidation/SignUpFormValidation";
+import {profileEditPasswordValid} from "../../CP/SignUpFormValidation/SignUpFormValidation";
 
 
 const ProfilePassword = () => {
@@ -13,7 +13,7 @@ const ProfilePassword = () => {
     const [success, setSuccess] = useState("")
 
     useEffect(() => {
-
+        profileEditPasswordValid(newPassword, newPassword2, setError)
     }, [oldPassword, newPassword, newPassword2]);
 
 
@@ -28,34 +28,39 @@ const ProfilePassword = () => {
 
     const updatePasswordAPI = event => {
         event.preventDefault()
-        axios.put(`/accounts/profile/edit/`,
-            {
-                "old_password": oldPassword,
-                "new_password": newPassword,
-                "new_password2": newPassword2,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("access")}`
-                },
-            })
-            .then((resp) => {
+        if(profileEditPasswordValid(newPassword, newPassword2, setError) &&
+            oldPassword.length > 0 && newPassword.length > 8) {
 
-                // could do something here if failed return like oh please sign in otherwise it just doesn't change
-                if (resp.status === 200) {
-                    setOldPassword("")
-                    setNewPassword("")
-                    setNewPassword2("")
-                    setSuccess("Password Change Successfully.")
-                }
-            }).catch(err => {
-                if(err.response.status === 400) {
+
+            axios.put(`/accounts/profile/edit/`,
+                {
+                    "old_password": oldPassword,
+                    "new_password": newPassword,
+                    "new_password2": newPassword2,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("access")}`
+                    },
+                })
+                .then((resp) => {
+
+                    // could do something here if failed return like oh please sign in otherwise it just doesn't change
+                    if (resp.status === 200) {
+                        setOldPassword("")
+                        setNewPassword("")
+                        setNewPassword2("")
+                        setSuccess("Password Change Successfully.")
+                    }
+                }).catch(err => {
+                if (err.response.status === 400) {
                     console.log(err.response.data.password[0])
                     console.log(err.response.data)
                     setError("Error: " + err.response.data.password[0])
                 }
 
-        });
+            });
+        }
     }
 
     return (
@@ -71,15 +76,15 @@ const ProfilePassword = () => {
                 </div>
 
                 <div className="input-group mb-3">
-                    <input id="old-pass" type="password" className="form-control login-form-control input-text-styling shadow-none" required
+                    <input id="old-pass" type="password" className="form-controlAdd form-control login-form-control input-text-styling shadow-none" required
                            placeholder="Old Password"  value={oldPassword} name="old-pass"
                            onChange={event => update(event)}/>
 
-                    <input id="new-pass" type="password" className="form-control login-form-control input-text-styling shadow-none" required
+                    <input id="new-pass" type="password" className="form-controlAdd form-control login-form-control input-text-styling shadow-none" required
                            placeholder="New Password" value={newPassword} name="new-pass"
                            onChange={event => update(event)}/>
 
-                    <input id="new-pass2" type="password" className="form-control login-form-control input-text-styling shadow-none" required
+                    <input id="new-pass2" type="password" className="form-controlAdd form-control login-form-control input-text-styling shadow-none" required
                            placeholder="Confirm New Password" value={newPassword2} name="new-pass2"
                            onChange={event => update(event)}/>
                 </div>
@@ -91,7 +96,7 @@ const ProfilePassword = () => {
                     </div>
                 </div>
                 <div className="align-items-end col-3">
-                    <input value="SAVE PASSWORD" type="submit" className="save-btn btn shadow-none"/>
+                    <input value="SAVE PASSWORD" type="submit" className="save-btn save-btn-profile btn shadow-none"/>
                 </div>
             </form>
 

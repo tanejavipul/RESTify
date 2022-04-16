@@ -5,7 +5,7 @@ import axios from "axios";
 import {emailValid, phoneValid, singleNameValid} from "../../CP/SignUpFormValidation/SignUpFormValidation";
 
 
-const ProfileForm = () => {
+const ProfileForm = ({profileUpdate}) => {
 
     const [temp, setTemp] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -128,7 +128,7 @@ const ProfileForm = () => {
     return (
         <>
             <h2 className="profile-h2-h4">Edit Profile</h2>
-            <ProfileIMG/>
+            <ProfileIMG profileUpdate={profileUpdate}/>
             <form className="row mx-0" onSubmit={editProfileAPI}>
                 <ProfileInput name={"firstname"} placeHolder={"First Name"} label={"FIRST NAME"} value={firstName}
                               update={update} error={firstNameError}/>
@@ -146,7 +146,7 @@ const ProfileForm = () => {
                 </div>
                 <div className="align-items-end col-3">
 
-                    <input value="SAVE CHANGES" type="submit" className="save-btn btn shadow-none"/>
+                    <input value="SAVE CHANGES" type="submit" className="save-btn save-btn-profile btn shadow-none"/>
 
                 </div>
             </form>

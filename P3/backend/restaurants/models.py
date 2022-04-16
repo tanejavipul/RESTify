@@ -41,12 +41,17 @@ class RestaurantNotification(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='restaurantUpdate')
     title = models.CharField(max_length=200)
     last_modified = DateTimeField(auto_now=True,editable=True)
+    def __str__(self):
+        return str(self.id)+ ". Notification: " + '"'+ str(self.restaurant.name) +'"' + " - " + str(self.title)
 
 class OwnerNotification(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='ownerNotification')
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='ownerNotification')
     title = models.CharField(max_length=200)
     last_modified = models.DateTimeField(auto_now=True)
+#     def __str__(self):
+#         return str(self.id)+ ". Notification: " + '"'+ str(self.restaurant.name) +'"' + " - " + str(self.title)
+#
 
 class Comment(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='comments')
@@ -65,3 +70,5 @@ class RestaurantLike(models.Model):
 class Following(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=CASCADE, related_name='following')
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, related_name='followers')
+    def __str__(self):
+        return "User: " + str(self.user) + " - Follows - Restaurant: " +  str(self.restaurant)

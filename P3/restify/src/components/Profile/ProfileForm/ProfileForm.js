@@ -80,8 +80,6 @@ const ProfileForm = ({profileUpdate}) => {
         event.preventDefault()
         let check = singleNameValid(firstName, setFirstNameError) && singleNameValid(lastName, setLastNameError) &&
                     emailValid(email, setEmailError) && phoneValid(phone, setPhoneError)
-        console.log(singleNameValid(firstName, setFirstNameError), singleNameValid(lastName, setLastNameError))
-        console.log(emailValid(email, setEmailError), phoneValid(phone, setPhoneError))
         if(check) {
             axios.put(`/accounts/profile/edit/`,
                 {
@@ -97,7 +95,6 @@ const ProfileForm = ({profileUpdate}) => {
                     },
                 })
                 .then((resp) => {
-                    console.log(resp)
                     // could do something here if failed return like oh please sign in otherwise it just doesn't change
                     if (resp.status === 200) {
                         setFirstName(resp.data.first_name)

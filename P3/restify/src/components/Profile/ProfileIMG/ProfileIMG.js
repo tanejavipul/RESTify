@@ -47,8 +47,6 @@ const ProfileIMG = ({profileUpdate}) => {
                 }
         });
     }
-    console.log(success)
-
 
     return (
         <>

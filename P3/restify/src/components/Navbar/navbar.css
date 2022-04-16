@@ -181,3 +181,20 @@
     height: 400px;
 }
 
+.notification-title {
+    background-color: var(--blue-main);
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    font-style: italic;
+    padding: 0.1em;
+    font-size: 1.2em;
+}
+
+.notification-0-padding{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.dropdown-menu-down-fix {
+    top: 150% !important;
+}

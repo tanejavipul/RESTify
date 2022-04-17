@@ -50,7 +50,11 @@ function Restaurant(props) {
                 console.log(response);
                 setFollowing(response['data']['result']);
                 return;
-            })
+            }).catch(error => {
+                if (error.response.status === 404) {
+                    console.log("Restaurant not found", error);
+                }
+            });
         }
 
         async function pullLiked() {
@@ -62,7 +66,12 @@ function Restaurant(props) {
                 console.log(response);
                 setLiked(response['data']['result']);
                 return;
-            })
+            }).catch(error => {
+                if (error.response.status === 404) {
+                    console.log("Like not found, User is owner or hasnt liked", error);
+                }
+                console.clear(); //do not need to see 404
+            });
         }
 
         async function getRestaurantInfo() {
@@ -92,11 +101,9 @@ function Restaurant(props) {
         pullLiked();
         console.log(restaurantInfo);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [id]);
 
     function updateLike(like) {
-        console.log('clicked');
-        // follow bool to check if we are liking or unliking
         if (like) {
             axios.post(`/restaurants/${id}/like/add/`, {}, {
                 headers: {
@@ -104,27 +111,28 @@ function Restaurant(props) {
                 },
             })
                 .then((resp) => {
-                    // could do something here if failed return like oh please sign in otherwise it just doesn't change
                     setLiked(true);
-                    // setNumLikes(numLikes + 1);
+                }).catch(error => {
+                    if (error.response.status === 401) { //shouldnt happen, but navigate to login, if user is logged out
+                        navigate('/');
+                    }
                 });
         } else {
-            // i think axios handles headers diff for delete
             const headers = {
                 'Authorization': `Bearer ${localStorage.getItem("access")}`
             }
             axios.delete(`/restaurants/${id}/like/`, { headers })
                 .then((resp) => {
-                    // could do something here if failed return like oh please sign in otherwise it just doesn't change
                     setLiked(false);
-                    // setNumLikes(numLikes - 1);
+                }).catch(error => {
+                    if (error.response.status === 401) {
+                        navigate('/');
+                    }
                 });
         }
     }
 
     function updateFollowing(val) {
-        console.log('clicked');
-        // follow bool to check if we are liking or unliking
         if (val) {
             axios.post(`/restaurants/follow/${id}/`, {}, {
                 headers: {
@@ -132,20 +140,23 @@ function Restaurant(props) {
                 },
             })
                 .then((resp) => {
-                    // could do something here if failed return like oh please sign in otherwise it just doesn't change
                     setFollowing(true);
-                    // setNumLikes(numLikes + 1); //TODO check if this auto updates on page refresh
+                }).catch(error => {
+                    if (error.response.status === 401) {
+                        navigate('/');
+                    }
                 });
         } else {
-            // i think axios handles headers diff for delete
             const headers = {
                 'Authorization': `Bearer ${localStorage.getItem("access")}`
             }
             axios.delete(`/restaurants/follow/${id}/`, { headers })
-                .then((resp) => {
-                    // could do something here if failed return like oh please sign in otherwise it just doesn't change
+                .then((resp) => {                  
                     setFollowing(false);
-                    // setNumLikes(numLikes - 1);
+                }).catch(error => {
+                    if (error.response.status === 401) {
+                        navigate('/');
+                    }
                 });
         }
     }

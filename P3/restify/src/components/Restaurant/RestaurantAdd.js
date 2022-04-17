@@ -5,11 +5,6 @@ import axios from "axios";
 import avatar from "../assets/Restaurant-Logo/restaurant-logo.png"
 import Navbar from "../Navbar/Navbar";
 import "./restaurantForms.css";
-// TODO: Check if user is logged in?
-// printing error messages
-// updating logo
-//phone validation is different from sign up page?
-//might be issue, user is not owner upon redirect? issue with not sighning out?
 
 function RestaurantAdd(props) {
     const navigate = useNavigate();
@@ -48,12 +43,12 @@ function RestaurantAdd(props) {
                 //this.setState({ errorMessage: error.message });
                 if (error.response.status === 400) {
                     setErrors(error.response.data);
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else { //401 Unauthorized
-                    //navigate();
-                    console.log("Please log in or sign up first");
+                    // console.log(error.response.data);
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
+                } else if (error.response.status === 401) {
+                    //401 already dealt with in nav bar compo
+                    navigate('/');
                 }
             });
 

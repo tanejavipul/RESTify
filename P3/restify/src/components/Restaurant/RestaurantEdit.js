@@ -7,13 +7,6 @@ import "./restaurantForms.css";
 import avatar from "../assets/Restaurant-Logo/restaurant-logo.png"
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
-// TODO: Check if user is logged in?
-// printing error messages
-// updating logo
-//pull restaurant from owner, redirect to create restarurant page if no restaurnt exists 404
-// POSSIBLE ISSUE: phone validiation on input and differnet validation in backend
-// make sure user is logged in, redirect otherwise
-//REMOVE PICTURE BUTTON
 
 function RestaurantEdit(props) {
     const location = useLocation();
@@ -108,20 +101,17 @@ function RestaurantEdit(props) {
             .catch(error => {
                 if (error.response.status === 400) {
                     setErrors(error.response.data);
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else { //401 Unauthorized
-                    //TODO, redirect?
-                    console.log("Please log in or sign up first");
+                    // console.log(error.response.data);
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
+                } else if (error.response.status === 404) {
+                    navigate('/home/');
+                    console.log("restaurant not found", error);
                 }
             });
     }
 
-    // const ImageUploader = e => {
-    //     setrLogoPreview(URL.createObjectURL(e.target.files[0]));
-    //     setrLogo(e.target.files[0]);
-    // }
+
 
     return (
         <>
@@ -148,20 +138,6 @@ function RestaurantEdit(props) {
                                     <input id="logo-img" type="file" className="btn shadow-none" onChange={e => { setrLogoPreview(URL.createObjectURL(e.target.files[0])); setrLogo(e.target.files[0]) }} />
                                 </div>
                             </div>
-
-                            {/* <div className="col-12">
-                                <div className="add-img">
-                                    <label htmlFor="logo-img">
-                                        <FontAwesomeIcon icon={faImage} style={{ fontSize: "50px" }} />
-                                    </label>
-
-                                    <label htmlFor="logo-img" className="label-file mb-3">
-                                        UPLOAD A COVER PHOTO
-                                    </label>
-
-                                    <input id="logo-img" type="file" className="btn shadow-none" required />
-                                </div>
-                            </div> */}
 
                             <div className="col-lg-6">
                                 <div className="input-group mb-4">
@@ -212,47 +188,7 @@ function RestaurantEdit(props) {
                                 </div>
                             </div>
 
-                            {/* <div className="mb-4">
-                                <div className="profile-label">CAROUSEL</div>
-                                <div id="pictureHelpBlock" className="form-text mb-2">
-                                    These pictures will be shown separately after the carousel component of your restaurant page
-                                    (max 3)
-                                </div>
-                                <div className="col-lg-12">
-                                    <div>
-                                        <label htmlFor="c-img-1">
-                                            <FontAwesomeIcon icon={faImage} style={{ fontSize: "50px" }} />
-                                        </label>
-                                        <label htmlFor="c-img-1" className="label-file mb-3">
-                                            PICTURE 1
-                                        </label>
-                                        <input id="c-img-1" type="file" className="btn shadow-none" required />
-                                    </div>
-                                </div>
-                                <div className="col-lg-12">
-                                    <div>
-                                        <label htmlFor="c-img-2">
-                                            <FontAwesomeIcon icon={faImage} style={{ fontSize: "50px" }} />
-                                        </label>
-                                        <label htmlFor="c-img-2" className="label-file mb-3">
-                                            PICTURE 2
-                                        </label>
-                                        <input id="c-img-2" type="file" className="btn shadow-none" required />
-                                    </div>
-                                </div>
-                                <div className="col-lg-12">
-                                    <div>
-                                        <label htmlFor="c-img-3">
-                                            <FontAwesomeIcon icon={faImage} style={{ fontSize: "50px" }} />
-                                        </label>
-                                        <label htmlFor="c-img-3" className="label-file mb-3">
-                                            PICTURE 3
-                                        </label>
-                                        <input id="c-img-3" type="file" className="btn shadow-none" required />
-                                    </div>
-                                </div>
-                            </div> */}
-
+                            
                             <div>
                                 <div className="profile-label">ADDITIONAL PICTURES</div>
                                 <div id="pictureHelpBlock" className="form-text mb-2">

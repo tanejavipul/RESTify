@@ -87,8 +87,8 @@
 
 
 .rlogo {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 80px;
+    max-height: 80px;
     object-fit: contain;
 }
 
@@ -152,6 +152,23 @@ nav>div a.nav-item.nav-link:hover {
     font-size: 5em;
 }
 
+.r-container {
+position: relative;
+    top: 70%;
+  -webkit-transform: translateY(-70%);
+  -ms-transform: translateY(-70%);
+  transform: translateY(-70%);
+
+}
+
+.r-button {
+    position: absolute;
+    z-index: 100;
+}
+
+.r-image {
+    object-fit: fill;
+}
 
 
 

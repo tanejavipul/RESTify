@@ -45,6 +45,12 @@ class GetRestaurantView(RetrieveAPIView):
     permission_classes = [AllowAny]
     serializer_class = GetRestaurantSerializer
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["restaurant_id"] = self.kwargs['restaurant_id']
+        # context["query_params"] = self.request.query_params
+        return context
+
     def get_object(self):
         return get_object_or_404(self.queryset, id=self.kwargs['restaurant_id'])
 

@@ -13,18 +13,18 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=100)
     postal = models.CharField(max_length=10)
     phone = PhoneNumberField(null=True)
-    logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurant/Logo/logo.png', blank=False) 
+    logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurants/Logo/logo.png', blank=False) 
 
     #extra fields on restaurant page
     description = models.TextField(max_length=2000, blank=True)
-    cover_img = models.ImageField(upload_to='Restaurants/Cover/', default='Restaurant/Cover/image.png', blank=True, null=True)
-    carousel_img_1 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
-    carousel_img_2 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
-    carousel_img_3 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurant/Carousel/image.png', blank=True, null=True)
-    image_1 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
-    image_2 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
-    image_3 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
-    image_4 = models.ImageField(upload_to='Restaurants/Image/', default='Restaurant/Image/image.png', blank=True, null=True)
+    cover_img = models.ImageField(upload_to='Restaurants/Cover/', default='Restaurants/Cover/image.png', blank=True, null=True)
+    carousel_img_1 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurants/Carousel/image.png', blank=True, null=True)
+    carousel_img_2 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurants/Carousel/image.png', blank=True, null=True)
+    carousel_img_3 = models.ImageField(upload_to='Restaurants/Carousel/', default='Restaurants/Carousel/image.png', blank=True, null=True)
+    image_1 = models.ImageField(upload_to='Restaurants/Image/', blank=True, null=True)
+    image_2 = models.ImageField(upload_to='Restaurants/Image/',  blank=True, null=True)
+    image_3 = models.ImageField(upload_to='Restaurants/Image/',  blank=True, null=True)
+    image_4 = models.ImageField(upload_to='Restaurants/Image/',  blank=True, null=True)
     
 
     def __str__(self):

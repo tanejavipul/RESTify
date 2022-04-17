@@ -78,7 +78,7 @@ function RestaurantEdit(props) {
         form_data.append('phone', rPhone);
 
         form_data.append('description', rDesc);
-        form_data.append('logo', rLogo);
+        form_data.append('logo', rLogo); 
 
         if (rImage1 !== "")
             form_data.append('image_1', rImage1);

@@ -109,7 +109,7 @@ function EditMenu(props) {
         // }
         
         // don't think I even use anymore
-        setMenuItems(tempItems);
+        // setMenuItems(tempItems);
         setClicked(false);
         // setPopUp(true);
     }
@@ -127,7 +127,7 @@ function EditMenu(props) {
     // TODO
     function changePopUp(e) {
         e.preventDefault();
-        setTimeout(() => {setOpen(false)}, 2000);
+        setTimeout(() => {setPopUp(false)}, 2000);
     }
 
     async function getMenuItems() {

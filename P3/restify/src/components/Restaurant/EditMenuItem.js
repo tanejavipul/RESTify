@@ -22,7 +22,6 @@ function EditMenuItem({setMenuItems, ...props}) {
         console.log('svaed ', props.saved);
         if (props.saved) {
             let newItem;
-            console.log(props.id, props.new)
             // undefined means existing so not new
             if (typeof props.new !== 'undefined') {
                 newItem = true;
@@ -30,6 +29,7 @@ function EditMenuItem({setMenuItems, ...props}) {
                 newItem = false;
             }
 
+            console.log(props.id, newItem);
             setMenuItems(props.id, document.getElementById(`item-name-${props.id}`).value, document.getElementById(`item-desc-${props.id}`).value, 
                         document.getElementById(`item-price-${props.id}`).value, document.getElementById(`item-type-${props.id}`).value, newItem);
         }

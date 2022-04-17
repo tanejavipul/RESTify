@@ -1,10 +1,9 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import status, serializers
-from rest_framework.response import Response
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from blogs.models import BlogPost
-from restaurants.models import Restaurant, OwnerNotification
+from restaurants.models import Restaurant, RestaurantNotification
 from restaurants.views import NotificationSelector as NS
 
 
@@ -67,7 +66,7 @@ class BlogPostSerializer(ModelSerializer):
 
         # create new notification for posting comment
         message = NS.getRestaurantNotificationTitle(NS.BLOG, restaurant)
-        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.BLOG, type_id=new_post.id)
+        self.notification = RestaurantNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.BLOG, type_id=new_post.id)
         self.notification.save()
 
         return new_post

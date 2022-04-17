@@ -2,7 +2,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
-from restaurants.models import MenuItem, Restaurant, OwnerNotification
+from restaurants.models import MenuItem, Restaurant, OwnerNotification, RestaurantNotification
 from restaurants.views import NotificationSelector as NS
 
 validTypes = ["Appetizers", "Main Course", "Sides", "Specials", "Desserts", "Drinks"]
@@ -61,7 +61,7 @@ class EditMenuSerializer(ModelSerializer):
         # create new notification for updating menu item
         print(instance.id)
         message = NS.getRestaurantNotificationTitle(NS.MENU, restaurant)
-        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.MENU, type_id=instance.id)
+        self.notification = RestaurantNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.MENU, type_id=instance.id)
         self.notification.save()
 
         return instance
@@ -108,7 +108,7 @@ class AddMenuSerializer(ModelSerializer):
 
         # create new notification for updating menu item
         message = NS.getRestaurantNotificationTitle(NS.MENU, restaurant)
-        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.MENU, type_id=menu_item.id)
+        self.notification = RestaurantNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.MENU, type_id=menu_item.id)
         self.notification.save()
 
         return menu_item

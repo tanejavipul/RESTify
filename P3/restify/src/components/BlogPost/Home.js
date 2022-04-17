@@ -7,24 +7,52 @@ import BlogPostTimeline from './BlogPostTimeline';
 function Home(props) {
 
     const [blogs, setBlogs] = useState([]);
-    const [numPosts, setNumPosts] = useState(0);
-    const [nextToken, setNextToken] = useState(""); // TODO
+    const [nextToken, setNextToken] = useState(`/blogs/home/?page=1`); // TODO
 
     useEffect(() => {
-        getHomePosts();
-    }, []);
+        // issue with initial pull since home page not scrollable initially
+        if (nextToken == '/blogs/home/?page=1') {
+            getHomePosts();
+        }
+        document.getElementsByTagName('body')[0].onscroll = (e) => scrollPage(e);
+        // return function cleanupListener() {
+        //     console.log('removed');
+        //     document.removeEventListener('body', scrollPage);
+        // }
+    }, [nextToken]);
+
+    const scrollPage = (e) => {
+        if(document.documentElement.scrollHeight === window.innerHeight + document.documentElement.scrollTop) {
+            // console.log('scrolled to the bottom');
+            getHomePosts();
+        }
+    };
 
     function getHomePosts() {
         const headers = {
             'Authorization': `Bearer ${localStorage.getItem("access")}`
         }
 
-        axios.get(`/blogs/home/`, {headers})
-        .then((response) => {
-            setBlogs(response['data']['results']);
-            setNumPosts(response['data']['count']);
-            setNextToken(response['data']['next']);
-        });
+        if (nextToken) {
+            axios.get(nextToken, { headers })
+            .then((resp) => {
+                if(resp.status === 200) {
+                    console.log('respo', resp);
+                    let data = resp.data.results;
+                    setNextToken(resp.data.next);
+
+                    for (let x = 0; x < resp.data.results.length; x++) {
+                        let temp = { "id": data[x].id, "title": data[x].title, "description": data[x].description, "primary_photo": data[x].primary_photo, "last_modified": data[x].last_modified, "bloglikes": data[x].bloglikes }
+                        setBlogs(blogs => [...blogs, temp]);
+                    }
+                    // console.log('next', resp.data.next);
+                    // console.log("pages", numbers+1);
+                    if (!resp.data.next) {
+                        setNextToken(null);
+                    }
+                }
+            });
+        }
     }
 
     return (

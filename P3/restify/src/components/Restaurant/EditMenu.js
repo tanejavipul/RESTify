@@ -15,14 +15,14 @@ function EditMenu(props) {
 
     const { id } = useParams();
     const [numMenuItems, setNumMenuItems] = useState(0);
-    const [nextToken, setNextToken] = useState(""); // TODO
+    const [nextToken, setNextToken] = useState(`/restaurants/${id}/menu/?page=1`); // TODO
     const [menuItems, setMenuItems] = useState([]);
     const [clicked, setClicked] = useState(false);
     const [isOpen, setPopUp] = useState(false);
 
     useEffect(() => {
         getMenuItems();
-    }, []);
+    }, [nextToken]);
 
     // not working
     // function updateMenuItems(menu_item_num) {
@@ -130,32 +130,42 @@ function EditMenu(props) {
         setTimeout(() => {setPopUp(false)}, 2000);
     }
 
-    async function getMenuItems() {
+    function getMenuItems() {
         const headers = {
             'Authorization': `Bearer ${localStorage.getItem('access')}`
         }
-        let response = await axios.get(`/restaurants/${id}/menu/`, {headers});
-        setMenuItems(response['data']['results']);
-        setNumMenuItems(response['data']['count']);
-        console.log(menuItems);
+        console.log('running');
+        // let response = await axios.get(`/restaurants/${id}/menu/`, {headers});
+        // setMenuItems(response['data']['results']);
+        // setNumMenuItems(response['data']['count']);
+        // console.log(menuItems);
+
+        if (nextToken) {
+            axios.get(nextToken, { headers })
+            .then((resp) => {
+                if(resp.status === 200) {
+                    console.log('respo', resp);
+                    let data = resp.data.results;
+                    setNextToken(resp.data.next);
+
+                    for (let x = 0; x < resp.data.results.length; x++) {
+                        let temp = { "id": data[x].id, "description": data[x].description, "name": data[x].name, "type": data[x].type, "price": data[x].price }
+                        setMenuItems(menuItems => [...menuItems, temp]);
+                    }
+                    // console.log('next', resp.data.next);
+                    // console.log("pages", numbers+1);
+                    if (!resp.data.next) {
+                        setNextToken(null);
+                    }
+                }
+            });
+        }
     }
 
     return (
         <div id="edit-menu-intro">
             <div class="mask d-flex align-items-center h-100 tone-down-bg">
                 <div class="container">
-                    {/* {isOpen ? 
-                        <div id={'temp'} className="popup-box">
-                            <div className="nested-popup-box">
-                                <span className="close-icon" onClick={(e) => setOpen(false)}></span>
-                                <b>Successfully updated</b>
-                                <br />
-                                <button onClick={(e) => deleteBlog(e)}>Confirm</button>
-                                <button onClick={() => setOpen(false)}>Cancel</button>
-                            </div>
-                        </div> :
-                        <></>
-                    } */}
                     <form class="edit-menu-row" style={{backgroundColor: '#FFFFFF'}}>
                         <h2 class="d-flex justify-content-center edit-menu-h2">Add / Edit Menu</h2>
 

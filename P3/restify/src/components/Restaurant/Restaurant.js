@@ -232,7 +232,7 @@ function Restaurant(props) {
                                             image_1={restaurantInfo['image_1']} image_2={restaurantInfo['image_2']} image_3={restaurantInfo['image_3']} image_4={restaurantInfo['image_4']} />
                                     </div>
                                     <div className={activeTab == "menu" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab">
-                                        <MenuSection isOwner={restaurantInfo['is_owner']} />
+                                        <MenuSection is_owner={restaurantInfo['is_owner']} />
                                     </div>
                                     <div className={activeTab == "blogs" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-blogs" role="tabpanel" aria-labelledby="nav-blogs-tab">
                                         <RestaurantBlogs />

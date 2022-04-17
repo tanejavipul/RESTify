@@ -50,7 +50,8 @@ function MenuSection(props) {
                     <h4 class="text-light">{object}</h4>
                     <div class="row row-cols-2 row-cols-md-2 g-2 mb-4">
                         {menuItems.filter(menuItem => menuItem['type'] == object).map((obj, i) => {
-                                return <MenuItem name={obj['name']} description={obj['description']} price={obj['price']} />
+                                return <MenuItem id={obj['id']} name={obj['name']} description={obj['description']} 
+                                                     price={obj['price']} is_owner={props.is_owner} refreshMenu={getMenu} />
                         })}
                     </div>
                 </>

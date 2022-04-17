@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from restaurants.views.CommentView import AddCommentView, CommentView
 from restaurants.views import NotificationSelector as NS
-from restaurants.views.MenuView import MenuView, EditMenuView, AddMenuView
+from restaurants.views.MenuView import DeleteMenuView, MenuView, EditMenuView, AddMenuView
 from restaurants.views.FollowView import FollowUnfollowView
 from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantListView, GetRestaurantView
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -70,6 +70,7 @@ urlpatterns = [
     path('<int:restaurant_id>/menu/', MenuView.as_view(), name='viewMenu'),
     path('<int:menu_item_id>/editMenuItem/', EditMenuView.as_view(), name='editMenuItem'),
     path('addMenuItem/', AddMenuView.as_view(), name='addMenuItem'),
+    path('<int:menu_item_id>/deleteMenuItem/', DeleteMenuView.as_view(), name='deleteMenuItem'),
 
     # Blogs
     path('<int:restaurant_id>/blogs/', BlogPostRestaurantHomeView.as_view(), name='restaurantBlogs'),

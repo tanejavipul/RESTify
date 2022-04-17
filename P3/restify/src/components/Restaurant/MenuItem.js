@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from "axios";
 
 // import "./menu.css";
 
-function MenuItem(props) {
+function MenuItem({refreshMenu, ...props}) {
 
     const [isOpen, setOpen] = useState(false);
 
@@ -14,22 +15,30 @@ function MenuItem(props) {
 
     function deleteMenuItem(e) {
         e.preventDefault();
-
+        let headers;
+        if (localStorage.getItem('access') !== null) {
+            headers = {
+                'Authorization': `Bearer ${localStorage.getItem("access")}`
+            }
+        }
+        axios.delete(`/restaurants/${props.id}/deleteMenuItem/`, {headers})
+        .then((resp) => {
+            // update parent component
+            refreshMenu();
+            setOpen(false);
+        })
     }
 
     return (
         <div class="col">
             <div class="card h-100">
                 <div class="row g-0">
-                    {/* <div class="col-md-3">
-                        <img src={`/Media/${props.menu_item_pic}`} class="img-fluid rounded-start menu-item-image" alt="..." />
-                    </div> */}
                     <div>
                         {isOpen ? 
                             <div className="popup-box">
                                 <div className="nested-popup-box">
                                     <span className="close-icon" onClick={() => setOpen(false)}>x</span>
-                                    <b>Are you sure you want to delete this Blog Post?</b>
+                                    <b>Are you sure you want to delete this Menu Item?</b>
                                     <br />
                                     <button onClick={(e) => deleteMenuItem(e)}>Confirm</button>
                                     <button onClick={() => setOpen(false)}>Cancel</button>
@@ -37,11 +46,10 @@ function MenuItem(props) {
                             </div> :
                             <></>
                         }
-                        {/* {restaurantOwner ? 
+                        {props.is_owner ? 
                             <span class="menu-item-close" onClick={(e) => togglePopUp(e)}>X</span> :
                             <></>
-                        } */}
-                        
+                        }
                         <div class="card-body">
                             <h4 class="card-title">{props.name}</h4>
                             {/* <p class="card-text"><small class="">{props.description}</small></p> */}

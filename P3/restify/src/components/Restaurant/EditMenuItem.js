@@ -1,22 +1,8 @@
 import {useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./editRestaurantPages.css";
-
-import axios from "axios";
-import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage, faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import { faPicture } from '@fortawesome/free-regular-svg-icons';
 
 function EditMenuItem({setMenuItems, ...props}) {
-
-    const { id } = useParams();
-    // const [name, setName] = useState("");
-    // const [desc, setDesc] = useState("");
-    // const [price, setPrice] = useState(0);
-    // const [type, setType] = useState("");
-    
 
     useEffect(() => {
         console.log('svaed ', props.saved);
@@ -43,8 +29,7 @@ function EditMenuItem({setMenuItems, ...props}) {
 
     return (
         <>
-            <div id={props.id} class="menu-item">
-                {props.id}
+            <div class="menu-item">
                 <div class="input-group mb-3">
                     <label for={`item-name-${props.id}`} class="edit-label col-3 edit-menu-label">MENU ITEM NAME:</label>
                     <input id={`item-name-${props.id}`} type="text" class="form-control col-9 edit-input-styling shadow-none" placeholder="Menu Item Name"

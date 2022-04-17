@@ -50,7 +50,7 @@ function EditMenu(props) {
         }
         formData.append('name', name);
         formData.append('description', desc);
-        formData.append('price', parseInt(price));
+        formData.append('price', parseFloat(price));
         formData.append('type', type);
         // console.log(Array.from(formData));
         // console.log(Object.fromEntries(formData));

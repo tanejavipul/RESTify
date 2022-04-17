@@ -15,8 +15,7 @@ import Navbar from "../Navbar/Navbar";
 function EditMenu(props) {
 
     const { id } = useParams();
-    const [numMenuItems, setNumMenuItems] = useState(0);
-    const [nextToken, setNextToken] = useState(`/restaurants/${id}/menu/?page=1`); // TODO
+    const [nextToken, setNextToken] = useState(`/restaurants/${id}/menu/?page=1`);
     const [menuItems, setMenuItems] = useState([]);
     const [clicked, setClicked] = useState(false);
     const [isOpen, setPopUp] = useState(false);
@@ -135,6 +134,12 @@ function EditMenu(props) {
         const headers = {
             'Authorization': `Bearer ${localStorage.getItem('access')}`
         }
+        axios.get(`/restaurants/${id}/view/`, { headers })
+        .then((response) => {
+            if (response.status === 404 || !response['data']['is_owner']) {
+                window.location.replace(`/home/`);
+            }
+        });
         console.log('running');
         // let response = await axios.get(`/restaurants/${id}/menu/`, {headers});
         // setMenuItems(response['data']['results']);
@@ -144,6 +149,10 @@ function EditMenu(props) {
         if (nextToken) {
             axios.get(nextToken, { headers })
             .then((resp) => {
+                console.log(resp);
+                if (resp.status === 404) {
+                    window.location.replace(`/home/`);
+                }
                 if(resp.status === 200) {
                     console.log('respo', resp);
                     let data = resp.data.results;
@@ -158,6 +167,11 @@ function EditMenu(props) {
                     if (!resp.data.next) {
                         setNextToken(null);
                     }
+                }
+            })
+            .catch((err) => {
+                if (err.response.status == 404) {
+                    window.location.replace(`/home/`);
                 }
             });
         }

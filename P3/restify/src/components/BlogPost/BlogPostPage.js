@@ -51,7 +51,12 @@ function BlogPostPage(props) {
             const headers = {
                 'Authorization': `Bearer ${localStorage.getItem('access')}`
             }
-            let response = await axios.get(`/blogs/${id}/`, {headers});
+            let response = await axios.get(`/blogs/${id}/`, {headers})
+                                        .catch((err) => {
+                                            if (err.response.status == 404) {
+                                                window.location.replace(`/home/`);
+                                            }
+                                        });
             let x = await setBlogPostInfo(response['data']);
             let y = await pullFollowing(response['data']['restaurant_id']);
             let z = await pullLiked();
@@ -76,7 +81,6 @@ function BlogPostPage(props) {
             // button shouldn't pop up anyways
             window.location.replace(`/home/`);
         });
-        
     }
 
     return (
@@ -116,10 +120,10 @@ function BlogPostPage(props) {
                             </> : <></>
                         }
                         <BlogPost restaurant_id={blogPostInfo['restaurant_id']} restaurant_name={blogPostInfo['restaurant_name']} title={blogPostInfo['title']} description={blogPostInfo['description']}
-                                  primary_photo={blogPostInfo['primary_photo']} photo_1={blogPostInfo['photo_1']} photo_2={blogPostInfo['photo_2']} photo_3={blogPostInfo['photo_3']}
+                                  primary_photo={blogPostInfo['primary_photo']} is_owner={blogPostInfo['is_owner']}
                                   num_likes={blogPostInfo['num_likes']} last_modified={blogPostInfo['last_modified']} liked={pulledLike} />
                         <div class="col-lg-4 m-15px-tb blog-aside">
-                            <FollowRestaurant restaurant_name={blogPostInfo['restaurant_name']} restaurant_id={blogPostInfo['restaurant_id']} is_following={isFollowing} />
+                            <FollowRestaurant is_owner={blogPostInfo['is_owner']} restaurant_name={blogPostInfo['restaurant_name']} restaurant_id={blogPostInfo['restaurant_id']} is_following={isFollowing} />
                             <LatestBlogs />
                         </div>
                     </div>

@@ -27,17 +27,15 @@ function Comment(props) {
         // Inspired by https://www.bootdey.com/snippets/view/Simple-Comment-panel
         <>
         <div class="comment-media">
-            <a href="restaurant.html" class="pull-comment-left">
+            <a class="pull-comment-left">
                 {/* Don't love this but probably better than hardcoding url for each image */}
                 <img src={`/Media/${props.profile_pic}`} alt="" class="comment-img-circle" />
             </a>
-            <div class="comment-media media-body">
+            <div class="media-body">
                 <span class="text-muted comment-float-right">
                     <small class="text-muted">{time}</small>
                 </span>
-                <a href="restaurant.html" class="text-decoration-none">
-                    <strong class="text-success">@{props.username}</strong>
-                </a>
+                <strong class="text-success">@{props.username}</strong>
                 <p>
                     {props.comment}
                 </p>

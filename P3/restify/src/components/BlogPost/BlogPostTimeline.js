@@ -76,16 +76,17 @@ function BlogPostTimeline(props) {
                 <div class="vtimeline-block">
                     <span class="vtimeline-date">{time}</span>
                     <div class="vtimeline-content">
-                        <img src={props.primary_photo} alt="" class="img-fluid mb20" />
+                        <img style={{height: '100%', width: '50%', objectFit: 'contain' }} class="mx-auto d-block" src={props.primary_photo} title="Restaurant Image" alt="" />
+                        {/* <img src={props.primary_photo} alt="" class="img-fluid mb20" /> */}
                         <div class="d-flex justify-content-around">
                             <h2 class="blog-title">{props.title}</h2>
-                            <div class="restaurant-icon d-flex flex-column justify-content-center align-items-center">
+                            {/* <div class="restaurant-icon d-flex flex-column justify-content-center align-items-center">
                                 <FontAwesomeIcon icon={faCutlery} size="2x" />
                                 <a class="text-decoration-none text-center" href="restaurantPages/restaurant.html"><h5>{props.restaurant_name}</h5></a>
-                            </div>
+                            </div> */}
                         </div>
                         <p>
-                            {props.description}
+                            {`${props.description.substring(0, 200)} ...`}
                         </p>
                         <hr />
                         <div class="d-flex justify-content-around align-items-center">
@@ -98,10 +99,9 @@ function BlogPostTimeline(props) {
                                 }
                             </button>
                             <a href={`/blogs/${props.blog_id}/`} class="blog-btn read-more">Read More</a>
-                            <button type="button" class="blog-btn share-btns">
-                                {/* Idk functionality for this lul */}
+                            {/* <button type="button" class="blog-btn share-btns">
                                 <FontAwesomeIcon icon={faShare} size="2x" />
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>

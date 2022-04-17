@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import axios from "axios";
-import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMap, faPhone, faPencil, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faMap, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -144,17 +141,17 @@ function RestaurantInfo(props) {
                 </div> }
                 {props.image_2 &&
                 <div className="col-md-3">
-                    <img src={props.image_2} alt="Image 1" className="img-thumbnail w-100"
+                    <img src={props.image_2} alt="" className="img-thumbnail w-100"
                         style={{ height: '250px' }} />
                 </div> }
                 {props.image_3 &&
                 <div className="col-md-3">
-                    <img src={props.image_3} alt="Image 1" className="img-thumbnail w-100"
+                    <img src={props.image_3} alt="" className="img-thumbnail w-100"
                         style={{ height: '250px' }} />
                 </div> }
                 {props.image_4 &&
                 <div className="col-md-3">
-                    <img src={props.image_4} alt="Image 1" className="img-thumbnail w-100"
+                    <img src={props.image_4} alt="" className="img-thumbnail w-100"
                         style={{ height: '250px' }} />
                 </div> }
             </div>

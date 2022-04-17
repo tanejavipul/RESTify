@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faHeart } from '@fortawesome/free-solid-svg-icons';
-
+import { useNavigate } from 'react-router-dom';
 import RestaurantInfo from './RestaurantInfo';
 
 
@@ -25,6 +25,7 @@ import Navbar from "../Navbar/Navbar";
 //Fix links on components nav bar once eric adds his components
 
 function Restaurant(props) {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [restaurantInfo, setRestaurantInfo] = useState({
         "is_owner": false,
@@ -41,42 +42,48 @@ function Restaurant(props) {
 
     useEffect(() => {
         async function pullFollowing() {
-            const headers = {
-                'Authorization': `Bearer ${localStorage.getItem('access')}`
-            }
-            axios.get(`/restaurants/follow/${id}/`, { headers })
-                .then((response) => {
-                    console.log(response);
-                    setFollowing(response['data']['result']);
-                    return;
-                })
+            axios.get(`/restaurants/follow/${id}/`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("access")}`
+                },
+            }).then((response) => {
+                console.log(response);
+                setFollowing(response['data']['result']);
+                return;
+            })
         }
 
         async function pullLiked() {
-            const headers = {
-                'Authorization': `Bearer ${localStorage.getItem('access')}`
-            }
-            axios.get(`/restaurants/${id}/like/`, { headers })
-                .then((response) => {
-                    console.log(response);
-                    setLiked(response['data']['result']);
-                    return;
-                })
+            axios.get(`/restaurants/${id}/like/`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("access")}`
+                },
+            }).then((response) => {
+                console.log(response);
+                setLiked(response['data']['result']);
+                return;
+            })
         }
 
         async function getRestaurantInfo() {
-            let headers;
-            if (localStorage.getItem('access') !== null) {
-                headers = {
-                    'Authorization': `Bearer ${localStorage.getItem("access")}`
-                }
-            }
-
-            axios.get(`/restaurants/${id}/view/`, { headers })
+            axios.get(`/restaurants/${id}/view/`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("access")}`
+                },
+            })
                 .then((response) => {
+                    console.log(localStorage.getItem("access"));
                     console.log(response);
                     setRestaurantInfo(response['data']);
                     return;
+                }).catch(error => {
+                    //this.setState({ errorMessage: error.message });
+                    if (error.response.status === 404) {
+                        navigate('/home/');
+                        // console.log(error.response.data);
+                        // console.log(error.response.status);
+                        // console.log(error.response.headers);
+                    } 
                 });
         }
 
@@ -84,6 +91,7 @@ function Restaurant(props) {
         pullFollowing();
         pullLiked();
         console.log(restaurantInfo);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function updateLike(like) {
@@ -158,12 +166,12 @@ function Restaurant(props) {
                                         <div className="d-grid col-2 r-button" style={{ marginTop: '80px' }}>
                                             <button className="btn btn-primary" type="button" onClick={() => updateFollowing(true)}>Follow</button>
                                         </div>
-                                    } 
+                                    }
                                     {isLiked ?
                                         <div className="r-button" style={{ marginTop: '130px' }}>
                                             <button className="btn btn-success" type="button" onClick={() => updateLike(false)}> <FontAwesomeIcon icon={faHeart} style={{ paddingRight: '5px' }} />Liked</button>
                                         </div> :
-                                        <div className="r-button" style={{ marginTop: '130px'}}>
+                                        <div className="r-button" style={{ marginTop: '130px' }}>
                                             <button className="btn btn-danger" type="button" onClick={() => updateLike(true)}> <FontAwesomeIcon icon={faHeart} style={{ paddingRight: '5px' }} />Like</button>
                                         </div>
                                     }
@@ -171,16 +179,16 @@ function Restaurant(props) {
                                 :
                                 <>
                                     <div className="d-grid col-2 mt-2" style={{ position: 'absolute' }}>
-                                        <button className="btn btn-secondary fa" style={{ marginTop: '70px' }} type="button">Follow</button>
+                                        <button disabled className="btn btn-secondary fa" style={{ marginTop: '70px' }} type="button">Follow</button>
                                     </div>
                                     <div className=" mt-2" style={{ position: 'absolute' }}>
-                                        <button className="btn btn-secondary fa fa-heart" style={{ marginTop: '120px' }} type="button"> <FontAwesomeIcon icon={faHeart} style={{ paddingRight: '5px' }} />Like</button>
+                                        <button disabled className="btn btn-secondary fa fa-heart" style={{ marginTop: '120px' }} type="button"> <FontAwesomeIcon icon={faHeart} style={{ paddingRight: '5px' }} />Like</button>
                                     </div>
                                 </>}
                             <div className=" r-container">
                                 <div className="text-center text-white">
                                     <h1 className="r-title">{restaurantInfo['name']}</h1>
-                                    <img src={restaurantInfo['logo']} className="rlogo" alt="..." />                            
+                                    <img src={restaurantInfo['logo']} className="rlogo" alt="..." />
                                 </div>
                             </div>
                         </div>
@@ -195,8 +203,8 @@ function Restaurant(props) {
                                     <div className="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                         <div className="nav-item">
 
-                                            {activeTab === "info" && restaurantInfo['is_owner'] && 
-                                                <Link to={`/restaurant/edit/`} state={{restaurantInfo: restaurantInfo, r_id: id}}  className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Edit </Link>
+                                            {activeTab === "info" && restaurantInfo['is_owner'] &&
+                                                <Link to={`/restaurant/edit/`} state={{ restaurantInfo: restaurantInfo, r_id: id }} className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Edit </Link>
                                             }
 
                                             <a className={activeTab === "info" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-info-tab" href="#nav-info" role="tab"
@@ -204,8 +212,8 @@ function Restaurant(props) {
                                         </div>
                                         <div className="nav-item">
                                             {activeTab === "menu" && restaurantInfo['is_owner'] &&
-                                                <Link to={`/restaurant/${id}/editMenu/`}
-                                                className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Edit </Link>
+                                                <Link to={`/restaurant/edit/`}
+                                                    className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Edit </Link>
                                             }
                                             <a className={activeTab === "menu" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-menu-tab" href="#nav-menu" role="tab"
                                                 onClick={() => setActiveTab("menu")}>Menu </a>
@@ -233,13 +241,13 @@ function Restaurant(props) {
                                             carousel_img_1={restaurantInfo['carousel_img_1']} carousel_img_2={restaurantInfo['carousel_img_2']} carousel_img_3={restaurantInfo['carousel_img_3']}
                                             image_1={restaurantInfo['image_1']} image_2={restaurantInfo['image_2']} image_3={restaurantInfo['image_3']} image_4={restaurantInfo['image_4']} />
                                     </div>
-                                    <div className={activeTab == "menu" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab">
+                                    <div className={activeTab === "menu" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab">
                                         <MenuSection is_owner={restaurantInfo['is_owner']} />
                                     </div>
-                                    <div className={activeTab == "blogs" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-blogs" role="tabpanel" aria-labelledby="nav-blogs-tab">
+                                    <div className={activeTab === "blogs" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-blogs" role="tabpanel" aria-labelledby="nav-blogs-tab">
                                         <RestaurantBlogs />
                                     </div>
-                                    <div className={activeTab == "comments" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
+                                    <div className={activeTab === "comments" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
                                         <CommentSection />
                                     </div>
                                 </div>

@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 // import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from "react-router-dom";
 import "./restaurantForms.css";
 import avatar from "../assets/Restaurant-Logo/restaurant-logo.png"
 import { useNavigate } from 'react-router-dom';
+import Navbar from "../Navbar/Navbar";
 // TODO: Check if user is logged in?
 // printing error messages
 // updating logo
 //pull restaurant from owner, redirect to create restarurant page if no restaurnt exists 404
 // POSSIBLE ISSUE: phone validiation on input and differnet validation in backend
 // make sure user is logged in, redirect otherwise
+//REMOVE PICTURE BUTTON
 
 function RestaurantEdit(props) {
     const location = useLocation();
@@ -30,10 +30,10 @@ function RestaurantEdit(props) {
 
     const [rDesc, setrDesc] = useState("");
 
-    const [rImage1, setImage1] = useState("");
-    const [rImage2, setImage2] = useState("");
-    const [rImage3, setImage3] = useState("");
-    const [rImage4, setImage4] = useState("");
+    const [rImage1, setImage1] = useState("keep");
+    const [rImage2, setImage2] = useState("keep");
+    const [rImage3, setImage3] = useState("keep");
+    const [rImage4, setImage4] = useState("keep");
 
     const [rPrevImage1, setPrevImage1] = useState(avatar);
     const [rPrevImage2, setPrevImage2] = useState(avatar);
@@ -67,6 +67,8 @@ function RestaurantEdit(props) {
                 setPrevImage4(location.state.restaurantInfo.image_4);
             }
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function editRestaurant() {
@@ -78,15 +80,17 @@ function RestaurantEdit(props) {
         form_data.append('phone', rPhone);
 
         form_data.append('description', rDesc);
-        form_data.append('logo', rLogo); 
 
-        if (rImage1 !== "")
+        if (rLogo !== "")
+            form_data.append('logo', rLogo); 
+
+        if (rImage1 !== "keep")
             form_data.append('image_1', rImage1);
-        if (rImage2 !== "")
+        if (rImage2 !== "keep")
             form_data.append('image_2', rImage2);
-        if (rImage3 !== "")
+        if (rImage3 !== "keep")
             form_data.append('image_3', rImage3);
-        if (rImage4 !== "")
+        if (rImage4 !== "keep")
             form_data.append('image_4', rImage4);
 
         const config = {
@@ -102,7 +106,7 @@ function RestaurantEdit(props) {
                 navigate(`/restaurant/${location.state.r_id}/`);
             })
             .catch(error => {
-                if (error.response.status == 400) {
+                if (error.response.status === 400) {
                     setErrors(error.response.data);
                     console.log(error.response.data);
                     console.log(error.response.status);
@@ -112,7 +116,6 @@ function RestaurantEdit(props) {
                     console.log("Please log in or sign up first");
                 }
             });
-
     }
 
     // const ImageUploader = e => {
@@ -122,6 +125,7 @@ function RestaurantEdit(props) {
 
     return (
         <>
+            <Navbar /> 
             <div className="rAdd-intro">
                 <div className="mask d-flex align-items-center h-100 rAdd-tone-down-bg">
                     <div className="container">
@@ -141,7 +145,7 @@ function RestaurantEdit(props) {
                                         UPDATE YOUR LOGO
                                     </label>
 
-                                    <input id="logo-img" type="file" className="btn shadow-none" onChange={e => { setrLogoPreview(URL.createObjectURL(e.target.files[0])); setrLogo(e.target.files[0]) }} required />
+                                    <input id="logo-img" type="file" className="btn shadow-none" onChange={e => { setrLogoPreview(URL.createObjectURL(e.target.files[0])); setrLogo(e.target.files[0]) }} />
                                 </div>
                             </div>
 
@@ -265,6 +269,8 @@ function RestaurantEdit(props) {
                                     <label htmlFor="additional-img-1" className="label-file mb-3">
                                         PICTURE 1
                                     </label>
+                                    {rPrevImage1 !== avatar &&
+                                    <button className="btn btn-danger shadow-none" onClick={() => {setPrevImage1(avatar); setImage1("")}}>X</button> }
                                     <input id="additional-img-1" type="file" className="btn shadow-none" onChange={e => { setPrevImage1(URL.createObjectURL(e.target.files[0])); setImage1(e.target.files[0]) }} />
                                 </div>
                             </div>
@@ -277,6 +283,8 @@ function RestaurantEdit(props) {
                                     <label htmlFor="additional-img-2" className="label-file mb-3">
                                         PICTURE 2
                                     </label>
+                                    {rPrevImage2 !== avatar &&
+                                    <button className="btn btn-danger shadow-none" onClick={() => {setPrevImage2(avatar); setImage2("")}}>X</button> }
                                     <input id="additional-img-2" type="file" className="btn shadow-none" onChange={e => { setPrevImage2(URL.createObjectURL(e.target.files[0])); setImage2(e.target.files[0]) }} />
                                 </div>
                             </div>
@@ -289,6 +297,8 @@ function RestaurantEdit(props) {
                                     <label htmlFor="additional-img-3" className="label-file mb-3">
                                         PICTURE 3
                                     </label>
+                                    {rPrevImage3 !== avatar &&
+                                    <button className="btn btn-danger shadow-none" onClick={() => {setPrevImage3(avatar); setImage3("")}}>X</button> }
                                     <input id="additional-img-3" type="file" className="btn shadow-none" onChange={e => { setPrevImage3(URL.createObjectURL(e.target.files[0])); setImage3(e.target.files[0]) }} />
                                 </div>
                             </div>
@@ -301,6 +311,8 @@ function RestaurantEdit(props) {
                                     <label htmlFor="additional-img-4" className="label-file mb-3">
                                         PICTURE 4
                                     </label>
+                                    {rPrevImage4 !== avatar &&
+                                    <button className="btn btn-danger shadow-none" onClick={() => {setPrevImage4(avatar); setImage4("")}}>X</button> }
                                     <input id="additional-img-4" type="file" className="btn shadow-none" onChange={e => { setPrevImage4(URL.createObjectURL(e.target.files[0])); setImage4(e.target.files[0]) }} />
                                 </div>
                             </div>

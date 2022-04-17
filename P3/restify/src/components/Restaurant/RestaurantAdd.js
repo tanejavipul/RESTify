@@ -1,45 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Redirect } from 'react-router'
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-// import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from '@fortawesome/free-solid-svg-icons';
 import avatar from "../assets/Restaurant-Logo/restaurant-logo.png"
-
+import Navbar from "../Navbar/Navbar";
 import "./restaurantForms.css";
 // TODO: Check if user is logged in?
 // printing error messages
 // updating logo
 //phone validation is different from sign up page?
+//might be issue, user is not owner upon redirect? issue with not sighning out?
 
 function RestaurantAdd(props) {
+    const navigate = useNavigate();
+
     const [rName, setrName] = useState('');
     const [rAddr, setrAddr] = useState('');
     const [rPhone, setrPhone] = useState('');
     const [rPostal, setrPostal] = useState('');
-    const [rLogo, setrLogo] = useState(avatar);
+
+    const [rLogo, setrLogo] = useState("");
+    const [rPrevLogo, setrPrevLogo] = useState(avatar);
 
     const [errors, setErrors] = useState({});
 
     function createRestaurant() {
-        const body = {
-            'name': rName,
-            'address': rAddr,
-            'postal': rPostal,
-            'phone': rPhone,
-            'logo': rLogo
-        }
+        let form_data = new FormData();
 
-        console.log(body);
+        form_data.append('name', rName);
+        form_data.append('address', rAddr);
+        form_data.append('postal', rPostal);
+        form_data.append('phone', rPhone);
+        form_data.append('logo', rLogo); 
 
-        axios.post(`/restaurants/add/`, body, {
+        axios.post(`/restaurants/add/`, form_data, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access")}`
             },
         })
             .then((resp) => {
-                // TODO redirect to restaurant page
+                navigate(`/restaurant/${resp['data'].id}/`)
 
                 console.log("Restaurant added succesfully: ", resp);
                 // return <Redirect to='/restaurants'/>
@@ -59,27 +59,9 @@ function RestaurantAdd(props) {
 
     }
 
-    const ImageUploader = e => {
-        console.log(e.target.files[0]);
-        // const formData = new FormData();
-        // formData.append(
-        //     'avatar',
-        //     event.target.files[0],
-        //     event.target.files[0].name
-        // )
-        // axios.put('/accounts/profile/edit/', formData, {
-        //     headers: {
-        //                 Authorization: `Bearer ${localStorage.getItem("access")}`,
-        //             },
-        // }).then((resp) => {
-        //     setSuccess(true)
-        //     profileUpdate(11)
-        //     setImage(resp.data.avatar)
-        // })
-    }
-
     return (
         <>
+            <Navbar />
             <div className="rAdd-intro">
                 <div className="mask d-flex align-items-center h-100 rAdd-tone-down-bg">
                     <div className="container">
@@ -92,14 +74,14 @@ function RestaurantAdd(props) {
                                 <div className="add-img">
                                     <label htmlFor="logo-img">
                                         {/* <FontAwesomeIcon icon={faImage} style={{ fontSize: "50px" }} /> */}
-                                        <img src={rLogo} className="signup-img img-thumbnail img-thumbnail-profile" alt="..."/>
+                                        <img src={rPrevLogo} className="signup-img img-thumbnail img-thumbnail-profile" alt="..."/>
                                     </label>
 
                                     <label htmlFor="logo-img" className="label-file mb-3" >
                                         UPLOAD YOUR LOGO
                                     </label>
 
-                                    <input id="logo-img" type="file" className="btn shadow-none" onChange={e => setrLogo(URL.createObjectURL(e.target.files[0]))} required />
+                                    <input id="logo-img" type="file" className="btn shadow-none" onChange={e => {setrLogo(e.target.files[0]); setrPrevLogo(URL.createObjectURL(e.target.files[0]))}} required />
                                 </div>
                             </div>
 

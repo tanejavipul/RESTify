@@ -7,6 +7,7 @@ import FollowRestaurant from './FollowRestaurant';
 import BlogPost from './BlogPost';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
@@ -80,6 +81,8 @@ function BlogPostPage(props) {
 
     return (
         // {/* Inspired By: https://www.bootdey.com/snippets/view/blog-detail-page */}
+        <>
+        <Navbar />
         <div id="intro">
             <div class="blog-single tone-down-bg">
                 <div class="container">
@@ -123,6 +126,7 @@ function BlogPostPage(props) {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

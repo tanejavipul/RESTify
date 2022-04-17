@@ -49,8 +49,6 @@ function App() {
           <Route path="/restaurant/edit/" element={<RestaurantEdit />} />
           <Route path="/restaurant/:id" element={<Restaurant />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/restaurant/:id/blogs/" element={<RestaurantBlogs />} />
-          <Route path="/restaurant/:id/comments/" element={<CommentSection />} />
           <Route path="/restaurant/:id/editMenu/" element={<EditMenu />} />
 
         </Routes>

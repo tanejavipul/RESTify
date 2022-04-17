@@ -17,6 +17,7 @@ LIKE_BLOG = 'LIKE_BLOG'
 COMMENT = 'COMMENT'
 
 
+
 def getRestaurantNotificationTitle(message, rest):
     rest_name = rest.name
     if message == BLOG:

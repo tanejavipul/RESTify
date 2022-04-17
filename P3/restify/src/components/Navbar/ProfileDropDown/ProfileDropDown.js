@@ -59,10 +59,10 @@ const ProfileDropDown = ({profileUpdate}) => {
                         data-bs-toggle="dropdown" aria-expanded="false"><img src={profileSVG} alt=""/>Profile
                 </button>
 
-                <ul className="dropdown-menu navbar-background dropdown-padding">
+                <ul className=" dropdown-menu-down-fix dropdown-menu navbar-background dropdown-padding">
                     <li className={"select-profile"}>
-                        <Link to="/profile" className="nav-dropdown-item dropdown-item nav-dropdown-item">
-                        <img src={image} className="fw-bold profile-avatar avatar-img " alt=""/>PROFILE</Link>
+                        <Link to="/profile" className=" fw-bold nav-dropdown-item dropdown-item nav-dropdown-item">
+                        <img src={image} className="profile-avatar avatar-img" alt=""/>PROFILE</Link>
                     </li>
                 </ul>
             </div>

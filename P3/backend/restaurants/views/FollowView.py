@@ -33,7 +33,7 @@ class FollowUnfollowView(APIView):
             restaurant = Restaurant.objects.get(id=self.kwargs['rest_id'])
             message = NS.getOwnerNotificationTitle(NS.FOLLOW, self.request.user, restaurant)
             Following.objects.create(user=self.request.user, restaurant=restaurant)
-            OwnerNotification.objects.create(restaurant=restaurant, title=message, user=self.request.user)
+            OwnerNotification.objects.create(restaurant=restaurant, title=message, user=self.request.user, type=NS.FOLLOW, type_id=restaurant.id)
             return Response({'Success': "User now follows the restaurant."}, status=status.HTTP_200_OK)
 
         return Response({'Error': "User not Authenticated"}, status=status.HTTP_401_UNAUTHORIZED)

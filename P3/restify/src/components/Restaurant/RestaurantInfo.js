@@ -26,7 +26,7 @@ function RestaurantInfo(props) {
                                 <FontAwesomeIcon icon={faMap} size="1x" />
                             </div>
                             <div className="text-primary col-md-10 d-flex align-items-center">
-                                <h6 className="m-0">{props.address}</h6>
+                                <h6 className="m-0">{props.address}, {props.postal}</h6>
                             </div>
                         </div>
                     </div>
@@ -93,16 +93,17 @@ function RestaurantInfo(props) {
                 </div>
             </div>
 
-            <div className="row mt-4">
-                <div className="col-md-12">
-                    <div className="p-4 bg-light rounded" style={{ height: '100%' }}>
-                        {props.description}
+            {props.description &&
+                <div className="row mt-4">
+                    <div className="col-md-12">
+                        <div className="p-4 bg-light rounded" style={{ height: '100%' }}>
+                            {props.description}
+                        </div>
                     </div>
                 </div>
+            }
 
-            </div>
-
-            <div id="carouselExampleIndicators" className="carousel slide mt-4" data-bs-ride="carousel">
+            {/* <div id="carouselExampleIndicators" className="carousel slide mt-4" data-bs-ride="carousel">
                 <div className="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide-to="0" className="active" aria-current="true"
@@ -133,25 +134,31 @@ function RestaurantInfo(props) {
                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>
-            </div>
+            </div> */}
+            
             <div className="row mt-4 d-flex h-100 mb-4">
+                {props.image_1 &&
                 <div className="col-md-3 ">
-                    <img src={props.image_1} alt="Image 1" className="img-thumbnail w-100"
-                        style={{ height: '250px' }} />
-                </div>
+                    <img src={props.image_1} alt="" className="img-thumbnail w-100"
+                        style={{ height: '250px', width: '100%' }} />
+                </div> }
+                {props.image_2 &&
                 <div className="col-md-3">
                     <img src={props.image_2} alt="Image 1" className="img-thumbnail w-100"
                         style={{ height: '250px' }} />
-                </div>
+                </div> }
+                {props.image_3 &&
                 <div className="col-md-3">
                     <img src={props.image_3} alt="Image 1" className="img-thumbnail w-100"
                         style={{ height: '250px' }} />
-                </div>
+                </div> }
+                {props.image_4 &&
                 <div className="col-md-3">
                     <img src={props.image_4} alt="Image 1" className="img-thumbnail w-100"
                         style={{ height: '250px' }} />
-                </div>
+                </div> }
             </div>
+
         </>
     )
 }

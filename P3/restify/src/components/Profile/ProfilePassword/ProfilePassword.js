@@ -54,8 +54,6 @@ const ProfilePassword = () => {
                     }
                 }).catch(err => {
                 if (err.response.status === 400) {
-                    console.log(err.response.data.password[0])
-                    console.log(err.response.data)
                     setError("Error: " + err.response.data.password[0])
                 }
 

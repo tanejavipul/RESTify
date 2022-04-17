@@ -59,8 +59,9 @@ class EditMenuSerializer(ModelSerializer):
         instance.save()
 
         # create new notification for updating menu item
+        print(instance.id)
         message = NS.getRestaurantNotificationTitle(NS.MENU, restaurant)
-        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message)
+        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.MENU, type_id=instance.id)
         self.notification.save()
 
         return instance
@@ -107,7 +108,7 @@ class AddMenuSerializer(ModelSerializer):
 
         # create new notification for updating menu item
         message = NS.getRestaurantNotificationTitle(NS.MENU, restaurant)
-        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message)
+        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.MENU, type_id=menu_item.id)
         self.notification.save()
 
         return menu_item

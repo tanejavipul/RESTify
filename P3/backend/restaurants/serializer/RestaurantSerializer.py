@@ -85,10 +85,10 @@ class EditRestaurantSerializer(ModelSerializer):
             if field_value in attrs and attrs[field_value] == None:
                 attrs[field_value] = 'Restaurant/Carousel/image.png'
         
-        for i in range(1, 5):
-            field_value = 'image_' + str(i)
-            if field_value in attrs and attrs[field_value] == None:
-                attrs[field_value] = 'Restaurant/Image/image.png'
+        # for i in range(1, 5):
+        #     field_value = 'image_' + str(i)
+        #     if field_value in attrs and attrs[field_value] == None:
+        #         attrs[field_value] = 'Restaurant/Image/image.png'
 
         return attrs
     
@@ -119,11 +119,22 @@ class GetRestaurantSerializer(ModelSerializer):
     num_follows = serializers.IntegerField(read_only=True, required=False, default=0)
     num_comments = serializers.IntegerField(read_only=True, required=False, default=0)
     num_blogs = serializers.IntegerField(read_only=True, required=False, default=0)
+    is_owner = serializers.SerializerMethodField('get_owner_status')
 
     class Meta:
         model = Restaurant
-        fields = ['name', 'address', 'postal', 'phone', 'logo', 'description', 'cover_img',  'carousel_img_1', 'carousel_img_2', 
+        fields = ['is_owner', 'name', 'address', 'postal', 'phone', 'logo', 'description', 'cover_img',  'carousel_img_1', 'carousel_img_2', 
         'carousel_img_3', 'image_1', 'image_2', 'image_3', 'image_4', 'num_likes', 'num_follows', 'num_comments', 'num_blogs'] 
+    
+    def get_owner_status(self, obj):
+        user = self.context['request'].user
+        restaurant = get_object_or_404(Restaurant, id=self.context['restaurant_id'])
+
+        if restaurant.owner == user:
+            self.is_owner = True
+        else:
+            self.is_owner = False
+        return self.is_owner
 
 
 class RestaurantLikeSerializer(ModelSerializer):
@@ -177,7 +188,7 @@ class RestaurantLikeSerializer(ModelSerializer):
 
             # create new notification for liking the restaurant
             message = NS.getOwnerNotificationTitle(NS.LIKE_REST, _user, _restaurant)
-            self.notification = OwnerNotification.objects.create(restaurant=_restaurant, user=_user, title=message)
+            self.notification = OwnerNotification.objects.create(restaurant=_restaurant, user=_user, title=message, type=NS.LIKE_REST, type_id=restaurant_id)
             self.notification.save()
 
         return restaurantLike

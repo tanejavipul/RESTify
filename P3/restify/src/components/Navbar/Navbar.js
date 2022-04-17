@@ -8,11 +8,12 @@ import restSVG from "../assets/Icons/restaurant.svg"
 import logoutSVG from "../assets/Icons/logout.svg"
 import ProfileDropDown from "./ProfileDropDown/ProfileDropDown";
 import NotificationsDropDown from "./NotificationsDropDown/NotificationsDropDown";
+import OwnerDropDown from "./OwnerDropDown/OwnerDropDown";
+import {useEffect, useState} from "react";
 
 
 const Navbar = ({profileUpdate}) => {
-
-
+    const [displayOwner, setDisplayOwner] = useState(1);
 
     return (
         <>
@@ -27,6 +28,8 @@ const Navbar = ({profileUpdate}) => {
                         <Link to="/profile" className="btn  navbar-button-styling"> <img src={homeSVG}/>Home</Link>
                         <Link to="/profile" className="btn  navbar-button-styling"> <img src={restSVG}/>Restaurant</Link>
                         <NotificationsDropDown/>
+                        {(displayOwner !== -1) ?
+                        <OwnerDropDown setDisplayOwner={setDisplayOwner}/> : ""}
                         {/* ADD NOTIFICATIONS*/}
                         <ProfileDropDown profileUpdate={profileUpdate}/>
                         <Link to="/profile" className="btn  navbar-button-styling"> <img src={logoutSVG}/>Logout</Link>

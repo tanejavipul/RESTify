@@ -67,7 +67,7 @@ class BlogPostSerializer(ModelSerializer):
 
         # create new notification for posting comment
         message = NS.getRestaurantNotificationTitle(NS.BLOG, restaurant)
-        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message)
+        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.BLOG, type_id=new_post.id)
         self.notification.save()
 
         return new_post
@@ -80,8 +80,7 @@ class EditBlogPostSerializer(ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ['title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3',
-                  'last_modified']
+        fields = ['title', 'description', 'primary_photo', 'photo_1', 'photo_2', 'photo_3', 'last_modified']
 
     def update(self, instance, validated_data):
 

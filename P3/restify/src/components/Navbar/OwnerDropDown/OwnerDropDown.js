@@ -4,7 +4,7 @@ import notificationsSVG from "../../assets/Icons/notifications.svg"
 import {noNotifications, NotificationNav} from '../NotiticationsModel';
 import OwnerMessage from "./OwnerMessage/OwnerMessage";
 
-const OwnerDropDown = () => {
+const OwnerDropDown = ({setDisplayOwner}) => {
     const [allNotifications, setAllNotifications] = useState([])
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(1);
@@ -35,6 +35,7 @@ const OwnerDropDown = () => {
             }).then((resp) => {
                 if(resp.status ===200) {
                     setCount(resp.data.count)
+                    console.log(count)
                     let data = resp.data.results
                     for (let x = 0; x < resp.data.results.length; x++) {
                         let temp = new NotificationNav(data[x].id, data[x].restaurant, data[x].title, data[x].last_modified)
@@ -48,7 +49,9 @@ const OwnerDropDown = () => {
                         setPage(-1)
                     }
                 }
-            });
+            }).catch(
+                setDisplayOwner(-1)
+            );
         }
     }
 
@@ -62,7 +65,7 @@ const OwnerDropDown = () => {
                 <img src={notificationsSVG}/>Owner
             </button>
 
-            {(count === 0) ?
+            {(count !== 0) ?
                 <div className="dropdown-menu-down-fix notification-0-padding dropdown-menu dropdown-menu-width
                 scrollable dropdown-padding scrollable navbar-background"
                      aria-labelledby="dropdownNotificationsButton" onScroll={onScroll}>

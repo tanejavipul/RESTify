@@ -18,6 +18,7 @@ function EditMenu(props) {
     const [nextToken, setNextToken] = useState(""); // TODO
     const [menuItems, setMenuItems] = useState([]);
     const [clicked, setClicked] = useState(false);
+    const [isOpen, setPopUp] = useState(false);
 
     useEffect(() => {
         getMenuItems();
@@ -33,49 +34,84 @@ function EditMenu(props) {
     // }
 
     async function updateMenuItems(id, name, desc, price, type, newItem) {
-        let tempItems = menuItems.filter((item) => item.id !== id );
+        // let tempItems = menuItems.filter((item) => item.id !== id );
         // console.log(id, name, type, desc, price, newItem);
-        console.log(id, newItem);
-        if (newItem) {
-            tempItems.push({"name": name, "description": desc, "price": parseInt(price), "type": type, "new" : true});
+        // console.log(id, newItem);
+        // if (newItem) {
+        //     tempItems.push({"name": name, "description": desc, "price": parseInt(price), "type": type, "new" : true});
+        // } else {
+        //     tempItems.push({"id": id, "name": name, "description": desc, "price": parseInt(price), "type": type});
+        // }
+        // console.log("tempITEMS: ", tempItems);
+
+        const formData = new FormData();
+        const headers = {
+            'Authorization': `Bearer ${localStorage.getItem('access')}`
+        }
+        formData.append('name', name);
+        formData.append('description', desc);
+        formData.append('price', parseInt(price));
+        formData.append('type', type);
+        // console.log(Array.from(formData));
+        // console.log(Object.fromEntries(formData));
+        
+        // new menu item
+        if(newItem) {
+            axios.post(`/restaurants/addMenuItem/`, formData, {headers})
+            .then((resp) => {
+                //TODO ERROR CHECKING
+                console.log(resp);
+                // window.location.replace(`/restaurant/${id}/menu/`);
+            })
         } else {
-            tempItems.push({"id": id, "name": name, "description": desc, "price": parseInt(price), "type": type});
+            // existing ID
+            axios.put(`/restaurants/${id}/editMenuItem/`, formData, {headers})
+            .then((resp) => {
+                //TODO ERROR CHECKING
+                console.log(resp);
+                // can't replace window cuz individually don't know when it's done
+                // window.location.replace(`/restaurant/${id}/menu/`);
+            })
         }
-        console.log("tempITEMS: ", tempItems);
-        for(let i=0; i < tempItems.length; i++) {
-            const formData = new FormData();
-            const headers = {
-                'Authorization': `Bearer ${localStorage.getItem('access')}`
-            }
-            formData.append('name', tempItems[i]['name']);
-            formData.append('description', tempItems[i]['description']);
-            formData.append('price', tempItems[i]['price']);
-            formData.append('type', tempItems[i]['type']);
-            // console.log(Array.from(formData));
-            // console.log(Object.fromEntries(formData));
+
+        // need to do one at a time
+        // for(let i=0; i < tempItems.length; i++) {
+        //     const formData = new FormData();
+        //     const headers = {
+        //         'Authorization': `Bearer ${localStorage.getItem('access')}`
+        //     }
+        //     formData.append('name', tempItems[i]['name']);
+        //     formData.append('description', tempItems[i]['description']);
+        //     formData.append('price', tempItems[i]['price']);
+        //     formData.append('type', tempItems[i]['type']);
+        //     // console.log(Array.from(formData));
+        //     // console.log(Object.fromEntries(formData));
             
-            // new menu item
-            console.log(tempItems[i]);
-            if('new' in tempItems[i]) {
-                console.log('insid');
-                axios.post(`/restaurants/addMenuItem/`, formData, {headers})
-                .then((resp) => {
-                    //ERROR CHECKING
-                    console.log(resp);
-                    // window.location.replace(`/restaurant/${id}/menu/`);
-                })
-            } else {
-                // existing ID
-                console.log(tempItems[i]);
-                axios.put(`/restaurants/${tempItems[i]['id']}/editMenuItem/`, formData, {headers})
-                .then((resp) => {
-                    console.log(resp);
-                    // window.location.replace(`/restaurant/${id}/menu/`);
-                })
-            }
-        }
+        //     // new menu item
+        //     console.log(tempItems[i]);
+        //     if('new' in tempItems[i]) {
+        //         console.log('insid');
+        //         axios.post(`/restaurants/addMenuItem/`, formData, {headers})
+        //         .then((resp) => {
+        //             //ERROR CHECKING
+        //             console.log(resp);
+        //             // window.location.replace(`/restaurant/${id}/menu/`);
+        //         })
+        //     } else {
+        //         // existing ID
+        //         console.log(tempItems[i]);
+        //         axios.put(`/restaurants/${tempItems[i]['id']}/editMenuItem/`, formData, {headers})
+        //         .then((resp) => {
+        //             console.log(resp);
+        //             // window.location.replace(`/restaurant/${id}/menu/`);
+        //         })
+        //     }
+        // }
+        
+        // don't think I even use anymore
         setMenuItems(tempItems);
         setClicked(false);
+        // setPopUp(true);
     }
     
     function updateMenu(e) {
@@ -86,6 +122,12 @@ function EditMenu(props) {
     function addRow(e) {
         e.preventDefault();
         setMenuItems([...menuItems, {"id": uuidv4(), "name": "", "description": "", "price": 0, "type": "", "new": true}]); 
+    }
+
+    // TODO
+    function changePopUp(e) {
+        e.preventDefault();
+        setTimeout(() => {setOpen(false)}, 2000);
     }
 
     async function getMenuItems() {
@@ -102,6 +144,18 @@ function EditMenu(props) {
         <div id="edit-menu-intro">
             <div class="mask d-flex align-items-center h-100 tone-down-bg">
                 <div class="container">
+                    {/* {isOpen ? 
+                        <div id={'temp'} className="popup-box">
+                            <div className="nested-popup-box">
+                                <span className="close-icon" onClick={(e) => setOpen(false)}></span>
+                                <b>Successfully updated</b>
+                                <br />
+                                <button onClick={(e) => deleteBlog(e)}>Confirm</button>
+                                <button onClick={() => setOpen(false)}>Cancel</button>
+                            </div>
+                        </div> :
+                        <></>
+                    } */}
                     <form class="edit-menu-row" style={{backgroundColor: '#FFFFFF'}}>
                         <h2 class="d-flex justify-content-center edit-menu-h2">Add / Edit Menu</h2>
 
@@ -125,7 +179,7 @@ function EditMenu(props) {
                         </div>                    
                         
                         <div class="d-flex justify-content-between">
-                            <a href={`/restaurants/${id}/menu/`} value="GO BACK" class="edit-save-btn btn shadow-none">GO BACK</a>
+                            <a href={`/restaurant/${id}/`} value="GO BACK" class="edit-save-btn btn shadow-none">GO BACK</a>
 
                             <input type="submit" onClick={(e) => updateMenu(e)} value="SAVE CHANGES" class="edit-save-btn btn shadow-none" />
                         </div>

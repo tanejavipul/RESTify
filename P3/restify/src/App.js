@@ -51,7 +51,6 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/restaurant/:id/blogs/" element={<RestaurantBlogs />} />
           <Route path="/restaurant/:id/comments/" element={<CommentSection />} />
-          <Route path="/restaurant/:id/menu/" element={<MenuSection />} />
           <Route path="/restaurant/:id/editMenu/" element={<EditMenu />} />
 
         </Routes>

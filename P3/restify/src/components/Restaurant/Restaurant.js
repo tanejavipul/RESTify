@@ -11,6 +11,9 @@ import RestaurantInfo from './RestaurantInfo';
 
 
 import "./restaurant.css";
+import MenuSection from "./MenuSection";
+import RestaurantBlogs from "./RestaurantBlogs";
+import CommentSection from "./CommentSection";
 // TODO: Check if user is logged in?
 //populating images, and data via backend
 //import various components and swap them based on tab
@@ -91,7 +94,7 @@ function Restaurant(props) {
                                                 onClick={() => setActiveTab("info")}>Info</a>
                                         </div>
                                         <div className="nav-item">
-                                            {activeTab == "menu" ? <a className="btn btn-primary btn-md edit-button " href="editRestaurant.html"
+                                            {activeTab == "menu" ? <a className="btn btn-primary btn-md edit-button " href={`/restaurant/${id}/editMenu/`}
                                                 role="button">
                                                 <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />
                                                 Edit
@@ -100,7 +103,7 @@ function Restaurant(props) {
                                                 onClick={() => setActiveTab("menu")}>Menu </a>
                                         </div>
                                         <div className="nav-item">
-                                            {activeTab == "blogs" ? <a className="btn btn-primary btn-md edit-button " href="editRestaurant.html"
+                                            {activeTab == "blogs" ? <a className="btn btn-primary btn-md edit-button " href={'/blogs/addBlog/'}
                                                 role="button">
                                                 <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />
                                                 Add New Blog Post
@@ -125,13 +128,13 @@ function Restaurant(props) {
                                             image_1={restaurantInfo['image_1']} image_2={restaurantInfo['image_2']} image_3={restaurantInfo['image_3']} image_4={restaurantInfo['image_4']} />
                                     </div>
                                     <div className={activeTab == "menu" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab">
-                                        <div>Component menu</div>
+                                        <MenuSection />
                                     </div>
                                     <div className={activeTab == "blogs" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-blogs" role="tabpanel" aria-labelledby="nav-blogs-tab">
-                                        <div>Component blogs</div>
+                                        <RestaurantBlogs />
                                     </div>
                                     <div className={activeTab == "comments" ? "tab-pane fade show active" : "tab-pane fade"} id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
-                                        <div>Component comments</div>
+                                        <CommentSection />
                                     </div>
                                 </div>
 

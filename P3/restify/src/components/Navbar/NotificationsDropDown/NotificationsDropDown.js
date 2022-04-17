@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import notificationsSVG from "../../assets/Icons/notifications.svg"
 import NotificationMessage from "./NotificationMessage/NotificationMessage";
@@ -11,7 +11,7 @@ const NotificationsDropDown = () => {
 
     useEffect(() => {
         update()
-    }, []);
+    }, );
 
     const onScroll = (e) => {
         const tar = e.target
@@ -53,7 +53,7 @@ const NotificationsDropDown = () => {
         <div className="dropdown navbar-dropdown w-100 f"  >
             <button className="btn  navbar-button-styling dropdown-toggle" type="button"
                     id="dropdownNotificationsButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src={notificationsSVG}/>Notification
+                <img src={notificationsSVG} alt=" " />Notification
             </button>
 
             {(count !== 0) ?

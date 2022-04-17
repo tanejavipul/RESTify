@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 
 import "../../Login/login.css"
 

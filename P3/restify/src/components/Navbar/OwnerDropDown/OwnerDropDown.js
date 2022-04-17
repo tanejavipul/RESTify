@@ -11,7 +11,7 @@ const OwnerDropDown = () => {
 
     useEffect(() => {
         update()
-    }, []);
+    }, );
 
     const onScroll = (e) => {
         const tar = e.target
@@ -59,7 +59,7 @@ const OwnerDropDown = () => {
         <div className="dropdown navbar-dropdown w-100 f"  >
             <button className="btn  navbar-button-styling dropdown-toggle" type="button"
                     id="dropdownNotificationsButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src={notificationsSVG}/>Owner
+                <img src={notificationsSVG} alt=" "/>Owner
             </button>
 
             {(count !== 0) ?

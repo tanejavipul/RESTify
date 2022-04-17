@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
 
-import {Navigate} from "react-router-dom";
-
 import nameBadgeSVG from "../../assets/Icons/name_badge.svg"
 import usernameSVG from "../../assets/Icons/email.svg"
 import emailSVG from "../../assets/Icons/mail.svg"
@@ -167,7 +165,7 @@ const SignupForm = () => {
                     <SignupInput icon={emailSVG} place_holder={"Email"} input_name={"email"} value1={email}
                                update={update} error={emailError} req={false}/>
                     <SignupInput icon={phoneSVG} place_holder={"+1(###)-###-####"} value1={phone} update={update}
-                               input_name={"phone"} req={false} error={phoneError} req={false}/>
+                               input_name={"phone"} error={phoneError} req={false}/>
                     <SignupInput icon={passwordSVG} place_holder={"*Password*"} input_name={"password1"} value1={password}
                                update={update} error={passwordError} type={"password"} bold={true}/>
                     <SignupInput icon={confirmPasswordSVG} place_holder={"*Confirm Password*"} input_name={"password2"}

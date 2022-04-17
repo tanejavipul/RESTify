@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import LogoName from "../CP/LogoName/LogoName";
 import SignupCarousel from "./SignupCarousel/SignupCarousel";
 import SignupForm from "./SignupForm/SignupForm";

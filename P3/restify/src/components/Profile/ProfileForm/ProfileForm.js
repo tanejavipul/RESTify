@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import ProfileInput from "../ProfileInput/ProfileInput";
 import ProfileIMG from "../ProfileIMG/ProfileIMG";
 import axios from "axios";
@@ -7,7 +7,6 @@ import {emailValid, phoneValid, singleNameValid} from "../../CP/SignUpFormValida
 
 const ProfileForm = ({profileUpdate}) => {
 
-    const [temp, setTemp] = useState("")
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
@@ -25,7 +24,7 @@ const ProfileForm = ({profileUpdate}) => {
 
     useEffect(() => {
         getProfileAPI()
-    }, [temp]);
+    }, []);
 
     useEffect(() => {
         singleNameValid(firstName, setFirstNameError)

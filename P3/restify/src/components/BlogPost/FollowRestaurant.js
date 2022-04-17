@@ -60,29 +60,29 @@ function FollowRestaurant(props) {
     return (
         // Inspired By: https://www.bootdey.com/snippets/view/blog-detail-page
         // <!-- Restaurant Author -->
-        <div class="widget widget-author">
-            <div class="widget-title">
+        <div className="widget widget-author">
+            <div className="widget-title">
                 <Link to={`/restaurant/${props.restaurant_id}/`} className="text-center navbar-logo-color text-decoration-none">
                     <h3>{props.restaurant_name}</h3>
                 </Link>
             </div>
-            <div class="widget-body">
-                <div class="media align-items-center d-flex flex-row">
+            <div className="widget-body">
+                <div className="media align-items-center d-flex flex-row">
                     {/* Not sure if link is right for now just temp */}
-                    <a href={`restaurantPages/${props.restaurant_id}/`} class="text-decoration-none">
-                        <div class="avatar">
+                    <a href={`restaurantPages/${props.restaurant_id}/`} className="text-decoration-none">
+                        <div className="avatar">
                             <img src={logo} title="" alt="" />
                         </div>
                     </a>
-                    <div class="media-body">
-                        <h6 class="follow-restaurant-bio">Hello 👋, This is a blog post from {props.restaurant_name}!</h6>
+                    <div className="media-body">
+                        <h6 className="follow-restaurant-bio">Hello 👋, This is a blog post from {props.restaurant_name}!</h6>
                     </div>
                 </div>
-                <p class="text-center m-3">{restaurantBio}</p>
-                <div class="d-grid mt-2">
+                <p className="text-center m-3">{restaurantBio}</p>
+                <div className="d-grid mt-2">
                     {following ?
-                        <button class="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(false)} >Unfollow {props.restaurant_name}</button> :
-                        <button class="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(true)} >Follow {props.restaurant_name}</button>
+                        <button className="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(false)} >Unfollow {props.restaurant_name}</button> :
+                        <button className="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(true)} >Follow {props.restaurant_name}</button>
                     }
                 </div>
             </div>

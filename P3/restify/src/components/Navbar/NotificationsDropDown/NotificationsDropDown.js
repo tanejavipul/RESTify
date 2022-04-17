@@ -56,6 +56,7 @@ const NotificationsDropDown = () => {
                 <img src={notificationsSVG}/>Notification
             </button>
 
+            {(count !== 0) ?
             <div className="dropdown-menu-down-fix notification-0-padding dropdown-menu dropdown-menu-width
                 scrollable dropdown-padding scrollable navbar-background"
                  aria-labelledby="dropdownNotificationsButton" onScroll={onScroll}>
@@ -65,7 +66,7 @@ const NotificationsDropDown = () => {
                         return <NotificationMessage key={data.id} data={data}/>
                     })}
                 {(page===-1) ? <div className="text-center fw-bold notification-title">No More Notifications</div> : ""}
-            </div>
+            </div> : noNotifications}
         </div>
     </>)
 

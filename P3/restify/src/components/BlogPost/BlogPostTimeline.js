@@ -90,18 +90,38 @@ function BlogPostTimeline(props) {
                         </p>
                         <hr />
                         <div class="d-flex justify-content-around align-items-center">
-                            <button type="button" class="blog-btn share-btns">
+                            {/* <button type="button" class="blog-btn share-btns">
                                 <h5>{numLikes}</h5>
-                                <br/>
-                                {liked ?
+                                <br/> */}
+                                {props.is_owner ?
+                                    <>
+                                        <button disabled class="blog-btn-disabled">
+                                            <h5>{numLikes}</h5>
+                                            <br/>
+                                            <button disabled class="like-btn">
+                                                <FontAwesomeIcon disabled icon={faHeartFill} size="3x" color="grey" />
+                                            </button>
+                                        </button>
+                                    </> :
+                                    <>
+                                        <button type="button" class="blog-btn share-btns">
+                                            <h5>{numLikes}</h5>
+                                            <br/>
+                                            <button type="button" class="like-btn">
+                                                {liked ?
+                                                    <FontAwesomeIcon icon={faHeartFill} size="3x" color="red" onClick={() => updateLike(false)} /> :
+                                                    <FontAwesomeIcon icon={faHeart} size="3x" onClick={() => updateLike(true)} />
+                                                }
+                                            </button>
+                                        </button>
+                                    </>
+                                }
+                                {/* {liked ?
                                     <FontAwesomeIcon icon={faHeartFill} size="2x" color="red" onClick={() => updateLike(false)} /> :
                                     <FontAwesomeIcon icon={faHeart} size="2x" onClick={() => updateLike(true)} />
-                                }
-                            </button>
+                                } */}
+                            {/* </button> */}
                             <a href={`/blogs/${props.blog_id}/`} class="blog-btn read-more">Read More</a>
-                            {/* <button type="button" class="blog-btn share-btns">
-                                <FontAwesomeIcon icon={faShare} size="2x" />
-                            </button> */}
                         </div>
                     </div>
                 </div>

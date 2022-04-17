@@ -95,6 +95,7 @@ class EditBlogPostSerializer(ModelSerializer):
 
         return instance
 
+
 class DeleteBlogPostSerializer(ModelSerializer):
     result = serializers.SerializerMethodField('result_message')
 
@@ -104,7 +105,18 @@ class DeleteBlogPostSerializer(ModelSerializer):
             return True
 
 class BlogPostHomeSerializer(ModelSerializer):
+    is_owner = serializers.SerializerMethodField('get_owner_status')
     
     class Meta:
         model = BlogPost
-        fields = ['id', 'title', 'description', 'primary_photo', 'last_modified', 'bloglikes'] # not sure if i should use bloglikes or something else but seems to work
+        fields = ['id', 'is_owner', 'title', 'description', 'primary_photo', 'last_modified', 'bloglikes'] # not sure if i should use bloglikes or something else but seems to work
+
+    def get_owner_status(self, obj):
+        user_id = self.context['request'].user.id
+        # print(obj)
+        blog_post = get_object_or_404(BlogPost, id=obj.id)
+        if blog_post.user_id == user_id:
+            self.is_owner = True
+        else:
+            self.is_owner = False
+        return self.is_owner

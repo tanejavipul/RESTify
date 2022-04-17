@@ -37,7 +37,7 @@ function RestaurantBlogs(props) {
                     setNextToken(resp.data.next);
 
                     for (let x = 0; x < resp.data.results.length; x++) {
-                        let temp = {"id": data[x].id, "description": data[x].description, "title": data[x].title, "last_modified": data[x].last_modified, "primary_photo": data[x].primary_photo, "bloglikes": data[x].bloglikes}
+                        let temp = {"id": data[x].id, "is_owner": data[x].is_owner, "description": data[x].description, "title": data[x].title, "last_modified": data[x].last_modified, "primary_photo": data[x].primary_photo, "bloglikes": data[x].bloglikes}
                         setBlogs(blogs => [...blogs, temp]);
                     }
                     // console.log('next', resp.data.next);

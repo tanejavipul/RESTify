@@ -69,7 +69,7 @@ function FollowRestaurant(props) {
             <div class="widget-body">
                 <div class="media align-items-center d-flex flex-row">
                     {/* Not sure if link is right for now just temp */}
-                    <a href={`restaurantPages/${props.restaurant_id}/`} class="text-decoration-none">
+                    <a href={`/restaurant/${props.restaurant_id}/`} class="text-decoration-none">
                         <div class="avatar">
                             <img src={logo} title="" alt="" />
                         </div>
@@ -80,10 +80,19 @@ function FollowRestaurant(props) {
                 </div>
                 <p class="text-center m-3">{restaurantBio}</p>
                 <div class="d-grid mt-2">
-                    {following ?
-                        <button class="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(false)} >Unfollow {props.restaurant_name}</button> :
-                        <button class="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(true)} >Follow {props.restaurant_name}</button>
-                    }
+                    <>
+                        {!props.is_owner ?
+                            <>
+                                {following ?
+                                    <button class="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(false)} >Unfollow {props.restaurant_name}</button> :
+                                    <button class="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(true)} >Follow {props.restaurant_name}</button>
+                                }
+                            </> :
+                            <>
+                                <button disabled className="btn btn-secondary fa" type="button">Can't Follow Your Own Restaurant</button>
+                            </>
+                        }
+                    </>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 .comment-wrapper .comment-panel-body {
-    max-height:650px;
+    /* Took out */
+    /* max-height:650px; */
     overflow:auto;
 }
 

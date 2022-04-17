@@ -17,6 +17,7 @@ function BlogPostPage(props) {
     const { id } = useParams();
     const [isFollowing, setFollowing] = useState(false);
     const [pulledLike, hasLiked] = useState(false);
+    const [isOpen, setOpen] = useState(false);
     const [blogPostInfo, setBlogPostInfo] = useState({"is_owner":"", "restaurant_name":"", "restaurant_id":"", "title":"", "description":"",
                                                     "primary_photo": "", "photo_1": "", "photo_2": "", "photo_3": "",
                                                     "num_likes": 0, "last_modified": "" });
@@ -58,7 +59,22 @@ function BlogPostPage(props) {
         getBlogPostInfo(id);
     }, []);
 
-    function confirmDelete() {
+    function togglePopUp(e) {
+        e.preventDefault();
+        setOpen(true);
+    }
+
+    function deleteBlog(e) {
+        e.preventDefault();
+        const headers = {
+            'Authorization': `Bearer ${localStorage.getItem('access')}`
+        }
+        axios.delete(`/blogs/${id}/delete/`, {headers})
+        .then((resp) => {
+            // think it just wont do anything if u dont own and will send u home
+            // button shouldn't pop up anyways
+            window.location.replace(`/home/`);
+        });
         
     }
 
@@ -67,6 +83,18 @@ function BlogPostPage(props) {
         <div id="intro">
             <div class="blog-single tone-down-bg">
                 <div class="container">
+                    {isOpen ? 
+                        <div className="popup-box">
+                            <div className="nested-popup-box">
+                                <span className="close-icon" onClick={() => setOpen(false)}>x</span>
+                                <b>Are you sure you want to delete this Blog Post?</b>
+                                <br />
+                                <button onClick={(e) => deleteBlog(e)}>Confirm</button>
+                                <button onClick={() => setOpen(false)}>Cancel</button>
+                            </div>
+                        </div> :
+                        <></>
+                    }
                     <div class="blog-post row align-items-start">
                         {blogPostInfo['is_owner'] ? 
                             <>
@@ -77,7 +105,7 @@ function BlogPostPage(props) {
                                     </a>
                                 </div>
                                 <div class="d-flex justify-content-end mt-2">
-                                    <button class="btn btn-primary bg-danger border-danger blog-delete-button" type="button" onClick={() => confirmDelete()} >
+                                    <button class="btn btn-primary bg-danger border-danger blog-delete-button" type="button" onClick={(e) => togglePopUp(e)} >
                                         <FontAwesomeIcon icon={faTimesCircle} />
                                         &nbsp; Delete Blog Post
                                     </button>

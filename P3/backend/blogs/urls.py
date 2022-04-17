@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from blogs.views.BlogPostEditView import BlogPostEditView
+from blogs.views.BlogPostEditView import BlogPostDeleteView, BlogPostEditView
 from blogs.views.BlogPostCreateView import BlogPostCreateView
 from blogs.views.BlogPostView import BlogPostView
 from blogs.views.BlogPostLikesView import AddBlogPostLikeView, BlogPostLikeView
@@ -28,6 +28,7 @@ urlpatterns = [
     path('<int:blogpost_id>/', BlogPostView.as_view(), name='view-blog'),
     path('create/', BlogPostCreateView.as_view(), name='create-blog'),
     path('<int:blogpost_id>/edit/', BlogPostEditView.as_view(), name='edit-blog'),
+    path('<int:blogpost_id>/delete/', BlogPostDeleteView.as_view(), name='delete-blog'),
     path('home/', BlogPostHomeView.as_view(), name='blogs-home'),
 
     #Blog Likes

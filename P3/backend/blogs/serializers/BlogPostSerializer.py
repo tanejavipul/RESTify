@@ -96,6 +96,13 @@ class EditBlogPostSerializer(ModelSerializer):
 
         return instance
 
+class DeleteBlogPostSerializer(ModelSerializer):
+    result = serializers.SerializerMethodField('result_message')
+
+    # might not even be needed
+    def result_message(self, obj):
+        if obj:
+            return True
 
 class BlogPostHomeSerializer(ModelSerializer):
     

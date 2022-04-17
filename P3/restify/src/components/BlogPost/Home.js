@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from "axios";
 import BlogPostTimeline from './BlogPostTimeline';
+import Navbar from "../Navbar/Navbar";
 
 function Home(props) {
 
@@ -57,21 +58,24 @@ function Home(props) {
 
     return (
         // {/* Inspired By: https://www.bootdey.com/snippets/view/bs4-blog-timeline */}
-        <div id="intro">
-            <div className="blog-single main-bg h-100 tone-down-bg">
-                <div className="container mt-md-5">
-                    <div className="container mb80">
-                        <div className="jumbotron text-center">
-                            <h1 className="mb-4 title-style">Your Feed</h1>
+        <>
+            <Navbar />
+            <div id="intro">
+                <div className="blog-single main-bg h-100 tone-down-bg">
+                    <div className="container mt-md-5">
+                        <div className="container mb80">
+                            <div className="jumbotron text-center">
+                                <h1 className="mb-4 title-style">Your Feed</h1>
+                            </div>
+                            {blogs.map(function(object, i) {
+                                return <BlogPostTimeline blog_id={object['id']} description={object['description']} last_modified={object['last_modified']}
+                                                        primary_photo={object['primary_photo']} title={object['title']} num_likes={object['bloglikes'].length} />
+                            })}
                         </div>
-                        {blogs.map(function(object, i) {
-                            return <BlogPostTimeline blog_id={object['id']} description={object['description']} last_modified={object['last_modified']} 
-                                                     primary_photo={object['primary_photo']} title={object['title']} num_likes={object['bloglikes'].length} />
-                        })}
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

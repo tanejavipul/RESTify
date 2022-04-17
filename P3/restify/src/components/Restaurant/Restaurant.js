@@ -14,6 +14,7 @@ import "./restaurant.css";
 import MenuSection from "./MenuSection";
 import RestaurantBlogs from "./RestaurantBlogs";
 import CommentSection from "./CommentSection";
+import Navbar from "../Navbar/Navbar";
 // TODO: Check if user is logged in?
 //populating images, and data via backend
 //import various components and swap them based on tab
@@ -143,6 +144,7 @@ function Restaurant(props) {
 
     return (
         <>
+            <Navbar />
             <div className="r-intro">
                 <div className="cover">
                     <div className="black-overlay">

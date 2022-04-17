@@ -10,6 +10,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuidv4 } from 'uuid';
 
 import EditMenuItem from './EditMenuItem';
+import Navbar from "../Navbar/Navbar";
 
 function EditMenu(props) {
 
@@ -163,40 +164,43 @@ function EditMenu(props) {
     }
 
     return (
-        <div id="edit-menu-intro">
-            <div class="mask d-flex align-items-center h-100 tone-down-bg">
-                <div class="container">
-                    <form class="edit-menu-row" style={{backgroundColor: '#FFFFFF'}}>
-                        <h2 class="d-flex justify-content-center edit-menu-h2">Add / Edit Menu</h2>
+        <>
+            <Navbar />
+            <div id="edit-menu-intro">
+                <div class="mask d-flex align-items-center h-100 tone-down-bg">
+                    <div class="container">
+                        <form class="edit-menu-row" style={{backgroundColor: '#FFFFFF'}}>
+                            <h2 class="d-flex justify-content-center edit-menu-h2">Add / Edit Menu</h2>
 
-                        { menuItems.map(function(object, i) {
-                            return <EditMenuItem id={object['id']} name={object['name']} description={object['description']} 
-                                                 price={object['price']} type={object['type']} 
-                                                 setMenuItems={updateMenuItems} saved={clicked} new={object['new']} />
-                        })}
-                                                
-                        <div class="d-flex align-items-center justify-content-end">
+                            { menuItems.map(function(object, i) {
+                                return <EditMenuItem id={object['id']} name={object['name']} description={object['description']} 
+                                                    price={object['price']} type={object['type']} 
+                                                    setMenuItems={updateMenuItems} saved={clicked} new={object['new']} />
+                            })}
+                                                    
+                            <div class="d-flex align-items-center justify-content-end">
 
-                            <div class="edit-menu-add-row d-flex">
+                                <div class="edit-menu-add-row d-flex">
 
-                                <button class="edit-menu-add-row-btn d-flex" onClick={event => addRow(event)}>
-                                    <FontAwesomeIcon icon={faPlusCircle} size="3x" style={{ color: "var(--blue-main)" }} />
-                                    <label class="d-flex align-items-center edit-menu-add-row-label edit-menu-label edit-label">ADD ANOTHER ITEM</label>
-                                </button>
+                                    <button class="edit-menu-add-row-btn d-flex" onClick={event => addRow(event)}>
+                                        <FontAwesomeIcon icon={faPlusCircle} size="3x" style={{ color: "var(--blue-main)" }} />
+                                        <label class="d-flex align-items-center edit-menu-add-row-label edit-menu-label edit-label">ADD ANOTHER ITEM</label>
+                                    </button>
 
 
+                                </div>
+                            </div>                    
+                            
+                            <div class="d-flex justify-content-between">
+                                <a href={`/restaurant/${id}/`} value="GO BACK" class="edit-save-btn btn shadow-none">GO BACK</a>
+
+                                <input type="submit" onClick={(e) => updateMenu(e)} value="SAVE CHANGES" class="edit-save-btn btn shadow-none" />
                             </div>
-                        </div>                    
-                        
-                        <div class="d-flex justify-content-between">
-                            <a href={`/restaurant/${id}/`} value="GO BACK" class="edit-save-btn btn shadow-none">GO BACK</a>
-
-                            <input type="submit" onClick={(e) => updateMenu(e)} value="SAVE CHANGES" class="edit-save-btn btn shadow-none" />
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

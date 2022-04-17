@@ -120,7 +120,7 @@ html, body {
 }
 
 /* Took out h6 */
-.blog-aside .widget-author {
+.blog-aside .widget-author h6 {
   font-weight: 600;
   color: #20247b;
   font-size: 22px;
@@ -227,15 +227,20 @@ html, body {
 }
 
 /* Took out h6 */
-.article .article-title a {
+/* .article .article-title a {
   text-transform: uppercase;
   color: #fc5356;
   border-bottom: 1px solid #fc5356;
-}
-.article .article-title h2 {
+} */
+/* .article .article-title h2 {
   color: var(--orange-1);
   font-weight: 1000;
-  /* margin-bottom: 1em; */
+  margin-bottom: 1em; comment out
+} */
+
+.blog-title {
+  color: var(--orange-1);
+  font-weight: 2000;
 }
 .article .article-title .media {
   padding-top: 15px;

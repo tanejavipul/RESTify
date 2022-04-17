@@ -76,7 +76,7 @@ class BlogPostSerializer(ModelSerializer):
 class EditBlogPostSerializer(ModelSerializer):
 
     title = serializers.CharField(max_length=100, required=False)
-    description = serializers.CharField(max_length=100, required=False)
+    # description = serializers.TextField(required=False)
 
     class Meta:
         model = BlogPost

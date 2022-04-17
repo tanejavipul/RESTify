@@ -112,7 +112,7 @@ function BlogPostPage(props) {
                                 </div>
                             </> : <></>
                         }
-                        <BlogPost restaurant_name={blogPostInfo['restaurant_name']} title={blogPostInfo['title']} description={blogPostInfo['description']}
+                        <BlogPost restaurant_id={blogPostInfo['restaurant_id']} restaurant_name={blogPostInfo['restaurant_name']} title={blogPostInfo['title']} description={blogPostInfo['description']}
                                   primary_photo={blogPostInfo['primary_photo']} photo_1={blogPostInfo['photo_1']} photo_2={blogPostInfo['photo_2']} photo_3={blogPostInfo['photo_3']}
                                   num_likes={blogPostInfo['num_likes']} last_modified={blogPostInfo['last_modified']} liked={pulledLike} />
                         <div class="col-lg-4 m-15px-tb blog-aside">

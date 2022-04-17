@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./blogPost.css";
@@ -62,18 +63,23 @@ function BlogPost(props) {
             <div class="col-lg-8 m-15px-tb">
                 <article class="article">
                     <div class="article-img">
-                        <img src={props.primary_photo} title="Restaurant Image" alt="Primary Photo" />
+                        {/* May need to change width */}
+                        <img style={{height: '100%', width: '50%', objectFit: 'contain' }} class="mx-auto d-block" src={props.primary_photo} title="Restaurant Image" alt="" />
                     </div>
                     <div class="article-title">
-                        <h2>{props.title}</h2>
+                        <h2 class="text-center blog-title">{props.title}</h2>
                         <ul class="post-meta list-inline d-flex justify-content-between">
-                            <li class="list-inline-item">
-                                <FontAwesomeIcon icon={faCutlery} size="3x" />
-                                <h5>{props.restaurant_name}</h5>
-                            </li>
+                            <div class="d-flex">
+                                <li class="list-inline-item">
+                                    <FontAwesomeIcon icon={faCutlery} size="3x" />
+                                    <Link to={`/restaurant/${props.restaurant_id}/`} className="text-center navbar-logo-color text-decoration-none">
+                                        <h5 class="ml-2">{props.restaurant_name}</h5>
+                                    </Link>
+                                </li>
+                            </div>
                             <li class="list-inline-item">
                                 <FontAwesomeIcon icon={faCalendar} size="3x" />
-                                <h5>{time}</h5>
+                                <h5 class="ml-2">{time}</h5>
                             </li>
                             <li class="list-inline-item">
                                 <div class="d-flex">
@@ -95,13 +101,13 @@ function BlogPost(props) {
                         </ul>
                     </div>
                     <div class="article-content">
-                        <p>{props.description}</p>
-                        <h4>Some images from the Blog Post</h4>
+                        <p class="h4">{props.description}</p>
+                        {/* <h4>Some images from the Blog Post</h4>
                         <div class="d-flex flex-row">
                             <img class="blog-img" src={props.photo_1} title="BlogPost Image 1" alt="BlogPost Image 1" />
                             <img class="blog-img" src={props.photo_2} title="BlogPost Image 2" alt="BlogPost Image 2" />
                             <img class="blog-img" src={props.photo_3} title="BlogPost Image 3" alt="BlogPost Image 3" />
-                        </div>
+                        </div> */}
                     </div>
                 </article>
             </div>

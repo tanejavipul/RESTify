@@ -1,4 +1,4 @@
-from rest_framework.generics import get_object_or_404, UpdateAPIView, ListAPIView, CreateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import get_object_or_404, UpdateAPIView, ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from restaurants.models import MenuItem, Restaurant
@@ -41,3 +41,22 @@ class EditMenuView(UpdateAPIView):
 class AddMenuView(CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = AddMenuSerializer
+
+
+class DeleteMenuView(DestroyAPIView):
+    queryset = MenuItem.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return get_object_or_404(MenuItem, id=self.kwargs['menu_item_id'])
+
+    def check_permissions(self, request):
+        user_id = request.user.id
+        menu_item = get_object_or_404(MenuItem, id=self.kwargs['menu_item_id'])
+        rest_id = menu_item.restaurant_id
+
+        restaurant = get_object_or_404(Restaurant, id=rest_id)
+
+        # not owner of the restaurant that owns the menu
+        if user_id != restaurant.owner_id:
+            self.permission_denied(self.request)

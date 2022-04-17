@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./blogPost.css";
@@ -31,7 +32,6 @@ function FollowRestaurant(props) {
     }
 
     function updateFollow(follow) {
-        console.log('clicked');
         // follow bool to check if we are following or unfollowing
         if (follow) {
             axios.post(`/restaurants/follow/${props.restaurant_id}/`, {}, {  
@@ -62,7 +62,9 @@ function FollowRestaurant(props) {
         // <!-- Restaurant Author -->
         <div class="widget widget-author">
             <div class="widget-title">
-                <h3>{props.restaurant_name}</h3>
+                <Link to={`/restaurant/${props.restaurant_id}/`} className="text-center navbar-logo-color text-decoration-none">
+                    <h3>{props.restaurant_name}</h3>
+                </Link>
             </div>
             <div class="widget-body">
                 <div class="media align-items-center d-flex flex-row">

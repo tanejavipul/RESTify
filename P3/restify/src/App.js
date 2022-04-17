@@ -36,7 +36,6 @@ function App() {
           <Route path="/home/"    element={<Home />} />
 
           <Route path="/profile/" element={<Profile />} />
-          <Route path="/nav/"     element={<Navbar />} />
           <Route path="/blogs/:id"  element={<BlogPostPage />} />
           <Route path="/restaurant/add/" element={<RestaurantAdd />} />
           <Route path="/restaurant/edit/" element={<RestaurantEdit />} />

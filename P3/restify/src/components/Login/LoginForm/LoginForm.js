@@ -17,10 +17,9 @@ const LoginForm = () => {
 
     useEffect(() => {
         document.title = "RESTify"
-        // FIXME FIX THIS WHEN FEED PAGE DONE
-        // if(localStorage.getItem("access") !== null) {
-        //     setNavi("true")
-        // }
+        if(localStorage.getItem("access") !== null) {
+            setNavi("true")
+        }
     }, []);
 
 

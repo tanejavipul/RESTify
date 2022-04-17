@@ -3,10 +3,23 @@ from django.shortcuts import get_object_or_404
 from rest_framework.generics import RetrieveAPIView, UpdateAPIView, CreateAPIView, ListAPIView, RetrieveDestroyAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.db.models import Count
-from rest_framework import filters
-from restaurants.serializer.RestaurantSerializer import RestaurantSerializer, EditRestaurantSerializer, GetRestaurantSerializer, RestaurantLikeSerializer, RestaurantLikeGetSerializer
+from rest_framework import filters, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from restaurants.serializer.RestaurantSerializer import RestaurantSerializer, EditRestaurantSerializer, \
+    GetRestaurantSerializer, RestaurantLikeSerializer, RestaurantLikeGetSerializer
 from restaurants.models import Restaurant
 
+
+class RestaurantIDView(APIView):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if not Restaurant.objects.filter(owner=self.request.user).exists():
+                return Response({'Error': "Restaurant not Found"}, status=status.HTTP_404_NOT_FOUND)
+            rest = Restaurant.objects.get(owner=self.request.user)
+            return Response({'id': rest.id}, status=status.HTTP_200_OK)
+        return Response({'Error': "User not Authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
 
 class AddRestaurantView(CreateAPIView):
     queryset = Restaurant.objects.all()

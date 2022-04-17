@@ -20,7 +20,8 @@ from restaurants.views.CommentView import AddCommentView, CommentView
 from restaurants.views import NotificationSelector as NS
 from restaurants.views.MenuView import MenuView, EditMenuView, AddMenuView
 from restaurants.views.FollowView import FollowUnfollowView
-from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, RestaurantLikeView, GetRestaurantListView, GetRestaurantView
+from restaurants.views.RestaurantViews import AddRestaurantView, EditRestaurantView, AddRestaurantLikeView, \
+    RestaurantLikeView, GetRestaurantListView, GetRestaurantView, RestaurantIDView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from restaurants.views.OwnerNotificationView import OwnerNotificationAddView, OwnerNotificationView
@@ -55,6 +56,8 @@ urlpatterns = [
          name='ownerNotifyComment'),
 
     #Restaurant
+    path('id/', RestaurantIDView.as_view(), name='RestaurantID'),
+
     path('add/', AddRestaurantView.as_view(), name='addRestaurant'),
     path('<int:restaurant_id>/edit/', EditRestaurantView.as_view(), name='editRestaurant'),
     path('search/', GetRestaurantListView.as_view(), name='getRestaurants'),

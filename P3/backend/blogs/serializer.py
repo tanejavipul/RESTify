@@ -79,7 +79,7 @@ class BlogPostLikeSerializer(ModelSerializer):
 
             #create new notification for liking the blog post
             message = NS.getOwnerNotificationTitle(NS.LIKE_BLOG, _user, _blogpost.restaurant)
-            self.notification = OwnerNotification.objects.create(restaurant=_blogpost.restaurant, user=_user, title=message)
+            self.notification = OwnerNotification.objects.create(restaurant=_blogpost.restaurant, user=_user, title=message,type=NS.LIKE_BLOG,type_id=blogpost_id)
             self.notification.save()
             
         #TODO: remove later

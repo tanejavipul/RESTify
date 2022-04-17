@@ -13,7 +13,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=100)
     postal = models.CharField(max_length=10)
     phone = PhoneNumberField(null=True)
-    logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurants/Logo/logo.png', blank=False) 
+    logo = models.ImageField(upload_to='Restaurants/Logo/', default='Restaurants/Logo/logo.png', blank=False)
 
     #extra fields on restaurant page
     description = models.TextField(max_length=2000, blank=True)
@@ -41,6 +41,8 @@ class RestaurantNotification(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='restaurantUpdate')
     title = models.CharField(max_length=200)
     last_modified = DateTimeField(auto_now=True,editable=True)
+    type = models.CharField(max_length=200)
+    type_id = models.IntegerField()
     def __str__(self):
         return str(self.id)+ ". Notification: " + '"'+ str(self.restaurant.name) +'"' + " - " + str(self.title)
 
@@ -49,9 +51,11 @@ class OwnerNotification(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='ownerNotification')
     title = models.CharField(max_length=200)
     last_modified = models.DateTimeField(auto_now=True)
-#     def __str__(self):
-#         return str(self.id)+ ". Notification: " + '"'+ str(self.restaurant.name) +'"' + " - " + str(self.title)
-#
+    type = models.CharField(max_length=200)
+    type_id = models.IntegerField()
+    def __str__(self):
+        return str(self.id)+ ". Notification: " + '"'+ str(self.restaurant.name) +'"' + " - " + str(self.title)
+
 
 class Comment(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True, related_name='comments')

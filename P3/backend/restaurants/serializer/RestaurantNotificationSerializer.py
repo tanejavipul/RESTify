@@ -9,4 +9,4 @@ class RestaurantNotificationSerializer(ModelSerializer):
     last_modified = serializers.DateTimeField(format="%a %B %d %Y, %I:%M%p")
     class Meta:
         model = RestaurantNotification
-        fields = ['id', 'restaurant', 'title', 'last_modified', 'logo']
+        fields = ['id', 'restaurant', 'title', 'last_modified', 'logo', 'type', 'type_id']

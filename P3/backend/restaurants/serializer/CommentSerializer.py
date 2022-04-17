@@ -51,7 +51,7 @@ class AddCommentSerializer(ModelSerializer):
 
         # create new notification for posting comment
         message = NS.getOwnerNotificationTitle(NS.COMMENT, user, restaurant)
-        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message)
+        self.notification = OwnerNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.COMMENT ,type_id=restaurant.id)
         self.notification.save()
 
         return comment

@@ -188,7 +188,7 @@ class RestaurantLikeSerializer(ModelSerializer):
 
             # create new notification for liking the restaurant
             message = NS.getOwnerNotificationTitle(NS.LIKE_REST, _user, _restaurant)
-            self.notification = OwnerNotification.objects.create(restaurant=_restaurant, user=_user, title=message)
+            self.notification = OwnerNotification.objects.create(restaurant=_restaurant, user=_user, title=message, type=NS.LIKE_REST, type_id=restaurant_id)
             self.notification.save()
 
         return restaurantLike

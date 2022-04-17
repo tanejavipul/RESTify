@@ -118,7 +118,9 @@ html, body {
   border-radius: 50%;
   overflow: hidden;
 }
-.blog-aside .widget-author h6 {
+
+/* Took out h6 */
+.blog-aside .widget-author {
   font-weight: 600;
   color: #20247b;
   font-size: 22px;
@@ -212,15 +214,20 @@ html, body {
   padding: 15px;
   margin: 15px 0 30px;
 }
+
 .article .article-title {
   padding: 15px 0 20px;
 }
-.article .article-title h6 {
+
+/* Took out h6 */
+.article .article-title {
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 20px;
 }
-.article .article-title h6 a {
+
+/* Took out h6 */
+.article .article-title a {
   text-transform: uppercase;
   color: #fc5356;
   border-bottom: 1px solid #fc5356;
@@ -258,7 +265,8 @@ html, body {
 .article .article-content h3,
 .article .article-content h4,
 .article .article-content h5,
-.article .article-content h6 {
+/* Took out h6 might need to take out others */
+.article .article-content {
   color: #20247b;
   font-weight: 600;
   /* margin-bottom: 15px; */
@@ -298,6 +306,7 @@ html, body {
   margin-bottom: 25px;
   font-size: 22px;
 }
+/* EDIT */
 img {
     max-width: 100%;
 }
@@ -509,7 +518,8 @@ h5 {
   font-size: 1.5em;
 }
 
-h6 {
+/* Changed h6 */
+.follow-restaurant-bio {
   font-size: 1.5rem;
   margin: 0;
   font-weight: 200;
@@ -674,4 +684,60 @@ h3 {
   padding: 3rem;
   margin-bottom: 2rem;
   color: white;
+}
+
+/* Popup style */
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+ 
+.nested-popup-box {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #999;
+  overflow: auto;
+  text-align: center;
+}
+ 
+.close-icon {
+  content: 'x';
+  cursor: pointer;
+  position: fixed;
+  right: calc(15% - 30px);
+  top: calc(100vh - 85vh - 33px);
+  background: #ededed;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #999;
+  font-size: 20px;
+}
+
+.menu-item-close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  background: #ededed;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #999;
+  font-size: 20px;
 }

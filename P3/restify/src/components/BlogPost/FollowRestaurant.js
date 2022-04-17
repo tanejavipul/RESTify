@@ -73,7 +73,7 @@ function FollowRestaurant(props) {
                         </div>
                     </a>
                     <div class="media-body">
-                        <h6>Hello 👋, This is a blog post from {props.restaurant_name}!</h6>
+                        <h6 class="follow-restaurant-bio">Hello 👋, This is a blog post from {props.restaurant_name}!</h6>
                     </div>
                 </div>
                 <p class="text-center m-3">{restaurantBio}</p>

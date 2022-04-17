@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import notificationsSVG from "../../assets/Icons/restaurant_notification.svg"
-import {noNotifications, NotificationNav} from '../NotiticationsModel';
+import {noNotifications, NotificationNav} from '../NotiticationHelper';
 import OwnerMessage from "./OwnerMessage/OwnerMessage";
 
 const OwnerDropDown = ({setDisplayOwner}) => {
@@ -38,12 +38,9 @@ const OwnerDropDown = ({setDisplayOwner}) => {
                     console.log(count)
                     let data = resp.data.results
                     for (let x = 0; x < resp.data.results.length; x++) {
-                        let temp = new NotificationNav(data[x].id, data[x].restaurant, data[x].title, data[x].last_modified)
+                        let temp = new NotificationNav(data[x].id, data[x].restaurant, data[x].title, data[x].last_modified, data[x].type, data[x].type_id)
                         setAllNotifications(allNotifications => [...allNotifications, temp]);
                     }
-                    allNotifications.map(function (data) {
-                        console.log(data.title)
-                    })
                     setPage(page + 1)
                     if (resp.data.next === null) {
                         setPage(-1)

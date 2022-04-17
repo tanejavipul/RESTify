@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import notificationsSVG from "../../assets/Icons/notifications.svg"
 import NotificationMessage from "./NotificationMessage/NotificationMessage";
-import {noNotifications, NotificationNav} from '../NotiticationsModel';
+import {noNotifications, NotificationNav} from '../NotiticationHelper';
 
 const NotificationsDropDown = () => {
     const [page, setPage] = useState(1);
@@ -36,12 +36,9 @@ const NotificationsDropDown = () => {
                     setCount(resp.data.count)
                     let data = resp.data.results
                     for (let x = 0; x < resp.data.results.length; x++) {
-                        let temp = new NotificationNav(data[x].id, data[x].restaurant, data[x].title, data[x].last_modified)
+                        let temp = new NotificationNav(data[x].id, data[x].restaurant, data[x].title, data[x].last_modified, data[x].type, data[x].type_id)
                         setAllNotifications(allNotifications => [...allNotifications, temp]);
                     }
-                    allNotifications.map(function (data) {
-                        console.log(data.title)
-                    })
                     setPage(page + 1)
                     if (resp.data.next === null) {
                         setPage(-1)

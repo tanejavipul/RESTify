@@ -15,14 +15,6 @@ import {useEffect, useState} from "react";
 const Navbar = ({profileUpdate}) => {
     const [displayOwner, setDisplayOwner] = useState(1);
 
-    useEffect(() => {
-        console.log(displayOwner)
-    }, [displayOwner]);
-
-
-
-
-
     return (
         <>
             <nav className="navbar  navbar-background fixed-top">

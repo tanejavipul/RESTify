@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import {linkURLCompiler} from "../../NotiticationHelper";
 
 
 const OwnerMessage = ({data}) => {
@@ -6,7 +7,7 @@ const OwnerMessage = ({data}) => {
 
 
     return <>
-        {/*<Link to={"/home/"} className={"select-profile"} style={{ textDecoration: 'none'}}>*/}
+        <Link to={linkURLCompiler(data.type, data.type_id, data.restaurant)} className={"select-profile"} style={{ textDecoration: 'none'}}>
         <div id={data.id} className="alert alert-secondary alert-dismissible fade show" role="alert">
             <button className="list-group-item list-group-item-action notification-individual-button">
                 <span className="notification-time">{data.time}<br/></span>
@@ -14,7 +15,7 @@ const OwnerMessage = ({data}) => {
             {/*    <strong>Sara</strong> */}
             </button>
         </div>
-        {/*</Link>*/}
+        </Link>
     </>
 
 

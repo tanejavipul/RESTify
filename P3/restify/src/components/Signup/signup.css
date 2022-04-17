@@ -49,11 +49,8 @@
     background-color: #231F20;
 }
 
-/*TODO CHANGE FOR CARASOUL*/
-h5 {
-    color: white;
-}
 
 .signin-h5 {
-    color: white;
+    color:  white;
+    text-shadow: -1px -1px 0 var(--blue-main), 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }

@@ -12,6 +12,7 @@ function BlogPostEdit(props) {
 
     const { id } = useParams();
     const [primaryPhoto, setPrimaryPhoto] = useState(null);
+    const [errors, setErrors] = useState({});
     const [blogPostInfo, setBlogPostInfo] = useState({"is_owner":"", "restaurant_name":"", "restaurant_id":"", "title":"", "description":"",
                                                       "primary_photo": "", "photo_1": "", "photo_2": "", "photo_3": "",
                                                       "num_likes": 0, "last_modified": "" });
@@ -25,7 +26,18 @@ function BlogPostEdit(props) {
             const headers = {
                 'Authorization': `Bearer ${localStorage.getItem('access')}`
             }
-            let response = await axios.get(`/blogs/${id}/`, {headers});
+            let response = await axios.get(`/blogs/${id}/`, {headers})
+                                        .catch((err) => {
+                                            if (err.response.status == 404) {
+                                                window.location.replace(`/home/`);
+                                            }
+                                        });
+            console.log(response['data']['is_owner']);
+            // if not owner shouldn't see page
+            if ( !response['data']['is_owner'] ) {
+                window.location.replace(`/blogs/${id}/`);
+            }
+
             setBlogPostInfo(response['data']);
         }
     }
@@ -52,14 +64,28 @@ function BlogPostEdit(props) {
             .then((resp) => {
                 console.log(resp);
                 window.location.replace(`/blogs/${id}/`);
-            });
+            })
+            .catch((err) => {
+                //TODO ERROR CHECKING
+                console.log(err.response);
+                if (err.response.status === 400) {
+                    setErrors(err.response.data);
+                }
+            })
         } else {
             axios.post(`/blogs/create/`, formData, {headers})
             .then((resp) => {
                 console.log(resp);
                 let blogId = resp['data']['id']
                 window.location.replace(`/blogs/${blogId}/`);
-            }); 
+            })
+            .catch((err) => {
+                //TODO ERROR CHECKING
+                console.log(err.response);
+                if (err.response.status === 400) {
+                    setErrors(err.response.data);
+                }
+            })
         }
     }
 
@@ -128,9 +154,20 @@ function BlogPostEdit(props) {
                                 </div>
                                 <img src={exampleBlog} class="example-blog flex-shrink-0" />
                             </div>
+                            
+                            {Object.keys(errors).length > 0 &&
+                                <div className="col-lg-12">
+                                    <i>Please fix the following errors</i>
+                                    {
+                                        Object.keys(errors).map(name => (
+                                            <div style={{color: 'red'}}>{name} : {errors[name]}</div>
+                                        ))
+                                    }
+                                </div>
+                            }
 
                             <hr class="edit-line-break" />
-                                
+                            
                             <div class="d-flex justify-content-between">
                                 <a href={`/blogs/${id}/`} value="GO BACK" class="edit-save-btn btn shadow-none">GO BACK</a>
 

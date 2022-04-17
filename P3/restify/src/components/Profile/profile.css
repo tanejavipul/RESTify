@@ -21,16 +21,6 @@ html, body {
     height: 100vh;
 }
 
-/* TODO */
-
-h2, h4 {
-    color: var(--blue-main);
-    font-weight: bold;
-    font-style: italic;
-    font-family: 'Nunito', sans-serif;
-    margin-bottom: 1.5em;
-}
-
 .profile-h2-h4 {
     color: var(--blue-main);
     font-weight: bold;
@@ -43,9 +33,6 @@ h2, h4 {
     padding-top: 1em;
 }
 
-h4 {
-    padding-top: 1em;
-}
 
 .row-content-adjust {
     background-color: white;

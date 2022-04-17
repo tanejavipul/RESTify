@@ -4,7 +4,7 @@ import notificationsSVG from "../../assets/Icons/restaurant_notification.svg"
 import {noNotifications, NotificationNav} from '../NotiticationHelper';
 import OwnerMessage from "./OwnerMessage/OwnerMessage";
 
-const OwnerDropDown = ({setDisplayOwner}) => {
+const OwnerDropDown = () => {
     const [allNotifications, setAllNotifications] = useState([])
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(1);
@@ -48,7 +48,6 @@ const OwnerDropDown = ({setDisplayOwner}) => {
                 }
             }).catch((e) => {
                 console.log(e.response)
-                setDisplayOwner(-1)
             });
         }
     }

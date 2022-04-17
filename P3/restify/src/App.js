@@ -41,7 +41,6 @@ function App() {
           <Route path="/home/"    element={<Home />} />
 
           <Route path="/profile/" element={<Profile />} />
-          <Route path="/nav/"     element={<Navbar />} />
           <Route path="/blogs/:id/"  element={<BlogPostPage />} />
           <Route path="/blogs/addBlog/" element={<BlogPostEdit />} />
           <Route path="/blogs/:id/edit/"  element={<BlogPostEdit />} />

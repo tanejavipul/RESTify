@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import notificationsSVG from "../../assets/Icons/notifications.svg"
+import notificationsSVG from "../../assets/Icons/restaurant_notification.svg"
 import {noNotifications, NotificationNav} from '../NotiticationsModel';
 import OwnerMessage from "./OwnerMessage/OwnerMessage";
 
@@ -49,9 +49,10 @@ const OwnerDropDown = ({setDisplayOwner}) => {
                         setPage(-1)
                     }
                 }
-            }).catch(
+            }).catch((e) => {
+                console.log(e.response)
                 setDisplayOwner(-1)
-            );
+            });
         }
     }
 

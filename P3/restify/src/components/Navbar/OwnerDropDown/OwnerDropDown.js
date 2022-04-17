@@ -80,21 +80,7 @@ const OwnerDropDown = ({setDisplayOwner}) => {
                 </div>
                 : noNotifications}
         </div>
-
-
-
-
-
-
-
-
     </>)
-
-
-
-
-
-
 }
 
 

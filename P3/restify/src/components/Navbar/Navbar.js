@@ -33,10 +33,12 @@ const Navbar = ({profileUpdate}) => {
         }).catch(e => {
             if(e.response.status === 404) {
                 setRestID(-1)
+                console.clear()
             }
             if(e.response.status === 401) {
                 deleteLogin()
                 setNav(-1)
+                console.clear()
 
             }
         });

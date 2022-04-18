@@ -34,6 +34,7 @@ function EditMenu(props) {
                 setRestID(resp.data.id)
             }
         }).catch(e => {
+            console.clear()
             // don't think this should ever happen cuz navbar works first
             console.log(e.response.status)
             // if(e.response.status === 404) {

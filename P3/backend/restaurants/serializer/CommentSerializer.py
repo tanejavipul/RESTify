@@ -31,15 +31,24 @@ class AddCommentSerializer(ModelSerializer):
 
     notification = ''
     commenter = ''
+    profile_pic = ''
     username = serializers.SerializerMethodField('get_commenter_name')
+    # profile_pic = serializers.SerializerMethodField('get_profile_photo')
+    profile_pic = serializers.ImageField(source='user.avatar', read_only=True, write_only=False)
+
+    
 
     class Meta:
         model = Comment
-        fields = ['comment', 'datetime', 'username']
+        fields = ['comment', 'datetime', 'username', 'profile_pic']
 
     # probably not needed?
     def get_commenter_name(self, obj):
         return str(obj.user)
+    
+    def get_profile_photo(self, obj):
+        profile_photo = str(User.objects.get(id=obj.user_id).avatar)
+        return profile_photo
 
     def create(self, validated_data):
         user = self.context['request'].user

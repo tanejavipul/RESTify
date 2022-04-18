@@ -10,8 +10,8 @@ chmod 777 manage.py
 python3 manage.py makemigrations
 python3 manage.py migrate
 
-
 cd ../restify/
-cd npm install
-cd ../
+npm install
+cd ..
+
 ./run.sh

@@ -12,12 +12,12 @@ class BlogPost(models.Model):
     restaurant = models.ForeignKey(to=Restaurant, on_delete=CASCADE, null=True, related_name='blogpost')
     title = models.CharField(max_length=100)
     description = models.TextField()
-    primary_photo = models.ImageField(upload_to='Blogs/Post/', blank=True, null=True)  # Allowing for no photos in blog post
+    primary_photo = models.ImageField(upload_to='Blogs/Post/', default='Restaurants/Logo/restaurant-logo.png',
+                                      blank=True, null=True)
     photo_1 = models.ImageField(upload_to='Blogs/Post/', blank=True, null=True)
     photo_2 = models.ImageField(upload_to='Blogs/Post/', blank=True, null=True)
     photo_3 = models.ImageField(upload_to='Blogs/Post/', blank=True, null=True)
     last_modified = DateTimeField(auto_now=True, editable=True)
-
 
 class BlogLike(models.Model):
     user = models.ForeignKey(to=User, on_delete=CASCADE, null=True, related_name='blogLikes')

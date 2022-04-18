@@ -29,7 +29,7 @@ function Comment(props) {
         <div class="comment-media">
             <a class="pull-comment-left">
                 {/* Don't love this but probably better than hardcoding url for each image */}
-                <img src={`/Media/${props.profile_pic}`} alt="" class="comment-img-circle" />
+                <img src={`${props.profile_pic}`} alt="" class="comment-img-circle" />
             </a>
             <div class="media-body">
                 <span class="text-muted comment-float-right">

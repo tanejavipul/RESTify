@@ -13,7 +13,8 @@ class CommentSerializer(ModelSerializer):
     commenter = ''
     profile_pic = ''
     username = serializers.SerializerMethodField('get_commenter_name')
-    profile_pic = serializers.SerializerMethodField('get_profile_photo')
+    profile_pic = serializers.ImageField(source='user.avatar')
+    # profile_pic = serializers.SerializerMethodField('get_profile_photo')
     class Meta:
         model = Comment
         fields = ['comment', 'datetime', 'username', 'profile_pic']

@@ -11,7 +11,7 @@ const NotificationsDropDown = () => {
 
     useEffect(() => {
         update()
-    }, );
+    }, []);
 
     const onScroll = (e) => {
         const tar = e.target

@@ -19,7 +19,7 @@ const Navbar = ({profileUpdate}) => {
 
     useEffect(() => {
         getRest()
-    }, );
+    }, []);
 
     const getRest = () => {
         axios.get(`/restaurants/id/`, {

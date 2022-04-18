@@ -83,14 +83,22 @@ function BlogPost(props) {
                             </li>
                             <li class="list-inline-item">
                                 <div class="d-flex">
-                                    <button type="button" class="like-btn">
-                                        {/* <i class="fa fa-heart-o fa-3x" aria-hidden="true"></i> */}
-                                        {liked ?
-                                            <FontAwesomeIcon icon={faHeartFill} size="3x" color="red" onClick={() => updateLike(false)} /> :
-                                            <FontAwesomeIcon icon={faHeart} size="3x" onClick={() => updateLike(true)} />
+                                        {props.is_owner ?
+                                            <>
+                                                <button disabled type="button" class="like-btn">
+                                                    <FontAwesomeIcon disabled icon={faHeartFill} size="3x" color="" />
+                                                </button>
+                                            </> :
+                                            <>
+                                                <button type="button" class="like-btn">
+                                                {liked ?
+                                                    <FontAwesomeIcon icon={faHeartFill} size="3x" color="red" onClick={() => updateLike(false)} /> :
+                                                    <FontAwesomeIcon icon={faHeart} size="3x" onClick={() => updateLike(true)} />
+                                                }
+                                                </button>
+                                            </>
                                         }
-                                        {/* <!-- <i class="fa fa-heart fa-3x" aria-hidden="true"></i> --> */}
-                                    </button>
+                                    {/* </button> */}
                                     <div>
                                         <h5>Like this Blog Post!</h5><br />
                                         <div class="h7">{numLikes} Likes</div>

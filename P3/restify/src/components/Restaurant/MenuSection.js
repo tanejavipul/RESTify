@@ -12,7 +12,6 @@ function MenuSection(props) {
     const { id } = useParams();
     const [menuItems, setMenuItems] = useState([]);
     const [numMenuItems, setNumMenuItems] = useState(0);
-    const [nextToken, setNextToken] = useState(""); // TODO
     const [existingTypes, setTypes] = useState([]);
 
     useEffect(() => {
@@ -31,7 +30,6 @@ function MenuSection(props) {
         .then((response) => {
             setMenuItems(response['data']['results']);
             setNumMenuItems(response['data']['count']);
-            setNextToken(response['data']['next']);
             let allTypes = response['data']['results'].map(data => {
                 return data.type
             });

@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
@@ -9,10 +10,23 @@ validTypes = ["Appetizers", "Main Course", "Sides", "Specials", "Desserts", "Dri
 
 
 class MenuSerializer(ModelSerializer):
+    
+    is_owner = serializers.SerializerMethodField('get_owner_status')
 
     class Meta:
         model = MenuItem
-        fields = ['name', 'description', 'price', 'type', 'id']
+        fields = ['is_owner', 'name', 'description', 'price', 'type', 'id']
+
+    def get_owner_status(self, obj):
+        user_id = self.context['request'].user.id
+        menu_item = get_object_or_404(MenuItem, id=obj.id)
+        restaurant_id = get_object_or_404(Restaurant, owner_id=user_id).id
+        print(restaurant_id)
+        if menu_item.restaurant_id == restaurant_id:
+            self.is_owner = True
+        else:
+            self.is_owner = False
+        return self.is_owner
 
 
 class EditMenuSerializer(ModelSerializer):
@@ -23,10 +37,11 @@ class EditMenuSerializer(ModelSerializer):
     description = serializers.CharField(max_length=100, required=False)
     price = serializers.FloatField(required=False)
     type = serializers.CharField(max_length=50, required=False)
+    is_owner = serializers.SerializerMethodField('get_owner_status')
 
     class Meta:
         model = MenuItem
-        fields = ['name', 'description', 'price', 'type']
+        fields = ['name', 'description', 'price', 'type', 'is_owner']
 
     def validate(self, attrs):
         errors = {}
@@ -45,6 +60,17 @@ class EditMenuSerializer(ModelSerializer):
             raise serializers.ValidationError(errors)
 
         return attrs
+
+    def get_owner_status(self, obj):
+        user_id = self.context['request'].user.id
+        menu_item = get_object_or_404(MenuItem, id=obj.id)
+        restaurant_id = get_object_or_404(Restaurant, owner_id=user_id).id
+        print(restaurant_id)
+        if menu_item.restaurant_id == restaurant_id:
+            self.is_owner = True
+        else:
+            self.is_owner = False
+        return self.is_owner
 
     def update(self, instance, validated_data):
         user = self.context['request'].user
@@ -73,7 +99,7 @@ class AddMenuSerializer(ModelSerializer):
 
     class Meta:
         model = MenuItem
-        fields = ['name', 'description', 'price', 'type']
+        fields = ['name', 'description', 'price', 'type', 'id']
 
     def validate(self, attrs):
         errors = {}

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faHeart, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import RestaurantInfo from './RestaurantInfo';
 
@@ -223,8 +223,8 @@ function Restaurant(props) {
                                         </div>
                                         <div className="nav-item">
                                             {activeTab === "menu" && restaurantInfo['is_owner'] &&
-                                                <Link to={`/restaurant/edit/`}
-                                                    className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Edit </Link>
+                                                <Link to={`/restaurant/editMenu/`}
+                                                className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPlus} size="1x" style={{ paddingRight: '10px' }} />Add New Menu Item </Link>
                                             }
                                             <a className={activeTab === "menu" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-menu-tab" href="#nav-menu" role="tab"
                                                 onClick={() => setActiveTab("menu")}>Menu </a>

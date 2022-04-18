@@ -218,7 +218,7 @@ function Restaurant(props) {
                                                 <Link to={`/restaurant/edit/`} state={{ restaurantInfo: restaurantInfo, r_id: id }} className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Edit </Link>
                                             }
 
-                                            <a className={activeTab === "info" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-info-tab" href="#nav-info" role="tab"
+                                            <a className={activeTab === "info" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-info-tab" role="tab"
                                                 onClick={() => setActiveTab("info")}>Info</a>
                                         </div>
                                         <div className="nav-item">
@@ -226,18 +226,18 @@ function Restaurant(props) {
                                                 <Link to={`/restaurant/editMenu/`}
                                                 className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPlus} size="1x" style={{ paddingRight: '10px' }} />Add New Menu Item </Link>
                                             }
-                                            <a className={activeTab === "menu" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-menu-tab" href="#nav-menu" role="tab"
+                                            <a className={activeTab === "menu" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-menu-tab" role="tab"
                                                 onClick={() => setActiveTab("menu")}>Menu </a>
                                         </div>
                                         <div className="nav-item">
                                             {activeTab === "blogs" && restaurantInfo['is_owner'] &&
                                                 <Link to={`/blogs/addBlog/`} className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Add New Blog Post </Link>
                                             }
-                                            <a className={activeTab === "blogs" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-blogs-tab" href="#nav-blogs" role="tab"
+                                            <a className={activeTab === "blogs" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-blogs-tab" role="tab"
                                                 onClick={() => setActiveTab("blogs")}>Blogs </a>
                                         </div>
                                         <div className="nav-item">
-                                            <a className={activeTab === "comments" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-comments-tab" href="#nav-comments" role="tab"
+                                            <a className={activeTab === "comments" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-comments-tab" role="tab"
                                                 onClick={() => setActiveTab("comments")}>Comments </a>
                                         </div>
 

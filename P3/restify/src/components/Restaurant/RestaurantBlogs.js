@@ -51,7 +51,7 @@ function RestaurantBlogs(props) {
     }
 
     const scrollPage = (e) => {
-        if(document.documentElement.scrollHeight < window.innerHeight + document.documentElement.scrollTop) {
+        if(document.documentElement.scrollHeight <= window.innerHeight + document.documentElement.scrollTop) {
             // console.log('scrolled to the bottom');
             pullMore();
         }

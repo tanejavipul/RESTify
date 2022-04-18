@@ -30,7 +30,7 @@ function Search(props) {
     useEffect(() => {
         if (page !== 1) {
             const scrollPage = (e) => {
-                if (document.documentElement.scrollHeight < window.innerHeight + document.documentElement.scrollTop) {
+                if (document.documentElement.scrollHeight <= window.innerHeight + document.documentElement.scrollTop) {
                     // console.log('scrolled to the bottom');
                     getSearchResults(page);
                 }

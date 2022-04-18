@@ -15,9 +15,10 @@ function Search(props) {
     const [searchValue, setSearchValue] = useState(""); //search value only set when user clicks "Search"
     const [results, setResults] = useState([]);
 
+
     useEffect(() => {
-        // if (searchValue == '') 
-        //     setResults([]);
+
+        document.getElementsByTagName('body')[0].onscroll = () => { };
         setResults([]);
         setPage(1);
         getSearchResults(1);
@@ -27,32 +28,25 @@ function Search(props) {
 
 
     useEffect(() => {
-        // const scrolling_function = () => {
-        //     if((window.innerHeight + window.scrollY) >= document.body.offsetHeight + 300){
-        //         // console.log("bottom");
-        //         getSearchResults(page);
-        //         window.removeEventListener('scroll',scrolling_function)
-        //     }
-        // }
+        if (page !== 1) {
+            const scrollPage = (e) => {
+                if (document.documentElement.scrollHeight === window.innerHeight + document.documentElement.scrollTop) {
+                    // console.log('scrolled to the bottom');
+                    getSearchResults(page);
+                }
+            };
 
-        //window.addEventListener('scroll', scrolling_function);
-        const scrollPage = (e) => {
-            if(document.documentElement.scrollHeight === window.innerHeight + document.documentElement.scrollTop) {
-                // console.log('scrolled to the bottom');
-                getSearchResults(page);
-            }
-        };
-
-        document.getElementsByTagName('body')[0].onscroll = (e) => scrollPage(e);
+            document.getElementsByTagName('body')[0].onscroll = (e) => scrollPage(e);
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-     }, [page])
+    }, [page])
 
-    
+
     const getSearchResults = (page_num) => {
         console.log(page_num);
         console.log("search value is", searchValue);
-        if (page_num !== -1 && searchValue !== '') {
+        if (page_num !== 0 && searchValue !== '') {
             let headers;
             if (localStorage.getItem('access') !== null) {
                 headers = {
@@ -69,14 +63,16 @@ function Search(props) {
                             let temp = data[x];
                             setResults(allResults => [...allResults, temp]);
                         }
-                        
-                        
                         if (!resp.data.next) {
-                            setPage(-1);
+                            setPage(0);
                         } else {
-                            setPage(page + 1);
+                            setPage(prevCount => prevCount + 1);
                         }
                     }
+                }).catch(error => {
+                    //this.setState({ errorMessage: error.message });
+                    console.log("Search Error: ", error);
+
                 });
         }
     }

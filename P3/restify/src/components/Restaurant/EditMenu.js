@@ -91,7 +91,7 @@ function EditMenu(props) {
                 // setMenuItems(tempItems);
                 // can't replace window cuz individually don't know when it's done
                 console.log(resp);
-                // window.location.replace(`/restaurant/${restID}/`);
+                window.location.replace(`/restaurant/${restID}/`);
             })
             .catch((err) => {
                 //TODO ERROR CHECKING

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
-// import "./menu.css";
 
 function MenuItem({refreshMenu, ...props}) {
 
@@ -46,9 +48,15 @@ function MenuItem({refreshMenu, ...props}) {
                             </div> :
                             <></>
                         }
-                        {props.is_owner ? 
-                            <span class="menu-item-close" onClick={(e) => togglePopUp(e)}>X</span> :
-                            <></>
+                        {props.is_owner &&
+                            <>
+                                {/* <span class="menu-item-close" onClick={(e) => togglePopUp(e)}>Edit Item</span> */}
+                                <div class="menu-item-close">
+                                    <Link to={`/restaurant/editMenuItem/${props.id}/`} className="btn btn-primary btn-md" ><FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Edit Item</Link>
+                                    <button className="btn btn-danger shadow-none">X</button> 
+                                </div>
+                                {/* <span class="menu-item-close" onClick={(e) => togglePopUp(e)}>X</span> */}
+                            </>
                         }
                         <div class="card-body">
                             <h4 class="card-title">{props.name}</h4>

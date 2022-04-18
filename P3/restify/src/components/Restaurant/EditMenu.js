@@ -15,33 +15,47 @@ import Navbar from "../Navbar/Navbar";
 function EditMenu(props) {
 
     const { id } = useParams();
-    const [nextToken, setNextToken] = useState(`/restaurants/${id}/menu/?page=1`);
-    const [menuItems, setMenuItems] = useState([]);
+    // const [nextToken, setNextToken] = useState(`/restaurants/${id}/menu/?page=1`);
+    const [menuItem, setMenuItem] = useState({"is_owner":"", "name": "", "description": "", "price": 0, "type": "" });
     const [clicked, setClicked] = useState(false);
-    const [isOpen, setPopUp] = useState(false);
+    const [restID, setRestID] = useState(-1);
 
+
+    // useEffect(() => {
+    //     getMenuItems();
+    // }, [nextToken]);
+    
     useEffect(() => {
-        getMenuItems();
-    }, [nextToken]);
+        getRest();
+        getMenuItem();
+    }, []);
 
-    // not working
-    // function updateMenuItems(menu_item_num) {
-    //     console.log(menu_item_num);
-    //     console.log(menuItems);
-    //     const newList = menuItems.filter((item) => item.id !== menu_item_num );
-    //     console.log(newList);
-    //     setMenuItems(newList);
-    // }
+    const getRest = () => {
+        axios.get(`/restaurants/id/`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("access")}`
+            },
+        }).then((resp) => {
+            if (resp.status === 200) {
+                setRestID(resp.data.id)
+            }
+        }).catch(e => {
+            // don't think this should ever happen cuz navbar works first
+            console.log(e.response.status)
+            // if(e.response.status === 404) {
+            //     setRestID(-1)
+            // }
+            // if(e.response.status === 401) {
+            //     deleteLogin()
+            //     setNav(-1)
+            // }
+        });
+    }
 
-    async function updateMenuItems(id, name, desc, price, type, newItem) {
-        // let tempItems = menuItems.filter((item) => item.id !== id );
-        // console.log(id, name, type, desc, price, newItem);
-        // console.log(id, newItem);
-        // if (newItem) {
-        //     tempItems.push({"name": name, "description": desc, "price": parseInt(price), "type": type, "new" : true});
-        // } else {
-        //     tempItems.push({"id": id, "name": name, "description": desc, "price": parseInt(price), "type": type});
-        // }
+    function updateMenuItems(local_id, name, desc, price, type, newItem) {
+        // console.log("tmenuITEMS: ", menuItems);
+
+        // let tempItems = menuItem.filter((item) => item.id !== id );
         // console.log("tempITEMS: ", tempItems);
 
         const formData = new FormData();
@@ -59,59 +73,51 @@ function EditMenu(props) {
         if(newItem) {
             axios.post(`/restaurants/addMenuItem/`, formData, {headers})
             .then((resp) => {
+                // console.log('resp id', resp.data['id']);
+                // tempItems.push({"id": resp.data['id'], "name": name, "description": desc, "price": parseInt(price), "type": type, "new" : true});
+                // console.log(tempItems);
+                window.location.replace(`/restaurant/${restID}/`);
+                // setMenuItems(tempItems);
+            })
+            .catch((err) => {
                 //TODO ERROR CHECKING
-                console.log(resp);
-                // window.location.replace(`/restaurant/${id}/menu/`);
+                console.log(err.response);
+                if (err.response.status === 400) {
+                    // tempItem.push({"errors": err.response.data, "id": id, "name": name, "description": desc, "price": parseInt(price), "type": type, "new" : true});
+                    setMenuItem({"errors": err.response.data, "id": local_id, "name": name, "description": desc, "price": parseInt(price), "type": type, "new" : true});
+                }
             })
         } else {
             // existing ID
             axios.put(`/restaurants/${id}/editMenuItem/`, formData, {headers})
             .then((resp) => {
-                //TODO ERROR CHECKING
-                console.log(resp);
+                // console.log('resp bro', resp);
+                // tempItems.push({"id": id, "name": resp.data['name'], "description": resp.data['description'], "price": parseInt(resp.data['price']), "type": resp.data['type']});
+                // console.log(tempItems);
+                // setMenuItems(tempItems);
                 // can't replace window cuz individually don't know when it's done
-                // window.location.replace(`/restaurant/${id}/menu/`);
+                console.log(resp);
+                // window.location.replace(`/restaurant/${restID}/`);
+            })
+            .catch((err) => {
+                //TODO ERROR CHECKING
+                console.log(err.response);
+                if (err.response.status === 400) {
+                    // tempItem.push({"errors": err.response.data, "id": id, "name": name, "description": desc, "price": parseInt(price), "type": type});
+                    setMenuItem({"errors": err.response.data, "id": local_id, "name": name, "description": desc, "price": parseInt(price), "type": type});
+                    // window.location.replace(`/restaurant/${id}/menu/`);
+                }
             })
         }
-
-        // need to do one at a time
-        // for(let i=0; i < tempItems.length; i++) {
-        //     const formData = new FormData();
-        //     const headers = {
-        //         'Authorization': `Bearer ${localStorage.getItem('access')}`
-        //     }
-        //     formData.append('name', tempItems[i]['name']);
-        //     formData.append('description', tempItems[i]['description']);
-        //     formData.append('price', tempItems[i]['price']);
-        //     formData.append('type', tempItems[i]['type']);
-        //     // console.log(Array.from(formData));
-        //     // console.log(Object.fromEntries(formData));
-            
-        //     // new menu item
-        //     console.log(tempItems[i]);
-        //     if('new' in tempItems[i]) {
-        //         console.log('insid');
-        //         axios.post(`/restaurants/addMenuItem/`, formData, {headers})
-        //         .then((resp) => {
-        //             //ERROR CHECKING
-        //             console.log(resp);
-        //             // window.location.replace(`/restaurant/${id}/menu/`);
-        //         })
-        //     } else {
-        //         // existing ID
-        //         console.log(tempItems[i]);
-        //         axios.put(`/restaurants/${tempItems[i]['id']}/editMenuItem/`, formData, {headers})
-        //         .then((resp) => {
-        //             console.log(resp);
-        //             // window.location.replace(`/restaurant/${id}/menu/`);
-        //         })
-        //     }
-        // }
-        
-        // don't think I even use anymore
-        // setMenuItems(tempItems);
-        setClicked(false);
-        // setPopUp(true);
+        // setClicked(false);
+        // prevent spam i guess
+        let btn = document.getElementById("submit-changes");
+        btn.disabled = true;
+        setTimeout(() => {
+            btn.disabled = false;
+            console.log('button undisabled');
+            setClicked(false);
+        }, 3000);
     }
     
     function updateMenu(e) {
@@ -119,59 +125,20 @@ function EditMenu(props) {
         setClicked(true);
     }
 
-    function addRow(e) {
-        e.preventDefault();
-        setMenuItems([...menuItems, {"id": uuidv4(), "name": "", "description": "", "price": 0, "type": "", "new": true}]); 
-    }
+    function getMenuItem() {
+        if (typeof id !== "undefined") {
 
-    // TODO
-    function changePopUp(e) {
-        e.preventDefault();
-        setTimeout(() => {setPopUp(false)}, 2000);
-    }
-
-    function getMenuItems() {
-        const headers = {
-            'Authorization': `Bearer ${localStorage.getItem('access')}`
-        }
-        axios.get(`/restaurants/${id}/view/`, { headers })
-        .then((response) => {
-            if (response.status === 404 || !response['data']['is_owner']) {
-                window.location.replace(`/home/`);
+            const headers = {
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
             }
-        });
-        console.log('running');
-        // let response = await axios.get(`/restaurants/${id}/menu/`, {headers});
-        // setMenuItems(response['data']['results']);
-        // setNumMenuItems(response['data']['count']);
-        // console.log(menuItems);
 
-        if (nextToken) {
-            axios.get(nextToken, { headers })
-            .then((resp) => {
-                console.log(resp);
-                if (resp.status === 404) {
+            axios.get(`/restaurants/${id}/editMenuItem/`, { headers })
+            .then((response) => {
+                if (response.status === 404 || !response['data']['is_owner']) {
                     window.location.replace(`/home/`);
-                }
-                if(resp.status === 200) {
-                    console.log('respo', resp);
-                    let data = resp.data.results;
-                    setNextToken(resp.data.next);
-
-                    for (let x = 0; x < resp.data.results.length; x++) {
-                        let temp = { "id": data[x].id, "description": data[x].description, "name": data[x].name, "type": data[x].type, "price": data[x].price }
-                        setMenuItems(menuItems => [...menuItems, temp]);
-                    }
-                    // console.log('next', resp.data.next);
-                    // console.log("pages", numbers+1);
-                    if (!resp.data.next) {
-                        setNextToken(null);
-                    }
-                }
-            })
-            .catch((err) => {
-                if (err.response.status == 404) {
-                    window.location.replace(`/home/`);
+                } else {
+                    setMenuItem(response['data']);
+                    console.log('dataadweaw', response['data']);
                 }
             });
         }
@@ -186,29 +153,29 @@ function EditMenu(props) {
                         <form class="edit-menu-row" style={{backgroundColor: '#FFFFFF'}}>
                             <h2 class="d-flex justify-content-center edit-menu-h2">Add / Edit Menu</h2>
 
-                            { menuItems.map(function(object, i) {
-                                return <EditMenuItem id={object['id']} name={object['name']} description={object['description']} 
-                                                    price={object['price']} type={object['type']} 
-                                                    setMenuItems={updateMenuItems} saved={clicked} new={object['new']} />
-                            })}
+                            {/* { menuItems.map(function(object, i) { */}
+                            <EditMenuItem errors={menuItem['errors']} id={menuItem['id']} name={menuItem['name']} description={menuItem['description']} 
+                                        price={menuItem['price']} type={menuItem['type']} 
+                                        setMenuItem={updateMenuItems} saved={clicked} new={menuItem['new']} />
+                            {/* // })} */}
                                                     
-                            <div class="d-flex align-items-center justify-content-end">
+                            {/* <div class="d-flex align-items-center justify-content-end"> */}
 
-                                <div class="edit-menu-add-row d-flex">
+                                {/* <div class="edit-menu-add-row d-flex"> */}
 
-                                    <button class="edit-menu-add-row-btn d-flex" onClick={event => addRow(event)}>
+                                    {/* <button class="edit-menu-add-row-btn d-flex" onClick={event => addRow(event)}>
                                         <FontAwesomeIcon icon={faPlusCircle} size="3x" style={{ color: "var(--blue-main)" }} />
                                         <label class="d-flex align-items-center edit-menu-add-row-label edit-menu-label edit-label">ADD ANOTHER ITEM</label>
-                                    </button>
+                                    </button> */}
 
 
-                                </div>
-                            </div>                    
+                                {/* </div> */}
+                            {/* </div>                     */}
                             
                             <div class="d-flex justify-content-between">
                                 <a href={`/restaurant/${id}/`} value="GO BACK" class="edit-save-btn btn shadow-none">GO BACK</a>
 
-                                <input type="submit" onClick={(e) => updateMenu(e)} value="SAVE CHANGES" class="edit-save-btn btn shadow-none" />
+                                <input id="submit-changes" type="submit" onClick={(e) => updateMenu(e)} value="SAVE CHANGES" class="edit-save-btn btn shadow-none" />
                             </div>
                         </form>
                     </div>

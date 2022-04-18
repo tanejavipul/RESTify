@@ -1,4 +1,4 @@
-from rest_framework.generics import get_object_or_404, UpdateAPIView, ListAPIView, CreateAPIView, DestroyAPIView
+from rest_framework.generics import get_object_or_404, RetrieveUpdateAPIView, ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from restaurants.models import MenuItem, Restaurant
@@ -14,7 +14,7 @@ class MenuView(ListAPIView):
         return MenuItem.objects.filter(restaurant=restaurant)
 
 
-class EditMenuView(UpdateAPIView):
+class EditMenuView(RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = EditMenuSerializer
 

@@ -743,7 +743,7 @@ h3 {
   position: absolute;
   top: 0px;
   right: 0px;
-  cursor: pointer;
+  /* cursor: pointer;
   background: #ededed;
   width: 25px;
   height: 25px;
@@ -751,5 +751,5 @@ h3 {
   line-height: 20px;
   text-align: center;
   border: 1px solid #999;
-  font-size: 20px;
+  font-size: 20px; */
 }

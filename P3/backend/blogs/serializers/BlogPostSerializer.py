@@ -66,7 +66,8 @@ class BlogPostSerializer(ModelSerializer):
 
         # create new notification for posting comment
         message = NS.getRestaurantNotificationTitle(NS.BLOG, restaurant)
-        self.notification = RestaurantNotification.objects.create(restaurant=restaurant, user=user, title=message, type=NS.BLOG, type_id=new_post.id)
+
+        self.notification = RestaurantNotification.objects.create(restaurant=restaurant, title=message, type=NS.BLOG, type_id=new_post.id)
         self.notification.save()
 
         return new_post

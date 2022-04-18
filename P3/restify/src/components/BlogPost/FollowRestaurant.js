@@ -69,7 +69,7 @@ function FollowRestaurant(props) {
             <div className="widget-body">
                 <div className="media align-items-center d-flex flex-row">
                     {/* Not sure if link is right for now just temp */}
-                    <a href={`restaurantPages/${props.restaurant_id}/`} className="text-decoration-none">
+                    <a href={`/restaurant/${props.restaurant_id}/`} className="text-decoration-none">
                         <div className="avatar">
                             <img src={logo} title="" alt="" />
                         </div>

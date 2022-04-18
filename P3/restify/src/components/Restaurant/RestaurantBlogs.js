@@ -16,7 +16,7 @@ function RestaurantBlogs(props) {
 
     useEffect(() => {
         // getRestaurantPosts();
-        // pullMore();
+        pullMore();
         // setNumbers(2);
         // window.addEventListener('scroll', scrollPage);
         document.getElementsByTagName('body')[0].onscroll = (e) => scrollPage(e);
@@ -51,7 +51,7 @@ function RestaurantBlogs(props) {
     }
 
     const scrollPage = (e) => {
-        if(document.documentElement.scrollHeight === window.innerHeight + document.documentElement.scrollTop) {
+        if(document.documentElement.scrollHeight < window.innerHeight + document.documentElement.scrollTop) {
             // console.log('scrolled to the bottom');
             pullMore();
         }

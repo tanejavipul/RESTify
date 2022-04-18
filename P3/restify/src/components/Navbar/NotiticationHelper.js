@@ -50,7 +50,7 @@ export const linkURLCompiler = (type, type_id, restaurant) =>{
         return "/blogs/" + type_id
     }
     else if(type===COMMENT){
-        return "/" + restaurant +"/comments/"
+        return "/restaurant/" + restaurant
     }
     else{
         return "/restaurant/" + restaurant

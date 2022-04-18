@@ -124,7 +124,7 @@ function BlogPostPage(props) {
                                   num_likes={blogPostInfo['num_likes']} last_modified={blogPostInfo['last_modified']} liked={pulledLike} />
                         <div class="col-lg-4 m-15px-tb blog-aside">
                             <FollowRestaurant is_owner={blogPostInfo['is_owner']} restaurant_name={blogPostInfo['restaurant_name']} restaurant_id={blogPostInfo['restaurant_id']} is_following={isFollowing} />
-                            <LatestBlogs />
+                            <LatestBlogs restaurant_id={blogPostInfo['restaurant_id']} />
                         </div>
                     </div>
                 </div>

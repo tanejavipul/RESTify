@@ -1,4 +1,5 @@
 #!/bin/sh
+cd backend
 pip3 install virtualenv
 virtualenv -p `which python3.10` venv
 source venv/bin/activate
@@ -9,5 +10,8 @@ chmod 777 manage.py
 python3 manage.py makemigrations
 python3 manage.py migrate
 
-./run.sh
 
+cd ../restify/
+npm install
+
+./run.sh

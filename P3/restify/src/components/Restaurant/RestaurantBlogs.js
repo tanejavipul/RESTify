@@ -16,11 +16,14 @@ function RestaurantBlogs(props) {
 
     useEffect(() => {
         // getRestaurantPosts();
-        pullMore();
         // setNumbers(2);
         // window.addEventListener('scroll', scrollPage);
         document.getElementsByTagName('body')[0].onscroll = (e) => scrollPage(e);
     }, [nextToken]);
+
+    useEffect(() => {
+        pullMore();
+    }, []);
 
     const pullMore = () => {
         const headers = {

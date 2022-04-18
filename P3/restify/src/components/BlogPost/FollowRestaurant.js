@@ -80,10 +80,19 @@ function FollowRestaurant(props) {
                 </div>
                 <p className="text-center m-3">{restaurantBio}</p>
                 <div className="d-grid mt-2">
-                    {following ?
-                        <button className="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(false)} >Unfollow {props.restaurant_name}</button> :
-                        <button className="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(true)} >Follow {props.restaurant_name}</button>
-                    }
+                    <>
+                        {!props.is_owner ?
+                            <>
+                                {following ?
+                                    <button className="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(false)} >Unfollow {props.restaurant_name}</button> :
+                                    <button className="d-flex justify-content-center btn btn-primary fa" type="button" onClick={() => updateFollow(true)} >Follow {props.restaurant_name}</button>
+                                }
+                            </> :
+                            <>
+                                <button disabled className="btn btn-secondary fa" type="button">Can't Follow Your Own Restaurant</button>
+                            </>
+                        }
+                    </>
                 </div>
             </div>
         </div>

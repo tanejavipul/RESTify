@@ -19,7 +19,7 @@ const Navbar = ({profileUpdate}) => {
 
     useEffect(() => {
         getRest()
-    }, []);
+    }, );
 
     const getRest = () => {
         axios.get(`/restaurants/id/`, {
@@ -60,8 +60,9 @@ const Navbar = ({profileUpdate}) => {
                         {/*<span className="badge badge-light"></span>*/}
                         <Link to="/search" className="btn  navbar-button-styling"> <img src={searchSVG} alt=" "/>Search</Link>
                         {(restID !== -1) ?
-                            <Link to={"/restaurant/"+ restID} className="btn  navbar-button-styling">
-                                <img src={restSVG} alt=" "/>Restaurant</Link> : ""}
+                            <Link to={"/restaurant/"+ restID} className="btn  navbar-button-styling"><img src={restSVG} alt=" "/>Restaurant</Link> :
+                            <Link to={"/restaurant/add/"} className="btn  navbar-button-styling"><img src={restSVG} alt=" "/>Add Restaurant</Link>
+                        }
                         <NotificationsDropDown/>
                         {(restID !== -1) ?
                             <OwnerDropDown/> : ""}

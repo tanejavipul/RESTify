@@ -459,11 +459,11 @@ h5 {
 	display: inline-block;
 	font-weight: 400;
 	line-height: 1.5;
-	color: #212529;
+	/* color: #212529; */
 	text-align: center;
 	text-decoration: none;
 	/* vertical-align: middle; */
-	cursor: pointer;
+	/* cursor: pointer; */
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
@@ -486,7 +486,7 @@ h5 {
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
-	cursor: pointer;
+	/* cursor: pointer; */
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
@@ -496,6 +496,12 @@ h5 {
 	font-size: 1rem;
 	border-radius: .25rem;
 	/* transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+}
+
+.blog-btn-disabled {
+	background-color: transparent;
+	border: 1px solid transparent;
+	padding: .375rem .75rem;
 }
 
 .blog-btn:hover {
@@ -737,7 +743,7 @@ h3 {
   position: absolute;
   top: 0px;
   right: 0px;
-  cursor: pointer;
+  /* cursor: pointer;
   background: #ededed;
   width: 25px;
   height: 25px;
@@ -745,5 +751,5 @@ h3 {
   line-height: 20px;
   text-align: center;
   border: 1px solid #999;
-  font-size: 20px;
+  font-size: 20px; */
 }

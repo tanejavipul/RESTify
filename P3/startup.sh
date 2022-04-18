@@ -12,6 +12,6 @@ python3 manage.py migrate
 
 
 cd ../restify/
-npm install
-
+cd npm install
+cd ../
 ./run.sh

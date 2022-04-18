@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function EditMenuItem({setMenuItem, ...props}) {
 
+    const [priceForm, setPriceForm] = useState(0);
+
     useEffect(() => {
         // console.log('svaed ', props.saved);
         if (props.saved) {
@@ -21,6 +23,11 @@ function EditMenuItem({setMenuItem, ...props}) {
         }        
     }, [props.saved]);
 
+    useEffect(() => {
+        setPriceForm(props.price)
+    }, [props.price]);
+
+
 
     return (
         <>
@@ -33,8 +40,8 @@ function EditMenuItem({setMenuItem, ...props}) {
 
                 <div class="input-group mb-3">
                     <label for={`item-price-${props.id}`} class="edit-label col-3 edit-menu-label">MENU ITEM PRICE ($):</label>
-                    <textarea style={{boxShadow: "none", resize: "none"}} id={`item-price-${props.id}`} type="text" class="form-control col-9 edit-input-styling shadow-none" placeholder="Menu Item Price"
-                        aria-label="Username" aria-describedby="basic-addon1" defaultValue={props.price} />
+                    <input style={{boxShadow: "none", resize: "none"}} id={`item-price-${props.id}`} type="text" class="form-control col-9 edit-input-styling shadow-none" placeholder="Menu Item Price"
+                        aria-label="Username" aria-describedby="basic-addon1" value={priceForm} onChange={e => setPriceForm(e.target.value)} />
                 </div>
 
                 <div class="input-group mb-3">

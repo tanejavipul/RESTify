@@ -51,8 +51,7 @@ function CommentSection(props) {
     }
 
     const scrollPage = (e) => {
-        if(document.documentElement.scrollHeight <= window.innerHeight + document.documentElement.scrollTop) {
-            // console.log('scrolled to the bottom');
+        if(document.documentElement.scrollHeight <= window.innerHeight + document.documentElement.scrollTop+2) {
             pullMore();
         }
     };

@@ -15,15 +15,9 @@ import Navbar from "../Navbar/Navbar";
 function EditMenu(props) {
 
     const { id } = useParams();
-    // const [nextToken, setNextToken] = useState(`/restaurants/${id}/menu/?page=1`);
     const [menuItem, setMenuItem] = useState({"is_owner":"", "name": "", "description": "", "price": 0, "type": "" });
     const [clicked, setClicked] = useState(false);
     const [restID, setRestID] = useState(-1);
-
-
-    // useEffect(() => {
-    //     getMenuItems();
-    // }, [nextToken]);
     
     useEffect(() => {
         getRest();
@@ -141,6 +135,11 @@ function EditMenu(props) {
                     console.log('dataadweaw', response['data']);
                 }
             });
+        } else {
+            setMenuItem( prevState => ({
+                ...prevState,
+                "new": true, 
+            }));
         }
     }
 
@@ -153,27 +152,12 @@ function EditMenu(props) {
                         <form class="edit-menu-row" style={{backgroundColor: '#FFFFFF'}}>
                             <h2 class="d-flex justify-content-center edit-menu-h2">Add / Edit Menu</h2>
 
-                            {/* { menuItems.map(function(object, i) { */}
                             <EditMenuItem errors={menuItem['errors']} id={menuItem['id']} name={menuItem['name']} description={menuItem['description']} 
                                         price={menuItem['price']} type={menuItem['type']} 
                                         setMenuItem={updateMenuItems} saved={clicked} new={menuItem['new']} />
-                            {/* // })} */}
-                                                    
-                            {/* <div class="d-flex align-items-center justify-content-end"> */}
-
-                                {/* <div class="edit-menu-add-row d-flex"> */}
-
-                                    {/* <button class="edit-menu-add-row-btn d-flex" onClick={event => addRow(event)}>
-                                        <FontAwesomeIcon icon={faPlusCircle} size="3x" style={{ color: "var(--blue-main)" }} />
-                                        <label class="d-flex align-items-center edit-menu-add-row-label edit-menu-label edit-label">ADD ANOTHER ITEM</label>
-                                    </button> */}
-
-
-                                {/* </div> */}
-                            {/* </div>                     */}
                             
                             <div class="d-flex justify-content-between">
-                                <a href={`/restaurant/${id}/`} value="GO BACK" class="edit-save-btn btn shadow-none">GO BACK</a>
+                                <a href={`/restaurant/${restID}/`} value="GO BACK" class="edit-save-btn btn shadow-none">GO BACK</a>
 
                                 <input id="submit-changes" type="submit" onClick={(e) => updateMenu(e)} value="SAVE CHANGES" class="edit-save-btn btn shadow-none" />
                             </div>

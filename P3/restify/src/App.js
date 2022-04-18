@@ -48,7 +48,8 @@ function App() {
           <Route path="/restaurant/edit/" element={<RestaurantEdit />} />
           <Route path="/restaurant/:id" element={<Restaurant />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/restaurant/editMenu/:id/" element={<EditMenu />} />
+          <Route path="/restaurant/editMenuItem/:id/" element={<EditMenu />} />
+          <Route path="/restaurant/editMenu/" element={<EditMenu />} />
 
         </Routes>
       </BrowserRouter>

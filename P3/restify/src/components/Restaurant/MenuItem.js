@@ -53,7 +53,7 @@ function MenuItem({refreshMenu, ...props}) {
                                 {/* <span class="menu-item-close" onClick={(e) => togglePopUp(e)}>Edit Item</span> */}
                                 <div class="menu-item-close">
                                     <Link to={`/restaurant/editMenuItem/${props.id}/`} className="btn btn-primary btn-md" ><FontAwesomeIcon icon={faPencil} size="1x" style={{ paddingRight: '10px' }} />Edit Item</Link>
-                                    <button className="btn btn-danger shadow-none">X</button> 
+                                    <button className="btn btn-danger shadow-none" onClick={(e) => togglePopUp(e)}>X</button> 
                                 </div>
                                 {/* <span class="menu-item-close" onClick={(e) => togglePopUp(e)}>X</span> */}
                             </>

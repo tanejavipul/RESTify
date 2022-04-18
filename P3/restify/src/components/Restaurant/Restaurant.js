@@ -204,7 +204,7 @@ function Restaurant(props) {
                                         </div>
                                         <div className="nav-item">
                                             {activeTab === "menu" && restaurantInfo['is_owner'] &&
-                                                <Link to={`/restaurant/${id}/editMenu/`}
+                                                <Link to={`/restaurant/editMenu/`}
                                                 className="btn btn-primary btn-md edit-button" > <FontAwesomeIcon icon={faPlus} size="1x" style={{ paddingRight: '10px' }} />Add New Menu Item </Link>
                                             }
                                             <a className={activeTab === "menu" ? "nav-item nav-link show active" : "nav-item nav-link"} id="nav-menu-tab" href="#nav-menu" role="tab"

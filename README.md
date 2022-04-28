@@ -1,9 +1,5 @@
 # RESTify
 
-
-This is a project I did during my last year with two of my friends.
-
-
 Restify is a social media platform for restaurants where users can search, follow, like, and comment on restaurants. 
 Moreover, restaurant owners can create blog posts and upload their menus there.
 
